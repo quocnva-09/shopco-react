@@ -1,0 +1,56 @@
+@use '@/styles/abstracts/variables' as *;
+
+.nav {
+  @media (max-width: $breakpoint) {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: $primary-color;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    padding-top: 64px;
+    overflow-y: auto;
+
+    &.is-open {
+      left: 0; // Trượt menu ra ngoài khi có trạng thái mở
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: $breakpoint) {
+      flex-direction: column;
+      padding: 0 24px;
+      gap: 16px;
+    }
+  }
+
+  &__menu-item {
+    display: block;
+  }
+
+  &__menu-link {
+    color: $black-color;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: $font-size-base;
+
+    @media (max-width: $breakpoint) {
+      font-size: $font-size-mobile;
+    }
+
+    &:hover {
+      color: $text-muted;
+    }
+  }
+}

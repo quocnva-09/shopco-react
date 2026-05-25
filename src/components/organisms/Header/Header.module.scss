@@ -1,0 +1,113 @@
+@import '@/styles/abstracts/variables';
+
+.header {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    gap: 40px;
+
+    @media (max-width: $breakpoint) {
+      gap: 16px;
+      padding: 20px 16px;
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    z-index: 1001;
+
+    @media (max-width: $breakpoint) {
+      display: block;
+      order: 1; // Đứng đầu tiên trên mobile
+      margin-top: 10px;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $black-color;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    &::before {
+      top: 5px;
+      box-shadow: 0 6px 0 $black-color;
+    }
+
+    &::after {
+      bottom: 5px;
+    }
+  }
+
+  &__logo {
+    font-family: $font-family-title;
+    font-size: 32px;
+    font-weight: 700;
+    color: $black-color;
+    text-decoration: none;
+    white-space: nowrap;
+
+    @media (max-width: $breakpoint) {
+      order: 2; // Đứng thứ 2 trên mobile
+      margin-right: auto; // Đẩy toàn bộ cụm đằng sau về bên phải
+      font-size: 25px;
+    }
+  }
+
+  &__nav-wrapper {
+    // Kế thừa flex-grow tự nhiên trên desktop nếu cần
+  }
+
+  &__search-wrapper {
+    flex: 1;
+
+    @media (max-width: $breakpoint) {
+      flex: 0;
+      order: 3; // Nút search đứng thứ 3 trên mobile
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (max-width: $breakpoint) {
+      order: 4; // Đứng cuối cùng bên phải trên mobile
+      gap: 12px;
+    }
+  }
+}
+
+// Lớp phủ tối màn hình khi mở mobile menu (Đặt ở tầng Organism là hợp lý nhất)
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

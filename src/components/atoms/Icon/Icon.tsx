@@ -1,6 +1,6 @@
 import { ReactSVG, type Props as ReactSVGProps } from "react-svg";
 import clsx from "clsx";
-import { toCssDimension } from "../../../utils/css";
+import { toCssDimension } from "@/utils/css";
 import styles from './Icon.module.scss'
 
 

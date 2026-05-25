@@ -20,6 +20,23 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src")
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        importer: {
+          findFileUrl(url) {
+            if (url.startsWith('@/')) {
+              const fileSubPath = url.replace(/^@\//, '');
+              const absolutePath = path.resolve(__dirname, 'src', fileSubPath);
+              
+              return new URL(`file://${absolutePath}`);
+            }
+            return null;
+          },
+        },
+      },
+    },
+  },
   test: {
     projects: [{
       extends: true,

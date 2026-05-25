@@ -1,3 +1,5 @@
+@use "@/styles/abstracts/variables" as *;
+
 .text-link{
   color: $primary-color;
   text-decoration: underline;

@@ -1,0 +1,51 @@
+@use "@/styles/abstracts/variables" as *;
+
+.notification-bar {
+  background-color: $black-color;
+  color: $white-color;
+  padding: 8px 0;
+  
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  &__text {
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+    
+    @media (max-width: $breakpoint) {
+      font-size: 12px;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: underline;
+    margin-left: 8px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
+    padding: 4px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

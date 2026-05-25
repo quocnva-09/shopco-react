@@ -1,0 +1,52 @@
+@use '@/styles/abstracts/variables' as *;
+
+.dropdown {
+  position: relative;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  // Khi có class mở (sau này xử lý bằng state)
+  &.is-open &__icon {
+    transform: rotate(180deg);
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    min-width: 160px;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    
+    // Giai đoạn tĩnh: Ẩn/hiện theo class cha .is-open
+    display: none;
+  }
+
+  &.is-open &__menu {
+    display: block;
+  }
+
+  @media (max-width: $breakpoint) {
+    // Trên mobile, dropdown thường sẽ xả phẳng ra (accordion) thay vì hover bay lơ lửng
+    &__menu {
+      position: static;
+      box-shadow: none;
+      padding-left: 16px;
+      background-color: transparent;
+    }
+  }
+}

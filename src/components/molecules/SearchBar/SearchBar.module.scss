@@ -1,0 +1,48 @@
+@use '@/styles/abstracts/variables' as *;
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: $grey-color;
+  border-radius: $radius-pill;
+  padding: 12px 16px;
+  gap: 12px;
+  width: 100%;
+
+  @media (max-width: $breakpoint) {
+    background-color: transparent;
+    padding: 0;
+    width: auto;
+  }
+
+  &__btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0.2;
+
+    @media (max-width: $breakpoint) {
+      opacity: 1;
+    }
+  }
+
+  &__input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+
+    @media (max-width: $breakpoint) {
+      display: none; // Ẩn ô nhập liệu trên Mobile, chỉ giữ lại icon
+    }
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+}

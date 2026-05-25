@@ -1,5 +1,8 @@
-.text{
+@use "../../../styles/abstracts/variables" as *;
+
+.text {
   font-size: 14px;
+  font-family: $font-family-base;
   &--clamp-1,
   &--clamp-2,
   &--clamp-3,

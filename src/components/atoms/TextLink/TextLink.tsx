@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import "./index.scss";
+import "./TextLink.module.scss";
 
 // 1. Kế thừa toàn bộ thuộc tính tiêu chuẩn của thẻ <a> (id, target, rel, onClick, style...)
 interface TextLinkProps extends ComponentPropsWithoutRef<"a"> {
