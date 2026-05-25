@@ -1,0 +1,8 @@
+.text-link{
+  color: $primary-color;
+  text-decoration: underline;
+
+  @media (max-width: $breakpoint) {
+    font-size: 12px;
+  }
+}

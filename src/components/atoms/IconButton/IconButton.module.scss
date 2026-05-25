@@ -1,0 +1,52 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.icon-button {
+  //Reset styles
+  background: none;
+  cursor: pointer;
+
+  // Center layout
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Effect
+  color: $primary-color; 
+  transition: opacity 0.2s ease;
+
+  // Responsive
+  flex-shrink: 0; 
+
+  // Size
+  font-size: $font-size-base;
+
+  @media (max-width: $breakpoint) {
+    font-size: $font-size-mobile;
+  }
+
+  // State
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  &--default{
+    
+  }
+
+  &--ghost{
+    
+  }
+}
+
+.icon-button--circular {
+  width: 48px;
+  height: 48px;
+  border-radius: 62px;
+  background-color: #f0f0f0;
+}
