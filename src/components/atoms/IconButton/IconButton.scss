@@ -48,6 +48,16 @@
     width: 48px;
     height: 48px;
     border-radius: 62px;
-    background-color: #f0f0f0;
+    background-color: $grey-color;
+  }
+
+  &--social {
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 28px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

@@ -6,4 +6,14 @@
   vertical-align: middle;
   position: relative;
   flex-shrink: 0;
+
+  // Ensure the wrapper span respects the width/height set via inline style
+  min-width: 0;
+
+  // Scale the inner SVG to fill the wrapper
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 }

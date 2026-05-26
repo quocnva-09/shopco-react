@@ -1,24 +1,22 @@
-import { type ComponentPropsWithoutRef } from 'react';
-import clsx from 'clsx';
-import { IconButton } from '../../atoms/IconButton/IconButton';
-import './SearchBar.scss';
+import { type ComponentPropsWithoutRef } from "react";
+import clsx from "clsx";
+import { IconButton } from "../../atoms/IconButton/IconButton";
+import "./SearchBar.scss";
+import { Input } from "@/components/atoms/Input";
 
-export interface SearchBarProps extends ComponentPropsWithoutRef<'form'> {}
+export interface SearchBarProps extends ComponentPropsWithoutRef<"form"> {}
 
-export const SearchBar = ({
-  className,
-  ...rest
-}: SearchBarProps) => {
+export const SearchBar = ({ className, ...rest }: SearchBarProps) => {
   return (
-    <form className={clsx('search-bar', className)} {...rest}>
+    <form className={clsx("search-bar", className)} {...rest}>
       <IconButton
         type="submit"
-        svgName="icn-look-up" 
-        ariaLabel="Search"
+        svgName="icn-look-up"
+        aria-label="Search"
         className="search-bar__btn"
-        variant="ghost" 
+        variant="ghost"
       />
-      <input
+      <Input
         type="text"
         className="search-bar__input"
         placeholder="Search for products..."

@@ -1,0 +1,49 @@
+@use "@/styles/abstracts/variables" as *;
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: $font-size-base;
+  font-family: inherit;
+  color: $black-color;
+  background-color: #f0f0f0; // Màu nền xám nhẹ đặc trưng của form hiện đại
+  border: 1px solid transparent;
+  border-radius: $radius-pill; // Mặc định bo tròn dạng viên thuốc giống thanh SearchBar của bạn
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+
+  @media (max-width: $breakpoint) {
+    font-size: $font-size-mobile;
+    padding: 10px 14px;
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  // Trạng thái khi người dùng click vào gõ chữ
+  &:focus {
+    border-color: rgba($black-color, 0.3);
+    background-color: #fff; // Đổi nền trắng khi focus để tạo điểm nhấn tương tác
+    box-shadow: 0 0 0 4px rgba($black-color, 0.05);
+  }
+
+  // Trạng thái khóa không cho nhập liệu
+  &:disabled {
+    background-color: $grey-color;
+    color: $text-muted;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // Trạng thái báo lỗi dữ liệu (khi kết hợp validation)
+  &[aria-invalid="true"] {
+    border-color: $danger-color;
+    background-color: rgba($label-danger-color, 0.2);
+
+    &:focus {
+      box-shadow: 0 0 0 4px rgba($danger-color, 0.1);
+    }
+  }
+}

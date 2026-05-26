@@ -1,0 +1,16 @@
+@use "@/styles/abstracts/variables" as *;
+
+.footer {
+  position: relative;
+  margin-top: 80px;
+
+  &__content {
+    background-color: $grey-color;
+    padding-top: 50px;
+    padding-bottom: 82px;
+
+    @media (max-width: $breakpoint) {
+      padding-top: 32px;
+    }
+  }
+}

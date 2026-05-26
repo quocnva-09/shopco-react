@@ -3,12 +3,15 @@ import clsx from "clsx";
 import { Icon } from "../Icon/Icon";
 import "./IconButton.scss";
 
-type IconButtonVariant = "default" | "ghost" | "circular";
+type IconButtonVariant = "default" | "ghost" | "circular" | "social";
 
-export interface IconButtonProps extends Omit<ComponentPropsWithoutRef<"button">, "children"> {
+export interface IconButtonProps extends Omit<
+  ComponentPropsWithoutRef<"button">,
+  "children"
+> {
   svgName: string;
-  ariaLabel: string;
   color?: string;
+  backgroundColor?: string;
   iconWidth?: number | string;
   iconHeight?: number | string;
   variant?: IconButtonVariant;
@@ -16,20 +19,21 @@ export interface IconButtonProps extends Omit<ComponentPropsWithoutRef<"button">
 
 export const IconButton = ({
   svgName,
-  ariaLabel,
   color,
+  backgroundColor,
   iconWidth,
   iconHeight,
   variant = "default",
   type = "button",
   className,
+  style,
   ...rest
 }: IconButtonProps) => {
   return (
     <button
       type={type}
       className={clsx("icon-button", `icon-button--${variant}`, className)}
-      aria-label={ariaLabel}
+      style={{ backgroundColor, ...style }}
       {...rest}
     >
       <Icon

@@ -23,17 +23,17 @@ export const Heading = ({
   const textContent = typeof children === "string" ? children : "";
 
   return (
-    <div 
+    <div
       className={clsx(
-        "heading-wrapper", 
-        showTooltip && "heading-wrapper--has-tooltip"
+        "heading-wrapper",
+        showTooltip && "heading-wrapper--has-tooltip",
       )}
     >
       <Component
         className={clsx(
           "heading-text",
           lineClamp === 1 ? "heading-text--ellipsis" : "heading-text--clamp",
-          className
+          className,
         )}
         style={
           lineClamp > 1
