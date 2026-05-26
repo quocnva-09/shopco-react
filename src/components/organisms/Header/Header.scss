@@ -1,4 +1,4 @@
-@import '@/styles/abstracts/variables';
+@use '@/styles/abstracts/variables' as *;
 
 .header {
   position: relative;

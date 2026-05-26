@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 import { NotificationBar } from './NotificationBar';
 
 const meta: Meta<typeof NotificationBar> = {
@@ -8,13 +7,6 @@ const meta: Meta<typeof NotificationBar> = {
   parameters: {
     layout: 'fullscreen',
   },
-  decorators: [
-    (Story) => (
-      <MemoryRouter>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
 };
 
 export default meta;

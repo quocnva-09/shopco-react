@@ -1,0 +1,51 @@
+@use '@/styles/abstracts/variables' as *;
+
+.button {
+  // Style chung của mọi loại Button (padding, border-radius, font...)
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 54px;
+  border-radius: $radius-pill;
+  font-size: $font-size-base;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+
+  @media (max-width: $breakpoint) {
+    padding: 12px 24px;
+    font-size: $font-size-mobile;
+  }
+
+  // --- TỔ HỢP 1: SOLID + DARK (Nút Đen Chữ Trắng gốc) ---
+  &--solid-dark {
+    background-color: $black-color;
+    color: $white-color;
+    &:hover:not(:disabled) { opacity: 0.8; }
+  }
+
+  // --- TỔ HỢP 2: OUTLINE + DARK (Nút Trắng Viền Xám - View All/Load More) ---
+  &--outline-dark {
+    background-color: $white-color;
+    color: $black-color;
+    border-color: $grey-color;
+    &:hover:not(:disabled) {
+      background-color: $grey-color;
+    }
+  }
+
+  // --- TỔ HỢP 3: SOLID + DANGER (Nút Đỏ cảnh báo/xóa) ---
+  &--solid-danger {
+    background-color: $label-danger-color;
+    color: $danger-color;
+    &:hover:not(:disabled) { opacity: 0.8; }
+  }
+
+  // --- Kích thước ---
+  &--full-width {
+    display: flex;
+    width: 100%;
+    flex: 1;
+  }
+}

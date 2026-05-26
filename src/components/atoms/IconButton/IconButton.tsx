@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Icon } from "../Icon/Icon";
-import styles from "./IconButton.module.scss";
+import "./IconButton.scss";
 
 type IconButtonVariant = "default" | "ghost" | "circular";
 
@@ -28,7 +28,7 @@ export const IconButton = ({
   return (
     <button
       type={type}
-      className={clsx(styles["icon-button"], styles[`icon-button--${variant}`], className)}
+      className={clsx("icon-button", `icon-button--${variant}`, className)}
       aria-label={ariaLabel}
       {...rest}
     >

@@ -1,0 +1,14 @@
+@use "@/styles/abstracts/variables" as *;
+
+.product-price-text {
+  font-weight: 700;
+
+  &--current {
+    color: $black-color;
+  }
+
+  &--old {
+    color: $text-muted;
+    text-decoration: line-through;
+  }
+}

@@ -1,0 +1,58 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.product-card__price {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  @include flex-group(10px, flex-start, center);
+  flex-wrap: wrap;
+
+  @media (max-width: $breakpoint) {
+    font-size: 20px;
+    gap: 5px;
+  }
+
+  &--current {
+    color: $black-color;
+  }
+
+  &--old {
+    color: $text-muted;
+    text-decoration: line-through;
+  }
+
+  &--discount {
+    padding: 6px 13.5px;
+    color: $danger-color;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: $radius-pill;
+    background-color: $label-danger-color;
+
+    @media (max-width: $breakpoint) {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+  }
+
+  // --- BIẾN THỂ PHỤC VỤ CHO PRODUCT DETAIL (`isDetail={true}`) ---
+  &--detail {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 32px; // Đưa font-size của chữ lớn lên tầng detail
+    gap: 12px;
+
+    @media (max-width: $breakpoint) {
+      font-size: 24px;
+      margin-bottom: 20px;
+      gap: 8px;
+    }
+
+    // Ghi đè riêng tag discount của bản detail to hơn
+    .product-card__price--discount {
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+  }
+}

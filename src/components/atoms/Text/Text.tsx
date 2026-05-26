@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
 import clsx from "clsx";
-import "./Text.module.scss";
+import "./Text.scss";
 
 type TextVariant = "p" | "span" | "div";
 

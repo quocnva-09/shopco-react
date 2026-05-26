@@ -1,7 +1,8 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { TextLink } from '@/components/atoms/TextLink';
-import styles from './DropdownMenu.module.scss';
+import './DropdownMenu.scss';
+import { Icon } from "@/components/atoms/Icon/Icon";
 
 export interface DropdownItem {
   label: string;
@@ -25,25 +26,24 @@ export const DropdownMenu = ({
 }: DropdownMenuProps) => {
   return (
     <div 
-      className={clsx(styles['dropdown'], isOpen && styles['is-open'], className)} 
+      className={clsx('dropdown', isOpen && 'is-open', className)} 
       {...rest}
     >
-      <div className={styles['dropdown__trigger']}>
-        <TextLink href={href} className={styles['dropdown__link']}>
+      <div className="dropdown__trigger">
+        <TextLink href={href} className="dropdown__link">
           {title}
         </TextLink>
-        <img
-          src="assets/icons/icn-arrow-down.svg"
-          alt=""
-          aria-hidden="true"
-          className={styles['dropdown__icon']}
+        <Icon
+          svgName="icn-arrow-down"
+          aria-label="icn-arrow-down"
+          className="dropdown__icon"
         />
       </div>
 
-      <ul className={styles['dropdown__menu']}>
+      <ul className="dropdown__menu">
         {items.map((item, index) => (
-          <li key={index} className={styles['dropdown__item']}>
-            <TextLink href={item.href} className={styles['dropdown__item-link']}>
+          <li key={index} className="dropdown__item">
+            <TextLink href={item.href} className="dropdown__item-link">
               {item.label}
             </TextLink>
           </li>

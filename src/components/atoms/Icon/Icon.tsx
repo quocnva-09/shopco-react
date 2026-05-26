@@ -1,7 +1,7 @@
 import { ReactSVG, type Props as ReactSVGProps } from "react-svg";
 import clsx from "clsx";
 import { toCssDimension } from "@/utils/css";
-import styles from './Icon.module.scss'
+import './Icon.scss';
 
 
 export interface IconProps extends Omit<ReactSVGProps, "src">{
@@ -32,7 +32,7 @@ export const Icon = (
   return (
     <ReactSVG
       src={`/images/${svgName}.svg`}
-      className={clsx(styles.icon, className)}
+      className={clsx('icon', className)}
       wrapper="span"
       style={{
         width: resolvedWidth,

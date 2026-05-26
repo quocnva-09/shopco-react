@@ -1,7 +1,7 @@
 @use "@/styles/abstracts/variables" as *;
 
 .text-link{
-  color: $primary-color;
+  color: $text-color;
   text-decoration: underline;
 
   @media (max-width: $breakpoint) {

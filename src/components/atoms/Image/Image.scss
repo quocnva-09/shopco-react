@@ -1,0 +1,34 @@
+.image-bare {
+  display: block;
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  background-color: #f0f0f0;
+
+  &__img {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &--loaded &__img {
+    opacity: 1;
+  }
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+  }
+}
+
+.is-loaded {
+}
+
+.is-error {
+  background-color: #eaeaea; 
+}
