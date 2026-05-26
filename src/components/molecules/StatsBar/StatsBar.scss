@@ -1,0 +1,63 @@
+@use '@/styles/abstracts/variables' as *;
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: $base-spacing * 2;
+  margin-top: $base-spacing * 3;
+  flex-wrap: wrap;
+
+  @media (max-width: $breakpoint) {
+    justify-content: center;
+    gap: 28px;
+    row-gap: 12px;
+    margin-top: 20px;
+  }
+
+  &__entry {
+    display: contents; // Để item và divider nằm cùng cấp flex với stats-bar
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: $breakpoint) {
+      // Item cuối cùng chiếm 100% chiều rộng để rớt xuống dòng riêng
+      &:last-of-type {
+        flex: 0 0 100%;
+        align-items: center;
+      }
+    }
+  }
+
+  &__value {
+    font-family: $text-font-stack;
+    font-size: 40px;
+    font-weight: 700;
+    color: $text-dark;
+
+    @media (max-width: $breakpoint) {
+      font-size: 24px;
+    }
+  }
+
+  &__label {
+    font-family: $text-font-stack;
+    font-size: $font-size-mobile;
+    color: $text-muted;
+
+    @media (max-width: $breakpoint) {
+      font-size: 12px;
+    }
+  }
+
+  // Ẩn divider cuối cùng trên mobile (trước item 30,000+)
+  &__divider {
+    @media (max-width: $breakpoint) {
+      &:last-of-type {
+        display: none;
+      }
+    }
+  }
+}

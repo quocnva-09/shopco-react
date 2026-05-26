@@ -1,0 +1,77 @@
+@use '@/styles/abstracts/variables' as *;
+
+.main-banner__image {
+  flex: 0 0 50%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: $breakpoint) {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
+}
+
+.main-banner__image-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  flex: 0 0 100%;
+  position: relative;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: 70% 15%;
+    transform: scale(1.15);
+  }
+
+  @media (max-width: $breakpoint) {
+    margin-left: -$padding-left-right-mobile;
+    margin-right: -$padding-left-right-mobile;
+    overflow: hidden;
+    width: calc(100% + (#{$padding-left-right-mobile} * 2));
+    transform: none;
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.main-banner__image-effect {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 2;
+
+  img {
+    width: 104px;
+    height: 104px;
+    object-fit: contain;
+
+    @media (max-width: $breakpoint) {
+      width: 76px;
+      height: 76px;
+    }
+  }
+
+  &--small {
+    top: 45%;
+    left: 0;
+    right: auto;
+
+    img {
+      width: 56px;
+      height: 56px;
+
+      @media (max-width: $breakpoint) {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  }
+}

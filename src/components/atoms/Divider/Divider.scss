@@ -1,0 +1,22 @@
+@use '@/styles/abstracts/variables' as *;
+
+.divider {
+  flex-shrink: 0;
+  background-color: rgba($black-color, 0.1);
+
+  // --- Vertical (dùng trong StatsBar, sidebar...) ---
+  &--vertical {
+    width: 1px;
+    height: 74px;
+
+    @media (max-width: $breakpoint) {
+      height: 52px;
+    }
+  }
+
+  // --- Horizontal (dùng trong footer, section separator...) ---
+  &--horizontal {
+    width: 100%;
+    height: 1px;
+  }
+}

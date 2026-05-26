@@ -1,0 +1,1 @@
+export { MainBannerImage } from './MainBannerImage';
