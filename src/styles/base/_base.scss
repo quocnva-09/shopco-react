@@ -1,4 +1,5 @@
-@use "../abstracts/variables";
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
 
 // -----------------------------------------------------------------------------
 // This file contains very basic styles.

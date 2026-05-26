@@ -1,36 +1,31 @@
-@use "../../../styles/abstracts/variables" as *;
+@use "@/styles/abstracts/variables" as *;
 
+// Khối bọc điều hướng hover hiển thị Tooltip toàn cục cho Text
+.text-wrapper {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+// Lõi xử lý định dạng Text
 .text {
-  font-size: 14px;
-  font-family: $font-family-base;
-  &--clamp-1,
-  &--clamp-2,
-  &--clamp-3,
-  &--clamp-4 {
+  margin: 0;
+
+  // Trạng thái cắt chữ nhiều dòng động bằng Biến CSS (CSS Variable)
+  &--clamp {
     display: -webkit-box;
-
-    /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
-
+    -webkit-line-clamp: var(--line-clamp); // Nhận trực tiếp số dòng từ React truyền xuống
     overflow: hidden;
-  }
-
-  &--clamp-1 {
-    -webkit-line-clamp: 1;
-  }
-
-  &--clamp-2 {
-    -webkit-line-clamp: 2;
-  }
-
-  &--clamp-3 {
-    -webkit-line-clamp: 3;
-  }
-
-  &--clamp-4 {
-    -webkit-line-clamp: 4;
-  }
-  @media (max-width: $breakpoint) {
-    font-size: 12px;
+    text-overflow: ellipsis;
   }
 }

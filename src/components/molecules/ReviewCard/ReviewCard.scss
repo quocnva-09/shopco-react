@@ -1,0 +1,82 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.review-card {
+  border: 1px solid $grey-color;
+  border-radius: $radius-lg;
+  padding: $base-spacing * 2 $base-spacing * 1.75;
+  display: flex;
+  flex-direction: column;
+  gap: $base-spacing;
+  max-width: auto;
+  height: auto;
+
+  @media (max-width: $breakpoint) {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  &__header {
+    @include flex-between;
+    align-items: center;
+
+    // Đè kích thước sao trong Review cho to lên theo thiết kế cũ (22px)
+    .rating__star {
+      width: 22px;
+      height: 21px;
+    }
+  }
+
+  &__menu {
+    background: $icn-3-dot no-repeat center;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 7px;
+    padding: 0;
+
+    @media (max-width: $breakpoint) {
+      display: none;
+    }
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $black-color;
+    width: 100%;
+
+    span:not(.verified-icon) {
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__comment {
+    line-height: 22px;
+    font-size: $font-size-base;
+    color: $text-muted;
+    width: 100%;
+
+    @media (max-width: $breakpoint) {
+      font-size: $font-size-mobile;
+      display: block !important; 
+      -webkit-line-clamp: unset !important;
+      overflow: visible !important;
+      white-space: normal !important;
+    }
+  }
+
+  &__date {
+    font-size: $font-size-base;
+    color: $text-muted;
+    margin-top: auto;
+    @media (max-width: $breakpoint) {
+      font-size: $font-size-mobile;
+    }
+  }
+}

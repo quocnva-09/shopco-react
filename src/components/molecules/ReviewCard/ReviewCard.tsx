@@ -1,0 +1,84 @@
+import { type ComponentPropsWithoutRef } from "react";
+import clsx from "clsx";
+import { Rating } from "@/components/atoms/Rating/Rating";
+import { Heading } from "@/components/atoms/Heading/Heading";
+import { Text } from "@/components/atoms/Text/Text";
+import { IconButton } from "@/components/atoms/IconButton";
+import "./ReviewCard.scss";
+import { Icon } from "@/components/atoms/Icon/Icon";
+
+export interface ReviewData {
+  id: string | number;
+  name: string;
+  rating: number;
+  comment: string;
+  date: string; // Ví dụ: "on August 14, 2025" hoặc "on May 26, 2026"
+  isVerified?: boolean;
+}
+
+export interface ReviewCardProps extends ComponentPropsWithoutRef<"div"> {
+  review: ReviewData;
+  onMenuClick?: () => void;
+}
+
+export const ReviewCard = ({
+  review,
+  onMenuClick,
+  className,
+  ...rest
+}: ReviewCardProps) => {
+  const { name, rating, comment, date, isVerified = true } = review;
+
+  return (
+    <div className={clsx("review-card", className)} {...rest}>
+      {/* 1. Kỷ nguyên Header: Rating + Menu 3 chấm */}
+      <div className="review-card__header">
+        <Rating value={rating} showText={false} />
+
+        {onMenuClick && (
+          <IconButton
+            svgName="icn-3-dot" // Ăn theo biến $icn-3-dot trong SCSS qua class của bạn
+            ariaLabel="Review options"
+            className="review-card__menu"
+            variant="ghost"
+            onClick={onMenuClick}
+          />
+        )}
+      </div>
+
+      {/* 2. Khối Tên + Icon Verified tích hợp Custom Tooltip */}
+      <div className="review-card__name">
+        <Text
+          as="span"
+          lineClamp={1}
+          showTooltip={true}
+          className="review-card__name-text"
+          tooltipClassName="tooltip--review-card"
+        >
+          {name}
+        </Text>
+        {isVerified && (
+          <Icon
+            svgName="icn-verified"
+            className="verified-icon"
+            color="green"
+          />
+        )}
+      </div>
+
+      {/* 3. Khối Nội dung Comment: Cắt 3 dòng trên Desktop, Bung lụa trên Mobile */}
+      <Text
+        as="p"
+        lineClamp={3}
+        showTooltip={true}
+        className="review-card__comment"
+        tooltipClassName="tooltip--comment"
+      >
+        {comment}
+      </Text>
+
+      {/* 4. Khối thời gian đăng bài */}
+      <time className="review-card__date">Posted {date}</time>
+    </div>
+  );
+};

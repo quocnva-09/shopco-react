@@ -1,9 +1,10 @@
-@use '../abstracts';
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
 
 /**
  * Basic typography style for copy text
  */
 body {
-  color: abstracts.$text-color;
-  font: normal 125% / 1.4 abstracts.$text-font-stack;
+  color: $text-color;
+  font: normal 125% / 1.4 $text-font-stack;
 }

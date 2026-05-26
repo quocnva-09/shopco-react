@@ -1,0 +1,32 @@
+@use '@/styles/abstracts/variables' as *;
+@use '@/styles/abstracts/mixins' as *;
+
+.product-card {
+  @include flex-group(0px, flex-start, flex-start);
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+
+  &__image {
+    margin: 0;
+    width: 100%;
+
+    & img {
+      border-radius: 13px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+  }
+
+  &__name {
+    margin: 16px 0 0 0;
+    font-size: 20px;
+    font-weight: 700;
+    width: 100%;
+
+    @media (max-width: $breakpoint) {
+      font-size: 16px;
+    }
+  }
+}
