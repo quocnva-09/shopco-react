@@ -32,7 +32,8 @@ export const Heading = ({
       <Component
         className={clsx(
           "heading-text",
-          lineClamp === 1 ? "heading-text--ellipsis" : "heading-text--clamp",
+          lineClamp === 1 && "heading-text--ellipsis",
+          lineClamp > 1 && "heading-text--clamp",
           className,
         )}
         style={
