@@ -26,7 +26,7 @@ export const NotificationBar = ({
         </Text>
         <IconButton
           svgName="icn-close"
-          ariaLabel="Close notification"
+          aria-label="Close notification"
           className="notification-bar__close"
           onClick={onClose}
           variant="ghost"

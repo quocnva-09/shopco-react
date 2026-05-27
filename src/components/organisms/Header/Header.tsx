@@ -1,12 +1,12 @@
-import { type ComponentPropsWithoutRef } from 'react';
-import clsx from 'clsx';
-import { TextLink } from '@/components/atoms/TextLink';
-import { IconButton } from '@/components/atoms/IconButton';
-import { NavMenu } from '@/components/molecules/NavMenu';
-import { SearchBar } from '@/components/molecules/SearchBar';
-import './Header.scss';
+import { type ComponentPropsWithoutRef } from "react";
+import clsx from "clsx";
+import { TextLink } from "@/components/atoms/TextLink";
+import { IconButton } from "@/components/atoms/IconButton";
+import { NavMenu } from "@/components/molecules/NavMenu";
+import { SearchBar } from "@/components/molecules/SearchBar";
+import "./Header.scss";
 
-export interface HeaderProps extends ComponentPropsWithoutRef<'header'> {
+export interface HeaderProps extends ComponentPropsWithoutRef<"header"> {
   onCartClick?: () => void;
   onProfileClick?: () => void;
 }
@@ -18,9 +18,8 @@ export const Header = ({
   ...rest
 }: HeaderProps) => {
   return (
-    <header className={clsx('header', className)} {...rest}>
-      <div className={clsx('header__container', 'container')}>
-        
+    <header className={clsx("header", className)} {...rest}>
+      <div className={clsx("header__container", "container")}>
         {/* Lớp cắt 1: Logo gắn link trực tiếp theo chiến lược tối giản */}
         <TextLink href="/" className="header__logo">
           SHOP.CO
@@ -36,20 +35,19 @@ export const Header = ({
         <div className="header__actions">
           <IconButton
             svgName="icn-cart" // Khớp với file icn-cart.svg của bạn
-            ariaLabel="Open shopping cart"
+            aria-label="Open shopping cart"
             className="header__icon-btn"
             onClick={onCartClick}
             variant="ghost"
           />
           <IconButton
             svgName="icn-user" // Khớp với file icn-user.svg của bạn
-            ariaLabel="View user profile"
+            aria-label="View user profile"
             className="header__icon-btn"
             onClick={onProfileClick}
             variant="ghost"
           />
         </div>
-
       </div>
     </header>
   );
