@@ -31,14 +31,13 @@ export const ReviewCard = ({
 
   return (
     <div className={clsx("review-card", className)} {...rest}>
-      {/* 1. Kỷ nguyên Header: Rating + Menu 3 chấm */}
       <div className="review-card__header">
         <Rating value={rating} showText={false} />
 
         {onMenuClick && (
           <IconButton
-            svgName="icn-3-dot" // Ăn theo biến $icn-3-dot trong SCSS qua class của bạn
-            ariaLabel="Review options"
+            svgName="icn-3-dot"
+            aria-label="Review options"
             className="review-card__menu"
             variant="ghost"
             onClick={onMenuClick}
@@ -51,7 +50,7 @@ export const ReviewCard = ({
         <Text
           as="span"
           lineClamp={1}
-          showTooltip={true}
+          showTooltip={false}
           className="review-card__name-text"
           tooltipClassName="tooltip--review-card"
         >

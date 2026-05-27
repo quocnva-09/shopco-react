@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Icon } from "../Icon/Icon";
 import "./IconButton.scss";
 
-type IconButtonVariant = "default" | "ghost" | "circular" | "social";
+type IconButtonVariant = "default" | "ghost" | "circular" | "social" | "no-fill";
 
 export interface IconButtonProps extends Omit<
   ComponentPropsWithoutRef<"button">,
