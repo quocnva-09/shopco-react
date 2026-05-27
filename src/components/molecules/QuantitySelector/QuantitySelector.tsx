@@ -1,7 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
-import { Text } from "@/components/atoms/Text";
 import "./QuantitySelector.scss";
 
 export interface QuantitySelectorProps extends ComponentPropsWithoutRef<"div"> {
@@ -23,9 +22,14 @@ export const QuantitySelector = ({
         className="quantity-selector__btn quantity-selector__btn--minus"
         variant="ghost"
       />
-      <Text as="span" className="quantity-selector__value">
-        {defaultValue}
-      </Text>
+      <input
+        type="number"
+        className="quantity-selector__value"
+        defaultValue={defaultValue}
+        min={min}
+        aria-label="Quantity"
+        readOnly
+      />
       <IconButton
         svgName="icn-plus"
         aria-label="Increase quantity"

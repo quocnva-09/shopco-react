@@ -1,7 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Rating } from "@/components/atoms/Rating/Rating";
-import { Heading } from "@/components/atoms/Heading/Heading";
 import { Text } from "@/components/atoms/Text/Text";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./ReviewCard.scss";

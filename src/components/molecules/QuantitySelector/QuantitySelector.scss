@@ -25,9 +25,21 @@
     text-align: center;
     font-size: $font-size-base;
     font-weight: 500;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 40px;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
     @media (max-width: $breakpoint) {
       font-size: $font-size-mobile;
+      width: 30px;
     }
   }
 }
