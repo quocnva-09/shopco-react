@@ -19,14 +19,8 @@
   &__header {
     @include flex-between;
     align-items: center;
-
-    // Đè kích thước sao trong Review cho to lên theo thiết kế cũ (22px)
-    .rating__star {
-      width: 22px;
-      height: 21px;
-    }
   }
-
+  
   &__menu {
     background: $icn-3-dot no-repeat center;
     border: none;

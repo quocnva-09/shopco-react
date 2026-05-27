@@ -18,11 +18,13 @@ export interface ReviewData {
 
 export interface ReviewCardProps extends ComponentPropsWithoutRef<"div"> {
   review: ReviewData;
+  showMenu?: boolean;
   onMenuClick?: () => void;
 }
 
 export const ReviewCard = ({
   review,
+  showMenu = false,
   onMenuClick,
   className,
   ...rest
@@ -34,7 +36,7 @@ export const ReviewCard = ({
       <div className="review-card__header">
         <Rating value={rating} showText={false} />
 
-        {onMenuClick && (
+        {(showMenu || onMenuClick) && (
           <IconButton
             svgName="icn-3-dot"
             aria-label="Review options"

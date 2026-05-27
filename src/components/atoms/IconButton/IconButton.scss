@@ -47,7 +47,8 @@
   &--circular {
     width: 48px;
     height: 48px;
-    border-radius: 62px;
+    aspect-ratio: 1;
+    border-radius: 50%;
     background-color: $grey-color;
   }
 

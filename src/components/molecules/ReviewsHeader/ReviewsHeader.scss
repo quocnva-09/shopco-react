@@ -1,0 +1,32 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.reviews__count {
+  font-size: $font-size-base;
+  @media (max-width: $breakpoint) {
+    font-size: $font-size-mobile;
+  }
+  font-weight: 400;
+  color: $text-muted;
+}
+
+.reviews__actions {
+  @include flex-center(row);
+  gap: $base-spacing;
+  position: relative;
+  flex-grow:5;
+
+  @media (max-width: $breakpoint) {
+    gap: $base-spacing * 0.5;
+  }
+}
+
+.button--dropdown{
+  color: $black-color;
+  padding: 15px 20px;
+}
+
+.button--write-review{
+  padding: 15px 30px;
+  white-space: nowrap;
+}

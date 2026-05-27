@@ -1,0 +1,18 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.reviews {
+  &__grid {
+    @include grid-layout(2, 1fr);
+    gap: $base-spacing;
+
+    @media (max-width: $breakpoint) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.btn--load-more{
+  justify-self: center;
+  display: block;
+}
