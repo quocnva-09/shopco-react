@@ -9,6 +9,8 @@ export interface HeadingProps extends ComponentPropsWithoutRef<"h1"> {
   lineClamp?: number;
   showTooltip?: boolean;
   tooltipClassName?: string;
+  fontSize?: string | number;
+  fontFamily?: string;
 }
 
 export const Heading = ({
@@ -16,7 +18,10 @@ export const Heading = ({
   lineClamp = 1,
   showTooltip = false,
   tooltipClassName,
+  fontSize,
+  fontFamily,
   className,
+  style,
   children,
   ...rest
 }: HeadingProps) => {
@@ -36,11 +41,14 @@ export const Heading = ({
           lineClamp > 1 && "heading-text--clamp",
           className,
         )}
-        style={
-          lineClamp > 1
+        style={{
+          ...(lineClamp > 1
             ? ({ "--line-clamp": lineClamp } as React.CSSProperties)
-            : undefined
-        }
+            : undefined),
+          fontSize,
+          fontFamily,
+          ...style,
+        }}
         title={!showTooltip ? textContent : undefined}
         {...rest}
       >

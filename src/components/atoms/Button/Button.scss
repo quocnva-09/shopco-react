@@ -42,6 +42,13 @@
     &:hover:not(:disabled) { opacity: 0.8; }
   }
 
+  // --- TỔ HỢP 4: SOLID + GREY (Nút Xám - Size Selector default) ---
+  &--solid-grey {
+    background-color: #f0f0f0;
+    color: $text-muted;
+    &:hover:not(:disabled) { opacity: 0.8; }
+  }
+
   // --- Kích thước ---
   &--full-width {
     display: flex;

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import './Button.scss';
 
 export type ButtonVariant = 'solid' | 'outline';
-export type ButtonColor = 'dark' | 'danger';
+export type ButtonColor = 'dark' | 'danger' | 'grey';
 
 export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: ButtonVariant;
