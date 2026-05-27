@@ -1,0 +1,33 @@
+@use "@/styles/abstracts/variables" as *;
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: $text-muted;
+  margin: 24px 0 36px 0;
+
+  @media (max-width: $breakpoint) {
+    margin: 20px 0;
+  }
+
+  &__item {
+    color: $text-muted;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $text-dark;
+    }
+
+    &--active {
+      color: $text-dark;
+      font-weight: 400;
+    }
+  }
+
+  &__separator {
+    margin: 0 8px;
+    font-size: 12px;
+  }
+}

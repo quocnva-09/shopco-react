@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FeedbackSection } from "./FeedbackSection";
 import { MOCK_REVIEWS } from "./feedbackData";
 import "@/styles/index.scss";
+import "@/components/atoms/Tooltip";
 
 const meta: Meta<typeof FeedbackSection> = {
   title: "Organisms/FeedbackSection",
