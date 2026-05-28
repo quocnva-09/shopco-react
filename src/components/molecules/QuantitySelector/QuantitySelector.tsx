@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./QuantitySelector.scss";
@@ -14,6 +14,16 @@ export const QuantitySelector = ({
   className,
   ...rest
 }: QuantitySelectorProps) => {
+  const [value, setValue] = useState(defaultValue);
+
+  const handleDecrease = () => {
+    setValue((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  const handleIncrease = () => {
+    setValue((prev) => prev + 1);
+  };
+
   return (
     <div className={clsx("quantity-selector", className)} {...rest}>
       <IconButton
@@ -21,11 +31,12 @@ export const QuantitySelector = ({
         aria-label="Decrease quantity"
         className="quantity-selector__btn quantity-selector__btn--minus"
         variant="ghost"
+        onClick={handleDecrease}
       />
       <input
         type="number"
         className="quantity-selector__value"
-        defaultValue={defaultValue}
+        value={value}
         min={min}
         aria-label="Quantity"
         readOnly
@@ -35,6 +46,7 @@ export const QuantitySelector = ({
         aria-label="Increase quantity"
         className="quantity-selector__btn quantity-selector__btn--plus"
         variant="ghost"
+        onClick={handleIncrease}
       />
     </div>
   );
