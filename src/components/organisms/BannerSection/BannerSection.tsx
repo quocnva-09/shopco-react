@@ -6,7 +6,7 @@ import { MainBannerImage } from "../../molecules/MainBannerImage";
 import type { StatItemData } from "../../molecules/StatsBar";
 import "./BannerSection.scss";
 
-export interface BannerSectionProps extends ComponentPropsWithoutRef<"section"> {
+export type BannerSectionProps = ComponentPropsWithoutRef<"section"> & {
   title: string;
   description: string;
   ctaLabel: string;
@@ -14,7 +14,7 @@ export interface BannerSectionProps extends ComponentPropsWithoutRef<"section"> 
   stats: StatItemData[];
   heroImage: { src: string; alt: string };
   effectSrc?: string;
-}
+};
 
 export const BannerSection = ({
   title,

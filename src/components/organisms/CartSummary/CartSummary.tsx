@@ -15,10 +15,10 @@ export interface SummaryLineItem {
   isDiscount?: boolean;
 }
 
-export interface CartSummaryProps extends ComponentPropsWithoutRef<"aside"> {
+export type CartSummaryProps = ComponentPropsWithoutRef<"aside"> & {
   lineItems: SummaryLineItem[];
   total: number;
-}
+};
 
 export const CartSummary = ({
   lineItems,

@@ -13,7 +13,7 @@ import {
 } from "@/components/molecules/ProductCard";
 import "./ProductCollectionSection.scss";
 
-export interface ProductCollectionSectionProps extends ComponentPropsWithoutRef<"section"> {
+export type ProductCollectionSectionProps = ComponentPropsWithoutRef<"section"> & {
   title: string;
   products: ProductCardData[];
   ctaLabel?: string;
@@ -21,7 +21,7 @@ export interface ProductCollectionSectionProps extends ComponentPropsWithoutRef<
   enableSlider?: boolean;
   visibleCount?: number;
   showButton?: boolean;
-}
+};
 
 export const ProductCollectionSection = ({
   title,

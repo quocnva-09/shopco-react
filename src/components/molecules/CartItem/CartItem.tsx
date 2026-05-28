@@ -9,9 +9,9 @@ import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import type { CartItemData } from "@/consts/cartData";
 import "./CartItem.scss";
 
-export interface CartItemProps extends ComponentPropsWithoutRef<"article"> {
+export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
   item: CartItemData;
-}
+};
 
 export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
   const { name, imageSrc, imageAlt, price, quantity, variants } = item;

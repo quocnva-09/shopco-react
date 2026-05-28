@@ -12,9 +12,9 @@ export interface StyleCategoryCardData {
   href?: string;
 }
 
-export interface StyleCategoryCardProps extends ComponentPropsWithoutRef<'a'> {
+export type StyleCategoryCardProps = ComponentPropsWithoutRef<'a'> & {
   category: StyleCategoryCardData;
-}
+};
 
 export const StyleCategoryCard = ({
   category,

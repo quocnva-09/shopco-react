@@ -5,17 +5,17 @@ import "./IconButton.scss";
 
 type IconButtonVariant = "default" | "ghost" | "circular" | "social" | "no-fill";
 
-export interface IconButtonProps extends Omit<
+export type IconButtonProps = Omit<
   ComponentPropsWithoutRef<"button">,
   "children"
-> {
+> & {
   svgName: string;
   color?: string;
   backgroundColor?: string;
   iconWidth?: number | string;
   iconHeight?: number | string;
   variant?: IconButtonVariant;
-}
+};
 
 export const IconButton = ({
   svgName,

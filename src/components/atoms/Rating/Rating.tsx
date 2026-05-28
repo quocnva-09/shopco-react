@@ -4,11 +4,11 @@ import './Rating.scss';
 
 export type RatingVariant = 'default' | 'row';
 
-export interface RatingProps extends ComponentPropsWithoutRef<'div'> {
+export type RatingProps = ComponentPropsWithoutRef<'div'> & {
   value: number;
   showText?: boolean;
   variant?: RatingVariant;
-}
+};
 
 export const Rating = ({
   value,

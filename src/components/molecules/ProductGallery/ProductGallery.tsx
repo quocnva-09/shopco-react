@@ -7,10 +7,10 @@ export interface ProductImage {
   img_path: string;
 }
 
-export interface ProductGalleryProps extends ComponentPropsWithoutRef<"figure"> {
+export type ProductGalleryProps = ComponentPropsWithoutRef<"figure"> & {
   images: ProductImage[];
   productName: string;
-}
+};
 
 export const ProductGallery = ({
   images,
@@ -25,14 +25,14 @@ export const ProductGallery = ({
       <div className="product-detail__thumbnails">
         {images.map((img, idx) => (
           <Image
-            key={img.img_path}
+            key={idx}
             src={img.img_path}
             alt={`${productName} - Thumbnail ${idx + 1}`}
             title={`${productName} - Thumbnail ${idx + 1}`}
             renderWrapper={false}
             className={clsx(
               "product-detail__thumbnail",
-              idx === 0 && "product-detail__thumbnail--active"
+              idx === 0 && "product-detail__thumbnail--active",
             )}
           />
         ))}

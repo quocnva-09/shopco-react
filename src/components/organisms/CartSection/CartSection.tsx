@@ -6,11 +6,11 @@ import type { SummaryLineItem } from "@/components/organisms/CartSummary";
 import type { CartItemData } from "@/consts/cartData";
 import "./CartSection.scss";
 
-export interface CartSectionProps extends ComponentPropsWithoutRef<"div"> {
+export type CartSectionProps = ComponentPropsWithoutRef<"div"> & {
   items: CartItemData[];
   lineItems: SummaryLineItem[];
   total: number;
-}
+};
 
 export const CartSection = ({
   items,

@@ -9,12 +9,12 @@ export interface DropdownItem {
   href: string;
 }
 
-export interface DropdownMenuProps extends ComponentPropsWithoutRef<"div"> {
+export type DropdownMenuProps = ComponentPropsWithoutRef<"div"> & {
   title: string;
   href: string;
   items: DropdownItem[];
   isOpen?: boolean;
-}
+};
 
 export const DropdownMenu = ({
   title,

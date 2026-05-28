@@ -7,10 +7,10 @@ export interface FooterLinkItem {
   href: string;
 }
 
-export interface FooterNavColumnProps {
+export type FooterNavColumnProps = {
   title: string;
   links: FooterLinkItem[];
-}
+};
 
 export const FooterNavColumn = ({ title, links }: FooterNavColumnProps) => {
   return (

@@ -10,12 +10,12 @@ export interface TabItem {
 
 export type TabsVariant = "default" | "profile";
 
-export interface TabsProps extends ComponentPropsWithoutRef<"div"> {
+export type TabsProps = ComponentPropsWithoutRef<"div"> & {
   tabs: TabItem[];
   activeTab: string;
   onTabChange?: (tabId: string) => void;
   variant?: TabsVariant;
-}
+};
 
 export const Tabs = ({
   tabs,

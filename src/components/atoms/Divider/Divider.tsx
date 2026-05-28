@@ -4,9 +4,9 @@ import './Divider.scss';
 
 export type DividerDirection = 'vertical' | 'horizontal';
 
-export interface DividerProps extends ComponentPropsWithoutRef<'div'> {
+export type DividerProps = ComponentPropsWithoutRef<'div'> & {
   direction?: DividerDirection;
-}
+};
 
 export const Divider = ({
   direction = 'vertical',

@@ -5,10 +5,9 @@ import { ProductDetailInfo } from "@/components/organisms/ProductDetailInfo";
 import type { ProductDetailData } from "@/consts/productDetailData";
 import "./ProductDetailSection.scss";
 
-export interface ProductDetailSectionProps
-  extends ComponentPropsWithoutRef<"section"> {
+export type ProductDetailSectionProps = ComponentPropsWithoutRef<"section"> & {
   data: ProductDetailData;
-}
+};
 
 export const ProductDetailSection = ({
   data,

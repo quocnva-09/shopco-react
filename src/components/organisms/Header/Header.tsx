@@ -6,10 +6,10 @@ import { NavMenu } from "@/components/molecules/NavMenu";
 import { SearchBar } from "@/components/molecules/SearchBar";
 import "./Header.scss";
 
-export interface HeaderProps extends ComponentPropsWithoutRef<"header"> {
+export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;
   onProfileClick?: () => void;
-}
+};
 
 export const Header = ({
   onCartClick,

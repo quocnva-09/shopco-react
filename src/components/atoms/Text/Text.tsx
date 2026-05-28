@@ -4,13 +4,13 @@ import "./Text.scss";
 
 type TextVariant = "p" | "span" | "div";
 
-export interface TextProps extends HTMLAttributes<HTMLElement> {
+export type TextProps = HTMLAttributes<HTMLElement> & {
   as?: TextVariant;
   lineClamp?: number;
   showTooltip?: boolean; // Cờ bật/tắt tính năng Tooltip khi hover
   tooltipClassName?: string; // Nhận class modifier từ global (.tooltip--comment, .tooltip--review-card)
   children: React.ReactNode;
-}
+};
 
 export const Text = ({
   as: Component = "p",

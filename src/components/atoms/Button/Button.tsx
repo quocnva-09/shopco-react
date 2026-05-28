@@ -1,48 +1,48 @@
-import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
-import clsx from 'clsx';
-import './Button.scss';
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+import clsx from "clsx";
+import "./Button.scss";
 
-export type ButtonVariant = 'solid' | 'outline';
-export type ButtonColor = 'dark' | 'danger' | 'grey';
+export type ButtonVariant = "solid" | "outline";
+export type ButtonColor = "dark" | "danger" | "grey";
 
-export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
+export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   variant?: ButtonVariant;
   colorScheme?: ButtonColor;
   fullWidth?: boolean;
   icon?: ReactNode;
-  iconPosition?: 'left' | 'right';
-}
+  iconPosition?: "left" | "right";
+};
 
 export const Button = ({
-  variant = 'solid',
-  colorScheme = 'dark',
+  variant = "solid",
+  colorScheme = "dark",
   fullWidth = false,
   icon,
-  iconPosition = 'left',
+  iconPosition = "left",
   className,
   children,
-  type = 'button',
+  type = "button",
   ...rest
 }: ButtonProps) => {
   return (
     <button
       type={type}
       className={clsx(
-        'button',
+        "button",
         `button--${variant}-${colorScheme}`, // Output chuỗi tĩnh: "button--solid-dark", "button--outline-dark"
-        fullWidth && 'button--full-width',
-        icon && 'button--icon',
-        className
+        fullWidth && "button--full-width",
+        icon && "button--icon",
+        className,
       )}
       {...rest}
     >
-      {icon && iconPosition === 'left' && (
+      {icon && iconPosition === "left" && (
         <span className="button__icon-wrapper">{icon}</span>
       )}
-      
+
       {children && <span className="button__text">{children}</span>}
-      
-      {icon && iconPosition === 'right' && (
+
+      {icon && iconPosition === "right" && (
         <span className="button__icon-wrapper">{icon}</span>
       )}
     </button>

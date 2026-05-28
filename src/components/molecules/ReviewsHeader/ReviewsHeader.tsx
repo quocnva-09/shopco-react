@@ -7,9 +7,9 @@ import { IconButton } from "@/components/atoms/IconButton";
 import { Icon } from "@/components/atoms/Icon";
 import "./ReviewsHeader.scss";
 
-export interface ReviewsHeaderProps extends ComponentPropsWithoutRef<"div"> {
+export type ReviewsHeaderProps = ComponentPropsWithoutRef<"div"> & {
   reviewCount: number;
-}
+};
 
 export const ReviewsHeader = ({
   reviewCount,

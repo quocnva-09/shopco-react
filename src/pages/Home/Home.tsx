@@ -47,7 +47,7 @@ export const HomePage = () => {
 
       <StyleCategorySection title="BROWSE BY DRESS STYLE" />
 
-      <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 4)} />
+      <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 6)} />
     </MainLayout>
   );
 };

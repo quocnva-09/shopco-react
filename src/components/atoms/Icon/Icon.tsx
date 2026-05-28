@@ -3,14 +3,14 @@ import clsx from "clsx";
 import { toCssDimension } from "@/utils/css";
 import "./Icon.scss";
 
-export interface IconProps extends Omit<ReactSVGProps, "src"> {
+export type IconProps = Omit<ReactSVGProps, "src"> & {
   svgName: string;
   color?: string;
   size?: number | string;
   width?: number | string;
   height?: number | string;
   preserveColors?: boolean;
-}
+};
 
 export const Icon = ({
   svgName,

@@ -130,13 +130,9 @@
         }
 
         @media (max-width: $breakpoint) {
-          margin-left: 0;
+          margin-right: auto;
           transform: none;
-          padding-right: 22%;
-          padding-top: 5%;
-          object-fit: contain;
-          transform: scale(2.2);
-          object-position: right bottom;
+          padding-right: 10%;
         }
       }
     }

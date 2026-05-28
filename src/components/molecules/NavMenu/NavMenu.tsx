@@ -4,9 +4,9 @@ import { TextLink } from '@/components/atoms/TextLink';
 import { DropdownMenu } from '@/components/molecules/DropdownMenu';
 import './NavMenu.scss';
 
-export interface NavMenuProps extends ComponentPropsWithoutRef<'nav'> {
+export type NavMenuProps = ComponentPropsWithoutRef<'nav'> & {
   isOpenMobile?: boolean;
-}
+};
 
 // Khởi tạo dữ liệu tĩnh mẫu (Mock Data)
 const SHOP_DROPDOWN_ITEMS = [

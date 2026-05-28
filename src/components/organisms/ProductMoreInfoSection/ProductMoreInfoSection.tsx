@@ -16,12 +16,12 @@ const PRODUCT_TABS = [
 // TODO: activeTab sẽ dùng useState khi implement React hooks
 const DEFAULT_ACTIVE_TAB = "reviews";
 
-export interface ProductMoreInfoSectionProps extends ComponentPropsWithoutRef<"div"> {
+export type ProductMoreInfoSectionProps = ComponentPropsWithoutRef<"div"> & {
   productDescription?: string;
   reviews: ReviewData[];
   reviewCount: number;
   faqContent?: string;
-}
+};
 
 export const ProductMoreInfoSection = ({
   productDescription = "",

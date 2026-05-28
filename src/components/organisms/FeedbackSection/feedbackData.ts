@@ -55,4 +55,13 @@ export const MOCK_REVIEWS: ReviewData[] = [
     date: 'on October 1, 2025',
     isVerified: false,
   },
+  {
+    id: 'review-7',
+    name: 'David P.',
+    rating: 4,
+    comment:
+      "I've been shopping at SHOP.CO for over a year now and I can confidently say it's my go-to for all things fashion. Great prices, excellent quality, and fast shipping every time.",
+    date: 'on October 1, 2025',
+    isVerified: false,
+  },
 ];

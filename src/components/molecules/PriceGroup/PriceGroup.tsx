@@ -4,13 +4,13 @@ import { PriceText } from "../../atoms/PriceText/PriceText"; // Import Atom con 
 import { DEFAULT_CURRENCY } from "@/consts/config";
 import "./PriceGroup.scss";
 
-export interface PriceGroupProps extends ComponentPropsWithoutRef<"div"> {
+export type PriceGroupProps = ComponentPropsWithoutRef<"div"> & {
   currentPrice: number;
   originalPrice?: number;
   discountPercentage?: number;
   currency?: string;
   isDetail?: boolean;
-}
+};
 
 export const PriceGroup = ({
   currentPrice,

@@ -5,9 +5,9 @@ import { TextLink } from '../../atoms/TextLink/TextLink';
 import { IconButton } from '../../atoms/IconButton/IconButton';
 import './NotificationBar.scss';
 
-export interface NotificationBarProps extends ComponentPropsWithoutRef<'div'> {
+export type NotificationBarProps = ComponentPropsWithoutRef<'div'> & {
   onClose?: () => void;
-}
+};
 
 export const NotificationBar = ({
   onClose,

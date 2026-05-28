@@ -3,11 +3,11 @@ import clsx from "clsx";
 import { Button } from "@/components/atoms/Button";
 import "./SizeSelector.scss";
 
-export interface SizeSelectorProps extends ComponentPropsWithoutRef<"div"> {
+export type SizeSelectorProps = ComponentPropsWithoutRef<"div"> & {
   name: string;
   sizes: string[];
   defaultValue?: string;
-}
+};
 
 export const SizeSelector = ({
   name,

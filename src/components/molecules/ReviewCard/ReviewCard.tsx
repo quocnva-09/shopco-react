@@ -15,11 +15,11 @@ export interface ReviewData {
   isVerified?: boolean;
 }
 
-export interface ReviewCardProps extends ComponentPropsWithoutRef<"div"> {
+export type ReviewCardProps = ComponentPropsWithoutRef<"div"> & {
   review: ReviewData;
   showMenu?: boolean;
   onMenuClick?: () => void;
-}
+};
 
 export const ReviewCard = ({
   review,

@@ -4,14 +4,14 @@ import "./Heading.scss";
 
 export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export interface HeadingProps extends ComponentPropsWithoutRef<"h1"> {
+export type HeadingProps = ComponentPropsWithoutRef<"h1"> & {
   as?: HeadingTag;
   lineClamp?: number;
   showTooltip?: boolean;
   tooltipClassName?: string;
   fontSize?: string | number;
   fontFamily?: string;
-}
+};
 
 export const Heading = ({
   as: Component = "h3",

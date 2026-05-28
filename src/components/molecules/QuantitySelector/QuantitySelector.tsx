@@ -3,10 +3,10 @@ import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./QuantitySelector.scss";
 
-export interface QuantitySelectorProps extends ComponentPropsWithoutRef<"div"> {
+export type QuantitySelectorProps = ComponentPropsWithoutRef<"div"> & {
   defaultValue?: number;
   min?: number;
-}
+};
 
 export const QuantitySelector = ({
   defaultValue = 1,

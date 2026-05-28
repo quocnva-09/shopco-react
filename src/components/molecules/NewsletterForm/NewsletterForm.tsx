@@ -20,7 +20,11 @@ export const NewsletterForm = () => {
           required
         />
       </div>
-      <Button type="submit" variant="outline">
+      <Button
+        type="submit"
+        variant="outline"
+        className="newsletter-form__submit"
+      >
         Subscribe to Newsletter
       </Button>
     </form>

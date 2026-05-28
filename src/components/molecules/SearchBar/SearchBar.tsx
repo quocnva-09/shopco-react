@@ -4,7 +4,7 @@ import { IconButton } from "../../atoms/IconButton/IconButton";
 import "./SearchBar.scss";
 import { Input } from "@/components/atoms/Input";
 
-export interface SearchBarProps extends ComponentPropsWithoutRef<"form"> {}
+export type SearchBarProps = ComponentPropsWithoutRef<"form"> & {};
 
 export const SearchBar = ({ className, ...rest }: SearchBarProps) => {
   return (

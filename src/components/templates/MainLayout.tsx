@@ -3,9 +3,9 @@ import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { NotificationBar } from "../organisms/NotificationBar";
 
-interface MainLayoutProps {
+export type MainLayoutProps = {
   children: ReactNode;
-}
+};
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (

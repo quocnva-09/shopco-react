@@ -9,11 +9,11 @@ export interface ColorItem {
   hex: string;
 }
 
-export interface ColorSelectorProps extends ComponentPropsWithoutRef<"div"> {
+export type ColorSelectorProps = ComponentPropsWithoutRef<"div"> & {
   name: string;
   colors: ColorItem[];
   defaultValue?: string;
-}
+};
 
 export const ColorSelector = ({
   name,

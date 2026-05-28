@@ -4,10 +4,9 @@ import { Heading } from "@/components/atoms/Heading/Heading";
 import { Text } from "@/components/atoms/Text";
 import "./ProductDetailsPanel.scss";
 
-export interface ProductDetailsPanelProps
-  extends ComponentPropsWithoutRef<"section"> {
+export type ProductDetailsPanelProps = ComponentPropsWithoutRef<"section"> & {
   description: string;
-}
+};
 
 export const ProductDetailsPanel = ({
   description,

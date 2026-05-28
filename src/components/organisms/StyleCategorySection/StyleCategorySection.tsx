@@ -5,10 +5,10 @@ import { StyleCategoryCard, type StyleCategoryCardData } from '@/components/mole
 import { defaultStyleCategories } from './StyleCategorySection.data';
 import './StyleCategorySection.scss';
 
-export interface StyleCategorySectionProps extends ComponentPropsWithoutRef<'section'> {
+export type StyleCategorySectionProps = ComponentPropsWithoutRef<'section'> & {
   title: string;
   categories?: StyleCategoryCardData[];
-}
+};
 
 export const StyleCategorySection = ({
   title,

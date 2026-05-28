@@ -2,7 +2,7 @@ import { useEffect, useState, type CSSProperties, type ComponentPropsWithoutRef 
 import clsx from 'clsx';
 import './Image.scss';
 
-export interface ImageProps extends ComponentPropsWithoutRef<'img'> {
+export type ImageProps = ComponentPropsWithoutRef<'img'> & {
   fallbackSrc?: string;
   imgClassName?: string;
   placeholderClassName?: string;
@@ -15,7 +15,7 @@ export interface ImageProps extends ComponentPropsWithoutRef<'img'> {
   loadedClassName?: string;
   errorClassName?: string;
   renderWrapper?: boolean;
-}
+};
 
 export const Image = ({
   src,

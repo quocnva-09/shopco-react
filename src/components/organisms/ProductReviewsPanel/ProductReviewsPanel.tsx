@@ -6,11 +6,10 @@ import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
 import { Button } from "@/components/atoms/Button";
 import "./ProductReviewsPanel.scss";
 
-export interface ProductReviewsPanelProps
-  extends ComponentPropsWithoutRef<"section"> {
+export type ProductReviewsPanelProps = ComponentPropsWithoutRef<"section"> & {
   reviews: ReviewData[];
   reviewCount: number;
-}
+};
 
 export const ProductReviewsPanel = ({
   reviews,

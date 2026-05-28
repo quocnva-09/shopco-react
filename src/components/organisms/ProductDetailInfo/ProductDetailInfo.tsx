@@ -11,7 +11,7 @@ import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import "./ProductDetailInfo.scss";
 
-export interface ProductDetailInfoProps extends ComponentPropsWithoutRef<"div"> {
+export type ProductDetailInfoProps = ComponentPropsWithoutRef<"div"> & {
   name: string;
   rating: number;
   currentPrice: number;
@@ -20,7 +20,7 @@ export interface ProductDetailInfoProps extends ComponentPropsWithoutRef<"div"> 
   description: string;
   colors: ColorItem[];
   sizes: string[];
-}
+};
 
 export const ProductDetailInfo = ({
   name,

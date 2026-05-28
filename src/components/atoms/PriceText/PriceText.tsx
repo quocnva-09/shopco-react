@@ -6,11 +6,11 @@ import { formatPrice } from '@/utils/formatter';
 
 export type PriceTextVariant = 'current' | 'old';
 
-export interface PriceTextProps extends ComponentPropsWithoutRef<'span'> {
+export type PriceTextProps = ComponentPropsWithoutRef<'span'> & {
   value: number;
   currency?:string;
   variant?: PriceTextVariant; // 'current' (màu đen) hoặc 'old' (màu xám gạch ngang)
-}
+};
 
 export const PriceText = ({
   value,

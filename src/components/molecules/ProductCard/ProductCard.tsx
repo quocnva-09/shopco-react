@@ -17,10 +17,10 @@ export interface ProductCardData {
   rating: number; // Điểm trung bình số sao đã được tính toán sẵn từ API tầng trên
 }
 
-export interface ProductCardProps extends ComponentPropsWithoutRef<"div"> {
+export type ProductCardProps = ComponentPropsWithoutRef<"div"> & {
   product: ProductCardData;
   isDetail?: boolean; // Cờ chuyển đổi giao diện sang dạng trang Product Detail lớn
-}
+};
 
 export const ProductCard = ({
   product,

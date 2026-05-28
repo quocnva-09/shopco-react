@@ -1,6 +1,6 @@
 @use '@/styles/abstracts/variables' as *;
 
-$bg-main-banner: #f2f0f0;
+$bg-main-banner: #F2F0F1;
 
 .banner-section {
   background-color: $bg-main-banner;
@@ -15,7 +15,7 @@ $bg-main-banner: #f2f0f0;
     transform: translateX(-50%);
     width: 100vw;
     height: 100%;
-    background-color: $white-cream-color;
+    background-color: $bg-main-banner;
     z-index: -1;
   }
 }

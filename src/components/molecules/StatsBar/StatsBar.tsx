@@ -8,9 +8,9 @@ export interface StatItemData {
   label: string;
 }
 
-export interface StatsBarProps extends ComponentPropsWithoutRef<'div'> {
+export type StatsBarProps = ComponentPropsWithoutRef<'div'> & {
   items: StatItemData[];
-}
+};
 
 export const StatsBar = ({
   items,

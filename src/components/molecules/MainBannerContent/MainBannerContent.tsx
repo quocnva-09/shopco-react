@@ -5,12 +5,12 @@ import { Text } from '../../atoms/Text';
 import { StatsBar, type StatItemData } from '../StatsBar';
 import './MainBannerContent.scss';
 
-export interface MainBannerContentProps extends ComponentPropsWithoutRef<'div'> {
+export type MainBannerContentProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
   description: string;
   stats: StatItemData[];
   children: ReactNode; // Slot cho CTA Button
-}
+};
 
 export const MainBannerContent = ({
   title,

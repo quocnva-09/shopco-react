@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import { Image } from '../../atoms/Image';
 import './MainBannerImage.scss';
 
-export interface MainBannerImageProps extends ComponentPropsWithoutRef<'figure'> {
+export type MainBannerImageProps = ComponentPropsWithoutRef<'figure'> & {
   src: string;
   alt: string;
   effectSrc?: string;
-}
+};
 
 export const MainBannerImage = ({
   src,

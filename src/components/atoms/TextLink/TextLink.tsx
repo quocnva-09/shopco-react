@@ -4,10 +4,10 @@ import clsx from "clsx";
 import "./TextLink.scss";
 
 // 1. Kế thừa toàn bộ thuộc tính tiêu chuẩn của thẻ <a> (id, target, rel, onClick, style...)
-interface TextLinkProps extends ComponentPropsWithoutRef<"a"> {
+export type TextLinkProps = ComponentPropsWithoutRef<"a"> & {
   href: string; // Ép thuộc tính href bắt buộc phải truyền đối với một liên kết
   children: React.ReactNode;
-}
+};
 
 const isInternal = (href: string) => {
   if (!href) return false;

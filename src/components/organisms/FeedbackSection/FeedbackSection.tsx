@@ -1,25 +1,25 @@
-import { type ComponentPropsWithoutRef } from 'react';
-import clsx from 'clsx';
-import { Heading } from '@/components/atoms/Heading';
-import { IconButton } from '@/components/atoms/IconButton';
-import { ReviewCard, type ReviewData } from '@/components/molecules/ReviewCard';
-import './FeedbackSection.scss';
+import { type ComponentPropsWithoutRef } from "react";
+import clsx from "clsx";
+import { Heading } from "@/components/atoms/Heading";
+import { IconButton } from "@/components/atoms/IconButton";
+import { ReviewCard, type ReviewData } from "@/components/molecules/ReviewCard";
+import "./FeedbackSection.scss";
 
-export interface FeedbackSectionProps extends ComponentPropsWithoutRef<'section'> {
+export type FeedbackSectionProps = ComponentPropsWithoutRef<"section"> & {
   /** Section heading text */
   title?: string;
   /** Array of review data objects to render as ReviewCards */
   reviews: ReviewData[];
-}
+};
 
 export const FeedbackSection = ({
-  title = 'WHAT OUR CUSTOMERS SAY',
+  title = "WHAT OUR CUSTOMERS SAY",
   reviews,
   className,
   ...rest
 }: FeedbackSectionProps) => {
   return (
-    <section className={clsx('feedback', className)} {...rest}>
+    <section className={clsx("feedback", className)} {...rest}>
       {/* Header: Title + Navigation Arrows */}
       <div className="feedback__header">
         <Heading as="h2" className="feedback__title">

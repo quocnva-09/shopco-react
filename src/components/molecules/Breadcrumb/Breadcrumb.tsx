@@ -12,9 +12,9 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-export interface BreadcrumbProps extends ComponentPropsWithoutRef<"nav"> {
+export type BreadcrumbProps = ComponentPropsWithoutRef<"nav"> & {
   items: BreadcrumbItem[];
-}
+};
 
 export const Breadcrumb = ({
   items,
