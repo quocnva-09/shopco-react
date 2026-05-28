@@ -3,15 +3,24 @@
 // Khối bọc điều hướng hover hiển thị Tooltip toàn cục cho Text
 .text-wrapper {
   position: relative;
-  width: 100%;
+  max-width: 100%;
   min-width: 0;
-  display: flex;
+  display: inline-flex;
   align-items: flex-start;
 
   &:hover {
     .tooltip {
       opacity: 1;
       visibility: visible;
+    }
+  }
+
+  // Mobile: ẩn tooltip
+  &--mobile-no-tooltip {
+    @media (max-width: $breakpoint) {
+      .tooltip {
+        display: none;
+      }
     }
   }
 }
@@ -24,8 +33,19 @@
   &--clamp {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--line-clamp); // Nhận trực tiếp số dòng từ React truyền xuống
+    -webkit-line-clamp: var(--line-clamp);
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  // Mobile: override số dòng clamp
+  &--mobile-clamp {
+    @media (max-width: $breakpoint) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: var(--mobile-line-clamp, 2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }

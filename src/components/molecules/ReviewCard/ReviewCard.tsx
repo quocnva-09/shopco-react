@@ -51,7 +51,9 @@ export const ReviewCard = ({
         <Text
           as="span"
           lineClamp={1}
-          showTooltip={false}
+          showTooltip
+          mobileLineClamp={2}
+          mobileShowTooltip={false}
           className="review-card__name-text"
           tooltipClassName="tooltip--review-card"
         >

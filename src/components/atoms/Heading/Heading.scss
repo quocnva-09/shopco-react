@@ -15,6 +15,30 @@
       }
     }
   }
+
+  // Mobile: override lineClamp khi có mobileLineClamp
+  &--mobile-clamp {
+    @media (max-width: $breakpoint) {
+      .heading-text--ellipsis,
+      .heading-text--clamp {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--mobile-line-clamp, 2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  // Mobile: ẩn tooltip
+  &--mobile-no-tooltip {
+    @media (max-width: $breakpoint) {
+      .tooltip {
+        display: none;
+      }
+    }
+  }
 }
 
 // core of heading

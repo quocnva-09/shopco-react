@@ -1,14 +1,19 @@
-import { useEffect, useState, type CSSProperties, type ComponentPropsWithoutRef } from 'react';
-import clsx from 'clsx';
-import './Image.scss';
+import {
+  useEffect,
+  useState,
+  type CSSProperties,
+  type ComponentPropsWithoutRef,
+} from "react";
+import clsx from "clsx";
+import "./Image.scss";
 
-export type ImageProps = ComponentPropsWithoutRef<'img'> & {
+export type ImageProps = ComponentPropsWithoutRef<"img"> & {
   fallbackSrc?: string;
   imgClassName?: string;
   placeholderClassName?: string;
   aspectRatio?: number | string;
-  fit?: CSSProperties['objectFit'];
-  objectPosition?: CSSProperties['objectPosition'];
+  fit?: CSSProperties["objectFit"];
+  objectPosition?: CSSProperties["objectPosition"];
   showPlaceholder?: boolean;
   isLoaded?: boolean;
   isError?: boolean;
@@ -19,7 +24,7 @@ export type ImageProps = ComponentPropsWithoutRef<'img'> & {
 
 export const Image = ({
   src,
-  fallbackSrc,
+  fallbackSrc = "/default.png",
   alt,
   className,
   imgClassName,
@@ -27,13 +32,13 @@ export const Image = ({
   width,
   height,
   aspectRatio,
-  fit = 'cover',
+  fit = "cover",
   objectPosition,
   showPlaceholder = false,
   isLoaded: externalIsLoaded,
   isError: externalIsError,
-  loadedClassName = 'is-loaded',
-  errorClassName = 'is-error',
+  loadedClassName = "is-loaded",
+  errorClassName = "is-error",
   renderWrapper = true,
   onLoad,
   onError,
@@ -77,18 +82,18 @@ export const Image = ({
   };
 
   const resolvedImgClassName = clsx(
-    renderWrapper && 'image-wrapper__img',
+    renderWrapper && "image-wrapper__img",
     imgClassName,
     finalIsLoaded && loadedClassName,
-    finalIsError && errorClassName
+    finalIsError && errorClassName,
   );
 
   // TRƯỜNG HỢP 1: Render thuần thẻ <img> không có div bọc ngoài
   if (!renderWrapper) {
     return (
       <img
-        className={clsx('image-bare', className, resolvedImgClassName)}
-        src={imgSrc || ''}
+        className={clsx("image-bare", className, resolvedImgClassName)}
+        src={imgSrc || ""}
         alt={alt}
         style={baseStyles}
         onLoad={handleLoad}
@@ -100,28 +105,38 @@ export const Image = ({
 
   // TRƯỜNG HỢP 2: Render đầy đủ wrapper hỗ trợ Trạng thái Loading / Placeholder
   return (
-    <div 
+    <div
       className={clsx(
-        'image-wrapper', 
-        finalIsLoaded && 'image-wrapper--loaded',
-        finalIsError && 'image-wrapper--error',
-        className
-      )} 
-      style={{ width, height, aspectRatio: aspectRatio !== undefined ? String(aspectRatio) : undefined }}
+        "image-wrapper",
+        finalIsLoaded && "image-wrapper--loaded",
+        finalIsError && "image-wrapper--error",
+        className,
+      )}
+      style={{
+        width,
+        height,
+        aspectRatio:
+          aspectRatio !== undefined ? String(aspectRatio) : undefined,
+      }}
     >
       <img
         className={resolvedImgClassName}
-        src={imgSrc || ''}
+        src={imgSrc || ""}
         alt={alt}
-        style={{ width: '100%', height: '100%', objectFit: fit, objectPosition }}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: fit,
+          objectPosition,
+        }}
         onLoad={handleLoad}
         onError={handleError}
         {...rest}
       />
       {showPlaceholder && (
-        <span 
-          className={clsx('image-wrapper__placeholder', placeholderClassName)} 
-          aria-hidden="true" 
+        <span
+          className={clsx("image-wrapper__placeholder", placeholderClassName)}
+          aria-hidden="true"
         />
       )}
     </div>

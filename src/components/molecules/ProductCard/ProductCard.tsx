@@ -38,48 +38,43 @@ export const ProductCard = ({
     rating,
   } = product;
 
-  const fallbackImage = "assets/images/default.png";
+  const fallbackImage = "default.png";
 
   return (
     <div
       className={clsx(
         "product-card",
         isDetail && "product-card--detail",
-        className
+        className,
       )}
       onClick={onClick}
       style={{ cursor: onClick ? "pointer" : "default" }}
       {...rest}
     >
-      {/* 1. KHỐI ẢNH: Sử dụng Atom Image có fallback chống lỗi ảnh */}
       <figure className="product-card__image">
         <Image
           src={primaryImage || fallbackImage}
           fallbackSrc={fallbackImage}
           alt={name}
           title={name}
-          renderWrapper={false} // Không render thẻ div bọc ngoài của Atom Image để giữ đúng cấu trúc CSS cũ
+          renderWrapper={false}
         />
       </figure>
 
-      {/* 2. KHỐI TÊN: Sử dụng Atom Heading thông minh tự động cắt chữ và tích hợp sẵn Tooltip */}
       <Heading
-        as={isDetail ? "h1" : "h3"} // Tự động đổi thẻ SEO: h1 cho trang chi tiết, h3 cho danh sách ngoài grid
-        lineClamp={isDetail ? 0 : 1} // Trang detail cho xuống dòng thoải mái, ngoài card cắt cứng 1 dòng
-        showTooltip={!isDetail} // Chỉ bật Custom Tooltip khi ở ngoài danh sách bị cắt chữ
+        as={isDetail ? "h1" : "h3"}
+        lineClamp={isDetail ? 0 : 1}
+        showTooltip={!isDetail}
+        mobileLineClamp={isDetail ? undefined : 2}
+        mobileShowTooltip={isDetail ? undefined : false}
         className="product-card__name"
         tooltipClassName="tooltip--product-card"
       >
         {name}
       </Heading>
 
-      {/* 3. KHỐI ĐÁNH GIÁ: Sử dụng Atom Rating đã tích hợp thuật toán ẩn sao trống */}
-      <Rating 
-        value={rating} 
-        className="product-card__rating" 
-      />
+      <Rating value={rating} className="product-card__rating" />
 
-      {/* 4. KHỐI GIÁ TIỀN: Sử dụng Molecule PriceGroup bọc hàm Intl định dạng tiền tệ */}
       <PriceGroup
         currentPrice={currentPrice}
         originalPrice={originalPrice}

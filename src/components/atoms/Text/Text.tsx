@@ -7,8 +7,12 @@ type TextVariant = "p" | "span" | "div";
 export type TextProps = HTMLAttributes<HTMLElement> & {
   as?: TextVariant;
   lineClamp?: number;
-  showTooltip?: boolean; // Cờ bật/tắt tính năng Tooltip khi hover
-  tooltipClassName?: string; // Nhận class modifier từ global (.tooltip--comment, .tooltip--review-card)
+  showTooltip?: boolean;
+  tooltipClassName?: string;
+  /** Số dòng hiển thị trên mobile (override lineClamp). Nếu không truyền → giữ nguyên lineClamp */
+  mobileLineClamp?: number;
+  /** Hiện tooltip trên mobile? Nếu không truyền → theo showTooltip */
+  mobileShowTooltip?: boolean;
   children: React.ReactNode;
 };
 
@@ -19,6 +23,8 @@ export const Text = ({
   lineClamp,
   showTooltip = false,
   tooltipClassName,
+  mobileLineClamp,
+  mobileShowTooltip,
   ...rest
 }: TextProps) => {
   // Trích xuất chuỗi chữ thuần từ children để làm nội dung Tooltip
@@ -30,14 +36,20 @@ export const Text = ({
       className={clsx(
         "text",
         lineClamp && "text--clamp",
-        className
+        mobileLineClamp !== undefined && "text--mobile-clamp",
+        className,
       )}
       style={
-        lineClamp
-          ? ({ "--line-clamp": lineClamp } as React.CSSProperties)
-          : undefined
+        {
+          ...(lineClamp
+            ? ({ "--line-clamp": lineClamp } as React.CSSProperties)
+            : undefined),
+          ...(mobileLineClamp !== undefined
+            ? ({ "--mobile-line-clamp": mobileLineClamp } as React.CSSProperties)
+            : undefined),
+        }
       }
-      title={!showTooltip ? textContent : undefined} // Dùng title mặc định nếu không bật Custom Tooltip
+      title={!showTooltip ? textContent : undefined}
       {...rest}
     >
       {children}
@@ -49,9 +61,14 @@ export const Text = ({
 
   // Nếu có tooltip, bọc trong wrapper quản lý hover
   return (
-    <div className="text-wrapper">
+    <div
+      className={clsx(
+        "text-wrapper",
+        mobileShowTooltip === false && showTooltip && "text-wrapper--mobile-no-tooltip",
+      )}
+    >
       {textElement}
-      
+
       {textContent && (
         <span className={clsx("tooltip", tooltipClassName)} aria-hidden="true">
           {textContent}

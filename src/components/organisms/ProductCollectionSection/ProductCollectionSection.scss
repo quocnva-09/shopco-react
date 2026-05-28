@@ -28,7 +28,8 @@
 
     @media (max-width: $breakpoint) {
       font-size: 32px;
-      margin: 40px 0 40px 0;
+      margin: 40px 0;
+      padding: 0 30px;
     }
   }
 
@@ -49,17 +50,8 @@
       width: 100%;
 
       @media (max-width: $breakpoint) {
-        flex: 0 0 calc(50% - 8px);
+        flex: 0 0 calc(60% - 8px);
         scroll-snap-align: start;
-      }
-
-      &__image {
-        width: 100%;
-
-        img {
-          width: 100%;
-          max-width: 100%;
-        }
       }
     }
   }
@@ -72,7 +64,7 @@
       flex-wrap: nowrap;
 
       @media (max-width: $breakpoint) {
-        margin-left: 16px;
+        margin-left: 0;
       }
     }
 
@@ -81,7 +73,6 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-
       &::-webkit-scrollbar {
         display: none;
       }

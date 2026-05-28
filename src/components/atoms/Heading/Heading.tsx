@@ -11,6 +11,10 @@ export type HeadingProps = ComponentPropsWithoutRef<"h1"> & {
   tooltipClassName?: string;
   fontSize?: string | number;
   fontFamily?: string;
+  /** Số dòng hiển thị trên mobile (override lineClamp). Nếu không truyền → giữ nguyên lineClamp */
+  mobileLineClamp?: number;
+  /** Hiện tooltip trên mobile? Nếu không truyền → theo showTooltip */
+  mobileShowTooltip?: boolean;
 };
 
 export const Heading = ({
@@ -20,6 +24,8 @@ export const Heading = ({
   tooltipClassName,
   fontSize,
   fontFamily,
+  mobileLineClamp,
+  mobileShowTooltip,
   className,
   style,
   children,
@@ -32,7 +38,14 @@ export const Heading = ({
       className={clsx(
         "heading-wrapper",
         showTooltip && "heading-wrapper--has-tooltip",
+        mobileLineClamp !== undefined && "heading-wrapper--mobile-clamp",
+        mobileShowTooltip === false && showTooltip && "heading-wrapper--mobile-no-tooltip",
       )}
+      style={
+        mobileLineClamp !== undefined
+          ? ({ "--mobile-line-clamp": mobileLineClamp } as React.CSSProperties)
+          : undefined
+      }
     >
       <Component
         className={clsx(

@@ -34,7 +34,7 @@ export const MOCK_PRODUCT_DETAIL: ProductDetailData = {
   description:
     "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
   images: [
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
+    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ.png" },
     { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
     { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
   ],
@@ -58,7 +58,7 @@ export const MOCK_REVIEWS: ReviewData[] = [
   },
   {
     id: "review-2",
-    name: "Alex M.",
+    name: "Alex M. Alex M. Alex M. Alex M. Alex M. v v Alex M. Alex M.Alex M.Alex M.Alex M.Alex M.Alex M.Alex M.Alex M.",
     rating: 4,
     comment:
       "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
@@ -116,10 +116,10 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
   },
   {
     id: "na-2",
-    name: "Skinny Fit Jeans",
+    name: "Skinny Fit Jeans Skinny Fit JeansSkinny Fit Jeans Skinny Fit Jeans Skinny Fit Jeans Skinny Fit Jeans",
     primaryImage: PRODUCT_IMAGE,
-    currentPrice: 240,
-    originalPrice: 260,
+    currentPrice: 24000000,
+    originalPrice: 26000000,
     discountPercentage: 8,
     rating: 3.5,
   },

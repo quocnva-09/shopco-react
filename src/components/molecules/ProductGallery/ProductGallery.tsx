@@ -25,7 +25,7 @@ export const ProductGallery = ({
       <div className="product-detail__thumbnails">
         {images.map((img, idx) => (
           <Image
-            key={idx}
+            key={`${productName} - Thumbnail ${idx + 1}`}
             src={img.img_path}
             alt={`${productName} - Thumbnail ${idx + 1}`}
             title={`${productName} - Thumbnail ${idx + 1}`}

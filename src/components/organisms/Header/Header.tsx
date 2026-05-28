@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, useState, useCallback } from "react";
 import clsx from "clsx";
 import { TextLink } from "@/components/atoms/TextLink";
 import { IconButton } from "@/components/atoms/IconButton";
@@ -17,21 +17,47 @@ export const Header = ({
   className,
   ...rest
 }: HeaderProps) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
   return (
     <header className={clsx("header", className)} {...rest}>
       <div className={clsx("header__container", "container")}>
-        {/* Lớp cắt 1: Logo gắn link trực tiếp theo chiến lược tối giản */}
+        {/* Hamburger: Nếu trên mobile và trạng thái menu không open thì hiển thị icon*/}
+        {!isMobileMenuOpen && (
+          <IconButton
+            className="header__hamburger"
+            aria-label="Toggle navigation menu"
+            onClick={toggleMobileMenu}
+            svgName="icn-hamburger"
+            iconWidth={24}
+            iconHeight={24}
+            variant="ghost"
+          />
+        )}
+
+        {/* Logo */}
         <TextLink href="/" className="header__logo">
           SHOP.CO
         </TextLink>
 
-        {/* Lớp cắt 2: Khối điều hướng chính (Chứa dropdown tĩnh bên trong) */}
-        <NavMenu className="header__nav-wrapper" />
+        {/* Navigation — slide-in trên mobile khi isMobileMenuOpen */}
+        <NavMenu
+          className="header__nav-wrapper"
+          isOpenMobile={isMobileMenuOpen}
+        />
 
-        {/* Lớp cắt 3: Khối tìm kiếm mở rộng khoảng cách ở giữa */}
+        {/* Search */}
         <SearchBar className="header__search-wrapper" />
 
-        {/* Lớp cắt 4: Nhóm các nút hành động tương tác phía bên phải */}
+        {/* Action buttons */}
         <div className="header__actions">
           <IconButton
             svgName="icn-cart"
@@ -53,6 +79,12 @@ export const Header = ({
           />
         </div>
       </div>
+
+      {/* Overlay tối màn hình khi menu mở */}
+      <div
+        className={clsx("overlay", isMobileMenuOpen && "is-active")}
+        onClick={closeMobileMenu}
+      />
     </header>
   );
 };
