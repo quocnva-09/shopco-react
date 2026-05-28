@@ -1,8 +1,8 @@
-import { HomePage } from "./pages/Home/Home";
+import { CartPage } from "./pages/Cart";
 import "@/styles/index.scss";
 
 function App() {
-  return <HomePage />;
+  return <CartPage />;
 }
 
 export default App;

@@ -6,21 +6,26 @@ import { PriceText } from "@/components/atoms/PriceText";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
 import { Divider } from "@/components/atoms/Divider";
-import type { CartSummaryData } from "@/consts/cartData";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./CartSummary.scss";
 
+export interface SummaryLineItem {
+  label: string;
+  value: number;
+  isDiscount?: boolean;
+}
+
 export interface CartSummaryProps extends ComponentPropsWithoutRef<"aside"> {
-  summary: CartSummaryData;
+  lineItems: SummaryLineItem[];
+  total: number;
 }
 
 export const CartSummary = ({
-  summary,
+  lineItems,
+  total,
   className,
   ...rest
 }: CartSummaryProps) => {
-  const { lineItems, total } = summary;
-
   return (
     <aside className={clsx("cart-summary", className)} {...rest}>
       <Heading

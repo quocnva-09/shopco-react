@@ -2,17 +2,20 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { CartItem } from "@/components/molecules/CartItem";
 import { CartSummary } from "@/components/organisms/CartSummary";
-import type { CartItemData, CartSummaryData } from "@/consts/cartData";
+import type { SummaryLineItem } from "@/components/organisms/CartSummary";
+import type { CartItemData } from "@/consts/cartData";
 import "./CartSection.scss";
 
 export interface CartSectionProps extends ComponentPropsWithoutRef<"div"> {
   items: CartItemData[];
-  summary: CartSummaryData;
+  lineItems: SummaryLineItem[];
+  total: number;
 }
 
 export const CartSection = ({
   items,
-  summary,
+  lineItems,
+  total,
   className,
   ...rest
 }: CartSectionProps) => {
@@ -24,7 +27,7 @@ export const CartSection = ({
         ))}
       </div>
 
-      <CartSummary summary={summary} />
+      <CartSummary lineItems={lineItems} total={total} />
     </div>
   );
 };

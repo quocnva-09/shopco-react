@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
-import { TextLink } from '@/components/atoms/TextLink';
-import './DropdownMenu.scss';
+import { TextLink } from "@/components/atoms/TextLink";
+import "./DropdownMenu.scss";
 import { Icon } from "@/components/atoms/Icon/Icon";
 
 export interface DropdownItem {
@@ -9,11 +9,11 @@ export interface DropdownItem {
   href: string;
 }
 
-export interface DropdownMenuProps extends ComponentPropsWithoutRef<'div'> {
+export interface DropdownMenuProps extends ComponentPropsWithoutRef<"div"> {
   title: string;
   href: string;
   items: DropdownItem[];
-  isOpen?: boolean; // Thuộc tính tĩnh phục vụ test UI ban đầu
+  isOpen?: boolean;
 }
 
 export const DropdownMenu = ({
@@ -25,10 +25,7 @@ export const DropdownMenu = ({
   ...rest
 }: DropdownMenuProps) => {
   return (
-    <div 
-      className={clsx('dropdown', isOpen && 'is-open', className)} 
-      {...rest}
-    >
+    <div className={clsx("dropdown", isOpen && "is-open", className)} {...rest}>
       <div className="dropdown__trigger">
         <TextLink href={href} className="dropdown__link">
           {title}

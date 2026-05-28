@@ -10,7 +10,8 @@ const meta: Meta<typeof CartSection> = {
   parameters: { layout: "fullscreen" },
   args: {
     items: MOCK_CART_ITEMS,
-    summary: MOCK_CART_SUMMARY,
+    lineItems: MOCK_CART_SUMMARY.lineItems,
+    total: MOCK_CART_SUMMARY.total,
   },
   decorators: [
     (Story) => (

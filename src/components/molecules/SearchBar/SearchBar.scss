@@ -27,4 +27,10 @@
       opacity: 1;
     }
   }
+
+  &__input{
+    @media (max-width: $breakpoint) {
+      display: none;
+    }
+  }
 }

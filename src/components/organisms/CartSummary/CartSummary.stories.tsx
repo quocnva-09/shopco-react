@@ -9,7 +9,8 @@ const meta: Meta<typeof CartSummary> = {
   tags: ["autodocs"],
   parameters: { layout: "padded" },
   args: {
-    summary: MOCK_CART_SUMMARY,
+    lineItems: MOCK_CART_SUMMARY.lineItems,
+    total: MOCK_CART_SUMMARY.total,
   },
   decorators: [
     (Story) => (
@@ -27,13 +28,11 @@ export const Default: Story = {};
 
 export const WithDiscount: Story = {
   args: {
-    summary: {
-      lineItems: [
-        { label: "Subtotal", value: 565 },
-        { label: "Discount (-20%)", value: -113, isDiscount: true },
-        { label: "Delivery Fee", value: 15 },
-      ],
-      total: 467,
-    },
+    lineItems: [
+      { label: "Subtotal", value: 565 },
+      { label: "Discount (-20%)", value: -113, isDiscount: true },
+      { label: "Delivery Fee", value: 15 },
+    ],
+    total: 467,
   },
 };

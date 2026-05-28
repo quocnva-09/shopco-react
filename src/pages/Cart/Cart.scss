@@ -1,0 +1,10 @@
+@use "@/styles/abstracts/variables" as *;
+
+.cart-page {
+  &__title {
+    font-family: $font-family-title;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+}
+    

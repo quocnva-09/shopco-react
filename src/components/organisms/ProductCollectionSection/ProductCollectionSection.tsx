@@ -1,26 +1,36 @@
-import { type ComponentPropsWithoutRef, useState, useMemo, useCallback } from 'react';
-import clsx from 'clsx';
-import { Heading } from '@/components/atoms/Heading';
-import { Button } from '@/components/atoms/Button';
-import { ProductCard, type ProductCardData } from '@/components/molecules/ProductCard';
-import './ProductCollectionSection.scss';
+import {
+  type ComponentPropsWithoutRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
+import clsx from "clsx";
+import { Heading } from "@/components/atoms/Heading";
+import { Button } from "@/components/atoms/Button";
+import {
+  ProductCard,
+  type ProductCardData,
+} from "@/components/molecules/ProductCard";
+import "./ProductCollectionSection.scss";
 
-export interface ProductCollectionSectionProps extends ComponentPropsWithoutRef<'section'> {
+export interface ProductCollectionSectionProps extends ComponentPropsWithoutRef<"section"> {
   title: string;
   products: ProductCardData[];
   ctaLabel?: string;
   onCtaClick?: () => void;
   enableSlider?: boolean;
   visibleCount?: number;
+  showButton?: boolean;
 }
 
 export const ProductCollectionSection = ({
   title,
   products,
-  ctaLabel = 'View All',
+  ctaLabel = "View All",
   onCtaClick,
   enableSlider = true,
   visibleCount = 4,
+  showButton = true,
   className,
   ...rest
 }: ProductCollectionSectionProps) => {
@@ -59,21 +69,15 @@ export const ProductCollectionSection = ({
   );
 
   return (
-    <section className={clsx('product-collection', className)} {...rest}>
+    <section className={clsx("product-collection", className)} {...rest}>
       {/* Tiêu đề section */}
-      <Heading
-        as="h2"
-        lineClamp={0}
-        className="product-collection__title"
-      >
+      <Heading as="h2" lineClamp={0} className="product-collection__title">
         {title}
       </Heading>
 
       {/* Slider hoặc Grid */}
       {enableSlider ? (
-        <div className="product-collection__slider">
-          {listContent}
-        </div>
+        <div className="product-collection__slider">{listContent}</div>
       ) : (
         listContent
       )}
@@ -103,13 +107,11 @@ export const ProductCollectionSection = ({
       )}
 
       {/* CTA Button */}
-      <Button
-        variant="outline"
-        colorScheme="dark"
-        onClick={onCtaClick}
-      >
-        {ctaLabel}
-      </Button>
+      {showButton && (
+        <Button variant="outline" colorScheme="dark" onClick={onCtaClick}>
+          {ctaLabel}
+        </Button>
+      )}
     </section>
   );
 };

@@ -9,6 +9,11 @@
     gap: 4px;
   }
 
+  &__link{
+    text-decoration: none;
+    font-size: 16px;
+  }
+
   &.is-open &__icon {
     transform: rotate(180deg);
   }

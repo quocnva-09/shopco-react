@@ -6,16 +6,13 @@
   padding: 8px 0;
   
   &__container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
   }
 
   &__text {
+    grid-column: 2;
     text-align: center;
     margin: 0;
     font-size: 14px;
@@ -37,15 +34,17 @@
   }
 
   &__close {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+    grid-column: 3;
+    justify-self: end;
     color: inherit;
     padding: 4px;
 
     &:hover {
       opacity: 0.8;
+    }
+
+    @media (max-width: $breakpoint) {
+      display: none;
     }
   }
 }

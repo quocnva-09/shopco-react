@@ -1,4 +1,8 @@
+import type { BreadcrumbItem } from "@/components/molecules/Breadcrumb";
+
 // Cart page mock data & types
+
+import type { SummaryLineItem } from "@/components/organisms/CartSummary";
 
 export interface CartItemVariant {
   label: string;
@@ -15,16 +19,11 @@ export interface CartItemData {
   variants: CartItemVariant[];
 }
 
-export interface SummaryLineItem {
-  label: string;
-  value: number;
-  isDiscount?: boolean;
-}
 
-export interface CartSummaryData {
-  lineItems: SummaryLineItem[];
-  total: number;
-}
+export const MOCK_BREADCRUMB_CART: BreadcrumbItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Cart", href: "/cart" },
+]
 
 export const MOCK_CART_ITEMS: CartItemData[] = [
   {
@@ -68,7 +67,7 @@ export const MOCK_CART_ITEMS: CartItemData[] = [
   },
 ];
 
-export const MOCK_CART_SUMMARY: CartSummaryData = {
+export const MOCK_CART_SUMMARY: { lineItems: SummaryLineItem[]; total: number } = {
   lineItems: [
     { label: "Subtotal", value: 565 },
     { label: "Discount (-20%)", value: -113, isDiscount: true },

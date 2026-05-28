@@ -15,6 +15,8 @@ export const SearchBar = ({ className, ...rest }: SearchBarProps) => {
         aria-label="Search"
         className="search-bar__btn"
         variant="ghost"
+        iconHeight={24}
+        iconWidth={24}
       />
       <Input
         type="text"

@@ -34,18 +34,22 @@ export const Header = ({
         {/* Lớp cắt 4: Nhóm các nút hành động tương tác phía bên phải */}
         <div className="header__actions">
           <IconButton
-            svgName="icn-cart" // Khớp với file icn-cart.svg của bạn
+            svgName="icn-cart"
             aria-label="Open shopping cart"
             className="header__icon-btn"
             onClick={onCartClick}
             variant="ghost"
+            iconWidth={24}
+            iconHeight={24}
           />
           <IconButton
-            svgName="icn-user" // Khớp với file icn-user.svg của bạn
+            svgName="icn-user"
             aria-label="View user profile"
             className="header__icon-btn"
             onClick={onProfileClick}
             variant="ghost"
+            iconWidth={24}
+            iconHeight={24}
           />
         </div>
       </div>
