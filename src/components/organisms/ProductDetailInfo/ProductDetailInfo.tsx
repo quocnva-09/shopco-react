@@ -12,6 +12,7 @@ import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import "./ProductDetailInfo.scss";
 
 export type ProductDetailInfoProps = ComponentPropsWithoutRef<"div"> & {
+  id: number;
   name: string;
   rating: number;
   currentPrice: number;
@@ -23,6 +24,7 @@ export type ProductDetailInfoProps = ComponentPropsWithoutRef<"div"> & {
 };
 
 export const ProductDetailInfo = ({
+  id,
   name,
   rating,
   currentPrice,
@@ -70,7 +72,7 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Select Colors
           </Text>
-          <ColorSelector name="color" colors={colors} />
+          <ColorSelector name="color" colors={colors} key={id} />
         </div>
 
         {/* Size Variant */}
@@ -78,7 +80,7 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Choose Size
           </Text>
-          <SizeSelector name="size" sizes={sizes} />
+          <SizeSelector name="size" sizes={sizes} key={id} />
         </div>
 
         {/* Actions */}

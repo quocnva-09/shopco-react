@@ -34,7 +34,7 @@
   }
 
   &__list {
-    @include flex-group(20px, flex-start, stretch);
+    @include flex-group(16px, flex-start, stretch);
     flex-wrap: wrap;
     width: 100%;
     transition: transform 0.5s ease;

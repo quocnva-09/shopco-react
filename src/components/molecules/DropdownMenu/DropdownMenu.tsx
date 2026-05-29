@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useCallback, useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { TextLink } from "@/components/atoms/TextLink";
 import "./DropdownMenu.scss";
@@ -13,20 +13,26 @@ export type DropdownMenuProps = ComponentPropsWithoutRef<"div"> & {
   title: string;
   href: string;
   items: DropdownItem[];
-  isOpen?: boolean;
 };
 
 export const DropdownMenu = ({
   title,
   href,
   items,
-  isOpen = false,
   className,
   ...rest
 }: DropdownMenuProps) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const handleDropdownClick = useCallback(() => {
+    setIsDropdownOpen((prev) => !prev);
+  }, []);
+
   return (
-    <div className={clsx("dropdown", isOpen && "is-open", className)} {...rest}>
-      <div className="dropdown__trigger">
+    <div
+      className={clsx("dropdown", isDropdownOpen && "is-open", className)}
+      {...rest}
+    >
+      <div className="dropdown__trigger" onClick={handleDropdownClick}>
         <TextLink href={href} className="dropdown__link">
           {title}
         </TextLink>

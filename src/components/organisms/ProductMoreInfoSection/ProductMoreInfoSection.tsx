@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Tabs } from "@/components/molecules/Tabs";
 import { ProductDetailsPanel } from "@/components/organisms/ProductDetailsPanel";
@@ -31,28 +31,39 @@ export const ProductMoreInfoSection = ({
   className,
   ...rest
 }: ProductMoreInfoSectionProps) => {
+  const [activeTab, setActiveTab] = useState<string>(DEFAULT_ACTIVE_TAB);
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className={clsx("product-more-info", className)} {...rest}>
       <Tabs
         tabs={PRODUCT_TABS}
-        activeTab={DEFAULT_ACTIVE_TAB}
-        // TODO: onTabChange sẽ update activeTab via useState
+        activeTab={activeTab}
+        onTabChange={handleTabClick}
       />
       <ProductDetailsPanel
         description={productDescription}
-        className={clsx("tab-content", "details")}
+        className={clsx(
+          "tab-content",
+          activeTab === "details" && "tab-content--active",
+        )}
       />
       <ProductReviewsPanel
         reviews={reviews}
         reviewCount={reviewCount}
         className={clsx(
           "tab-content",
-          DEFAULT_ACTIVE_TAB === "reviews" && "tab-content--active",
+          activeTab === "reviews" && "tab-content--active",
         )}
       />
       <ProductFaqsPanel
         content={faqContent}
-        className={clsx("tab-content", "faqs")}
+        className={clsx(
+          "tab-content",
+          activeTab === "faqs" && "tab-content--active",
+        )}
       />
     </div>
   );

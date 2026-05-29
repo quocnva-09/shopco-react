@@ -4,9 +4,9 @@ import { HomePage } from "./pages/Home";
 import { ProductDetailPage } from "./pages/ProductDetail";
 
 function App() {
-  // return <HomePage />;
+  return <HomePage />;
   // return <CartPage />;
-  return <ProductDetailPage />;
+  // return <ProductDetailPage />;
 }
 
 export default App;

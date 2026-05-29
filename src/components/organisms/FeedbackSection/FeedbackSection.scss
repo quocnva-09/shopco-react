@@ -65,8 +65,6 @@
 
   &__slider {
     position: relative;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
 
     // Pseudo elements tạo hiệu ứng blur
     &::before,
@@ -75,8 +73,8 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      // Đảm bảo blur width luôn có ít nhất 100px đè vào content
-      width: max(calc(50vw - 50% + 100px), 100px);
+      // Blur area should exactly cover the space outside the container's inner content
+      width: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
       pointer-events: none;
       z-index: 2;
       -webkit-backdrop-filter: blur(4px);
@@ -111,10 +109,12 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 
-    // Tăng mạnh padding-bottom để tooltip dài không bị cắt bởi overflow
-    padding: 20px calc(50vw - 50%) 250px calc(50vw - 50%);
+    // Align items with the container's inner content, increase bottom padding for tooltip
+    padding-top: 20px;
+    padding-bottom: 250px;
+    padding-left: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
+    padding-right: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
     margin-bottom: -230px;
-    pointer-events: none;
 
     // Ẩn thanh cuộn
     &::-webkit-scrollbar {
@@ -125,7 +125,8 @@
     scrollbar-width: none;
 
     @media (max-width: $breakpoint) {
-      padding: 20px 16px 250px 16px;
+      padding-left: $padding-left-right-mobile;
+      padding-right: $padding-left-right-mobile;
     }
 
     .review-card {

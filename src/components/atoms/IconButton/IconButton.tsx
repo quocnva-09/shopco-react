@@ -3,7 +3,12 @@ import clsx from "clsx";
 import { Icon } from "../Icon/Icon";
 import "./IconButton.scss";
 
-type IconButtonVariant = "default" | "ghost" | "circular" | "social" | "no-fill";
+type IconButtonVariant =
+  | "default"
+  | "ghost"
+  | "circular"
+  | "social"
+  | "no-fill";
 
 export type IconButtonProps = Omit<
   ComponentPropsWithoutRef<"button">,
@@ -27,6 +32,7 @@ export const IconButton = ({
   type = "button",
   className,
   style,
+  onClick,
   ...rest
 }: IconButtonProps) => {
   return (
@@ -34,6 +40,7 @@ export const IconButton = ({
       type={type}
       className={clsx("icon-button", `icon-button--${variant}`, className)}
       style={{ backgroundColor, ...style }}
+      onClick={onClick}
       {...rest}
     >
       <Icon

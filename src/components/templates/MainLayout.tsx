@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { NotificationBar } from "../organisms/NotificationBar";
@@ -8,11 +8,20 @@ export type MainLayoutProps = {
 };
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
+  const [isNotificationVisible, setIsNotificationVisible] =
+    useState<boolean>(true);
+
+  const handleCloseNotification = () => {
+    setIsNotificationVisible(false);
+  };
+
   return (
     <>
-      <NotificationBar />
+      {isNotificationVisible && (
+        <NotificationBar onClose={handleCloseNotification} />
+      )}
       <Header />
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

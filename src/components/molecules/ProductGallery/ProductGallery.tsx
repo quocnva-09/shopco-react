@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Image } from "@/components/atoms/Image";
 import "./ProductGallery.scss";
@@ -18,7 +18,12 @@ export const ProductGallery = ({
   className,
   ...rest
 }: ProductGalleryProps) => {
-  const mainImage = images[0]?.img_path || "";
+  const initialImage = images[0]?.img_path || "";
+  const [selectedImage, setSelectedImage] = useState<string>(initialImage);
+
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
 
   return (
     <figure className={clsx("product-detail__gallery", className)} {...rest}>
@@ -32,14 +37,16 @@ export const ProductGallery = ({
             renderWrapper={false}
             className={clsx(
               "product-detail__thumbnail",
-              idx === 0 && "product-detail__thumbnail--active",
+              img.img_path === selectedImage &&
+                "product-detail__thumbnail--active",
             )}
+            onClick={() => handleImageClick(img.img_path)}
           />
         ))}
       </div>
       <div className="product-detail__main-image">
         <Image
-          src={mainImage}
+          src={selectedImage}
           alt={productName}
           title={productName}
           renderWrapper={false}

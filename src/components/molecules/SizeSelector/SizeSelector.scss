@@ -26,11 +26,11 @@
     @media (max-width: $breakpoint) {
       padding: 10px 20px;
     }
-  }
 
-  // Khi radio checked → override Button sang solid-dark styling
-  &__input:checked + &__label .button {
-    background-color: $text-dark;
-    color: #fff;
+    // Khi radio checked → override Button sang solid-dark styling
+    &.is-active{
+      background-color: $text-dark !important;
+      color: #fff !important;
+    }
   }
 }

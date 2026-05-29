@@ -22,6 +22,7 @@ export const Button = ({
   className,
   children,
   type = "button",
+  onClick,
   ...rest
 }: ButtonProps) => {
   return (
@@ -34,6 +35,7 @@ export const Button = ({
         icon && "button--icon",
         className,
       )}
+      onClick={onClick}
       {...rest}
     >
       {icon && iconPosition === "left" && (

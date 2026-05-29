@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./ColorSelector.scss";
@@ -23,6 +23,11 @@ export const ColorSelector = ({
   ...rest
 }: ColorSelectorProps) => {
   const checkedId = defaultValue || colors[0]?.id;
+  const [selectedColor, setSelectedColor] = useState<string>(checkedId);
+
+  const handleChange = (colorId: string) => {
+    setSelectedColor(colorId);
+  };
 
   return (
     <div className={clsx("color-selector", className)} {...rest}>
@@ -35,8 +40,9 @@ export const ColorSelector = ({
               name={name}
               id={inputId}
               value={item.id}
-              defaultChecked={item.id === checkedId}
               className="color-selector__input"
+              checked={selectedColor === item.id}
+              onChange={() => handleChange(item.id)}
             />
             <label
               htmlFor={inputId}
@@ -47,9 +53,13 @@ export const ColorSelector = ({
                 svgName="vector-tick"
                 backgroundColor={item.hex}
                 color="#fff"
-                className="color-selector__swatch"
+                className={clsx(
+                  "color-selector__swatch",
+                  selectedColor === item.id && "is-active",
+                )}
                 tabIndex={-1}
                 aria-hidden="true"
+                onClick={() => handleChange(item.id)}
               />
             </label>
           </span>

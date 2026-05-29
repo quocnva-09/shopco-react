@@ -21,33 +21,35 @@ import "./Home.scss";
 export const HomePage = () => {
   return (
     <MainLayout>
-      <BannerSection
-        title={HERO_TITLE}
-        description={HERO_DESCRIPTION}
-        ctaLabel={HERO_CTA}
-        stats={HERO_STATS}
-        heroImage={HERO_IMAGE}
-      />
+      <div className="container">
+        <BannerSection
+          title={HERO_TITLE}
+          description={HERO_DESCRIPTION}
+          ctaLabel={HERO_CTA}
+          stats={HERO_STATS}
+          heroImage={HERO_IMAGE}
+        />
 
-      <BrandLogoBar className="home__brand-logo" />
+        <BrandLogoBar className="home__brand-logo" />
 
-      <ProductCollectionSection
-        title="NEW ARRIVALS"
-        products={NEW_ARRIVALS}
-        ctaLabel="View All"
-      />
+        <ProductCollectionSection
+          title="NEW ARRIVALS"
+          products={NEW_ARRIVALS}
+          ctaLabel="View All"
+        />
 
-      <Divider direction="horizontal" />
+        <Divider direction="horizontal" />
 
-      <ProductCollectionSection
-        title="TOP SELLING"
-        products={TOP_SELLING}
-        ctaLabel="View All"
-      />
+        <ProductCollectionSection
+          title="TOP SELLING"
+          products={TOP_SELLING}
+          ctaLabel="View All"
+        />
 
-      <StyleCategorySection title="BROWSE BY DRESS STYLE" />
+        <StyleCategorySection title="BROWSE BY DRESS STYLE" />
+      </div>
 
-      <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 6)} />
+      <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 8)} />
     </MainLayout>
   );
 };

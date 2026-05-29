@@ -34,9 +34,9 @@ export const MOCK_PRODUCT_DETAIL: ProductDetailData = {
   description:
     "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
   images: [
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ.png" },
+    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/iXSmMBRKFPgBrMAhTXFk0cS2LGraiVsTMjnSalbk.png" },
     { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
+    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/KPejbXr2JJ3B6oYeeKNeq3OlCfOuZm9Xevz6VVeZ.png" },
   ],
   colors: [
     { id: "olive", name: "Olive Green", hex: "#4f4631" },
@@ -97,7 +97,7 @@ export const MOCK_REVIEWS: ReviewData[] = [
     name: "Ava H.",
     rating: 4.5,
     comment:
-      "I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter.",
+      "I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter. I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter.",
     date: "on August 19, 2025",
     isVerified: true,
   },
@@ -141,6 +141,33 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
   },
   {
     id: "na-5",
+    name: "Sleeve Striped T-Shirt",
+    primaryImage: PRODUCT_IMAGE,
+    currentPrice: 130,
+    originalPrice: 160,
+    discountPercentage: 19,
+    rating: 4.5,
+  },
+  {
+    id: "na-6",
+    name: "Sleeve Striped T-Shirt",
+    primaryImage: PRODUCT_IMAGE,
+    currentPrice: 130,
+    originalPrice: 160,
+    discountPercentage: 19,
+    rating: 4.5,
+  },
+  {
+    id: "na-7",
+    name: "Sleeve Striped T-Shirt",
+    primaryImage: PRODUCT_IMAGE,
+    currentPrice: 130,
+    originalPrice: 160,
+    discountPercentage: 19,
+    rating: 4.5,
+  },
+  {
+    id: "na-8",
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
