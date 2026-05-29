@@ -65,6 +65,7 @@
 
   &__slider {
     position: relative;
+    overflow: hidden; // Prevent horizontal scrolling
 
     // Pseudo elements tạo hiệu ứng blur
     &::before,
@@ -101,32 +102,32 @@
   }
 
   &__items {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-
     // Align items with the container's inner content, increase bottom padding for tooltip
     padding-top: 20px;
     padding-bottom: 250px;
     padding-left: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
     padding-right: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
     margin-bottom: -230px;
-
-    // Ẩn thanh cuộn
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    pointer-events: none;
 
     @media (max-width: $breakpoint) {
       padding-left: $padding-left-right-mobile;
       padding-right: $padding-left-right-mobile;
+      padding-bottom: 250px;
+    }
+  }
+
+  &__track {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    // Translate based on slide index * (card width + gap)
+    transform: translateX(calc(var(--slide-index, 0) * -420px));
+
+    @media (max-width: $breakpoint) {
+      // Translate by card width (90vw) + gap (20px)
+      transform: translateX(calc(var(--slide-index, 0) * -1 * (90vw + 20px)));
     }
 
     .review-card {

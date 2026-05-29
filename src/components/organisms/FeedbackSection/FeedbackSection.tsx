@@ -24,41 +24,33 @@ export const FeedbackSection = ({
   className,
   ...rest
 }: FeedbackSectionProps) => {
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScroll = useCallback(() => {
-    if (sliderRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      // Use a 1px tolerance for rounding issues
-      setCanScrollRight(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
-    }
-  }, []);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    checkScroll();
-    window.addEventListener("resize", checkScroll);
-    return () => window.removeEventListener("resize", checkScroll);
-  }, [checkScroll, reviews]);
+    const handleResize = () => setIsMobile(window.innerWidth <= 991);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const visibleCount = isMobile ? 1 : 3;
+  const maxIndex = Math.max(0, reviews.length - visibleCount);
+
+  // Auto-correct slideIndex if window resize makes maxIndex smaller
+  useEffect(() => {
+    if (slideIndex > maxIndex) {
+      setSlideIndex(maxIndex);
+    }
+  }, [maxIndex, slideIndex]);
 
   const handlePrev = useCallback(() => {
-    if (sliderRef.current) {
-      const itemWidth = sliderRef.current.firstElementChild?.clientWidth || 400;
-      sliderRef.current.scrollBy({
-        left: -(itemWidth + 20),
-        behavior: "smooth",
-      });
-    }
+    setSlideIndex((prev) => Math.max(0, prev - 1));
   }, []);
 
   const handleNext = useCallback(() => {
-    if (sliderRef.current) {
-      const itemWidth = sliderRef.current.firstElementChild?.clientWidth || 400;
-      sliderRef.current.scrollBy({ left: itemWidth + 20, behavior: "smooth" });
-    }
-  }, []);
+    setSlideIndex((prev) => Math.min(maxIndex, prev + 1));
+  }, [maxIndex]);
 
   return (
     <section className={clsx("feedback", className)} {...rest}>
@@ -75,7 +67,7 @@ export const FeedbackSection = ({
             aria-label="Previous reviews"
             className="feedback__arrow feedback__arrow--prev"
             onClick={handlePrev}
-            disabled={!canScrollLeft}
+            disabled={slideIndex === 0}
           />
           <IconButton
             variant="no-fill"
@@ -83,17 +75,22 @@ export const FeedbackSection = ({
             aria-label="Next reviews"
             className="feedback__arrow feedback__arrow--next"
             onClick={handleNext}
-            disabled={!canScrollRight}
+            disabled={slideIndex >= maxIndex}
           />
         </div>
       </div>
 
-      {/* Slider: Horizontal scroll with snap */}
+      {/* Slider: State-driven transform */}
       <div className="feedback__slider">
-        <div className="feedback__items" ref={sliderRef} onScroll={checkScroll}>
-          {reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          ))}
+        <div className="feedback__items">
+          <div
+            className="feedback__track"
+            style={{ "--slide-index": slideIndex } as React.CSSProperties}
+          >
+            {reviews.map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
