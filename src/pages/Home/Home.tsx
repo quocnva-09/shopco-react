@@ -2,8 +2,6 @@ import { BannerSection } from "@/components/organisms/BannerSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { StyleCategorySection } from "@/components/organisms/StyleCategorySection";
 import { FeedbackSection } from "@/components/organisms/FeedbackSection";
-import { MainLayout } from "@/components/templates/MainLayout";
-
 import {
   HERO_TITLE,
   HERO_DESCRIPTION,
@@ -20,7 +18,7 @@ import "./Home.scss";
 
 export const HomePage = () => {
   return (
-    <MainLayout>
+    <>
       <div className="container">
         <BannerSection
           title={HERO_TITLE}
@@ -50,6 +48,6 @@ export const HomePage = () => {
       </div>
 
       <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 8)} />
-    </MainLayout>
+    </>
   );
 };

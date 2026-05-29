@@ -1,13 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
-import { NotificationBar } from "../organisms/NotificationBar";
+import { NotificationBar } from "@/components/organisms/NotificationBar";
+import { Outlet } from "react-router-dom";
 
-export type MainLayoutProps = {
-  children: ReactNode;
-};
-
-export const MainLayout = ({ children }: MainLayoutProps) => {
+export const MainLayout = () => {
   const [isNotificationVisible, setIsNotificationVisible] =
     useState<boolean>(true);
 
@@ -21,7 +18,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         <NotificationBar onClose={handleCloseNotification} />
       )}
       <Header />
-      <main>{children}</main>
+      <Outlet />
       <Footer />
     </>
   );

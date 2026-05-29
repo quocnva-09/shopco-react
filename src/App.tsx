@@ -1,12 +1,13 @@
-import { CartPage } from "./pages/Cart";
 import "@/styles/index.scss";
-import { HomePage } from "./pages/Home";
-import { ProductDetailPage } from "./pages/ProductDetail";
+import { StrictMode } from "react";
+import { AppRouter } from "@/routes";
 
 function App() {
-  return <HomePage />;
-  // return <CartPage />;
-  // return <ProductDetailPage />;
+  return (
+    <StrictMode>
+      <AppRouter />
+    </StrictMode>
+  );
 }
 
 export default App;
