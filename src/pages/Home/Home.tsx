@@ -15,8 +15,11 @@ import { MOCK_REVIEWS } from "@/components/organisms/FeedbackSection/feedbackDat
 import { Divider } from "@/components/atoms/Divider";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
 import "./Home.scss";
+// import { useState } from "react";
 
 export const HomePage = () => {
+  // const [newArrivals, setNewArrivals] = useState<ProductData[]>([]);
+
   return (
     <>
       <div className="container">

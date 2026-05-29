@@ -2,21 +2,23 @@ import { ProductDetailSection } from "@/components/organisms/ProductDetailSectio
 import { ProductMoreInfoSection } from "@/components/organisms/ProductMoreInfoSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 import {
   MOCK_PRODUCT_DETAIL,
   MOCK_REVIEWS,
-  MOCK_BREADCRUMB,
   MOCK_RELATED_PRODUCTS,
 } from "@/consts/productDetailData";
 import { Divider } from "@/components/atoms/Divider";
 
 export const ProductDetailPage = () => {
+  const breadcrumbs = useBreadcrumbs();
+
   return (
     <>
       <main className="container">
         <Divider direction="horizontal" />
-        <Breadcrumb items={MOCK_BREADCRUMB} />
+        <Breadcrumb items={breadcrumbs} />
         <ProductDetailSection data={MOCK_PRODUCT_DETAIL} />
         <ProductMoreInfoSection
           reviewCount={MOCK_REVIEWS.length}

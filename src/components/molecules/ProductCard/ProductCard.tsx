@@ -1,9 +1,11 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 import { Image } from "@/components/atoms/Image";
 import { Heading } from "@/components/atoms/Heading/Heading";
 import { Rating } from "@/components/atoms/Rating/Rating";
 import { PriceGroup } from "@/components/molecules/PriceGroup/PriceGroup";
+import { PATHS } from "@/routes/paths";
 import "./ProductCard.scss";
 
 // Khai báo kiểu dữ liệu đầu vào sạch cho Product Proptypes
@@ -17,7 +19,8 @@ export interface ProductCardData {
   rating: number; // Điểm trung bình số sao đã được tính toán sẵn từ API tầng trên
 }
 
-export type ProductCardProps = ComponentPropsWithoutRef<"div"> & {
+// Mở rộng từ thẻ <a> (hoặc Link) thay vì div vì giờ nó là component điều hướng
+export type ProductCardProps = ComponentPropsWithoutRef<typeof Link> & {
   product: ProductCardData;
   isDetail?: boolean; // Cờ chuyển đổi giao diện sang dạng trang Product Detail lớn
 };
@@ -30,6 +33,7 @@ export const ProductCard = ({
   ...rest
 }: ProductCardProps) => {
   const {
+    id,
     name,
     primaryImage,
     currentPrice,
@@ -41,14 +45,15 @@ export const ProductCard = ({
   const fallbackImage = "default.png";
 
   return (
-    <div
+    <Link
+      to={`${PATHS.PRODUCT_DETAIL}/${id}`}
       className={clsx(
         "product-card",
         isDetail && "product-card--detail",
         className,
       )}
       onClick={onClick}
-      style={{ cursor: onClick ? "pointer" : "default" }}
+      style={{ cursor: "pointer", textDecoration: "none", color: "inherit" }}
       {...rest}
     >
       <figure className="product-card__image">
@@ -82,6 +87,6 @@ export const ProductCard = ({
         isDetail={isDetail}
         className="product-card__price"
       />
-    </div>
+    </Link>
   );
 };
