@@ -10,9 +10,9 @@ const meta: Meta<typeof ColorSelector> = {
   args: {
     name: "color",
     colors: [
-      { id: "olive", name: "Olive Green", hex: "#4f4631" },
-      { id: "teal", name: "Dark Teal", hex: "#314f4a" },
-      { id: "navy", name: "Navy Blue", hex: "#31344f" },
+      { color: "olive", hex: "#4f4631" },
+      { color: "teal", hex: "#314f4a" },
+      { color: "navy", hex: "#31344f" },
     ],
   },
 };
@@ -25,12 +25,12 @@ export const Default: Story = {};
 export const ManyColors: Story = {
   args: {
     colors: [
-      { id: "olive", name: "Olive Green", hex: "#4f4631" },
-      { id: "teal", name: "Dark Teal", hex: "#314f4a" },
-      { id: "navy", name: "Navy Blue", hex: "#31344f" },
-      { id: "red", name: "Ruby Red", hex: "#c62828" },
-      { id: "blue", name: "Royal Blue", hex: "#1565c0" },
-      { id: "green", name: "Forest Green", hex: "#2e7d32" },
+      { color: "olive", hex: "#4f4631" },
+      { color: "teal", hex: "#314f4a" },
+      { color: "navy", hex: "#31344f" },
+      { color: "red", hex: "#c62828" },
+      { color: "blue", hex: "#1565c0" },
+      { color: "green", hex: "#2e7d32" },
     ],
   },
 };

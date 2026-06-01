@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ReviewCard, type ReviewData } from "./ReviewCard";
+import { ReviewCard } from "./ReviewCard";
 import "@/styles/index.scss";
+import type { ReviewData } from "@/types/review";
 
 const mockReview: ReviewData = {
   id: 1,
@@ -10,6 +11,8 @@ const mockReview: ReviewData = {
     "\"I absolutely love this t-shirt! The material is so soft and comfortable. I've washed it multiple times and the color hasn't faded at all. Highly recommend to anyone looking for a stylish yet everyday essential garment that fits perfectly in any wardrobe.\"",
   date: "on August 14, 2025",
   isVerified: true,
+  createdAt: "2022-01-01",
+  updatedAt: "2022-01-01",
 };
 
 const meta: Meta<typeof ReviewCard> = {

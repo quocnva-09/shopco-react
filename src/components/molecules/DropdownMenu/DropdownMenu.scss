@@ -30,7 +30,26 @@
     list-style: none;
     margin: 0;
     display: none;
+    flex-direction: column;
+    border-radius: 6px;
   }
+
+  &__item{
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    padding: 10px 16px;
+    cursor: pointer;
+    &:hover {
+      background-color: $grey-color;
+    }
+  }
+
+  &__item-link{
+    text-decoration: none;
+    color: inherit;
+  }
+    
 
   &.is-open &__menu {
     display: block;

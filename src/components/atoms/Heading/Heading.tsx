@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, type ElementType } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import "./Heading.scss";
 
@@ -39,7 +39,9 @@ export const Heading = ({
         "heading-wrapper",
         showTooltip && "heading-wrapper--has-tooltip",
         mobileLineClamp !== undefined && "heading-wrapper--mobile-clamp",
-        mobileShowTooltip === false && showTooltip && "heading-wrapper--mobile-no-tooltip",
+        mobileShowTooltip === false &&
+          showTooltip &&
+          "heading-wrapper--mobile-no-tooltip",
       )}
       style={
         mobileLineClamp !== undefined

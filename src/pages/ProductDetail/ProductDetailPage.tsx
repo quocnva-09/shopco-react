@@ -4,11 +4,6 @@ import { ProductCollectionSection } from "@/components/organisms/ProductCollecti
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
-import {
-  MOCK_PRODUCT_DETAIL,
-  MOCK_REVIEWS,
-  MOCK_RELATED_PRODUCTS,
-} from "@/consts/productDetailData";
 import { Divider } from "@/components/atoms/Divider";
 import type { ProductCardData, ProductDetailData } from "@/types/product";
 import { useState, useEffect } from "react";
@@ -96,18 +91,23 @@ export const ProductDetailPage = () => {
             Loading product...
           </div>
         ) : product ? (
-          <>
-            <ProductDetailSection data={product} />
-            <ProductMoreInfoSection
-              reviewCount={reviews.length}
-              reviews={reviews}
-            />
-          </>
+          <ProductDetailSection data={product} />
         ) : (
           <div style={{ padding: "4rem 0", textAlign: "center" }}>
             Loading product...
           </div>
         )}
+        {isLoadingReviews ? (
+          <div style={{ padding: "4rem 0", textAlign: "center" }}>
+            Loading reviews...
+          </div>
+        ) : (
+          <ProductMoreInfoSection
+            reviewCount={reviews.length}
+            reviews={reviews}
+          />
+        )}
+
         {isLoadingRelatedProducts ? (
           <div style={{ padding: "4rem 0", textAlign: "center" }}>
             Loading related products...
