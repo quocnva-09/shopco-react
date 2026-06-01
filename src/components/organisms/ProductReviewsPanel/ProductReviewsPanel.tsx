@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { ReviewCard } from "@/components/molecules/ReviewCard/ReviewCard";
-import type { ReviewData } from "@/components/molecules/ReviewCard/ReviewCard";
+import type { ReviewData } from "@/types/review";
 import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
 import { Button } from "@/components/atoms/Button";
 import "./ProductReviewsPanel.scss";

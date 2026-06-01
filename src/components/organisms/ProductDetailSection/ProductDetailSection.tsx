@@ -25,6 +25,7 @@ export const ProductDetailSection = ({
     images,
     colors,
     sizes,
+    categoryId,
   } = data;
 
   return (
@@ -40,6 +41,7 @@ export const ProductDetailSection = ({
         description={description}
         colors={colors}
         sizes={sizes}
+        categoryId={categoryId}
       />
     </section>
   );

@@ -5,15 +5,7 @@ import { Text } from "@/components/atoms/Text/Text";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./ReviewCard.scss";
 import { Icon } from "@/components/atoms/Icon/Icon";
-
-export interface ReviewData {
-  id: string | number;
-  name: string;
-  rating: number;
-  comment: string;
-  date: string; // Ví dụ: "on August 14, 2025" hoặc "on May 26, 2026"
-  isVerified?: boolean;
-}
+import type { ReviewData } from "@/types/review";
 
 export type ReviewCardProps = ComponentPropsWithoutRef<"div"> & {
   review: ReviewData;

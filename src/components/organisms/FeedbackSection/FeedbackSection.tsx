@@ -12,9 +12,7 @@ import { ReviewCard, type ReviewData } from "@/components/molecules/ReviewCard";
 import "./FeedbackSection.scss";
 
 export type FeedbackSectionProps = ComponentPropsWithoutRef<"section"> & {
-  /** Section heading text */
   title?: string;
-  /** Array of review data objects to render as ReviewCards */
   reviews: ReviewData[];
 };
 

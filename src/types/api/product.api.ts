@@ -6,6 +6,16 @@ export interface ProductCategoryApi {
   slug: string;
 }
 
+export interface ProductColorApi {
+  color: string;
+  hex: string;
+}
+
+export interface ProductSizeApi {
+  size: string;
+  label: string;
+}
+
 export interface ProductImageApi {
   id: number;
   product_id: number;
@@ -21,8 +31,8 @@ export interface ProductApi {
   description: string;
   price: number;
   price_discount: number;
-  sizes: string[];
-  colors: string[];
+  sizes: ProductSizeApi[];
+  colors: ProductColorApi[];
   is_active: boolean;
   rating_avg?: number;
   reviews_count?: number;

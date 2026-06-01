@@ -39,6 +39,7 @@ export interface ProductDetailData {
   images: ProductImage[];
   colors: ColorItem[];
   sizes: SizeItem[];
+  categoryId: number;
 }
 
 export interface ProductData {
@@ -48,8 +49,8 @@ export interface ProductData {
   description: string;
   price: number;
   priceDiscount: number;
-  sizes: string[];
-  colors: string[];
+  sizes: SizeItem[];
+  colors: ColorItem[];
   isActive: boolean;
   ratingAvg?: number;
   reviewsCount?: number;

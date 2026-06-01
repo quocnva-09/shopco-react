@@ -11,7 +11,11 @@ import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import "./ProductDetailInfo.scss";
 
-export type ProductDetailInfoProps = Omit<ComponentPropsWithoutRef<"div">, "id"> & Omit<ProductDetailData, "images">;
+export type ProductDetailInfoProps = Omit<
+  ComponentPropsWithoutRef<"div">,
+  "id"
+> &
+  Omit<ProductDetailData, "images">;
 
 export const ProductDetailInfo = ({
   id,
@@ -24,6 +28,7 @@ export const ProductDetailInfo = ({
   colors,
   sizes,
   className,
+  categoryId,
   ...rest
 }: ProductDetailInfoProps) => {
   return (

@@ -8,10 +8,7 @@ import {
   HERO_CTA,
   HERO_IMAGE,
   HERO_STATS,
-  NEW_ARRIVALS,
-  TOP_SELLING,
 } from "@/consts/homeData";
-import { MOCK_REVIEWS } from "@/components/organisms/FeedbackSection/feedbackData";
 import { Divider } from "@/components/atoms/Divider";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
 import "./Home.scss";
@@ -19,6 +16,9 @@ import { useEffect, useState } from "react";
 import type { ProductCardData } from "@/types/product";
 import { ProductService } from "@/services/product.service";
 import { mapProductCardData } from "@/utils/mappers/product.mapper";
+import type { ReviewData } from "@/types/review";
+import { mapReviewData } from "@/utils/mappers/review.mapper";
+import { ReviewService } from "@/services/review.service";
 
 export const HomePage = () => {
   const [newArrivals, setNewArrivals] = useState<ProductCardData[]>([]);
@@ -27,6 +27,8 @@ export const HomePage = () => {
   const [topSellings, setTopSellings] = useState<ProductCardData[]>([]);
   const [isLoadingTopSellings, setIsLoadingTopSellings] =
     useState<boolean>(true);
+  const [feedBacks, setFeedBacks] = useState<ReviewData[]>([]);
+  const [isLoadingFeedBacks, setIsLoadingFeedBacks] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchNewArrivals = async () => {
@@ -38,7 +40,6 @@ export const HomePage = () => {
           per_page: 4,
         });
 
-        // Transform the backend snake_case response into UI camelCase model
         const mappedData = response.data.map(mapProductCardData);
         setNewArrivals(mappedData);
       } catch (error) {
@@ -59,8 +60,6 @@ export const HomePage = () => {
           sort_dir: "desc",
           per_page: 4,
         });
-
-        // Transform the backend snake_case response into UI camelCase model
         const mappedData = response.data.map(mapProductCardData);
         setTopSellings(mappedData);
       } catch (error) {
@@ -70,6 +69,27 @@ export const HomePage = () => {
       }
     };
     fetchTopSellings();
+  }, []);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      setIsLoadingFeedBacks(true);
+      try {
+        const response = await ReviewService.getReviews({
+          sort_by: "rating",
+          sort_direction: "desc",
+          limit: 8,
+        });
+
+        const mappedData = response.data.map(mapReviewData);
+        setFeedBacks(mappedData);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      } finally {
+        setIsLoadingFeedBacks(false);
+      }
+    };
+    fetchReviews();
   }, []);
 
   return (
@@ -85,24 +105,42 @@ export const HomePage = () => {
 
         <BrandLogoBar className="home__brand-logo" />
 
-        <ProductCollectionSection
-          title="NEW ARRIVALS"
-          products={newArrivals}
-          ctaLabel="View All"
-        />
+        {isLoadingNewArrivals ? (
+          <div style={{ padding: "4rem 0", textAlign: "center" }}>
+            Loading new arrivals...
+          </div>
+        ) : (
+          <ProductCollectionSection
+            title="NEW ARRIVALS"
+            products={newArrivals}
+            ctaLabel="View All"
+          />
+        )}
 
         <Divider direction="horizontal" />
 
-        <ProductCollectionSection
-          title="TOP SELLING"
-          products={topSellings}
-          ctaLabel="View All"
-        />
+        {isLoadingTopSellings ? (
+          <div style={{ padding: "4rem 0", textAlign: "center" }}>
+            Loading top sellings...
+          </div>
+        ) : (
+          <ProductCollectionSection
+            title="TOP SELLING"
+            products={topSellings}
+            ctaLabel="View All"
+          />
+        )}
 
         <StyleCategorySection title="BROWSE BY DRESS STYLE" />
       </div>
 
-      <FeedbackSection reviews={MOCK_REVIEWS.slice(0, 8)} />
+      {isLoadingFeedBacks ? (
+        <div style={{ padding: "4rem 0", textAlign: "center" }}>
+          Loading feedbacks...
+        </div>
+      ) : (
+        <FeedbackSection reviews={feedBacks} />
+      )}
     </>
   );
 };

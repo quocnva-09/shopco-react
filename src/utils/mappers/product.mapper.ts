@@ -1,4 +1,9 @@
-import type { ProductApi, ProductImageApi } from "@/types/api/product.api";
+import type {
+  ProductApi,
+  ProductColorApi,
+  ProductImageApi,
+  ProductSizeApi,
+} from "@/types/api/product.api";
 import type {
   ProductData,
   ProductCardData,
@@ -7,21 +12,13 @@ import type {
   SizeItem,
   ColorItem,
 } from "@/types/product";
-import { SIZE_LIST } from "@/consts/sizes";
-import { COLOR_LIST } from "@/consts/colors";
 
-export const mapSize = (sizeStr: string): SizeItem => {
-  const found = SIZE_LIST.find(
-    (s) => s.size.toLowerCase() === sizeStr.toLowerCase(),
-  );
-  return found || { size: sizeStr, label: sizeStr };
+export const mapSize = (size: ProductSizeApi): SizeItem => {
+  return { size: size.size, label: size.label };
 };
 
-export const mapColor = (colorStr: string): ColorItem => {
-  const found = COLOR_LIST.find(
-    (c) => c.color.toLowerCase() === colorStr.toLowerCase(),
-  );
-  return found || { color: colorStr, hex: "#cccccc" };
+export const mapColor = (color: ProductColorApi): ColorItem => {
+  return { color: color.color, hex: color.hex };
 };
 
 export const mapProductImage = (apiImage: ProductImageApi): ProductImage => {
@@ -42,8 +39,8 @@ export const mapProductData = (apiProduct: ProductApi): ProductData => {
     description: apiProduct.description,
     price: apiProduct.price,
     priceDiscount: apiProduct.price_discount,
-    sizes: apiProduct.sizes || [],
-    colors: apiProduct.colors || [],
+    sizes: apiProduct.sizes.map(mapSize),
+    colors: apiProduct.colors.map(mapColor),
     isActive: apiProduct.is_active,
     ratingAvg: apiProduct.rating_avg,
     reviewsCount: apiProduct.reviews_count,
@@ -89,7 +86,6 @@ export const mapProductCardData = (apiProduct: ProductApi): ProductCardData => {
 export const mapProductDetailData = (
   apiProduct: ProductApi,
 ): ProductDetailData => {
-  // Calculate discount percentage if needed
   let discountPercentage = undefined;
   if (
     apiProduct.price_discount &&
@@ -102,6 +98,7 @@ export const mapProductDetailData = (
 
   return {
     id: apiProduct.id,
+    categoryId: apiProduct.category.id,
     name: apiProduct.name,
     rating: apiProduct.rating_avg || 0,
     currentPrice: apiProduct.price_discount || apiProduct.price,
