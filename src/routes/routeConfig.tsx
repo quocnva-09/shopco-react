@@ -25,7 +25,6 @@ export const router = createBrowserRouter([
         path: `${PATHS.PRODUCT_DETAIL}/:id`,
         element: <ProductDetailPage />,
         loader: () => {
-          // Simulate fetching product by ID. In a real app, use params.id
           return MOCK_PRODUCT_DETAIL;
         },
         handle: {

@@ -8,21 +8,11 @@ import { PriceGroup } from "@/components/molecules/PriceGroup/PriceGroup";
 import { PATHS } from "@/routes/paths";
 import "./ProductCard.scss";
 
-// Khai báo kiểu dữ liệu đầu vào sạch cho Product Proptypes
-export interface ProductCardData {
-  id: string | number;
-  name: string;
-  primaryImage?: string;
-  currentPrice: number;
-  originalPrice?: number;
-  discountPercentage?: number;
-  rating: number; // Điểm trung bình số sao đã được tính toán sẵn từ API tầng trên
-}
+import type { ProductCardData } from "@/types/product";
 
-// Mở rộng từ thẻ <a> (hoặc Link) thay vì div vì giờ nó là component điều hướng
 export type ProductCardProps = ComponentPropsWithoutRef<typeof Link> & {
   product: ProductCardData;
-  isDetail?: boolean; // Cờ chuyển đổi giao diện sang dạng trang Product Detail lớn
+  isDetail?: boolean;
 };
 
 export const ProductCard = ({

@@ -6,22 +6,12 @@ import { Text } from "@/components/atoms/Text";
 import { Button } from "@/components/atoms/Button";
 import { PriceGroup } from "@/components/molecules/PriceGroup/PriceGroup";
 import { ColorSelector } from "@/components/molecules/ColorSelector";
-import type { ColorItem } from "@/components/molecules/ColorSelector";
+import type { ProductDetailData } from "@/types/product";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import "./ProductDetailInfo.scss";
 
-export type ProductDetailInfoProps = ComponentPropsWithoutRef<"div"> & {
-  id: number;
-  name: string;
-  rating: number;
-  currentPrice: number;
-  originalPrice?: number;
-  discountPercentage?: number;
-  description: string;
-  colors: ColorItem[];
-  sizes: string[];
-};
+export type ProductDetailInfoProps = Omit<ComponentPropsWithoutRef<"div">, "id"> & Omit<ProductDetailData, "images">;
 
 export const ProductDetailInfo = ({
   id,

@@ -1,21 +1,6 @@
-import type { ProductImage } from "@/components/molecules/ProductGallery";
-import type { ColorItem } from "@/components/molecules/ColorSelector";
+import type { ColorItem, SizeItem, ProductDetailData, ProductCardData, ProductImage } from "@/types/product";
 import type { ReviewData } from "@/components/molecules/ReviewCard";
-import type { ProductCardData } from "@/components/molecules/ProductCard";
 import type { BreadcrumbItem } from "@/components/molecules/Breadcrumb";
-
-export interface ProductDetailData {
-  id: string | number;
-  name: string;
-  rating: number;
-  currentPrice: number;
-  originalPrice?: number;
-  discountPercentage?: number;
-  description: string;
-  images: ProductImage[];
-  colors: ColorItem[];
-  sizes: string[];
-}
 
 export const MOCK_BREADCRUMB: BreadcrumbItem[] = [
   { label: "Home", href: "/" },
@@ -25,7 +10,7 @@ export const MOCK_BREADCRUMB: BreadcrumbItem[] = [
 ];
 
 export const MOCK_PRODUCT_DETAIL: ProductDetailData = {
-  id: "product-1",
+  id: 1,
   name: "One Life Graphic T-Shirt",
   rating: 4.5,
   currentPrice: 260,
@@ -34,16 +19,42 @@ export const MOCK_PRODUCT_DETAIL: ProductDetailData = {
   description:
     "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
   images: [
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/iXSmMBRKFPgBrMAhTXFk0cS2LGraiVsTMjnSalbk.png" },
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
-    { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/KPejbXr2JJ3B6oYeeKNeq3OlCfOuZm9Xevz6VVeZ.png" },
+    {
+      id: 1,
+      productId: 1,
+      imgPath:
+        "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/iXSmMBRKFPgBrMAhTXFk0cS2LGraiVsTMjnSalbk.png",
+      alt: "Product Image 1",
+      isPrimary: true,
+    },
+    {
+      id: 2,
+      productId: 1,
+      imgPath:
+        "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png",
+      alt: "Product Image 2",
+      isPrimary: false,
+    },
+    {
+      id: 3,
+      productId: 1,
+      imgPath:
+        "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/KPejbXr2JJ3B6oYeeKNeq3OlCfOuZm9Xevz6VVeZ.png",
+      alt: "Product Image 3",
+      isPrimary: false,
+    },
   ],
   colors: [
-    { id: "olive", name: "Olive Green", hex: "#4f4631" },
-    { id: "teal", name: "Dark Teal", hex: "#314f4a" },
-    { id: "navy", name: "Navy Blue", hex: "#31344f" },
+    { color: "olive", hex: "#4f4631" },
+    { color: "teal", hex: "#314f4a" },
+    { color: "navy", hex: "#31344f" },
   ],
-  sizes: ["Small", "Medium", "Large", "X-Large"],
+  sizes: [
+    { size: "S", label: "Small" },
+    { size: "M", label: "Medium" },
+    { size: "L", label: "Large" },
+    { size: "XL", label: "X-Large" },
+  ],
 };
 
 export const MOCK_REVIEWS: ReviewData[] = [
@@ -108,14 +119,14 @@ const PRODUCT_IMAGE =
 
 export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
   {
-    id: "na-1",
+    id: 101,
     name: "T-Shirt With Tape Details",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 120,
     rating: 4.5,
   },
   {
-    id: "na-2",
+    id: 102,
     name: "Skinny Fit Jeans Skinny Fit JeansSkinny Fit Jeans Skinny Fit Jeans Skinny Fit Jeans Skinny Fit Jeans",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 24000000,
@@ -124,14 +135,14 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
     rating: 3.5,
   },
   {
-    id: "na-3",
+    id: 103,
     name: "Checkered Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 180,
     rating: 4.0,
   },
   {
-    id: "na-4",
+    id: 104,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
@@ -140,7 +151,7 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: "na-5",
+    id: 105,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
@@ -149,7 +160,7 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: "na-6",
+    id: 106,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
@@ -158,7 +169,7 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: "na-7",
+    id: 107,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
@@ -167,7 +178,7 @@ export const MOCK_RELATED_PRODUCTS: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: "na-8",
+    id: 108,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,

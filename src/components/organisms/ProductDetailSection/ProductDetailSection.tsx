@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { ProductGallery } from "@/components/molecules/ProductGallery";
 import { ProductDetailInfo } from "@/components/organisms/ProductDetailInfo";
-import type { ProductDetailData } from "@/consts/productDetailData";
+import type { ProductDetailData } from "@/types/product";
 import "./ProductDetailSection.scss";
 
 export type ProductDetailSectionProps = ComponentPropsWithoutRef<"section"> & {
@@ -15,6 +15,7 @@ export const ProductDetailSection = ({
   ...rest
 }: ProductDetailSectionProps) => {
   const {
+    id,
     name,
     rating,
     currentPrice,
@@ -30,6 +31,7 @@ export const ProductDetailSection = ({
     <section className={clsx("product-detail", className)} {...rest}>
       <ProductGallery images={images} productName={name} />
       <ProductDetailInfo
+        id={id}
         name={name}
         rating={rating}
         currentPrice={currentPrice}

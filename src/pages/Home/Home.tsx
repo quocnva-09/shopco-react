@@ -15,10 +15,62 @@ import { MOCK_REVIEWS } from "@/components/organisms/FeedbackSection/feedbackDat
 import { Divider } from "@/components/atoms/Divider";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
 import "./Home.scss";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { ProductCardData } from "@/types/product";
+import { ProductService } from "@/services/product.service";
+import { mapProductCardData } from "@/utils/mappers/product.mapper";
 
 export const HomePage = () => {
-  // const [newArrivals, setNewArrivals] = useState<ProductData[]>([]);
+  const [newArrivals, setNewArrivals] = useState<ProductCardData[]>([]);
+  const [isLoadingNewArrivals, setIsLoadingNewArrivals] =
+    useState<boolean>(true);
+  const [topSellings, setTopSellings] = useState<ProductCardData[]>([]);
+  const [isLoadingTopSellings, setIsLoadingTopSellings] =
+    useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchNewArrivals = async () => {
+      setIsLoadingNewArrivals(true);
+      try {
+        const response = await ProductService.getProducts({
+          sort_by: "created_at",
+          sort_dir: "desc",
+          per_page: 4,
+        });
+
+        // Transform the backend snake_case response into UI camelCase model
+        const mappedData = response.data.map(mapProductCardData);
+        setNewArrivals(mappedData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoadingNewArrivals(false);
+      }
+    };
+    fetchNewArrivals();
+  }, []);
+
+  useEffect(() => {
+    const fetchTopSellings = async () => {
+      setIsLoadingTopSellings(true);
+      try {
+        const response = await ProductService.getProducts({
+          sort_by: "selling",
+          sort_dir: "desc",
+          per_page: 4,
+        });
+
+        // Transform the backend snake_case response into UI camelCase model
+        const mappedData = response.data.map(mapProductCardData);
+        setTopSellings(mappedData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoadingTopSellings(false);
+      }
+    };
+    fetchTopSellings();
+  }, []);
 
   return (
     <>
@@ -35,7 +87,7 @@ export const HomePage = () => {
 
         <ProductCollectionSection
           title="NEW ARRIVALS"
-          products={NEW_ARRIVALS}
+          products={newArrivals}
           ctaLabel="View All"
         />
 
@@ -43,7 +95,7 @@ export const HomePage = () => {
 
         <ProductCollectionSection
           title="TOP SELLING"
-          products={TOP_SELLING}
+          products={topSellings}
           ctaLabel="View All"
         />
 

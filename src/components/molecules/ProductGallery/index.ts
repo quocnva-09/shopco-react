@@ -1,2 +1,2 @@
 export { ProductGallery } from "./ProductGallery";
-export type { ProductImage, ProductGalleryProps } from "./ProductGallery";
+export type { ProductGalleryProps } from "./ProductGallery";

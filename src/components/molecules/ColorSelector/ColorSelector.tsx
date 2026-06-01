@@ -2,12 +2,7 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./ColorSelector.scss";
-
-export interface ColorItem {
-  id: string;
-  name: string;
-  hex: string;
-}
+import type { ColorItem } from "@/types/product";
 
 export type ColorSelectorProps = ComponentPropsWithoutRef<"div"> & {
   name: string;
@@ -22,7 +17,7 @@ export const ColorSelector = ({
   className,
   ...rest
 }: ColorSelectorProps) => {
-  const checkedId = defaultValue || colors[0]?.id;
+  const checkedId = defaultValue || colors[0]?.color;
   const [selectedColor, setSelectedColor] = useState<string>(checkedId);
 
   const handleChange = (colorId: string) => {
@@ -32,22 +27,22 @@ export const ColorSelector = ({
   return (
     <div className={clsx("color-selector", className)} {...rest}>
       {colors.map((item) => {
-        const inputId = `${item.id}`;
+        const inputId = `${item.color}`;
         return (
-          <span key={item.id}>
+          <span key={item.color}>
             <input
               type="radio"
               name={name}
               id={inputId}
-              value={item.id}
+              value={item.color}
               className="color-selector__input"
-              checked={selectedColor === item.id}
-              onChange={() => handleChange(item.id)}
+              checked={selectedColor === item.color}
+              onChange={() => handleChange(item.color)}
             />
             <label
               htmlFor={inputId}
               className="color-selector__label"
-              title={item.name}
+              title={item.color}
             >
               <IconButton
                 svgName="vector-tick"
@@ -55,11 +50,11 @@ export const ColorSelector = ({
                 color="#fff"
                 className={clsx(
                   "color-selector__swatch",
-                  selectedColor === item.id && "is-active",
+                  selectedColor === item.color && "is-active",
                 )}
                 tabIndex={-1}
                 aria-hidden="true"
-                onClick={() => handleChange(item.id)}
+                onClick={() => handleChange(item.color)}
               />
             </label>
           </span>

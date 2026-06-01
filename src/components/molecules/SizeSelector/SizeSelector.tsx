@@ -2,10 +2,11 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Button } from "@/components/atoms/Button";
 import "./SizeSelector.scss";
+import type { SizeItem } from "@/types/product";
 
 export type SizeSelectorProps = ComponentPropsWithoutRef<"div"> & {
   name: string;
-  sizes: string[];
+  sizes: SizeItem[];
   defaultValue?: string;
 };
 
@@ -16,7 +17,7 @@ export const SizeSelector = ({
   className,
   ...rest
 }: SizeSelectorProps) => {
-  const checkedValue = defaultValue || sizes?.[0];
+  const checkedValue = defaultValue || sizes?.[0]?.size;
   const [selectedSize, setSelectedSize] = useState<string>(checkedValue);
 
   const handleChange = (size: string) => {
@@ -25,18 +26,18 @@ export const SizeSelector = ({
 
   return (
     <div className={clsx("size-selector", className)} {...rest}>
-      {sizes.map((size, idx) => {
-        const inputId = `${name}-${idx}`;
+      {sizes.map((item) => {
+        const inputId = `${name}-${item.size}`;
         return (
-          <span key={size}>
+          <span key={item.size}>
             <input
               type="radio"
               name={name}
               id={inputId}
-              value={size}
+              value={item.size}
               className="size-selector__input"
-              checked={selectedSize === size}
-              onChange={() => handleChange(size)}
+              checked={selectedSize === item.size}
+              onChange={() => handleChange(item.size)}
             />
             <label htmlFor={inputId} className="size-selector__label">
               <Button
@@ -44,12 +45,12 @@ export const SizeSelector = ({
                 colorScheme="grey"
                 className={clsx(
                   "size-selector__button",
-                  selectedSize === size && "is-active",
+                  selectedSize === item.size && "is-active",
                 )}
                 tabIndex={-1}
-                onClick={() => handleChange(size)}
+                onClick={() => handleChange(item.size)}
               >
-                {size}
+                {item.label}
               </Button>
             </label>
           </span>
