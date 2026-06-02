@@ -1,85 +1,40 @@
+import { useMemo } from "react";
 import { ProductDetailSection } from "@/components/organisms/ProductDetailSection";
 import { ProductMoreInfoSection } from "@/components/organisms/ProductMoreInfoSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
-
 import { Divider } from "@/components/atoms/Divider";
-import type { ProductCardData, ProductDetailData } from "@/types/product";
-import { useState, useEffect } from "react";
-import { ProductService } from "@/services/product.service";
-import {
-  mapProductCardData,
-  mapProductDetailData,
-} from "@/utils/mappers/product.mapper";
 import { useParams } from "react-router-dom";
-import type { ReviewData } from "@/types/review";
-import { ReviewService } from "@/services/review.service";
-import { mapReviewData } from "@/utils/mappers/review.mapper";
+import { useProductCollection } from "@/hooks/useProductCollection";
+import { useReviews } from "@/hooks/useReviews";
+import { useProduct } from "@/hooks/useProduct";
 
 export const ProductDetailPage = () => {
-  const breadcrumbs = useBreadcrumbs();
-  const [product, setProduct] = useState<ProductDetailData>();
-  const [isLoadingProduct, setIsLoadingProduct] = useState<boolean>(true);
   const { id } = useParams<{ id: string }>();
-  const [relatedProducts, setRelatedProducts] = useState<ProductCardData[]>([]);
-  const [isLoadingRelatedProducts, setIsLoadingRelatedProducts] =
-    useState<boolean>(true);
-  const [reviews, setReviews] = useState<ReviewData[]>([]);
-  const [isLoadingReviews, setIsLoadingReviews] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      setIsLoadingProduct(true);
-      try {
-        const response = await ProductService.getProductById(Number(id));
-        setProduct(mapProductDetailData(response.data));
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      } finally {
-        setIsLoadingProduct(false);
-      }
-    };
-    fetchProduct();
-  }, [id]);
+  const { product, isLoading: isLoadingProduct } = useProduct(Number(id));
 
-  useEffect(() => {
-    if (!product) return;
+  const { products: relatedProducts, isLoading: isLoadingRelatedProducts } =
+    useProductCollection(
+      { category_id: product?.category?.id, per_page: 8 },
+      { enabled: !isLoadingProduct && Boolean(product?.category?.id) },
+    );
 
-    const fetchRelatedProducts = async () => {
-      setIsLoadingRelatedProducts(true);
-      try {
-        const response = await ProductService.getProducts({
-          category_id: product.categoryId,
-          per_page: 8,
-        });
-        const mappedData = response.data.map(mapProductCardData);
-        setRelatedProducts(mappedData);
-      } catch (error) {
-        console.error("Error fetching related products:", error);
-      } finally {
-        setIsLoadingRelatedProducts(false);
-      }
-    };
-    fetchRelatedProducts();
-  }, [product]);
+  const { reviews, isLoading: isLoadingReviews } = useReviews({
+    product_id: Number(id),
+    is_approved: true,
+    limit: 8,
+  });
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      setIsLoadingReviews(true);
-      try {
-        const response = await ReviewService.getReviewsByProductId(Number(id));
-
-        const mappedData = response.data.map(mapReviewData);
-        setReviews(mappedData);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      } finally {
-        setIsLoadingReviews(false);
-      }
-    };
-    fetchReviews();
-  }, [id]);
+  const baseBreadcrumbs = useBreadcrumbs();
+  const breadcrumbs = useMemo(
+    () => [
+      ...baseBreadcrumbs,
+      { label: product?.name || "Product Detail" },
+    ],
+    [baseBreadcrumbs, product?.name],
+  );
 
   return (
     <>

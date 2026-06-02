@@ -1,7 +1,7 @@
 @use '@/styles/abstracts/variables' as *;
 @use '@/styles/abstracts/mixins' as *;
 
-.product-card__price {
+.price {
   margin-top: 8px;
   font-size: 24px;
   font-weight: 700;
@@ -50,7 +50,7 @@
     }
 
     // Ghi đè riêng tag discount của bản detail to hơn
-    .product-card__price--discount {
+    .price--discount {
       padding: 4px 12px;
       font-size: 14px;
     }

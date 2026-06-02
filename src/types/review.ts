@@ -1,5 +1,5 @@
 export interface ReviewData {
-  id: string | number;
+  id: number;
   name: string;
   rating: number;
   comment: string;

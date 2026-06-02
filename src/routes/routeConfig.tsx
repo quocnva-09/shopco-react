@@ -7,7 +7,6 @@ import { MainLayout } from "@/components/templates/MainLayout";
 import { HomePage } from "@/pages/Home";
 import { ProductDetailPage } from "@/pages/ProductDetail";
 import { CartPage } from "@/pages/Cart";
-import { MOCK_PRODUCT_DETAIL } from "@/consts/productDetailData";
 
 export const router = createBrowserRouter([
   {
@@ -24,14 +23,8 @@ export const router = createBrowserRouter([
       {
         path: `${PATHS.PRODUCT_DETAIL}/:id`,
         element: <ProductDetailPage />,
-        loader: () => {
-          return MOCK_PRODUCT_DETAIL;
-        },
         handle: {
-          crumb: (data: typeof MOCK_PRODUCT_DETAIL) => [
-            { label: "Product", href: PATHS.PRODUCT_DETAIL },
-            { label: data?.name || "Product Detail" },
-          ],
+          crumb: () => [{ label: "Product" }],
         },
       },
       {

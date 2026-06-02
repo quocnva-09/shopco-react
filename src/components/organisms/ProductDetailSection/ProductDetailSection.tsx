@@ -2,11 +2,11 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { ProductGallery } from "@/components/molecules/ProductGallery";
 import { ProductDetailInfo } from "@/components/organisms/ProductDetailInfo";
-import type { ProductDetailData } from "@/types/product";
+import type { ProductData } from "@/types/product";
 import "./ProductDetailSection.scss";
 
 export type ProductDetailSectionProps = ComponentPropsWithoutRef<"section"> & {
-  data: ProductDetailData;
+  data: ProductData;
 };
 
 export const ProductDetailSection = ({
@@ -14,35 +14,12 @@ export const ProductDetailSection = ({
   className,
   ...rest
 }: ProductDetailSectionProps) => {
-  const {
-    id,
-    name,
-    rating,
-    currentPrice,
-    originalPrice,
-    discountPercentage,
-    description,
-    images,
-    colors,
-    sizes,
-    categoryId,
-  } = data;
+  const { name, images } = data;
 
   return (
     <section className={clsx("product-detail", className)} {...rest}>
       <ProductGallery images={images} productName={name} />
-      <ProductDetailInfo
-        id={id}
-        name={name}
-        rating={rating}
-        currentPrice={currentPrice}
-        originalPrice={originalPrice}
-        discountPercentage={discountPercentage}
-        description={description}
-        colors={colors}
-        sizes={sizes}
-        categoryId={categoryId}
-      />
+      <ProductDetailInfo product={data} />
     </section>
   );
 };

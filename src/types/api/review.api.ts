@@ -15,9 +15,10 @@ export interface ReviewApi {
 }
 
 export interface ReviewParams {
+  product_id?: number;
   keyword?: string;
   sort_by?: "id" | "created_at" | "rating";
-  sort_direction?: "asc" | "desc";
+  sort_dir?: "asc" | "desc";
   limit?: number;
   is_approved?: boolean;
 }

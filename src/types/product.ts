@@ -28,27 +28,14 @@ export interface ProductImage {
   isPrimary: boolean;
 }
 
-export interface ProductDetailData {
-  id: number;
-  name: string;
-  rating: number;
-  currentPrice: number;
-  originalPrice?: number;
-  discountPercentage?: number;
-  description: string;
-  images: ProductImage[];
-  colors: ColorItem[];
-  sizes: SizeItem[];
-  categoryId: number;
-}
-
 export interface ProductData {
   id: number;
   name: string;
   slug: string;
   description: string;
-  price: number;
-  priceDiscount: number;
+  originalPrice: number;
+  currentPrice: number;
+  discountPercent: number;
   sizes: SizeItem[];
   colors: ColorItem[];
   isActive: boolean;

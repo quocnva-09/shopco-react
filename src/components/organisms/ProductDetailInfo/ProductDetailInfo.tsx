@@ -6,7 +6,7 @@ import { Text } from "@/components/atoms/Text";
 import { Button } from "@/components/atoms/Button";
 import { PriceGroup } from "@/components/molecules/PriceGroup/PriceGroup";
 import { ColorSelector } from "@/components/molecules/ColorSelector";
-import type { ProductDetailData } from "@/types/product";
+import type { ProductData } from "@/types/product";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import "./ProductDetailInfo.scss";
@@ -14,23 +14,17 @@ import "./ProductDetailInfo.scss";
 export type ProductDetailInfoProps = Omit<
   ComponentPropsWithoutRef<"div">,
   "id"
-> &
-  Omit<ProductDetailData, "images">;
+> & {
+  product: ProductData;
+};
 
 export const ProductDetailInfo = ({
-  id,
-  name,
-  rating,
-  currentPrice,
-  originalPrice,
-  discountPercentage,
-  description,
-  colors,
-  sizes,
+  product,
   className,
-  categoryId,
   ...rest
 }: ProductDetailInfoProps) => {
+  const rating = product.ratingAvg ?? 0;
+
   return (
     <div className={clsx("product-detail__info", className)} {...rest}>
       {/* Product Card Info: Name + Rating + Price */}
@@ -42,22 +36,20 @@ export const ProductDetailInfo = ({
         fontSize="40px"
         fontFamily="'IntegralCF', sans-serif"
       >
-        {name}
+        {product.name}
       </Heading>
 
       <Rating value={rating} /*className="product-card__rating"*/ />
 
       <PriceGroup
-        currentPrice={currentPrice}
-        originalPrice={originalPrice}
-        discountPercentage={discountPercentage}
-        isDetail
-        //className="product-card__price"
+        currentPrice={product.currentPrice}
+        originalPrice={product.originalPrice}
+        discountPercentage={product.discountPercent}
       />
 
       {/* Description */}
       <Text as="p" className="product-detail__description">
-        {description}
+        {product.description}
       </Text>
 
       {/* Form: Color + Size + Quantity + Add to Cart */}
@@ -67,7 +59,11 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Select Colors
           </Text>
-          <ColorSelector name="color" colors={colors} key={id} />
+          <ColorSelector
+            name="color"
+            colors={product.colors}
+            key={product.id}
+          />
         </div>
 
         {/* Size Variant */}
@@ -75,7 +71,7 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Choose Size
           </Text>
-          <SizeSelector name="size" sizes={sizes} key={id} />
+          <SizeSelector name="size" sizes={product.sizes} key={product.id} />
         </div>
 
         {/* Actions */}

@@ -1,10 +1,10 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
-import { Button } from "../../atoms/Button";
-import { MainBannerContent } from "../../molecules/MainBannerContent";
-import { MainBannerImage } from "../../molecules/MainBannerImage";
-import type { StatItemData } from "../../molecules/StatsBar";
-import "./BannerSection.scss";
+import { Button } from "@/components/atoms/Button";
+import { MainBannerContent } from "@/components/molecules/MainBannerContent";
+import { MainBannerImage } from "@/components/molecules/MainBannerImage";
+import type { StatItemData } from "@/components/molecules/StatsBar";
+import "@/components/organisms/BannerSection/BannerSection.scss";
 
 export type BannerSectionProps = ComponentPropsWithoutRef<"section"> & {
   title: string;

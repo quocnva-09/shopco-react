@@ -1,6 +1,6 @@
+import type { ProductCardData } from "@/types/product";
 // Homepage mock data — tập trung tất cả static data cho Home page
 import type { StatItemData } from "@/components/molecules/StatsBar";
-import type { ProductCardData } from "@/components/molecules/ProductCard";
 
 // ──────────── Banner Section ────────────
 
@@ -14,12 +14,16 @@ export const HERO_IMAGE = {
   alt: "Fashion model wearing SHOP.CO collection",
 };
 
+export const HERO_EFFECTS = {
+  src: "images/banner-effect.svg",
+  alt: "Banner effect",
+};
+
 export const HERO_STATS: StatItemData[] = [
   { value: "200+", label: "International Brands" },
   { value: "2,000+", label: "High-Quality Products" },
   { value: "30,000+", label: "Happy Customers" },
 ];
-
 
 // ──────────── Product Collections ────────────
 
@@ -28,14 +32,14 @@ const PRODUCT_IMAGE =
 
 export const NEW_ARRIVALS: ProductCardData[] = [
   {
-    id: "na-1",
+    id: 1,
     name: "T-Shirt With Tape Details",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 120,
     rating: 4.5,
   },
   {
-    id: "na-2",
+    id: 2,
     name: "Skinny Fit Jeans",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 240,
@@ -44,14 +48,14 @@ export const NEW_ARRIVALS: ProductCardData[] = [
     rating: 3.5,
   },
   {
-    id: "na-3",
+    id: 3,
     name: "Checkered Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 180,
     rating: 4.0,
   },
   {
-    id: "na-4",
+    id: 4,
     name: "Sleeve Striped T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 130,
@@ -63,7 +67,7 @@ export const NEW_ARRIVALS: ProductCardData[] = [
 
 export const TOP_SELLING: ProductCardData[] = [
   {
-    id: "ts-1",
+    id: 5,
     name: "Vertical Striped Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 212,
@@ -72,21 +76,21 @@ export const TOP_SELLING: ProductCardData[] = [
     rating: 5.0,
   },
   {
-    id: "ts-2",
+    id: 6,
     name: "Courage Graphic T-Shirt",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 145,
     rating: 4.0,
   },
   {
-    id: "ts-3",
+    id: 7,
     name: "Loose Fit Bermuda Shorts",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 80,
     rating: 3.0,
   },
   {
-    id: "ts-4",
+    id: 8,
     name: "Faded Skinny Jeans",
     primaryImage: PRODUCT_IMAGE,
     currentPrice: 210,

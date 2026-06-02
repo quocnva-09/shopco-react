@@ -21,23 +21,19 @@ export const PriceGroup = ({
   className,
   ...rest
 }: PriceGroupProps) => {
-  const hasDiscount = originalPrice && originalPrice > currentPrice;
-  const hasDiscountPercent = discountPercentage && discountPercentage > 0;
+  const hasDiscount = (originalPrice ?? 0) > currentPrice;
+  const hasDiscountPercent = (discountPercentage ?? 0) > 0;
 
   return (
     <div
-      className={clsx(
-        "product-card__price",
-        isDetail && "product-card__price--detail",
-        className
-      )}
+      className={clsx("price", isDetail && "price--detail", className)}
       {...rest}
     >
       <PriceText
         value={currentPrice}
         currency={currency}
         variant="current"
-        className="product-card__price--current"
+        className="price--current"
       />
 
       {hasDiscount && (
@@ -45,14 +41,12 @@ export const PriceGroup = ({
           value={originalPrice}
           currency={currency}
           variant="old"
-          className="product-card__price--old"
+          className="price--old"
         />
       )}
 
       {hasDiscountPercent && (
-        <span className="product-card__price--discount">
-          -{discountPercentage}%
-        </span>
+        <span className="price--discount">-{discountPercentage}%</span>
       )}
     </div>
   );

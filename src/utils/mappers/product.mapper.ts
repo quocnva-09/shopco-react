@@ -7,7 +7,6 @@ import type {
 import type {
   ProductData,
   ProductCardData,
-  ProductDetailData,
   ProductImage,
   SizeItem,
   ColorItem,
@@ -32,15 +31,24 @@ export const mapProductImage = (apiImage: ProductImageApi): ProductImage => {
 };
 
 export const mapProductData = (apiProduct: ProductApi): ProductData => {
+  const discountPercent =
+    apiProduct.price_discount && apiProduct.price > apiProduct.price_discount
+      ? Math.round(
+          ((apiProduct.price - apiProduct.price_discount) / apiProduct.price) *
+            100,
+        )
+      : 0;
+
   return {
     id: apiProduct.id,
     name: apiProduct.name,
     slug: apiProduct.slug,
     description: apiProduct.description,
-    price: apiProduct.price,
-    priceDiscount: apiProduct.price_discount,
-    sizes: apiProduct.sizes.map(mapSize),
-    colors: apiProduct.colors.map(mapColor),
+    currentPrice: apiProduct.price_discount || apiProduct.price,
+    originalPrice: apiProduct.price_discount ? apiProduct.price : undefined,
+    discountPercent,
+    sizes: (apiProduct.sizes || []).map(mapSize),
+    colors: (apiProduct.colors || []).map(mapColor),
     isActive: apiProduct.is_active,
     ratingAvg: apiProduct.rating_avg,
     reviewsCount: apiProduct.reviews_count,
@@ -80,33 +88,5 @@ export const mapProductCardData = (apiProduct: ProductApi): ProductCardData => {
     originalPrice: apiProduct.price_discount ? apiProduct.price : undefined,
     discountPercentage,
     rating: apiProduct.rating_avg || 0,
-  };
-};
-
-export const mapProductDetailData = (
-  apiProduct: ProductApi,
-): ProductDetailData => {
-  let discountPercentage = undefined;
-  if (
-    apiProduct.price_discount &&
-    apiProduct.price > apiProduct.price_discount
-  ) {
-    discountPercentage = Math.round(
-      ((apiProduct.price - apiProduct.price_discount) / apiProduct.price) * 100,
-    );
-  }
-
-  return {
-    id: apiProduct.id,
-    categoryId: apiProduct.category.id,
-    name: apiProduct.name,
-    rating: apiProduct.rating_avg || 0,
-    currentPrice: apiProduct.price_discount || apiProduct.price,
-    originalPrice: apiProduct.price_discount ? apiProduct.price : undefined,
-    discountPercentage,
-    description: apiProduct.description,
-    images: (apiProduct.images || []).map(mapProductImage),
-    colors: (apiProduct.colors || []).map(mapColor),
-    sizes: (apiProduct.sizes || []).map(mapSize),
   };
 };

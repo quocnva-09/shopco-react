@@ -5,6 +5,8 @@ import { IconButton } from "@/components/atoms/IconButton";
 import { NavMenu } from "@/components/molecules/NavMenu";
 import { SearchBar } from "@/components/molecules/SearchBar";
 import "./Header.scss";
+import { Link } from "react-router-dom";
+import { PATHS } from "@/routes";
 
 export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;
@@ -59,15 +61,17 @@ export const Header = ({
 
         {/* Action buttons */}
         <div className="header__actions">
-          <IconButton
-            svgName="icn-cart"
-            aria-label="Open shopping cart"
-            className="header__icon-btn"
-            onClick={onCartClick}
-            variant="ghost"
-            iconWidth={24}
-            iconHeight={24}
-          />
+          <Link to={PATHS.CART}>
+            <IconButton
+              svgName="icn-cart"
+              aria-label="Open shopping cart"
+              className="header__icon-btn"
+              onClick={onCartClick}
+              variant="ghost"
+              iconWidth={24}
+              iconHeight={24}
+            />
+          </Link>
           <IconButton
             svgName="icn-user"
             aria-label="View user profile"
