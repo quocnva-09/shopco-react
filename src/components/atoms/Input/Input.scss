@@ -22,13 +22,6 @@
     color: $text-muted;
   }
 
-  // Trạng thái khi người dùng click vào gõ chữ
-  &:focus {
-    border-color: rgba($black-color, 0.3);
-    background-color: #fff; // Đổi nền trắng khi focus để tạo điểm nhấn tương tác
-    box-shadow: 0 0 0 4px rgba($black-color, 0.05);
-  }
-
   // Trạng thái khóa không cho nhập liệu
   &:disabled {
     background-color: $grey-color;

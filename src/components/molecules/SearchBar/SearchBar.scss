@@ -7,6 +7,11 @@
   border-radius: $radius-pill;
   width: 100%;
 
+  &:focus-within {
+    transition: all 0.2s ease;
+    box-shadow: 0 0 0 1px rgba($black-color, 0.2);
+  }
+
   @media (max-width: $breakpoint) {
     background-color: transparent;
     padding: 0;
@@ -28,7 +33,7 @@
     }
   }
 
-  &__input{
+  &__input {
     @media (max-width: $breakpoint) {
       display: none;
     }

@@ -6,18 +6,6 @@ $bg-main-banner: #F2F0F1;
   background-color: $bg-main-banner;
   position: relative;
   z-index: 1;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 100%;
-    background-color: $bg-main-banner;
-    z-index: -1;
-  }
 }
 
 .main-banner {

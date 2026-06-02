@@ -17,9 +17,13 @@
     background-color: $white-color;
     border-radius: $radius-pill;
     overflow: hidden;
+    
+    
+    &:focus-within {
+      box-shadow: 0 0 0 1px rgba($black-color, 0.2);
+    } 
   }
 
-  // Icon mail — có padding để canh lề trái, giống search-bar__btn
   &__icon {
     flex-shrink: 0;
     padding: 12px 0 12px 16px;

@@ -29,7 +29,7 @@ export const BannerSection = ({
 }: BannerSectionProps) => {
   return (
     <section className={clsx("banner-section", className)} {...rest}>
-      <div className="main-banner">
+      <div className={clsx("container", "main-banner")}>
         <MainBannerContent
           title={title}
           description={description}

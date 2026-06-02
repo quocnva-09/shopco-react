@@ -94,17 +94,17 @@ export const HomePage = () => {
 
   return (
     <>
+      <BannerSection
+        title={HERO_TITLE}
+        description={HERO_DESCRIPTION}
+        ctaLabel={HERO_CTA}
+        stats={HERO_STATS}
+        heroImage={HERO_IMAGE}
+      />
+
+      <BrandLogoBar className="home__brand-logo" />
+
       <div className="container">
-        <BannerSection
-          title={HERO_TITLE}
-          description={HERO_DESCRIPTION}
-          ctaLabel={HERO_CTA}
-          stats={HERO_STATS}
-          heroImage={HERO_IMAGE}
-        />
-
-        <BrandLogoBar className="home__brand-logo" />
-
         {isLoadingNewArrivals ? (
           <div style={{ padding: "4rem 0", textAlign: "center" }}>
             Loading new arrivals...

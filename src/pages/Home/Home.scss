@@ -1,19 +1,6 @@
 @use "@/styles/abstracts/variables" as *;
 
-// Full-bleed: break out of .container padding to stretch edge-to-edge
 .home__brand-logo {
-  width: 100vw;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-
-  // Overlap: pull up onto BannerSection's bottom
-  margin-top: -40px;
   z-index: 1;
-
-  @media (max-width: $breakpoint) {
-    margin-top: -20px;
-  }
 }

@@ -1,25 +1,23 @@
 @use '@/styles/abstracts/variables' as *;
 
+.brand-logo-wrapper {
+  background-color: $black-color;
+  padding: 44px 0;
+
+  @media (max-width: $breakpoint) {
+    padding: 28px 0;
+  }
+}
+
 .brand-logo {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0;
-  padding: 44px 0;
-  background-color: $black-color;
+  margin: 0 auto;
   gap: 20px;
 
-  // Tràn ra full width bằng cách dùng negative margin + padding bù
-  margin-left: -$padding-left-right-full-layout;
-  margin-right: -$padding-left-right-full-layout;
-  padding-left: $padding-left-right-full-layout;
-  padding-right: $padding-left-right-full-layout;
-
   @media (max-width: $breakpoint) {
-    margin-left: -$padding-left-right-mobile;
-    margin-right: -$padding-left-right-mobile;
-    padding: 28px $padding-left-right-mobile;
     justify-content: center;
     gap: 16px;
   }
