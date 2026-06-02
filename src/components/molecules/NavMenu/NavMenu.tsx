@@ -26,7 +26,7 @@ export const NavMenu = ({
     >
       <ul className="nav__menu">
         <li className="nav__menu-item">
-          <DropdownMenu title="Shop" href="" items={SHOP_DROPDOWN_ITEMS} />
+          <DropdownMenu title="Shop" items={SHOP_DROPDOWN_ITEMS} />
         </li>
         <li className="nav__menu-item">
           <TextLink href="/on-sale" className="nav__menu-link">

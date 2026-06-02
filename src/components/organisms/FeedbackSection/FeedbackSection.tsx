@@ -22,7 +22,7 @@ export const FeedbackSection = ({
   className,
   ...rest
 }: FeedbackSectionProps) => {
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,6 @@ export const FeedbackSection = ({
   const visibleCount = isMobile ? 1 : 3;
   const maxIndex = Math.max(0, reviews.length - visibleCount);
 
-  // Auto-correct slideIndex if window resize makes maxIndex smaller
   useEffect(() => {
     if (slideIndex > maxIndex) {
       setSlideIndex(maxIndex);

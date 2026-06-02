@@ -4,8 +4,9 @@ import { Tabs } from "@/components/molecules/Tabs";
 import { ProductDetailsPanel } from "@/components/organisms/ProductDetailsPanel";
 import { ProductReviewsPanel } from "@/components/organisms/ProductReviewsPanel";
 import { ProductFaqsPanel } from "@/components/organisms/ProductFaqsPanel";
-import type { ReviewData } from "@/components/molecules/ReviewCard/ReviewCard";
 import "./ProductMoreInfoSection.scss";
+import type { ReviewData } from "@/types/review";
+import type { SortOrder, RatingFilter } from "@/consts/reviewFilters";
 
 const PRODUCT_TABS = [
   { id: "details", label: "Product Details" },
@@ -21,6 +22,10 @@ export type ProductMoreInfoSectionProps = ComponentPropsWithoutRef<"div"> & {
   reviews: ReviewData[];
   reviewCount: number;
   faqContent?: string;
+  sortOrder?: SortOrder;
+  onSortChange?: (order: SortOrder) => void;
+  ratingFilter?: RatingFilter | null;
+  onRatingFilterChange?: (rating: RatingFilter | null) => void;
 };
 
 export const ProductMoreInfoSection = ({
@@ -28,6 +33,10 @@ export const ProductMoreInfoSection = ({
   reviews,
   reviewCount,
   faqContent = "",
+  sortOrder,
+  onSortChange,
+  ratingFilter,
+  onRatingFilterChange,
   className,
   ...rest
 }: ProductMoreInfoSectionProps) => {
@@ -53,6 +62,10 @@ export const ProductMoreInfoSection = ({
       <ProductReviewsPanel
         reviews={reviews}
         reviewCount={reviewCount}
+        sortOrder={sortOrder}
+        onSortChange={onSortChange}
+        ratingFilter={ratingFilter}
+        onRatingFilterChange={onRatingFilterChange}
         className={clsx(
           "tab-content",
           activeTab === "reviews" && "tab-content--active",
