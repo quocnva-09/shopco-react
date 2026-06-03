@@ -38,7 +38,7 @@ export const PriceGroup = ({
 
       {hasDiscount && (
         <PriceText
-          value={originalPrice}
+          value={originalPrice!}
           currency={currency}
           variant="old"
           className="price--old"

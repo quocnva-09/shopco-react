@@ -3,9 +3,9 @@ import { ProductGallery } from "./ProductGallery";
 import "@/styles/index.scss";
 
 const mockImages = [
-  { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
-  { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
-  { img_path: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png" },
+  { id: 1, productId: 1, imgPath: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png", alt: "Product image 1", isPrimary: true },
+  { id: 2, productId: 1, imgPath: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png", alt: "Product image 2", isPrimary: false },
+  { id: 3, productId: 1, imgPath: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png", alt: "Product image 3", isPrimary: false },
 ];
 
 const meta: Meta<typeof ProductGallery> = {

@@ -8,19 +8,33 @@ const meta: Meta<typeof ProductDetailInfo> = {
   tags: ["autodocs"],
   parameters: { layout: "padded" },
   args: {
-    name: "One Life Graphic T-Shirt",
-    rating: 4.5,
-    currentPrice: 260,
-    originalPrice: 300,
-    discountPercentage: 40,
-    description:
-      "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
-    colors: [
-      { id: "olive", name: "Olive Green", hex: "#4f4631" },
-      { id: "teal", name: "Dark Teal", hex: "#314f4a" },
-      { id: "navy", name: "Navy Blue", hex: "#31344f" },
-    ],
-    sizes: ["Small", "Medium", "Large", "X-Large"],
+    product: {
+      id: 1,
+      name: "One Life Graphic T-Shirt",
+      slug: "one-life-graphic-t-shirt",
+      description:
+        "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      ratingAvg: 4.5,
+      currentPrice: 260,
+      originalPrice: 300,
+      discountPercent: 40,
+      colors: [
+        { color: "olive", hex: "#4f4631" },
+        { color: "teal", hex: "#314f4a" },
+        { color: "navy", hex: "#31344f" },
+      ],
+      sizes: [
+        { size: "S", label: "Small" },
+        { size: "M", label: "Medium" },
+        { size: "L", label: "Large" },
+        { size: "XL", label: "X-Large" },
+      ],
+      isActive: true,
+      createdAt: "2024-01-01",
+      updatedAt: "2024-01-01",
+      category: { id: 1, name: "T-Shirts", slug: "t-shirts" },
+      images: [],
+    },
   },
 };
 

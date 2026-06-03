@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProductCard, type ProductCardData } from "./ProductCard";
+import { ProductCard, type ProductCardData } from "./";
 
 import '@/styles/index.scss'; 
 import '@/components/atoms/Tooltip';
 
 // Khởi tạo dữ liệu giả lập (Mock data) của một sản phẩm
 const mockProduct: ProductCardData = {
-  id: "p1",
+  id: 1,
   name: "T-Shirt With Tape Details Siêu Cấp Vip Pro Dài Ngoằng",
   primaryImage: "https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png",
   currentPrice: 120,

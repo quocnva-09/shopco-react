@@ -33,7 +33,7 @@ export interface ProductData {
   name: string;
   slug: string;
   description: string;
-  originalPrice: number;
+  originalPrice?: number;
   currentPrice: number;
   discountPercent: number;
   sizes: SizeItem[];

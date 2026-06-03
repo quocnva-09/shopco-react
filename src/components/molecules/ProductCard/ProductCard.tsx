@@ -10,9 +10,10 @@ import "./ProductCard.scss";
 
 import type { ProductCardData } from "@/types/product";
 
-export type ProductCardProps = ComponentPropsWithoutRef<typeof Link> & {
+export type ProductCardProps = Omit<ComponentPropsWithoutRef<typeof Link>, "to"> & {
   product: ProductCardData;
   isDetail?: boolean;
+  to?: string;
 };
 
 export const ProductCard = ({
@@ -36,6 +37,7 @@ export const ProductCard = ({
 
   return (
     <Link
+      {...rest}
       to={`${PATHS.PRODUCT}/${id}`}
       className={clsx(
         "product-card",
@@ -44,7 +46,6 @@ export const ProductCard = ({
       )}
       onClick={onClick}
       style={{ cursor: "pointer", textDecoration: "none", color: "inherit" }}
-      {...rest}
     >
       <figure className="product-card__image">
         <Image

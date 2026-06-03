@@ -5,7 +5,7 @@ import type { ProductCardData } from '@/components/molecules/ProductCard';
 // Mock data — 8 sản phẩm để test slider navigation
 const mockProducts: ProductCardData[] = [
   {
-    id: 'p1',
+    id: 1,
     name: 'T-Shirt With Tape Details',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 120,
@@ -14,7 +14,7 @@ const mockProducts: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: 'p2',
+    id: 2,
     name: 'Skinny Fit Jeans',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 240,
@@ -23,14 +23,14 @@ const mockProducts: ProductCardData[] = [
     rating: 3.5,
   },
   {
-    id: 'p3',
+    id: 3,
     name: 'Checkered Shirt',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 180,
     rating: 4.0,
   },
   {
-    id: 'p4',
+    id: 4,
     name: 'Sleeve Striped T-Shirt',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 130,
@@ -39,7 +39,7 @@ const mockProducts: ProductCardData[] = [
     rating: 4.5,
   },
   {
-    id: 'p5',
+    id: 5,
     name: 'Vertical Striped Shirt',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 212,
@@ -48,21 +48,21 @@ const mockProducts: ProductCardData[] = [
     rating: 5.0,
   },
   {
-    id: 'p6',
+    id: 6,
     name: 'Courage Graphic T-Shirt',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 145,
     rating: 4.0,
   },
   {
-    id: 'p7',
+    id: 7,
     name: 'Loose Fit Bermuda Shorts',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 80,
     rating: 3.0,
   },
   {
-    id: 'p8',
+    id: 8,
     name: 'Faded Skinny Jeans',
     primaryImage: 'https://shopco-s3.s3.ap-southeast-1.amazonaws.com/products/0yovdzFcT4SEbA2TTzBB98x3tmrfo4Ec43K88WZ4.png',
     currentPrice: 210,

@@ -9,7 +9,12 @@ const meta: Meta<typeof SizeSelector> = {
   parameters: { layout: "padded" },
   args: {
     name: "size",
-    sizes: ["Small", "Medium", "Large", "X-Large"],
+    sizes: [
+      { size: "S", label: "Small" },
+      { size: "M", label: "Medium" },
+      { size: "L", label: "Large" },
+      { size: "XL", label: "X-Large" },
+    ],
   },
 };
 
@@ -20,6 +25,6 @@ export const Default: Story = {};
 
 export const WithDefault: Story = {
   args: {
-    defaultValue: "Medium",
+    defaultValue: "M",
   },
 };

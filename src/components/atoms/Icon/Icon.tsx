@@ -48,8 +48,8 @@ export const Icon = ({
           svg.setAttribute("width", "100%");
           svg.setAttribute("height", "100%");
         } else {
-          svg.setAttribute("width", resolvedWidth);
-          svg.setAttribute("height", resolvedHeight);
+          svg.setAttribute("width", resolvedWidth ?? "");
+          svg.setAttribute("height", resolvedHeight ?? "");
 
           svg.querySelectorAll("*").forEach((el) => {
             if (el.getAttribute("fill"))
