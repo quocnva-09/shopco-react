@@ -10,6 +10,9 @@ import "./ProductReviewsPanel.scss";
 export type ProductReviewsPanelProps = ComponentPropsWithoutRef<"section"> & {
   reviews: ReviewData[];
   reviewCount: number;
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  onLoadMore?: () => void;
   sortOrder?: SortOrder;
   onSortChange?: (order: SortOrder) => void;
   ratingFilter?: RatingFilter | null;
@@ -19,36 +22,41 @@ export type ProductReviewsPanelProps = ComponentPropsWithoutRef<"section"> & {
 export const ProductReviewsPanel = ({
   reviews,
   reviewCount,
+  hasMore = false,
+  isLoadingMore = false,
+  onLoadMore,
   sortOrder,
   onSortChange,
   ratingFilter,
   onRatingFilterChange,
   className,
   ...rest
-}: ProductReviewsPanelProps) => {
-  // const showLoadMoreButton = reviewCount > 6 && reviews.length < reviewCount;
+}: ProductReviewsPanelProps) => (
+  <section className={clsx("tab-content", "reviews", className)} {...rest}>
+    <ReviewsHeader
+      reviewCount={reviewCount}
+      sortOrder={sortOrder}
+      onSortChange={onSortChange}
+      ratingFilter={ratingFilter}
+      onRatingFilterChange={onRatingFilterChange}
+    />
 
-  return (
-    <section className={clsx("tab-content", "reviews", className)} {...rest}>
-      <ReviewsHeader
-        reviewCount={reviewCount}
-        sortOrder={sortOrder}
-        onSortChange={onSortChange}
-        ratingFilter={ratingFilter}
-        onRatingFilterChange={onRatingFilterChange}
-      />
+    <div className="reviews__grid">
+      {reviews.map((review) => (
+        <ReviewCard key={review.id} review={review} showMenu />
+      ))}
+    </div>
 
-      <div className="reviews__grid">
-        {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} showMenu />
-        ))}
-      </div>
-
-      {/* {showLoadMoreButton && ( */}
-      <Button variant="outline" className="btn--load-more">
-        Load More Reviews
+    {hasMore && (
+      <Button
+        variant="outline"
+        className="btn--load-more"
+        onClick={onLoadMore}
+        disabled={isLoadingMore}
+      >
+        {isLoadingMore ? "Loading..." : "Load More Reviews"}
       </Button>
-      {/* )} */}
-    </section>
-  );
-};
+    )}
+  </section>
+);
+

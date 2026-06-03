@@ -12,24 +12,43 @@ import {
 } from "@/consts/homeData";
 import { Divider } from "@/components/atoms/Divider";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
+import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import "./Home.scss";
 import { useProductCollection } from "@/hooks/useProductCollection";
 import { useReviews } from "@/hooks/useReviews";
 
 export const HomePage = () => {
-  const { products: newArrivals, isLoading: isLoadingNewArrivals } =
-    useProductCollection({
-      sort_by: "created_at",
-      sort_dir: "desc",
-      per_page: 4,
-    });
-  const { products: topSellings, isLoading: isLoadingTopSellings } =
-    useProductCollection({
-      sort_by: "selling",
-      sort_dir: "desc",
-      per_page: 4,
-    });
-  const { reviews: feedBacks, isLoading: isLoadingFeedBacks } = useReviews({
+  const {
+    products: newArrivals,
+    isLoading: isLoadingNewArrivals,
+    error: newArrivalsError,
+    isRetryable: newArrivalsRetryable,
+    retry: retryNewArrivals,
+  } = useProductCollection({
+    sort_by: "created_at",
+    sort_dir: "desc",
+    per_page: 4,
+  });
+
+  const {
+    products: topSellings,
+    isLoading: isLoadingTopSellings,
+    error: topSellingsError,
+    isRetryable: topSellingsRetryable,
+    retry: retryTopSellings,
+  } = useProductCollection({
+    sort_by: "selling",
+    sort_dir: "desc",
+    per_page: 4,
+  });
+
+  const {
+    reviews: feedBacks,
+    isLoading: isLoadingFeedBacks,
+    error: feedBacksError,
+    isRetryable: feedBacksRetryable,
+    retry: retryFeedBacks,
+  } = useReviews({
     sort_by: "rating",
     sort_dir: "desc",
     limit: 8,
@@ -49,42 +68,48 @@ export const HomePage = () => {
       <BrandLogoBar className="home__brand-logo" />
 
       <div className="container">
-        {isLoadingNewArrivals ? (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading new arrivals...
-          </div>
-        ) : (
+        <SectionStateWrapper
+          isLoading={isLoadingNewArrivals}
+          loadingMessage="Loading new arrivals..."
+          error={newArrivalsError}
+          isRetryable={newArrivalsRetryable}
+          onRetry={retryNewArrivals}
+        >
           <ProductCollectionSection
             title="NEW ARRIVALS"
             products={newArrivals}
             ctaLabel="View All"
           />
-        )}
+        </SectionStateWrapper>
 
         <Divider direction="horizontal" />
 
-        {isLoadingTopSellings ? (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading top sellings...
-          </div>
-        ) : (
+        <SectionStateWrapper
+          isLoading={isLoadingTopSellings}
+          loadingMessage="Loading top selling..."
+          error={topSellingsError}
+          isRetryable={topSellingsRetryable}
+          onRetry={retryTopSellings}
+        >
           <ProductCollectionSection
             title="TOP SELLING"
             products={topSellings}
             ctaLabel="View All"
           />
-        )}
+        </SectionStateWrapper>
 
         <StyleCategorySection title="BROWSE BY DRESS STYLE" />
       </div>
 
-      {isLoadingFeedBacks ? (
-        <div style={{ padding: "4rem 0", textAlign: "center" }}>
-          Loading feedbacks...
-        </div>
-      ) : (
+      <SectionStateWrapper
+        isLoading={isLoadingFeedBacks}
+        loadingMessage="Loading reviews..."
+        error={feedBacksError}
+        isRetryable={feedBacksRetryable}
+        onRetry={retryFeedBacks}
+      >
         <FeedbackSection reviews={feedBacks} />
-      )}
+      </SectionStateWrapper>
     </>
   );
 };

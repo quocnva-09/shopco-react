@@ -1,0 +1,26 @@
+@use "@/styles/abstracts/variables" as *;
+
+.section-state {
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+
+  &__message {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    color: $text-muted;
+
+    &--error {
+      color: $danger-color;
+    }
+  }
+
+  &__retry-btn {
+    margin-top: 0.25rem;
+  }
+}
+

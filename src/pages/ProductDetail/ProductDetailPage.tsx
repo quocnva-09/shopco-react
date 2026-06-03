@@ -3,6 +3,7 @@ import { ProductDetailSection } from "@/components/organisms/ProductDetailSectio
 import { ProductMoreInfoSection } from "@/components/organisms/ProductMoreInfoSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
+import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 import { Divider } from "@/components/atoms/Divider";
 import { useParams } from "react-router-dom";
@@ -26,27 +27,53 @@ export const ProductDetailPage = () => {
     setSortOrder(order);
   }, []);
 
-  const handleRatingFilterChange = useCallback((rating: RatingFilter | null) => {
-    setRatingFilter((prev) => (prev === rating ? null : rating));
-  }, []);
+  const handleRatingFilterChange = useCallback(
+    (rating: RatingFilter | null) => {
+      setRatingFilter((prev) => (prev === rating ? null : rating));
+    },
+    [],
+  );
 
-  const { product, isLoading: isLoadingProduct } = useProduct(Number(id));
+  const {
+    product,
+    isLoading: isLoadingProduct,
+    error: productError,
+    isRetryable: productRetryable,
+    retry: retryProduct,
+  } = useProduct(Number(id));
 
-  const { products: relatedProducts, isLoading: isLoadingRelatedProducts } =
-    useProductCollection(
-      { category_id: product?.category?.id, per_page: 8 },
-      { enabled: !isLoadingProduct && Boolean(product?.category?.id) },
-    );
+  const {
+    products: relatedProducts,
+    isLoading: isLoadingRelatedProducts,
+    error: relatedError,
+    isRetryable: relatedRetryable,
+    retry: retryRelated,
+  } = useProductCollection(
+    { category_id: product?.category?.id, per_page: 8 },
+    { enabled: !isLoadingProduct && Boolean(product?.category?.id) },
+  );
 
-  const { reviews, isLoading: isLoadingReviews } = useReviews({
-    product_id: Number(id),
-    is_approved: true,
-    limit: 8,
-    sort_by: "created_at",
-    sort_dir: sortOrder === SORT_ORDER.LATEST ? "desc" : "asc",
-  });
+  const {
+    reviews,
+    totalCount,
+    hasMore,
+    isLoading: isLoadingReviews,
+    isLoadingMore: isLoadingMoreReviews,
+    error: reviewsError,
+    isRetryable: reviewsRetryable,
+    retry: retryReviews,
+    loadMore: loadMoreReviews,
+  } = useReviews(
+    {
+      product_id: Number(id),
+      is_approved: true,
+      limit: 6,
+      sort_by: "created_at",
+      sort_dir: sortOrder === SORT_ORDER.LATEST ? "desc" : "asc",
+    },
+    { enableLoadMore: true },
+  );
 
-  // Client-side filter: lọc theo rating trên dữ liệu đã load
   const filteredReviews = useMemo(
     () =>
       ratingFilter != null
@@ -57,10 +84,7 @@ export const ProductDetailPage = () => {
 
   const baseBreadcrumbs = useBreadcrumbs();
   const breadcrumbs = useMemo(
-    () => [
-      ...baseBreadcrumbs,
-      { label: product?.name || "Product Detail" },
-    ],
+    () => [...baseBreadcrumbs, { label: product?.name || "Product Detail" }],
     [baseBreadcrumbs, product?.name],
   );
 
@@ -69,43 +93,52 @@ export const ProductDetailPage = () => {
       <main className="container">
         <Divider direction="horizontal" />
         <Breadcrumb items={breadcrumbs} />
-        {isLoadingProduct ? (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading product...
-          </div>
-        ) : product ? (
-          <ProductDetailSection data={product} />
-        ) : (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading product...
-          </div>
-        )}
-        {isLoadingReviews ? (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading reviews...
-          </div>
-        ) : (
+
+        <SectionStateWrapper
+          isLoading={isLoadingProduct}
+          loadingMessage="Loading product..."
+          error={productError}
+          isRetryable={productRetryable}
+          onRetry={retryProduct}
+        >
+          {product && <ProductDetailSection data={product} />}
+        </SectionStateWrapper>
+
+        {/* Reviews */}
+        <SectionStateWrapper
+          isLoading={isLoadingReviews}
+          loadingMessage="Loading reviews..."
+          error={reviewsError}
+          isRetryable={reviewsRetryable}
+          onRetry={retryReviews}
+        >
           <ProductMoreInfoSection
-            reviewCount={filteredReviews.length}
+            reviewCount={totalCount}
             reviews={filteredReviews}
+            hasMore={hasMore}
+            isLoadingMore={isLoadingMoreReviews}
+            onLoadMore={loadMoreReviews}
             sortOrder={sortOrder}
             onSortChange={handleSortChange}
             ratingFilter={ratingFilter}
             onRatingFilterChange={handleRatingFilterChange}
           />
-        )}
+        </SectionStateWrapper>
 
-        {isLoadingRelatedProducts ? (
-          <div style={{ padding: "4rem 0", textAlign: "center" }}>
-            Loading related products...
-          </div>
-        ) : (
+        {/* Related products */}
+        <SectionStateWrapper
+          isLoading={isLoadingRelatedProducts}
+          loadingMessage="Loading related products..."
+          error={relatedError}
+          isRetryable={relatedRetryable}
+          onRetry={retryRelated}
+        >
           <ProductCollectionSection
             title="YOU MAY ALSO LIKE"
             products={relatedProducts}
             showButton={false}
           />
-        )}
+        </SectionStateWrapper>
       </main>
     </>
   );

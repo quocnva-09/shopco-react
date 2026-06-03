@@ -21,6 +21,9 @@ export type ProductMoreInfoSectionProps = ComponentPropsWithoutRef<"div"> & {
   productDescription?: string;
   reviews: ReviewData[];
   reviewCount: number;
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  onLoadMore?: () => void;
   faqContent?: string;
   sortOrder?: SortOrder;
   onSortChange?: (order: SortOrder) => void;
@@ -32,6 +35,9 @@ export const ProductMoreInfoSection = ({
   productDescription = "",
   reviews,
   reviewCount,
+  hasMore,
+  isLoadingMore,
+  onLoadMore,
   faqContent = "",
   sortOrder,
   onSortChange,
@@ -62,6 +68,9 @@ export const ProductMoreInfoSection = ({
       <ProductReviewsPanel
         reviews={reviews}
         reviewCount={reviewCount}
+        hasMore={hasMore}
+        isLoadingMore={isLoadingMore}
+        onLoadMore={onLoadMore}
         sortOrder={sortOrder}
         onSortChange={onSortChange}
         ratingFilter={ratingFilter}
