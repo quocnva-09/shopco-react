@@ -1,0 +1,52 @@
+@use "@/styles/abstracts/variables" as *;
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem 1rem;
+  text-align: center;
+  gap: 2rem;
+  font-family: $font-family-title;
+
+  &__code {
+    font-size: clamp(100px, 20vw, 180px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, #08060d 0%, #6b6375 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    user-select: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 480px;
+  }
+
+  &__title {
+    font-size: 40px;
+    width: 100%;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-family: $font-family-base;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+}

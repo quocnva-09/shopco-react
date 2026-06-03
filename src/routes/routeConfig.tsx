@@ -1,5 +1,5 @@
 // routes/routeConfig.tsx
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { PATHS } from "./paths";
 
 // pages
@@ -7,6 +7,7 @@ import { MainLayout } from "@/components/templates/MainLayout";
 import { HomePage } from "@/pages/Home";
 import { ProductDetailPage } from "@/pages/ProductDetail";
 import { CartPage } from "@/pages/Cart";
+import { NotFoundPage } from "@/pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -21,12 +22,13 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: `${PATHS.PRODUCT_DETAIL}/:id`,
+        path: `${PATHS.PRODUCT}/:id`,
         element: <ProductDetailPage />,
         handle: {
           crumb: () => [{ label: "Product" }],
         },
       },
+
       {
         path: PATHS.CART,
         element: <CartPage />,
@@ -34,6 +36,18 @@ export const router = createBrowserRouter([
           crumb: () => [{ label: "Cart" }],
         },
       },
+      {
+        path: PATHS.PRODUCT,
+        element: <Navigate to={PATHS.HOME} replace />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);

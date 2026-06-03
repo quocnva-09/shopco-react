@@ -27,7 +27,9 @@ export interface ApiResponse<T> {
 }
 
 export interface ErrorResponse {
+  /** HTTP status code (400 | 401 | 403 | 404 | 405 | 422 | 500). */
   status: number;
   message: string;
-  error: unknown;
+  /** Per-field validation errors. Present only on 422 Unprocessable Entity responses. */
+  errors?: Record<string, string[]>;
 }

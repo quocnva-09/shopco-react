@@ -12,6 +12,7 @@ import { SearchBar } from "@/components/molecules/SearchBar";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import { PATHS } from "@/routes";
+import { Divider } from "@/components/atoms/Divider";
 
 export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;

@@ -36,7 +36,7 @@ export const ProductCard = ({
 
   return (
     <Link
-      to={`${PATHS.PRODUCT_DETAIL}/${id}`}
+      to={`${PATHS.PRODUCT}/${id}`}
       className={clsx(
         "product-card",
         isDetail && "product-card--detail",

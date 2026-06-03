@@ -1,0 +1,28 @@
+@use "@/styles/abstracts/variables" as *;
+
+.app-toaster {
+  // Overrides react-hot-toast's default inline container positioning
+  // Applied via containerClassName on <Toaster>
+  top: 16px !important;
+  right: 16px !important;
+}
+
+// Applied to every individual toast via toastOptions.className
+.toast {
+  font-family: $font-family-base;
+  font-size: 14px;
+  max-width: 360px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  &--error {
+    // react-hot-toast applies the icon theme separately,
+    // we only need to style the toast container itself here.
+    border-left: 3px solid $danger-color;
+  }
+
+  &--success {
+    border-left: 3px solid $color-success;
+  }
+}

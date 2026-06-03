@@ -1,8 +1,4 @@
-import type { ProductCardData } from "@/types/product";
-// Homepage mock data — tập trung tất cả static data cho Home page
 import type { StatItemData } from "@/components/molecules/StatsBar";
-
-// ──────────── Banner Section ────────────
 
 export const HERO_TITLE = "FIND CLOTHES THAT MATCHES YOUR STYLE";
 export const HERO_DESCRIPTION =

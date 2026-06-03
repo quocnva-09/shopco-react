@@ -26,6 +26,8 @@ export const ProductReviewsPanel = ({
   className,
   ...rest
 }: ProductReviewsPanelProps) => {
+  // const showLoadMoreButton = reviewCount > 6 && reviews.length < reviewCount;
+
   return (
     <section className={clsx("tab-content", "reviews", className)} {...rest}>
       <ReviewsHeader
@@ -42,9 +44,11 @@ export const ProductReviewsPanel = ({
         ))}
       </div>
 
+      {/* {showLoadMoreButton && ( */}
       <Button variant="outline" className="btn--load-more">
         Load More Reviews
       </Button>
+      {/* )} */}
     </section>
   );
 };

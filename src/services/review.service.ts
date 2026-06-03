@@ -1,4 +1,4 @@
-import { get } from "@/lib/axios";
+import { get } from "@/lib/axiosClient";
 import type { ReviewListResponse, ReviewParams } from "@/types/api/review.api";
 
 export const ReviewService = {
