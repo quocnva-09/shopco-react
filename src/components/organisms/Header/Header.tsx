@@ -1,4 +1,9 @@
-import { type ComponentPropsWithoutRef, useState, useCallback } from "react";
+import {
+  type ComponentPropsWithoutRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import clsx from "clsx";
 import { TextLink } from "@/components/atoms/TextLink";
 import { IconButton } from "@/components/atoms/IconButton";
@@ -27,6 +32,23 @@ export const Header = ({
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
+  }, []);
+
+  // Tự động đóng mobile menu khi viewport vượt qua breakpoint (991px)
+  // Tránh trường hợp state bị giữ nguyên khi user resize từ mobile → desktop
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 992px)");
+
+    const handleBreakpointChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleBreakpointChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleBreakpointChange);
+    };
   }, []);
 
   return (

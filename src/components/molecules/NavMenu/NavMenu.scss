@@ -35,6 +35,11 @@
 
   &__menu-item {
     display: block;
+
+    @media (max-width: $breakpoint) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__menu-link {

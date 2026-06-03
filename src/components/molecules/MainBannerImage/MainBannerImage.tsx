@@ -1,9 +1,9 @@
-import { type ComponentPropsWithoutRef } from 'react';
-import clsx from 'clsx';
-import { Image } from '../../atoms/Image';
-import './MainBannerImage.scss';
+import { type ComponentPropsWithoutRef } from "react";
+import clsx from "clsx";
+import { Image } from "../../atoms/Image";
+import "./MainBannerImage.scss";
 
-export type MainBannerImageProps = ComponentPropsWithoutRef<'figure'> & {
+export type MainBannerImageProps = ComponentPropsWithoutRef<"figure"> & {
   src: string;
   alt: string;
   effectSrc?: string;
@@ -17,7 +17,7 @@ export const MainBannerImage = ({
   ...rest
 }: MainBannerImageProps) => {
   return (
-    <figure className={clsx('main-banner__image', className)} {...rest}>
+    <figure className={clsx("main-banner__image", className)} {...rest}>
       {/* Decorative star effects */}
       {effectSrc && (
         <>
@@ -32,12 +32,7 @@ export const MainBannerImage = ({
 
       {/* Hero image */}
       <div className="main-banner__image-wrapper">
-        <Image
-          src={src}
-          alt={alt}
-          renderWrapper={false}
-          fit="cover"
-        />
+        <Image src={src} alt={alt} renderWrapper={false} fit="cover" />
       </div>
     </figure>
   );

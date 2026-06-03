@@ -14,7 +14,7 @@
     }
   }
 
-  &__link{
+  &__text{
     text-decoration: none;
     font-size: 16px;
   }
@@ -29,45 +29,18 @@
     top: 100%;
     left: 0;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     min-width: 160px;
-    z-index: 10;
-    list-style: none;
-    margin: 0;
-    display: none;
-    flex-direction: column;
     border-radius: 6px;
-    padding: 2px;
-  }
+    z-index: 10;
 
-  &__item{
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-    padding: 10px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover {
-      background-color: $grey-color;
-    }
-  }
-
-  &__item-link{
-    text-decoration: none;
-    color: inherit;
-  }
-    
-
-  &.is-open &__menu {
-    display: block;
-  }
-
-  @media (max-width: $breakpoint) {
-    &__menu {
+    @media (max-width: $breakpoint) {
+      display: block;
       position: static;
       box-shadow: none;
-      padding-left: 16px;
       background-color: transparent;
+      border-radius: 0;
+      min-width: unset;
     }
   }
 }

@@ -27,7 +27,7 @@
     width: 24px;
     height: 24px;
     position: relative;
-    z-index: 1001;
+    z-index: 1000;
 
     @media (max-width: $breakpoint) {
       display: block;

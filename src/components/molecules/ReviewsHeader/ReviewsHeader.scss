@@ -38,17 +38,17 @@
   }
 }
 
-// Base dropdown wrapper (dùng chung cho sort & filter)
-.dropdown {
-  position: relative;
+.reviews__actions {
+  .dropdown {
+    position: relative;
 
-  // Rotate icon khi mở
-  &.is-open .button--dropdown svg {
-    transition: transform 0.2s ease;
-    transform: rotate(180deg);
+    &.is-open .button--dropdown svg {
+      transition: transform 0.2s ease;
+      transform: rotate(180deg);
+    }
   }
 
-  &__menu {
+  .dropdown .dropdown__menu {
     position: absolute;
     top: calc(100% + 6px);
     left: 0;
@@ -61,24 +61,19 @@
     list-style: none;
     margin: 0;
 
-    // Ẩn mặc định
     display: none;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 0.15s ease, transform 0.15s ease;
-
-    .dropdown.is-open & {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: $breakpoint) {
-      display: none !important;
-    }
   }
 
-  &__item {
+  .dropdown.is-open .dropdown__menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dropdown__item {
     border-radius: 6px;
     &:hover {
       background-color: $grey-color;
@@ -86,7 +81,7 @@
   }
 
   // Button bên trong menu item (không có underline, full-width)
-  &__item-btn {
+  .dropdown__item-btn {
     display: block;
     width: 100%;
     text-align: left;
