@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .header {
   position: relative;
@@ -45,13 +45,12 @@
 
     @media (max-width: $breakpoint) {
       order: 2; // Đứng thứ 2 trên mobile
-      margin-right: auto; 
+      margin-right: auto;
       font-size: 25px;
     }
   }
 
   &__nav-wrapper {
-
   }
 
   &__search-wrapper {
@@ -59,7 +58,7 @@
 
     @media (max-width: $breakpoint) {
       flex: 0;
-      order: 3; 
+      order: 3;
     }
   }
 
@@ -67,9 +66,13 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    > a {
+      display: flex;
+      align-items: center;
+    }
 
     @media (max-width: $breakpoint) {
-      order: 4; 
+      order: 4;
       gap: 12px;
     }
   }

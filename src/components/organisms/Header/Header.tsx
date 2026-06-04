@@ -63,7 +63,6 @@ export const Header = ({
             svgName="icn-hamburger"
             iconWidth={24}
             iconHeight={24}
-            variant="ghost"
           />
         )}
 
@@ -89,7 +88,7 @@ export const Header = ({
               aria-label="Open shopping cart"
               className="header__icon-btn"
               onClick={onCartClick}
-              variant="ghost"
+              variant="default"
               iconWidth={24}
               iconHeight={24}
             />
@@ -99,7 +98,7 @@ export const Header = ({
             aria-label="View user profile"
             className="header__icon-btn"
             onClick={onProfileClick}
-            variant="ghost"
+            variant="default"
             iconWidth={24}
             iconHeight={24}
           />

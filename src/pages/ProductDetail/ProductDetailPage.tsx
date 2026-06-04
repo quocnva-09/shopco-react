@@ -137,6 +137,7 @@ export const ProductDetailPage = () => {
             title="YOU MAY ALSO LIKE"
             products={relatedProducts}
             showButton={false}
+            className="product-page__product-collections"
           />
         </SectionStateWrapper>
       </main>

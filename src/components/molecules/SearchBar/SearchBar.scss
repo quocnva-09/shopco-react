@@ -25,11 +25,10 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    opacity: 0.2;
     padding: 12px 0 12px 16px;
 
     @media (max-width: $breakpoint) {
-      opacity: 1;
+      color: rgba($black-color, 1);
     }
   }
 

@@ -6,9 +6,9 @@
   font-size: $font-size-base;
   font-family: inherit;
   color: $black-color;
-  background-color: #f0f0f0; // Màu nền xám nhẹ đặc trưng của form hiện đại
+  background-color: #f0f0f0;
   border: 1px solid transparent;
-  border-radius: $radius-pill; // Mặc định bo tròn dạng viên thuốc giống thanh SearchBar của bạn
+  border-radius: $radius-pill;
   outline: none;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -19,7 +19,7 @@
   }
 
   &::placeholder {
-    color: $text-muted;
+    color: rgba($black-color, 0.4);
   }
 
   // Trạng thái khóa không cho nhập liệu

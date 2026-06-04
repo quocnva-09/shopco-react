@@ -64,7 +64,10 @@
       flex-wrap: nowrap;
 
       @media (max-width: $breakpoint) {
-        margin-left: 0;
+        &::after {
+          content: "";
+          flex: 0 0 1px;
+        }
       }
     }
 
@@ -73,9 +76,27 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      margin-right: -$padding-left-right-mobile;
+      width: calc(100% + #{$padding-left-right-mobile});
+      box-sizing: border-box;
+
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+  }
+
+  &__btn {
+    padding: 15px 85px;
+    @media (max-width: $breakpoint) {
+      width: 100%;
+    }
+  }
+
+  // Khi không có CTA button, bỏ khoảng cách phía dưới của list
+  &--no-btn {
+    .product-collection__list {
+      margin-bottom: 0;
     }
   }
 

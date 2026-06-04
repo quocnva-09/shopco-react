@@ -60,7 +60,14 @@ export const ProductCollectionSection = ({
   );
 
   return (
-    <section className={clsx("product-collection", className)} {...rest}>
+    <section
+      className={clsx(
+        "product-collection",
+        !showButton && "product-collection--no-btn",
+        className
+      )}
+      {...rest}
+    >
       <Heading as="h2" lineClamp={0} className="product-collection__title">
         {title}
       </Heading>
@@ -98,7 +105,12 @@ export const ProductCollectionSection = ({
 
       {/* CTA Button */}
       {showButton && (
-        <Button variant="outline" colorScheme="dark" onClick={onCtaClick}>
+        <Button
+          variant="outline"
+          className="product-collection__btn"
+          colorScheme="dark"
+          onClick={onCtaClick}
+        >
           {ctaLabel}
         </Button>
       )}

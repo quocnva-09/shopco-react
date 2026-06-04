@@ -35,7 +35,12 @@ export const BannerSection = ({
           description={description}
           stats={stats}
         >
-          <Button variant="solid" colorScheme="dark" onClick={onCtaClick}>
+          <Button
+            variant="solid"
+            colorScheme="dark"
+            className="banner-section__btn"
+            onClick={onCtaClick}
+          >
             {ctaLabel}
           </Button>
         </MainBannerContent>

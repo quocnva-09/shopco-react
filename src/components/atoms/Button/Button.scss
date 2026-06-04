@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .button {
   // Style chung của mọi loại Button (padding, border-radius, font...)
@@ -16,21 +16,23 @@
 
   @media (max-width: $breakpoint) {
     padding: 12px 24px;
-    font-size: $font-size-mobile;
+    font-size: 16px;
   }
 
   // --- TỔ HỢP 1: SOLID + DARK (Nút Đen Chữ Trắng gốc) ---
   &--solid-dark {
     background-color: $black-color;
     color: $white-color;
-    &:hover:not(:disabled) { opacity: 0.8; }
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
   }
 
   // --- TỔ HỢP 2: OUTLINE + DARK (Nút Trắng Viền Xám - View All/Load More) ---
   &--outline-dark {
     background-color: $white-color;
     color: $black-color;
-    border-color: $grey-color;
+    border-color: rgb($black-color, 0.1);
     &:hover:not(:disabled) {
       background-color: $grey-color;
     }
@@ -40,14 +42,18 @@
   &--solid-danger {
     background-color: $label-danger-color;
     color: $danger-color;
-    &:hover:not(:disabled) { opacity: 0.8; }
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
   }
 
   // --- TỔ HỢP 4: SOLID + GREY (Nút Xám - Size Selector default) ---
   &--solid-grey {
     background-color: #f0f0f0;
     color: $text-muted;
-    &:hover:not(:disabled) { opacity: 0.8; }
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
   }
 
   // --- Kích thước ---

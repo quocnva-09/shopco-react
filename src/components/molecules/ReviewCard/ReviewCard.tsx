@@ -11,11 +11,13 @@ export type ReviewCardProps = ComponentPropsWithoutRef<"div"> & {
   review: ReviewData;
   showMenu?: boolean;
   onMenuClick?: () => void;
+  showDate?: boolean;
 };
 
 export const ReviewCard = ({
   review,
   showMenu = false,
+  showDate = true,
   onMenuClick,
   className,
   ...rest
@@ -32,7 +34,8 @@ export const ReviewCard = ({
             svgName="icn-3-dot"
             aria-label="Review options"
             className="review-card__menu"
-            variant="ghost"
+            iconHeight={24}
+            iconWidth={24}
             onClick={onMenuClick}
           />
         )}
@@ -72,7 +75,7 @@ export const ReviewCard = ({
       </Text>
 
       {/* 4. Khối thời gian đăng bài */}
-      <time className="review-card__date">Posted {date}</time>
+      {showDate && <time className="review-card__date">Posted {date}</time>}
     </div>
   );
 };

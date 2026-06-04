@@ -16,7 +16,7 @@ export type FeedbackSectionProps = ComponentPropsWithoutRef<"section"> & {
 };
 
 export const FeedbackSection = ({
-  title = "WHAT OUR CUSTOMERS SAY",
+  title = "OUR HAPPY CUSTOMERS",
   reviews,
   className,
   ...rest
@@ -62,6 +62,8 @@ export const FeedbackSection = ({
             svgName="icn-arrow-left"
             aria-label="Previous reviews"
             className="feedback__arrow feedback__arrow--prev"
+            iconWidth={24}
+            iconHeight={24}
             onClick={handlePrev}
             disabled={slideIndex === 0}
           />
@@ -70,6 +72,8 @@ export const FeedbackSection = ({
             svgName="icn-arrow-right"
             aria-label="Next reviews"
             className="feedback__arrow feedback__arrow--next"
+            iconWidth={24}
+            iconHeight={24}
             onClick={handleNext}
             disabled={slideIndex >= maxIndex}
           />
@@ -84,7 +88,7 @@ export const FeedbackSection = ({
             style={{ "--slide-index": slideIndex } as React.CSSProperties}
           >
             {reviews.map((review) => (
-              <ReviewCard key={review.id} review={review} />
+              <ReviewCard key={review.id} review={review} showDate={false} />
             ))}
           </div>
         </div>

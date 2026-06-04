@@ -18,7 +18,7 @@
   }
 
   &--old {
-    color: $text-muted;
+    color: rgb($black-color, 0.4);
     text-decoration: line-through;
   }
 
@@ -28,7 +28,7 @@
     font-size: 12px;
     font-weight: 500;
     border-radius: $radius-pill;
-    background-color: $label-danger-color;
+    background-color: rgba($danger-color, 0.1);
 
     @media (max-width: $breakpoint) {
       font-size: 10px;

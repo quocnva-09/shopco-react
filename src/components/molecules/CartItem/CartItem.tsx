@@ -26,39 +26,45 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
       />
 
       <div className="cart-item__info">
-        <Heading
-          as="h2"
-          lineClamp={1}
-          showTooltip={false}
-          className="cart-item__name"
-        >
-          {name}
-        </Heading>
+        {/* Khối 1: name + variants | delete */}
+        <div className="cart-item__top">
+          <div className="cart-item__meta">
+            <Heading
+              as="h2"
+              lineClamp={1}
+              showTooltip={false}
+              className="cart-item__name"
+            >
+              {name}
+            </Heading>
 
-        {variants.map((variant) => (
-          <Text as="p" key={variant.label} className="cart-item__variant">
-            {variant.label}:{" "}
-            <Text as="span" className="cart-item__variant-value">
-              {variant.value}
-            </Text>
-          </Text>
-        ))}
+            {variants.map((variant) => (
+              <Text as="p" key={variant.label} className="cart-item__variant">
+                {variant.label}:{" "}
+                <Text as="span" className="cart-item__variant-value">
+                  {variant.value}
+                </Text>
+              </Text>
+            ))}
+          </div>
 
-        <PriceText value={price} className="cart-item__price" />
-      </div>
+          <IconButton
+            svgName="icn-delete"
+            aria-label="Remove item"
+            variant="ghost"
+            color="red"
+            className="cart-item__delete"
+          />
+        </div>
 
-      <div className="cart-item__actions">
-        <IconButton
-          svgName="icn-delete"
-          aria-label="Remove item"
-          variant="ghost"
-          color="red"
-          className="cart-item__delete"
-        />
-        <QuantitySelector
-          defaultValue={quantity}
-          className="cart-item__quantity"
-        />
+        {/* Khối 2: price | quantity */}
+        <div className="cart-item__bottom">
+          <PriceText value={price} className="cart-item__price" />
+          <QuantitySelector
+            defaultValue={quantity}
+            className="cart-item__quantity"
+          />
+        </div>
       </div>
     </article>
   );

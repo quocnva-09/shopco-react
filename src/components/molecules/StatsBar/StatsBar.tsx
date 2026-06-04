@@ -28,7 +28,10 @@ export const StatsBar = ({
           {index < items.length - 1 && (
             <Divider
               direction="vertical"
-              className="stats-bar__divider"
+              className={clsx(
+                "stats-bar__divider",
+                index === items.length - 2 && "stats-bar__divider--end"
+              )}
             />
           )}
         </div>

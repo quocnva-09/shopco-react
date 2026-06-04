@@ -2,25 +2,34 @@
 @use "@/styles/abstracts/mixins" as *;
 
 .review-card {
-  border: 1px solid $grey-color;
+  border: 1px solid rgb($black-color, 0.1);
   border-radius: $radius-lg;
-  padding: $base-spacing * 2 $base-spacing * 1.75;
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
-  gap: $base-spacing;
   max-width: auto;
   height: auto;
 
   @media (max-width: $breakpoint) {
     padding: 20px;
-    gap: 12px;
   }
 
   &__header {
     @include flex-between;
     align-items: center;
+
+    // Stars lớn hơn trên desktop, thu nhỏ về default của ProductCard trên mobile
+    .rating {
+      --star-size: 23px;
+      --star-gap: 6.5px;
+
+      @media (max-width: $breakpoint) {
+        --star-size: 18.5px;
+        --star-gap: 5.5px;
+      }
+    }
   }
-  
+
   &__menu {
     background: $icn-3-dot no-repeat center;
     border: none;
@@ -35,6 +44,7 @@
   }
 
   &__name {
+    margin-top: 15px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -48,17 +58,23 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    @media (max-width: $breakpoint) {
+      margin-top: 12px;
+    }
   }
 
   &__comment {
+    margin-top: 12px;
     line-height: 22px;
     font-size: $font-size-base;
     color: $text-muted;
     width: 100%;
 
     @media (max-width: $breakpoint) {
+      margin-top: 8px;
       font-size: $font-size-mobile;
-      display: block !important; 
+      display: block !important;
       -webkit-line-clamp: unset !important;
       overflow: visible !important;
       white-space: normal !important;
@@ -66,10 +82,12 @@
   }
 
   &__date {
+    margin-top: 24px;
     font-size: $font-size-base;
+    font-weight: 500;
     color: $text-muted;
-    margin-top: auto;
     @media (max-width: $breakpoint) {
+      margin-top: 16px;
       font-size: $font-size-mobile;
     }
   }

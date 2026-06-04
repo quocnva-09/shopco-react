@@ -7,15 +7,11 @@
   gap: 16px;
   padding-bottom: 24px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: relative;
   min-width: 0;
 
   &:last-child {
     border-bottom: none;
     padding-bottom: 0;
-    .cart-item__actions {
-      bottom: 0;
-    }
   }
 
   &__image-wrap {
@@ -41,13 +37,29 @@
     object-fit: cover;
   }
 
+  // Wrapper bên phải ảnh — chứa toàn bộ thông tin
   &__info {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-right: 32px;
     min-width: 0;
+  }
+
+  // Khối 1: name + variants (trái) | delete (phải)
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  // Khối 1.1: name + variants (flex-column)
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
   }
 
   &__name {
@@ -64,6 +76,7 @@
     font-size: 14px;
     color: $text-dark;
     margin: 0 0 2px 0;
+
     @media (max-width: $breakpoint) {
       font-size: 12px;
     }
@@ -73,37 +86,11 @@
     }
   }
 
-  &__price {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 12px 0 0 0;
-
-    @media (max-width: $breakpoint) {
-      font-size: 20px;
-      margin-top: 8px;
-    }
-  }
-
-  &__actions {
-    position: absolute;
-    top: 0;
-    bottom: 24px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-
-  &__quantity {
-    padding: 12px 20px;
-
-    @media (max-width: $breakpoint) {
-      padding: 8px 14px;
-    }
-  }
-
+  // Khối 1.2: delete button
   &__delete {
+    flex-shrink: 0;
+    padding-top: 3px;
+
     svg {
       width: 24px;
       height: 24px;
@@ -114,6 +101,31 @@
         width: 20px;
         height: 20px;
       }
+    }
+  }
+
+  // Khối 2: price (trái) | quantity (phải)
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__price {
+    font-size: 24px;
+    font-weight: 700;
+
+    @media (max-width: $breakpoint) {
+      font-size: 20px;
+    }
+  }
+
+  &__quantity {
+    padding: 12px 20px;
+
+    @media (max-width: $breakpoint) {
+      padding: 8px 14px;
     }
   }
 }

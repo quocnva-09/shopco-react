@@ -42,8 +42,6 @@
   }
 
   &__arrow {
-    width: 48px;
-    height: 48px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -53,14 +51,6 @@
     justify-content: center;
     transition: background-color 0.3s ease;
 
-    &:hover {
-      background-color: $grey-color;
-    }
-
-    img {
-      width: 24px;
-      height: 24px;
-    }
   }
 
   &__slider {

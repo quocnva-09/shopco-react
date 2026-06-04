@@ -30,7 +30,6 @@ export const QuantitySelector = ({
         svgName="icn-minus"
         aria-label="Decrease quantity"
         className="quantity-selector__btn quantity-selector__btn--minus"
-        variant="ghost"
         onClick={handleDecrease}
       />
       <input
@@ -38,6 +37,7 @@ export const QuantitySelector = ({
         className="quantity-selector__value"
         value={value}
         min={min}
+        size={1}
         aria-label="Quantity"
         readOnly
       />
@@ -45,7 +45,6 @@ export const QuantitySelector = ({
         svgName="icn-plus"
         aria-label="Increase quantity"
         className="quantity-selector__btn quantity-selector__btn--plus"
-        variant="ghost"
         onClick={handleIncrease}
       />
     </div>

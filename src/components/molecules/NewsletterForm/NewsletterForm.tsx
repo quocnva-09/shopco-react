@@ -10,7 +10,7 @@ export const NewsletterForm = () => {
         <IconButton
           svgName="icn-email-input"
           aria-label="Mail input"
-          variant="ghost"
+          variant="default"
           className="newsletter-form__icon"
         />
         <Input

@@ -6,40 +6,37 @@
   justify-content: space-between;
   background-color: #f0f0f0;
   border-radius: 24px;
-  padding: 14px 20px;
+  padding: 12px 20px;
 
   &__btn {
     flex-shrink: 0;
 
     &--plus {
-      margin-right: auto;
+      padding-left: 20px;
     }
 
     &--minus {
-      margin-left: auto;
+      padding-right: 20px;
     }
   }
 
   &__value {
-    flex-grow: 1;
     text-align: center;
     font-size: $font-size-base;
     font-weight: 500;
     border: none;
     background: transparent;
     outline: none;
-    width: 40px;
+    min-width: 0;
+    max-width: 14px;
     -moz-appearance: textfield;
+    padding: 0;
+    font-size: 16px;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
-    }
-
-    @media (max-width: $breakpoint) {
-      font-size: $font-size-mobile;
-      width: 30px;
     }
   }
 }

@@ -8,12 +8,16 @@ export type RatingProps = ComponentPropsWithoutRef<'div'> & {
   value: number;
   showText?: boolean;
   variant?: RatingVariant;
+  starSize?: number;
+  starGap?: number;
 };
 
 export const Rating = ({
   value,
   showText = true,
   variant = 'default',
+  starSize,
+  starGap,
   className,
   ...rest
 }: RatingProps) => {
@@ -34,7 +38,13 @@ export const Rating = ({
       )} 
       {...rest}
     >
-      <div className="rating">
+      <div
+        className="rating"
+        style={{
+          ...(starSize !== undefined && { '--star-size': `${starSize}px` } as React.CSSProperties),
+          ...(starGap !== undefined && { '--star-gap': `${starGap}px` } as React.CSSProperties),
+        }}
+      >
         {fullStarsArray.map((_, index) => (
           <span key={`full-${index}`} className="rating__star rating__star--full" aria-hidden="true" />
         ))}

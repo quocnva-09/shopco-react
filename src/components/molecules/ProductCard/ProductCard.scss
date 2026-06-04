@@ -1,5 +1,5 @@
-@use '@/styles/abstracts/variables' as *;
-@use '@/styles/abstracts/mixins' as *;
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
 
 .product-card {
   @include flex-group(0px, flex-start, flex-start);
@@ -12,7 +12,7 @@
     width: 100%;
 
     & img {
-      border-radius: 13px;
+      border-radius: 20px;
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
@@ -28,5 +28,9 @@
     @media (max-width: $breakpoint) {
       font-size: 16px;
     }
+  }
+
+  &__rating {
+    margin-top: 8px;
   }
 }

@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .stats-bar {
   display: flex;
@@ -52,10 +52,9 @@
     }
   }
 
-  // Ẩn divider cuối cùng trên mobile (trước item 30,000+)
   &__divider {
     @media (max-width: $breakpoint) {
-      &:last-of-type {
+      &--end {
         display: none;
       }
     }

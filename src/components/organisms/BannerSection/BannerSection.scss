@@ -1,11 +1,15 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
-$bg-main-banner: #F2F0F1;
+$bg-main-banner: #f2f0f1;
 
 .banner-section {
   background-color: $bg-main-banner;
   position: relative;
   z-index: 1;
+
+  &__btn {
+    padding: 15px 67.5px;
+  }
 }
 
 .main-banner {
