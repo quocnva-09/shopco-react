@@ -4,11 +4,7 @@ import { PATHS } from "./paths";
 
 // pages
 import { MainLayout } from "@/components/templates/MainLayout";
-import { HomePage } from "@/pages/Home";
-import { ProductDetailPage } from "@/pages/ProductDetail";
-import { CartPage } from "@/pages/Cart";
 import { NotFoundPage } from "@/pages/NotFound";
-
 
 export const router = createBrowserRouter([
   {
@@ -20,11 +16,17 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        lazy: async () => {
+          const { HomePage } = await import("@/pages/Home");
+          return { Component: HomePage };
+        },
       },
       {
         path: `${PATHS.PRODUCT}/:id`,
-        element: <ProductDetailPage />,
+        lazy: async () => {
+          const { ProductDetailPage } = await import("@/pages/ProductDetail");
+          return { Component: ProductDetailPage };
+        },
         handle: {
           crumb: () => [{ label: "Product" }],
         },
@@ -32,7 +34,10 @@ export const router = createBrowserRouter([
 
       {
         path: PATHS.CART,
-        element: <CartPage />,
+        lazy: async () => {
+          const { CartPage } = await import("@/pages/Cart");
+          return { Component: CartPage };
+        },
         handle: {
           crumb: () => [{ label: "Cart" }],
         },
@@ -43,7 +48,10 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <NotFoundPage />,
+        lazy: async () => {
+          const { NotFoundPage } = await import("@/pages/NotFound");
+          return { Component: NotFoundPage };
+        },
       },
     ],
   },

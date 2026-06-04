@@ -89,58 +89,56 @@ export const ProductDetailPage = () => {
   );
 
   return (
-    <>
-      <main className="container">
-        <Divider direction="horizontal" />
-        <Breadcrumb items={breadcrumbs} />
+    <main className="container">
+      <Divider direction="horizontal" />
+      <Breadcrumb items={breadcrumbs} />
 
-        <SectionStateWrapper
-          isLoading={isLoadingProduct}
-          loadingMessage="Loading product..."
-          error={productError}
-          isRetryable={productRetryable}
-          onRetry={retryProduct}
-        >
-          {product && <ProductDetailSection data={product} />}
-        </SectionStateWrapper>
+      <SectionStateWrapper
+        isLoading={isLoadingProduct}
+        loadingMessage="Loading product..."
+        error={productError}
+        isRetryable={productRetryable}
+        onRetry={retryProduct}
+      >
+        {product && <ProductDetailSection data={product} />}
+      </SectionStateWrapper>
 
-        {/* Reviews */}
-        <SectionStateWrapper
-          isLoading={isLoadingReviews}
-          loadingMessage="Loading reviews..."
-          error={reviewsError}
-          isRetryable={reviewsRetryable}
-          onRetry={retryReviews}
-        >
-          <ProductMoreInfoSection
-            reviewCount={totalCount}
-            reviews={filteredReviews}
-            hasMore={hasMore}
-            isLoadingMore={isLoadingMoreReviews}
-            onLoadMore={loadMoreReviews}
-            sortOrder={sortOrder}
-            onSortChange={handleSortChange}
-            ratingFilter={ratingFilter}
-            onRatingFilterChange={handleRatingFilterChange}
-          />
-        </SectionStateWrapper>
+      {/* Reviews */}
+      <SectionStateWrapper
+        isLoading={isLoadingReviews}
+        loadingMessage="Loading reviews..."
+        error={reviewsError}
+        isRetryable={reviewsRetryable}
+        onRetry={retryReviews}
+      >
+        <ProductMoreInfoSection
+          reviewCount={totalCount}
+          reviews={filteredReviews}
+          hasMore={hasMore}
+          isLoadingMore={isLoadingMoreReviews}
+          onLoadMore={loadMoreReviews}
+          sortOrder={sortOrder}
+          onSortChange={handleSortChange}
+          ratingFilter={ratingFilter}
+          onRatingFilterChange={handleRatingFilterChange}
+        />
+      </SectionStateWrapper>
 
-        {/* Related products */}
-        <SectionStateWrapper
-          isLoading={isLoadingRelatedProducts}
-          loadingMessage="Loading related products..."
-          error={relatedError}
-          isRetryable={relatedRetryable}
-          onRetry={retryRelated}
-        >
-          <ProductCollectionSection
-            title="YOU MAY ALSO LIKE"
-            products={relatedProducts}
-            showButton={false}
-            className="product-page__product-collections"
-          />
-        </SectionStateWrapper>
-      </main>
-    </>
+      {/* Related products */}
+      <SectionStateWrapper
+        isLoading={isLoadingRelatedProducts}
+        loadingMessage="Loading related products..."
+        error={relatedError}
+        isRetryable={relatedRetryable}
+        onRetry={retryRelated}
+      >
+        <ProductCollectionSection
+          title="YOU MAY ALSO LIKE"
+          products={relatedProducts}
+          showButton={false}
+          className="product-page__product-collections"
+        />
+      </SectionStateWrapper>
+    </main>
   );
 };

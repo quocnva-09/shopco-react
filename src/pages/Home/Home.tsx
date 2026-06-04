@@ -55,7 +55,7 @@ export const HomePage = () => {
   });
 
   return (
-    <>
+    <main>
       <BannerSection
         title={HERO_TITLE}
         description={HERO_DESCRIPTION}
@@ -110,6 +110,6 @@ export const HomePage = () => {
       >
         <FeedbackSection reviews={feedBacks} />
       </SectionStateWrapper>
-    </>
+    </main>
   );
 };
