@@ -28,12 +28,17 @@ export const BannerSection = ({
   ...rest
 }: BannerSectionProps) => {
   return (
-    <section className={clsx("banner-section", className)} {...rest}>
-      <div className={clsx("container", "main-banner")}>
+    <section
+      className={clsx("banner-section", className)}
+      aria-labelledby="banner-section-title"
+      {...rest}
+    >
+      <div className="banner-section__inner container">
         <MainBannerContent
           title={title}
           description={description}
           stats={stats}
+          titleId="banner-section-title"
         >
           <Button
             variant="solid"

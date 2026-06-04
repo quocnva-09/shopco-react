@@ -10,6 +10,7 @@ export const router = createBrowserRouter([
   {
     path: PATHS.HOME,
     element: <MainLayout />,
+    HydrateFallback: () => null,
     handle: {
       crumb: () => [{ label: "Home", href: PATHS.HOME }],
     },

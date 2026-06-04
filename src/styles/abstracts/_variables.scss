@@ -7,11 +7,12 @@ $font-size-base: 16px;
 $font-size-mobile: 14px;
 
 // Responsive
+$breakpoint-desktop: 1100px;
 $breakpoint-tablet: 991px;
-$mobile: 390px;
+$breakpoint-mobile: 390px;
 
 // Width
-$max-width: 1440px;
+$max-width: 1240px;
 
 // Font
 $font-family-base: "Satoshi", sans-serif;

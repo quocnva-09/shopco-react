@@ -9,13 +9,16 @@ export type MainBannerContentProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
   description: string;
   stats: StatItemData[];
-  children: ReactNode; // Slot cho CTA Button
+  /** Optional id forwarded to the <h1> for aria-labelledby on the section */
+  titleId?: string;
+  children: ReactNode;
 };
 
 export const MainBannerContent = ({
   title,
   description,
   stats,
+  titleId,
   children,
   className,
   ...rest
@@ -24,12 +27,13 @@ export const MainBannerContent = ({
     <div className={clsx('main-banner__content', className)} {...rest}>
       <Heading
         as="h1"
+        id={titleId}
         className="main-banner__title"
       >
         {title}
       </Heading>
 
-      <Text className="main-banner__desc">
+      <Text as="p" className="main-banner__desc">
         {description}
       </Text>
 
