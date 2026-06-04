@@ -7,7 +7,7 @@
   margin-top: $base-spacing * 3;
   flex-wrap: wrap;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     justify-content: center;
     gap: 28px;
     row-gap: 12px;
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       // Item cuối cùng chiếm 100% chiều rộng để rớt xuống dòng riêng
       &:last-of-type {
         flex: 0 0 100%;
@@ -32,28 +32,28 @@
   }
 
   &__value {
-    font-family: $text-font-stack;
+    font-family: $font-family-base;
     font-size: 40px;
     font-weight: 700;
-    color: $text-dark;
+    color: $black-color;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 24px;
     }
   }
 
   &__label {
-    font-family: $text-font-stack;
+    font-family: $font-family-base;
     font-size: $font-size-mobile;
     color: $text-muted;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 12px;
     }
   }
 
   &__divider {
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       &--end {
         display: none;
       }

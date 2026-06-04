@@ -3,11 +3,12 @@
 
 .reviews__count {
   font-size: $font-size-base;
-  @media (max-width: $breakpoint) {
-    font-size: $font-size-mobile;
-  }
   font-weight: 400;
   color: $text-muted;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: $font-size-mobile;
+  }
 }
 
 .reviews__actions {
@@ -16,29 +17,10 @@
   position: relative;
   flex-grow: 5;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     gap: $base-spacing * 0.5;
   }
-}
 
-.button--dropdown {
-  color: $black-color;
-  padding: 15px 20px;
-  @media (max-width: $breakpoint) {
-    display: none;
-  }
-}
-
-.button--write-review {
-  padding: 15px 30px;
-  white-space: nowrap;
-  @media (max-width: $breakpoint) {
-    padding: 12px 16px;
-    font-size: 12px;
-  }
-}
-
-.reviews__actions {
   .dropdown {
     position: relative;
 
@@ -75,8 +57,9 @@
 
   .dropdown__item {
     border-radius: 6px;
+
     &:hover {
-      background-color: $grey-color;
+      background-color: $color-neutral;
     }
   }
 
@@ -95,7 +78,26 @@
     border-radius: 6px;
 
     &:hover {
-      background-color: $grey-color;
+      background-color: $color-neutral;
     }
+  }
+}
+
+.button--dropdown {
+  color: $black-color;
+  padding: 15px 20px;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+.button--write-review {
+  padding: 15px 30px;
+  white-space: nowrap;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 12px 16px;
+    font-size: 12px;
   }
 }

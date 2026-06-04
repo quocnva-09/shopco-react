@@ -4,9 +4,9 @@
 .tabs {
   @include flex-center(row);
   gap: $base-spacing;
-  border-bottom: 1px solid $grey-color;
+  border-bottom: 1px solid $color-neutral;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     gap: 0;
   }
 
@@ -23,7 +23,7 @@
     position: relative;
     flex: 1;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: $font-size-mobile;
       white-space: nowrap;
 
@@ -41,7 +41,7 @@
     }
 
     &--active {
-      color: $text-color;
+      color: $black-color;
       font-weight: 500;
 
       &::after {
@@ -62,46 +62,4 @@
     }
   }
 
-  // Profile variant (pill tabs)
-  &--profile {
-    background-color: #f2f0f1;
-    border-radius: $radius-pill;
-    padding: 10px;
-
-    .tabs__item {
-      padding: 10px 20px;
-      font-size: 0;
-    }
-
-    .tabs__item--active {
-      background-color: white;
-      color: $text-color;
-      font-weight: 500;
-      border-radius: $radius-pill;
-      font-size: 20px;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: $breakpoint) {
-      .tabs__item {
-        font-size: 0;
-
-        img {
-          width: 24px;
-          height: 24px;
-          margin: 0;
-        }
-
-        &:first-child,
-        &:nth-child(2),
-        &:last-child {
-          flex: 1;
-          justify-content: center;
-        }
-      }
-    }
-  }
 }

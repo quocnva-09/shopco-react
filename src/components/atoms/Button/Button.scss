@@ -14,7 +14,7 @@
   border: 1px solid transparent;
   gap: 21px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     padding: 12px 24px;
     font-size: 16px;
   }
@@ -34,14 +34,14 @@
     color: $black-color;
     border-color: rgb($black-color, 0.1);
     &:hover:not(:disabled) {
-      background-color: $grey-color;
+      opacity: 0.7;
     }
   }
 
   // --- TỔ HỢP 3: SOLID + DANGER (Nút Đỏ cảnh báo/xóa) ---
   &--solid-danger {
-    background-color: $label-danger-color;
-    color: $danger-color;
+    background-color: $color-danger-surface;
+    color: $color-danger;
     &:hover:not(:disabled) {
       opacity: 0.8;
     }

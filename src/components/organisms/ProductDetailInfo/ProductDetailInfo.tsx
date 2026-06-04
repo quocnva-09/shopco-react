@@ -33,18 +33,18 @@ export const ProductDetailInfo = ({
         lineClamp={0}
         showTooltip={false}
         className="product-detail__name"
-        fontSize="40px"
         fontFamily="'IntegralCF', sans-serif"
       >
         {product.name}
       </Heading>
 
-      <Rating value={rating} /*className="product-card__rating"*/ />
+      <Rating value={rating} className="product-detail__rating" />
 
       <PriceGroup
         currentPrice={product.currentPrice}
         originalPrice={product.originalPrice}
         discountPercentage={product.discountPercent}
+        isDetail={true}
       />
 
       {/* Description */}

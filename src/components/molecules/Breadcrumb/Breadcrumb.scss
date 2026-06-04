@@ -7,7 +7,7 @@
   color: $text-muted;
   margin: 24px 0;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     margin: 20px 0;
   }
 
@@ -17,11 +17,11 @@
     transition: color 0.3s ease;
 
     &:hover {
-      color: $text-dark;
+      color: $black-color;
     }
 
     &--active {
-      color: $text-dark;
+      color: $black-color;
       font-weight: 400;
     }
   }

@@ -14,8 +14,7 @@ const PRODUCT_TABS = [
   { id: "faqs", label: "FAQs" },
 ];
 
-// TODO: activeTab sẽ dùng useState khi implement React hooks
-const DEFAULT_ACTIVE_TAB = "reviews";
+const DEFAULT_ACTIVE_TAB = 'reviews';
 
 export type ProductMoreInfoSectionProps = ComponentPropsWithoutRef<"div"> & {
   productDescription?: string;

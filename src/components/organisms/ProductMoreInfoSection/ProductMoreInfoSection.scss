@@ -4,7 +4,7 @@
 .product-more-info {
   margin-top: 60px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     margin-top: 40px;
   }
 }
@@ -15,7 +15,7 @@
   width: 100%;
   margin: 24px auto 0;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     margin-top: 20px;
   }
 
@@ -36,8 +36,9 @@
   &__title {
     font-size: 24px;
     font-weight: 700;
-    flex-grow:5;
-    @media (max-width: $breakpoint) {
+    flex-grow: 5;
+
+    @media (max-width: $breakpoint-tablet) {
       font-size: 20px;
       margin: 0;
     }

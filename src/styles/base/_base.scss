@@ -15,7 +15,7 @@ html {
 
 body {
   font-family: $font-family-base;
-  color: $text-color; /* Fixing primary-color to text-color since primary is #fff */
+  color: $black-color;
   font-size: 1.4rem; /* 14px default */
   padding: 0;
 }
@@ -35,15 +35,6 @@ body {
 /**
  * Basic styles for links
  */
-// a {
-//   color: abstracts.$brand-color;
-//   text-decoration: none;
-
-//   @include abstracts.on-event {
-//     color: abstracts.$text-color;
-//     text-decoration: underline;
-//   }
-// }
 
 p {
   margin: 0;

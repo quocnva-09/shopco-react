@@ -1,5 +1,5 @@
-@use '@/styles/abstracts/variables' as *;
-@use '@/styles/abstracts/mixins' as *;
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
 
 .icon-button {
   //Reset styles
@@ -14,16 +14,16 @@
   justify-content: center;
 
   // Effect
-  color: $black-color; 
+  color: $black-color;
   transition: opacity 0.2s ease;
 
   // Responsive
-  flex-shrink: 0; 
+  flex-shrink: 0;
 
   // Size
   font-size: $font-size-base;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     font-size: $font-size-mobile;
   }
 
@@ -37,21 +37,17 @@
     opacity: 0.4;
   }
 
-  &--default{
-    
-  }
-
-  &--ghost{
-    color: rgba($black-color, 0.4) ;
+  &--ghost {
+    color: rgba($black-color, 0.4);
   }
   &--circular {
     width: 48px;
     height: 48px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: $grey-color;
+    background-color: $color-neutral;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       width: 40px;
       height: 40px;
     }

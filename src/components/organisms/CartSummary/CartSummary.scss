@@ -6,7 +6,7 @@
   border-radius: $radius-lg;
   padding: 20px 24px 32px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     padding: 24px;
   }
 
@@ -15,7 +15,7 @@
     font-weight: 700;
     margin: 0 0 24px 0;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 20px;
     }
   }
@@ -31,7 +31,7 @@
     margin-bottom: 20px;
     font-size: 20px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 16px;
     }
 
@@ -66,12 +66,12 @@
     font-weight: 700;
     margin-bottom: 24px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 20px;
     }
 
     .cart-summary__label {
-      color: $text-dark;
+      color: $black-color;
       font-weight: 400;
     }
   }
@@ -99,13 +99,13 @@
       font-size: $font-size-base;
       height: 48px;
       width: 100%;
-      color: $text-dark;
+      color: $black-color;
 
       &::placeholder {
         color: $text-muted;
       }
 
-      @media (max-width: $breakpoint) {
+      @media (max-width: $breakpoint-tablet) {
         font-size: $font-size-mobile;
         height: 44px;
       }

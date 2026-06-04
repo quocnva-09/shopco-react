@@ -4,7 +4,7 @@
 .feedback {
   margin-bottom: 80px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     margin-bottom: 40px;
   }
 
@@ -13,7 +13,7 @@
     align-items: flex-end;
     margin-bottom: 20px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       margin-bottom: 4px;
     }
   }
@@ -30,7 +30,7 @@
     overflow: visible;
     text-overflow: unset;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 32px;
     }
   }
@@ -71,7 +71,7 @@
       -webkit-backdrop-filter: blur(4px);
       backdrop-filter: blur(4px);
 
-      @media (max-width: $breakpoint) {
+      @media (max-width: $breakpoint-tablet) {
         display: none;
       }
     }
@@ -100,7 +100,7 @@
     margin-bottom: -230px;
     pointer-events: none;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       padding-left: $padding-left-right-mobile;
       padding-right: $padding-left-right-mobile;
       padding-bottom: 250px;
@@ -116,7 +116,7 @@
     // Translate based on slide index * (card width + gap)
     transform: translateX(calc(var(--slide-index, 0) * -420px));
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       grid-auto-columns: 90vw;
       transform: translateX(calc(var(--slide-index, 0) * -1 * (90vw + 20px)));
     }

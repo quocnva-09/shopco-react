@@ -1,7 +1,7 @@
 @use "@/styles/abstracts/variables" as *;
 
 .text-link{
-  color: $text-color;
+  color: $black-color;
   text-decoration: underline;
 
   &:hover{
@@ -9,7 +9,7 @@
     opacity: 0.8;
   }
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     font-size: 12px;
   }
 }

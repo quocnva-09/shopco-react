@@ -18,7 +18,7 @@
 
   // Mobile: override lineClamp khi có mobileLineClamp
   &--mobile-clamp {
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       .heading-text--ellipsis,
       .heading-text--clamp {
         white-space: normal;
@@ -33,7 +33,7 @@
 
   // Mobile: ẩn tooltip
   &--mobile-no-tooltip {
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       .tooltip {
         display: none;
       }
@@ -62,14 +62,4 @@
     text-overflow: ellipsis;
     white-space: normal;
   }
-}
-
-// tooltip
-.tooltip {
-  position: absolute;
-  // add style for tooltip
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  z-index: 10;
 }

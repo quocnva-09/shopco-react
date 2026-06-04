@@ -9,7 +9,7 @@
     width: 1px;
     height: 74px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       height: 52px;
     }
   }

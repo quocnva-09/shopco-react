@@ -19,7 +19,7 @@ $bg-main-banner: #f2f0f1;
   position: relative;
   z-index: 1;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     flex-direction: column;
   }
 }

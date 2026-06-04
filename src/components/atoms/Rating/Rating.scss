@@ -1,17 +1,15 @@
 @use "@/styles/abstracts/variables" as *;
 @use "@/styles/abstracts/mixins" as *;
 
+// Local icon references (moved from global _variables.scss)
+$-icn-star: url("/images/icn-star.svg") no-repeat center/cover;
+$-icn-half-star: url("/images/icn-half-star.svg") no-repeat center/cover;
+
 // Rating row
 .rating-row {
   @include flex-center;
   justify-content: flex-start;
   gap: $base-spacing * 0.5;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
 }
 
 // Default rating wrapper
@@ -31,17 +29,12 @@
     width: var(--star-size, 18.5px);
     height: var(--star-size, 18.5px);
 
-    @media (max-width: $breakpoint) {
-      width: var(--star-size, 18.5px);
-      height: var(--star-size, 18.5px);
-      background-size: cover;
-    }
     &--full {
-      background: $icn-star;
+      background: $-icn-star;
     }
 
     &--half {
-      background: $icn-half-star;
+      background: $-icn-half-star;
       width: calc(var(--star-size, 18px) * 0.55);
     }
 
@@ -58,10 +51,6 @@
   font-size: 14px;
   font-weight: 400;
   color: $black-color;
-
-  @media (max-width: $breakpoint) {
-    font-size: 14px;
-  }
 
   span {
     color: $text-muted;

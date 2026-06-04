@@ -13,7 +13,7 @@
   box-sizing: border-box;
   transition: all 0.2s ease;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     font-size: $font-size-mobile;
     padding: 10px 14px;
   }
@@ -24,7 +24,7 @@
 
   // Trạng thái khóa không cho nhập liệu
   &:disabled {
-    background-color: $grey-color;
+    background-color: $color-neutral;
     color: $text-muted;
     cursor: not-allowed;
     opacity: 0.6;
@@ -32,11 +32,11 @@
 
   // Trạng thái báo lỗi dữ liệu (khi kết hợp validation)
   &[aria-invalid="true"] {
-    border-color: $danger-color;
-    background-color: rgba($label-danger-color, 0.2);
+    border-color: $color-danger;
+    background-color: rgba($color-danger-surface, 0.2);
 
     &:focus {
-      box-shadow: 0 0 0 4px rgba($danger-color, 0.1);
+      box-shadow: 0 0 0 4px rgba($color-danger, 0.1);
     }
   }
 }

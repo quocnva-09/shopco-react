@@ -2,12 +2,12 @@
 @use "@/styles/abstracts/mixins" as *;
 
 .style-categories {
-  background-color: $grey-color;
+  background-color: $color-neutral;
   border-radius: $radius-pill;
   padding: 70px 64px;
   margin: 80px 0;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     padding: 40px 24px;
     margin: 40px 0;
     border-radius: $radius-lg;
@@ -27,7 +27,7 @@
     overflow: visible;
     text-overflow: unset;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 32px;
       margin-bottom: 28px;
     }
@@ -40,7 +40,7 @@
 
     grid-auto-rows: clamp(200px, 22vw, 300px);
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       grid-template-columns: 1fr;
       gap: 16px;
 
@@ -55,7 +55,7 @@
     background-color: $white-color;
     text-decoration: none;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       width: 100%;
       grid-column: 1 / -1 !important;
       aspect-ratio: 310 / 190;
@@ -72,7 +72,7 @@
           transform: scale(2.25);
         }
 
-        @media (max-width: $breakpoint) {
+        @media (max-width: $breakpoint-tablet) {
           transform: scale(1.8);
         }
       }
@@ -90,7 +90,7 @@
           transform: scale(1.85);
         }
 
-        @media (max-width: $breakpoint) {
+        @media (max-width: $breakpoint-tablet) {
           transform: scale(2);
           transform-origin: 75% 40%;
         }
@@ -110,7 +110,7 @@
           transform: scale(1.15);
         }
 
-        @media (max-width: $breakpoint) {
+        @media (max-width: $breakpoint-tablet) {
           transform: scale(1.2);
           transform-origin: 60% 100%;
         }
@@ -129,7 +129,7 @@
           transform: scale(1.05);
         }
 
-        @media (max-width: $breakpoint) {
+        @media (max-width: $breakpoint-tablet) {
           margin-right: auto;
           transform: none;
           padding-right: 10%;
@@ -147,7 +147,7 @@
     color: $black-color;
     z-index: 1;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 24px;
       top: 16px;
       left: 24px;

@@ -34,7 +34,7 @@
     border-radius: 6px;
     z-index: 10;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       display: block;
       position: static;
       box-shadow: none;

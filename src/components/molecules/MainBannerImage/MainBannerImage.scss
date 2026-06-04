@@ -6,7 +6,7 @@
   position: relative;
   z-index: 1;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     flex: 0 0 100%;
     width: 100%;
     max-width: none;
@@ -29,7 +29,7 @@
     transform: scale(1.12);
   }
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     margin-left: -$padding-left-right-mobile;
     margin-right: -$padding-left-right-mobile;
     overflow: hidden;
@@ -53,7 +53,7 @@
     height: 104px;
     object-fit: contain;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       width: 76px;
       height: 76px;
     }
@@ -68,7 +68,7 @@
       width: 56px;
       height: 56px;
 
-      @media (max-width: $breakpoint) {
+      @media (max-width: $breakpoint-tablet) {
         width: 44px;
         height: 44px;
       }

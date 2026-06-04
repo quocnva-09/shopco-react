@@ -26,7 +26,7 @@
     overflow: visible;
     text-overflow: unset;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       font-size: 32px;
       margin: 40px 0;
       padding: 0 30px;
@@ -40,7 +40,7 @@
     transition: transform 0.5s ease;
     margin-bottom: 36px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       gap: 16px;
       margin-left: 0;
     }
@@ -49,7 +49,7 @@
       flex: 0 0 calc(25% - 15px);
       width: 100%;
 
-      @media (max-width: $breakpoint) {
+      @media (max-width: $breakpoint-tablet) {
         flex: 0 0 calc(60% - 8px);
         scroll-snap-align: start;
       }
@@ -63,7 +63,7 @@
     .product-collection__list {
       flex-wrap: nowrap;
 
-      @media (max-width: $breakpoint) {
+      @media (max-width: $breakpoint-tablet) {
         &::after {
           content: "";
           flex: 0 0 1px;
@@ -71,7 +71,7 @@
       }
     }
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -88,7 +88,7 @@
 
   &__btn {
     padding: 15px 85px;
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       width: 100%;
     }
   }
@@ -116,12 +116,12 @@
     background: none;
     border: none;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       display: none;
     }
 
     &:hover {
-      color: $grey-color-hover;
+      color: $color-neutral-hover;
       cursor: pointer;
     }
 

@@ -5,7 +5,7 @@
   gap: 12px;
   flex-wrap: wrap;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     gap: 8px;
   }
 
@@ -23,13 +23,13 @@
     pointer-events: none; // Để label xử lý click → toggle radio
     padding: 12px 24px;
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       padding: 10px 20px;
     }
 
     // Khi radio checked → override Button sang solid-dark styling
     &.is-active{
-      background-color: $text-dark !important;
+      background-color: $black-color !important;
       color: #fff !important;
     }
   }

@@ -19,7 +19,7 @@
   &--error {
     // react-hot-toast applies the icon theme separately,
     // we only need to style the toast container itself here.
-    border-left: 3px solid $danger-color;
+    border-left: 3px solid $color-danger;
   }
 
   &--success {

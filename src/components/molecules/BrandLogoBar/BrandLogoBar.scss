@@ -4,7 +4,7 @@
   background-color: $black-color;
   padding: 44px 0;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     padding: 28px 0;
   }
 }
@@ -17,7 +17,7 @@
   margin: 0 auto;
   gap: 20px;
 
-  @media (max-width: $breakpoint) {
+  @media (max-width: $breakpoint-tablet) {
     justify-content: center;
     gap: 16px;
   }
@@ -28,7 +28,7 @@
     object-fit: contain;
     filter: brightness(0) invert(1); // Logo trắng trên nền đen
 
-    @media (max-width: $breakpoint) {
+    @media (max-width: $breakpoint-tablet) {
       max-height: 26px;
     }
   }
