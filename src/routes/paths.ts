@@ -5,3 +5,5 @@ export const PATHS = {
   CART: "/cart",
   NOTFOUND: "/404",
 };
+
+

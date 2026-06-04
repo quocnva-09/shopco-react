@@ -9,6 +9,7 @@ import { ProductDetailPage } from "@/pages/ProductDetail";
 import { CartPage } from "@/pages/Cart";
 import { NotFoundPage } from "@/pages/NotFound";
 
+
 export const router = createBrowserRouter([
   {
     path: PATHS.HOME,

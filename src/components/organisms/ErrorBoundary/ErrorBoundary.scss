@@ -1,0 +1,52 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+// -----------------------------------------------------------------------------
+// ErrorBoundary — Fallback UI hiển thị khi có lỗi render trong cây component
+// Block: .error-boundary
+// -----------------------------------------------------------------------------
+
+.error-boundary {
+  @include flex-center(column);
+
+  gap: $base-spacing;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: $base-spacing * 2;
+  border: 2px solid $color-danger;
+  border-radius: 12px;
+  background-color: $color-danger-surface;
+  text-align: center;
+  font-family: $font-family-base;
+
+  // --- Icon ---
+  &__icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  // --- Tiêu đề lỗi ---
+  // Override heading-text để áp màu danger mà không phá vỡ atom
+  &__title {
+    color: $color-danger;
+    margin: 0;
+  }
+
+  // --- Hộp thông tin chi tiết lỗi ---
+  &__detail {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: $white-color;
+    border-radius: 6px;
+    font-family: $font-family-base;
+    font-size: 0.875rem;
+    color: $text-muted;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  // --- Khu vực action (nút) ---
+  &__actions {
+    margin-top: 4px;
+  }
+}
