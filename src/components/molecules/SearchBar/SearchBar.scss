@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .search-bar {
   display: flex;
@@ -7,10 +7,10 @@
   border-radius: $radius-pill;
   width: 100%;
 
-  &:focus-within {
-    transition: all 0.2s ease;
-    box-shadow: 0 0 0 1px rgba($black-color, 0.2);
-  }
+  // &:focus-within {
+  //   transition: all 0.2s ease;
+  //   box-shadow: 0 0 0 1px rgba($black-color, 0.2);
+  // }
 
   @media (max-width: $breakpoint-tablet) {
     background-color: transparent;
