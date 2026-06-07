@@ -22,11 +22,6 @@ $bg-banner: #f2f0f1;
     grid-template-columns: 1fr;
     gap: 0;
   }
-
-  @media (max-width: $breakpoint-mobile) {
-    margin-left: -$padding-left-right-mobile;
-    margin-right: -$padding-left-right-mobile;
-  }
 }
 
 .banner-section__btn {

@@ -92,7 +92,7 @@
   }
 
   &__items {
-    // Align items with the container's inner content, increase bottom padding for tooltip
+    // Align items with the container's inner content
     padding-top: 20px;
     padding-bottom: 250px;
     padding-left: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
@@ -100,26 +100,31 @@
     margin-bottom: -230px;
     pointer-events: none;
 
+    // Compute gap & card width as CSS custom properties so __track can reference them
+    --feedback-gap: 20px;
+    --feedback-card-w: calc(
+      (100% - var(--feedback-gap) * 2) / 3
+    );
+
     @media (max-width: $breakpoint-tablet) {
       padding-left: $padding-left-right-mobile;
       padding-right: $padding-left-right-mobile;
       padding-bottom: 250px;
+      --feedback-card-w: calc(100vw - #{$padding-left-right-mobile} * 2);
     }
   }
 
   &__track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 400px;
-    gap: 20px;
+    // Each column = exactly 1/3 of inner container (minus 2 gaps)
+    grid-auto-columns: var(--feedback-card-w);
+    gap: var(--feedback-gap);
     transition: transform 0.5s ease-in-out;
-    // Translate based on slide index * (card width + gap)
-    transform: translateX(calc(var(--slide-index, 0) * -420px));
-
-    @media (max-width: $breakpoint-tablet) {
-      grid-auto-columns: 90vw;
-      transform: translateX(calc(var(--slide-index, 0) * -1 * (90vw + 20px)));
-    }
+    // Slide by one card width + one gap per step — no hard-coded px
+    transform: translateX(
+      calc(var(--slide-index, 0) * -1 * (var(--feedback-card-w) + var(--feedback-gap)))
+    );
 
     .review-card {
       pointer-events: auto;
