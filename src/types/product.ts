@@ -11,13 +11,19 @@ export interface ProductCardData {
 }
 
 export interface ColorItem {
-  color: string;
-  hex: string;
+  name: string;
+  hexCode: string;
 }
 
 export interface SizeItem {
-  size: string;
+  name: string;
   label: string;
+}
+
+export interface ProductVariant {
+  id: number;
+  color: ColorItem;
+  size: SizeItem;
 }
 
 export interface ProductImage {
@@ -36,8 +42,7 @@ export interface ProductData {
   originalPrice?: number;
   currentPrice: number;
   discountPercent: number;
-  sizes: SizeItem[];
-  colors: ColorItem[];
+  variants: ProductVariant[];
   isActive: boolean;
   ratingAvg?: number;
   reviewsCount?: number;

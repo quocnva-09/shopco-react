@@ -6,14 +6,20 @@ export interface ProductCategoryApi {
   slug: string;
 }
 
-export interface ProductColorApi {
-  color: string;
-  hex: string;
+export interface ProductVariantColorApi {
+  name: string;
+  hex_code: string;
 }
 
-export interface ProductSizeApi {
-  size: string;
+export interface ProductVariantSizeApi {
+  name: string;
   label: string;
+}
+
+export interface ProductVariantApi {
+  id: number;
+  color: ProductVariantColorApi;
+  size: ProductVariantSizeApi;
 }
 
 export interface ProductImageApi {
@@ -21,7 +27,7 @@ export interface ProductImageApi {
   product_id: number;
   img_path: string;
   alt: string;
-  is_primary: boolean;
+  is_primary: number | boolean;
 }
 
 export interface ProductApi {
@@ -29,10 +35,9 @@ export interface ProductApi {
   name: string;
   slug: string;
   description: string;
-  price: number;
-  price_discount: number;
-  sizes: ProductSizeApi[];
-  colors: ProductColorApi[];
+  price: string;
+  price_discount: string | null;
+  variants: ProductVariantApi[];
   is_active: boolean;
   rating_avg?: number;
   reviews_count?: number;

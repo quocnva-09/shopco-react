@@ -17,44 +17,44 @@ export const ColorSelector = ({
   className,
   ...rest
 }: ColorSelectorProps) => {
-  const checkedId = defaultValue || colors[0]?.color;
+  const checkedId = defaultValue ?? colors[0]?.name;
   const [selectedColor, setSelectedColor] = useState<string>(checkedId);
 
-  const handleChange = (colorId: string) => {
-    setSelectedColor(colorId);
+  const handleChange = (colorName: string) => {
+    setSelectedColor(colorName);
   };
 
   return (
     <div className={clsx("color-selector", className)} {...rest}>
       {colors.map((item) => {
-        const inputId = `${item.color}`;
+        const inputId = `${name}-${item.name}`;
         return (
-          <span key={item.color}>
+          <span key={item.name}>
             <input
               type="radio"
               name={name}
               id={inputId}
-              value={item.color}
+              value={item.name}
               className="color-selector__input"
-              checked={selectedColor === item.color}
-              onChange={() => handleChange(item.color)}
+              checked={selectedColor === item.name}
+              onChange={() => handleChange(item.name)}
             />
             <label
               htmlFor={inputId}
               className="color-selector__label"
-              title={item.color}
+              title={item.name}
             >
               <IconButton
                 svgName="vector-tick"
-                backgroundColor={item.hex}
+                backgroundColor={item.hexCode}
                 color="#fff"
                 className={clsx(
                   "color-selector__swatch",
-                  selectedColor === item.color && "is-active",
+                  selectedColor === item.name && "is-active",
                 )}
                 tabIndex={-1}
                 aria-hidden="true"
-                onClick={() => handleChange(item.color)}
+                onClick={() => handleChange(item.name)}
               />
             </label>
           </span>

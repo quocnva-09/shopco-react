@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useMemo, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading/Heading";
 import { Rating } from "@/components/atoms/Rating/Rating";
@@ -9,6 +9,10 @@ import { ColorSelector } from "@/components/molecules/ColorSelector";
 import type { ProductData } from "@/types/product";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
+import {
+  getUniqueColors,
+  getUniqueSizes,
+} from "@/utils/mappers/product.mapper";
 import "./ProductDetailInfo.scss";
 
 export type ProductDetailInfoProps = Omit<
@@ -24,6 +28,16 @@ export const ProductDetailInfo = ({
   ...rest
 }: ProductDetailInfoProps) => {
   const rating = product.ratingAvg ?? 0;
+
+  const uniqueColors = useMemo(
+    () => getUniqueColors(product.variants),
+    [product.variants],
+  );
+
+  const uniqueSizes = useMemo(
+    () => getUniqueSizes(product.variants),
+    [product.variants],
+  );
 
   return (
     <div className={clsx("product-detail__info", className)} {...rest}>
@@ -61,7 +75,7 @@ export const ProductDetailInfo = ({
           </Text>
           <ColorSelector
             name="color"
-            colors={product.colors}
+            colors={uniqueColors}
             key={product.id}
           />
         </div>
@@ -71,7 +85,7 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Choose Size
           </Text>
-          <SizeSelector name="size" sizes={product.sizes} key={product.id} />
+          <SizeSelector name="size" sizes={uniqueSizes} key={product.id} />
         </div>
 
         {/* Actions */}
