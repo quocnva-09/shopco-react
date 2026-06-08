@@ -50,12 +50,12 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
-
   }
 
   &__slider {
     position: relative;
-    overflow: hidden; // Prevent horizontal scrolling
+    overflow-x: clip;
+    overflow-y: visible;
 
     // Pseudo elements tạo hiệu ứng blur
     &::before,
@@ -65,7 +65,10 @@
       top: 0;
       bottom: 0;
       // Blur area should exactly cover the space outside the container's inner content
-      width: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
+      width: calc(
+        max((100vw - #{$max-width}) / 2, 0px) +
+          #{$padding-left-right-full-layout}
+      );
       pointer-events: none;
       z-index: 2;
       -webkit-backdrop-filter: blur(4px);
@@ -78,14 +81,22 @@
 
     &::before {
       left: 0;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
       mask-image: linear-gradient(to right, black 0%, transparent 100%);
       -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
     }
 
     &::after {
       right: 0;
-      background: linear-gradient(to left, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
       mask-image: linear-gradient(to left, black 0%, transparent 100%);
       -webkit-mask-image: linear-gradient(to left, black 0%, transparent 100%);
     }
@@ -94,22 +105,21 @@
   &__items {
     // Align items with the container's inner content
     padding-top: 20px;
-    padding-bottom: 250px;
-    padding-left: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
-    padding-right: calc(max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout});
-    margin-bottom: -230px;
+    padding-left: calc(
+      max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout}
+    );
+    padding-right: calc(
+      max((100vw - #{$max-width}) / 2, 0px) + #{$padding-left-right-full-layout}
+    );
     pointer-events: none;
 
     // Compute gap & card width as CSS custom properties so __track can reference them
     --feedback-gap: 20px;
-    --feedback-card-w: calc(
-      (100% - var(--feedback-gap) * 2) / 3
-    );
+    --feedback-card-w: calc((100% - var(--feedback-gap) * 2) / 3);
 
     @media (max-width: $breakpoint-tablet) {
       padding-left: $padding-left-right-mobile;
       padding-right: $padding-left-right-mobile;
-      padding-bottom: 250px;
       --feedback-card-w: calc(100vw - #{$padding-left-right-mobile} * 2);
     }
   }
@@ -123,7 +133,10 @@
     transition: transform 0.5s ease-in-out;
     // Slide by one card width + one gap per step — no hard-coded px
     transform: translateX(
-      calc(var(--slide-index, 0) * -1 * (var(--feedback-card-w) + var(--feedback-gap)))
+      calc(
+        var(--slide-index, 0) * -1 *
+          (var(--feedback-card-w) + var(--feedback-gap))
+      )
     );
 
     .review-card {
