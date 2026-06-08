@@ -15,10 +15,12 @@ import type {
 export const mapVariant = (v: ProductVariantApi): ProductVariant => ({
   id: v.id,
   color: {
+    id: v.color.id,
     name: v.color.name,
     hexCode: v.color.hex_code,
   },
   size: {
+    id: v.size.id,
     name: v.size.name,
     label: v.size.label,
   },

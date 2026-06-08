@@ -1,4 +1,11 @@
-import { useMemo, type ComponentPropsWithoutRef } from "react";
+import {
+  useState,
+  useMemo,
+  useCallback,
+  type SyntheticEvent,
+  type ComponentPropsWithoutRef,
+} from "react";
+import { useDispatch } from "react-redux";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading/Heading";
 import { Rating } from "@/components/atoms/Rating/Rating";
@@ -6,9 +13,12 @@ import { Text } from "@/components/atoms/Text";
 import { Button } from "@/components/atoms/Button";
 import { PriceGroup } from "@/components/molecules/PriceGroup/PriceGroup";
 import { ColorSelector } from "@/components/molecules/ColorSelector";
-import type { ProductData } from "@/types/product";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
+import type { ProductData } from "@/types/product";
+import type { AppDispatch } from "@/store/store";
+import type { AddToCartPayload } from "@/types/payload/cart.payload";
+import { addToCart } from "@/slices/cartSlice";
 import {
   getUniqueColors,
   getUniqueSizes,
@@ -27,6 +37,7 @@ export const ProductDetailInfo = ({
   className,
   ...rest
 }: ProductDetailInfoProps) => {
+  const dispatch = useDispatch<AppDispatch>();
   const rating = product.ratingAvg ?? 0;
 
   const uniqueColors = useMemo(
@@ -37,6 +48,64 @@ export const ProductDetailInfo = ({
   const uniqueSizes = useMemo(
     () => getUniqueSizes(product.variants),
     [product.variants],
+  );
+
+  // Variant selection state
+  const [selectedColorId, setSelectedColorId] = useState<number>(
+    uniqueColors[0]?.id,
+  );
+  const [selectedSizeId, setSelectedSizeId] = useState<number>(
+    uniqueSizes[0]?.id,
+  );
+  const [quantity, setQuantity] = useState(1);
+
+  // Resolve selected variant from current color + size selection
+  const selectedVariant = useMemo(
+    () =>
+      product.variants.find(
+        (v) => v.color.id === selectedColorId && v.size.id === selectedSizeId,
+      ),
+    [product.variants, selectedColorId, selectedSizeId],
+  );
+
+  // Add to cart handler
+  const handleAddToCart = useCallback(
+    (e: SyntheticEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      if (!selectedVariant) return;
+
+      // Resolve primary image — fallback to first image
+      const primaryImage =
+        product.images.find((img) => img.isPrimary)?.imgPath ??
+        product.images[0]?.imgPath ??
+        "";
+
+      const payload: AddToCartPayload = {
+        productId: product.id,
+        productVariantId: selectedVariant.id,
+        quantity,
+        variant: {
+          id: selectedVariant.id,
+          colorId: selectedVariant.color.id,
+          color: selectedVariant.color.name,
+          colorHex: selectedVariant.color.hexCode,
+          sizeId: selectedVariant.size.id,
+          size: selectedVariant.size.name,
+          sizeLabel: selectedVariant.size.label,
+        },
+        product: {
+          id: product.id,
+          name: product.name,
+          imgPath: primaryImage,
+          price: product.originalPrice ?? product.currentPrice,
+          priceDiscount: product.currentPrice,
+        },
+      };
+
+      dispatch(addToCart(payload));
+    },
+    [dispatch, product, selectedVariant, quantity],
   );
 
   return (
@@ -67,7 +136,7 @@ export const ProductDetailInfo = ({
       </Text>
 
       {/* Form: Color + Size + Quantity + Add to Cart */}
-      <form className="product-detail__form">
+      <form className="product-detail__form" onSubmit={handleAddToCart}>
         {/* Color Variant */}
         <div className="product-detail__variant">
           <Text as="span" className="product-detail__variant-label">
@@ -77,6 +146,7 @@ export const ProductDetailInfo = ({
             name="color"
             colors={uniqueColors}
             key={product.id}
+            onChange={setSelectedColorId}
           />
         </div>
 
@@ -85,17 +155,26 @@ export const ProductDetailInfo = ({
           <Text as="span" className="product-detail__variant-label">
             Choose Size
           </Text>
-          <SizeSelector name="size" sizes={uniqueSizes} key={product.id} />
+          <SizeSelector
+            name="size"
+            sizes={uniqueSizes}
+            key={product.id}
+            onChange={setSelectedSizeId}
+          />
         </div>
 
         {/* Actions */}
         <div className="product-detail__actions">
-          <QuantitySelector className="product-detail__quantity" />
+          <QuantitySelector
+            className="product-detail__quantity"
+            onChange={setQuantity}
+          />
           <Button
             variant="solid"
             fullWidth
             type="submit"
             className="product-detail__btn"
+            disabled={!selectedVariant}
           >
             Add to Cart
           </Button>

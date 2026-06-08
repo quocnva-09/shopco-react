@@ -3,25 +3,38 @@ import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./QuantitySelector.scss";
 
-export type QuantitySelectorProps = ComponentPropsWithoutRef<"div"> & {
+export type QuantitySelectorProps = Omit<
+  ComponentPropsWithoutRef<"div">,
+  "onChange"
+> & {
   defaultValue?: number;
   min?: number;
+  onChange?: (value: number) => void;
 };
 
 export const QuantitySelector = ({
   defaultValue = 1,
   min = 1,
+  onChange,
   className,
   ...rest
 }: QuantitySelectorProps) => {
   const [value, setValue] = useState(defaultValue);
 
   const handleDecrease = () => {
-    setValue((prev) => (prev > 1 ? prev - 1 : prev));
+    setValue((prev) => {
+      const next = prev > min ? prev - 1 : prev;
+      onChange?.(next);
+      return next;
+    });
   };
 
   const handleIncrease = () => {
-    setValue((prev) => prev + 1);
+    setValue((prev) => {
+      const next = prev + 1;
+      onChange?.(next);
+      return next;
+    });
   };
 
   return (

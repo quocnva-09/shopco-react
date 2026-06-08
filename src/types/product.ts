@@ -11,11 +11,13 @@ export interface ProductCardData {
 }
 
 export interface ColorItem {
+  id: number;
   name: string;
   hexCode: string;
 }
 
 export interface SizeItem {
+  id: number;
   name: string;
   label: string;
 }

@@ -5,11 +5,13 @@ import { PATHS } from "./paths";
 // pages
 import { MainLayout } from "@/components/templates/MainLayout";
 import { NotFoundPage } from "@/pages/NotFound";
+import { RouteErrorBoundary } from "@/components/organisms/ErrorBoundary";
 
 export const router = createBrowserRouter([
   {
     path: PATHS.HOME,
     element: <MainLayout />,
+    errorElement: <RouteErrorBoundary />,
     HydrateFallback: () => null,
     handle: {
       crumb: () => [{ label: "Home", href: PATHS.HOME }],

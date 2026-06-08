@@ -1,13 +1,17 @@
+import { useSelector } from "react-redux";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { Divider } from "@/components/atoms/Divider";
 import { Heading } from "@/components/atoms/Heading";
 import { CartSection } from "@/components/organisms/CartSection";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
+import type { RootState } from "@/store/store";
 import "./Cart.scss";
-import { MOCK_CART_ITEMS, MOCK_CART_SUMMARY } from "@/consts/cartData";
 
 export const CartPage = () => {
   const breadcrumbs = useBreadcrumbs();
+  const { cartItems, deliveryFee, discount } = useSelector(
+    (state: RootState) => state.cart,
+  );
 
   return (
     <main className="container">
@@ -18,9 +22,9 @@ export const CartPage = () => {
       </Heading>
 
       <CartSection
-        items={MOCK_CART_ITEMS}
-        lineItems={MOCK_CART_SUMMARY.lineItems}
-        total={MOCK_CART_SUMMARY.total}
+        items={cartItems}
+        deliveryFee={deliveryFee}
+        discount={discount}
       />
     </main>
   );

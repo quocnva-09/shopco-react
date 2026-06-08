@@ -7,11 +7,13 @@ export interface ProductCategoryApi {
 }
 
 export interface ProductVariantColorApi {
+  id: number;
   name: string;
   hex_code: string;
 }
 
 export interface ProductVariantSizeApi {
+  id: number;
   name: string;
   label: string;
 }
