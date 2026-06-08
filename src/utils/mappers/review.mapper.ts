@@ -13,7 +13,7 @@ export const mapReviewData = (apiReview: ReviewApi): ReviewData => {
 
   return {
     id: apiReview.id,
-    name: apiReview.user_name || "Anonymous User",
+    name: apiReview.reviewer_name || "Anonymous User",
     rating: apiReview.rating,
     comment: apiReview.comment,
     date: formattedDate,

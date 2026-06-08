@@ -2,10 +2,13 @@ import type { PaginationResponse, ApiResponse } from "./api";
 
 export interface ReviewApi {
   id: number;
-  user_id: number;
-  user_name: string;
+  user_id: number | null;
+  reviewer_name: string;
+  is_guest: boolean;
+  guest_name: string | null;
+  guest_email: string | null;
   product_id: number;
-  order_item_id: number;
+  order_item_id: number | null;
   rating: number;
   comment: string;
   is_approved: boolean;

@@ -22,19 +22,15 @@ export const QuantitySelector = ({
   const [value, setValue] = useState(defaultValue);
 
   const handleDecrease = () => {
-    setValue((prev) => {
-      const next = prev > min ? prev - 1 : prev;
-      onChange?.(next);
-      return next;
-    });
+    const next = value > min ? value - 1 : value;
+    setValue(next);
+    onChange?.(next);
   };
 
   const handleIncrease = () => {
-    setValue((prev) => {
-      const next = prev + 1;
-      onChange?.(next);
-      return next;
-    });
+    const next = value + 1;
+    setValue(next);
+    onChange?.(next);
   };
 
   return (
@@ -50,7 +46,7 @@ export const QuantitySelector = ({
         className="quantity-selector__value"
         value={value}
         min={min}
-        size={1}
+        style={{ width: `${String(value).length}ch` }}
         aria-label="Quantity"
         readOnly
       />

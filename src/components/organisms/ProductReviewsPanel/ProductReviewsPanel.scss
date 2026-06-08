@@ -12,8 +12,13 @@
   }
 }
 
-.btn--load-more{
+.btn--load-more {
   margin-top: 15px;
+  padding: 15px 45px;
   justify-self: center;
   display: block;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 14px 36px;
+  }
 }
