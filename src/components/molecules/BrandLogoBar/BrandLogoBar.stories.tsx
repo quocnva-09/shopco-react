@@ -15,7 +15,7 @@ const meta: Meta<typeof BrandLogoBar> = {
 export default meta;
 type Story = StoryObj<typeof BrandLogoBar>;
 
-// 1. Desktop — 5 logo nằm ngang trên nền đen
+// 1. Desktop — 5 logos in a row on a dark background
 export const Default: Story = {
   render: (args) => (
     <div style={{ padding: '0 100px', backgroundColor: '#f0eeed' }}>
@@ -38,7 +38,7 @@ export const MobileView: Story = {
   ),
 };
 
-// 3. Ít logo hơn (kiểm tra spacing)
+// 3. Fewer logos (check spacing)
 export const ThreeLogos: Story = {
   args: {
   },

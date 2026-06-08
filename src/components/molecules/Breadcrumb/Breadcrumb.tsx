@@ -8,7 +8,7 @@ import "./Breadcrumb.scss";
 export interface BreadcrumbItem {
   /** Display label */
   label: string;
-  /** URL path — nếu undefined → item cuối (active, không phải link) */
+  /** URL path — if undefined → this is the last (active) item, not a link */
   href?: string;
 }
 
@@ -32,7 +32,7 @@ export const Breadcrumb = ({
 
         return (
           <span key={item.label}>
-            {/* Separator trước mỗi item (trừ item đầu) */}
+            {/* Separator before each item (except the first) */}
             {index > 0 && (
               <Icon
                 svgName="vector-direct-right"
@@ -41,7 +41,7 @@ export const Breadcrumb = ({
               />
             )}
 
-            {/* Link hoặc Active text */}
+            {/* Link or Active text */}
             {item.href && !isLast ? (
               <TextLink href={item.href} className="breadcrumb__item">
                 {item.label}

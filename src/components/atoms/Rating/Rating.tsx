@@ -24,7 +24,7 @@ export const Rating = ({
   const roundedValue = Math.round(value * 2) / 2;
   const displayRating = roundedValue % 1 === 0 ? `${roundedValue}.0` : roundedValue;
 
-  // 2. Tính toán số lượng sao thực tế cần vẽ
+  // 2. Calculate the actual number of stars to render
   const fullStarsCount = Math.floor(roundedValue);
   const hasHalfStar = roundedValue % 1 !== 0;
 

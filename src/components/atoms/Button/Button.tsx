@@ -30,7 +30,7 @@ export const Button = ({
       type={type}
       className={clsx(
         "button",
-        `button--${variant}-${colorScheme}`, // Output chuỗi tĩnh: "button--solid-dark", "button--outline-dark"
+        `button--${variant}-${colorScheme}`, // Outputs a static class string e.g. "button--solid-dark", "button--outline-dark"
         fullWidth && "button--full-width",
         icon && "button--icon",
         className,

@@ -8,16 +8,16 @@ const meta: Meta<typeof Rating> = {
   argTypes: {
     value: {
       control: { type: 'number', min: 0, max: 5, step: 0.5 },
-      description: 'Số điểm đánh giá (Hỗ trợ bước nhảy 0.5 để test nửa sao)',
+      description: 'Rating score (supports 0.5 step increments for testing half stars)',
     },
     variant: {
       control: 'inline-radio',
       options: ['default', 'row'],
-      description: 'Biến thể hiển thị: default (trong card) hoặc row (trong bộ lọc có hover)',
+      description: 'Display variant: default (inside card) or row (inside a filter with hover)',
     },
     showText: {
       control: 'boolean',
-      description: 'Bật/tắt hiển thị chữ số kèm theo (ví dụ: 4.5/5)',
+      description: 'Toggle visibility of the numeric score text (e.g. 4.5/5)',
     },
   },
   args: {
@@ -30,7 +30,7 @@ const meta: Meta<typeof Rating> = {
 export default meta;
 type Story = StoryObj<typeof Rating>;
 
-// 1. Trạng thái mặc định dùng trong ProductCard (Có text điểm số, không hover)
+// 1. Default state used in ProductCard (with score text, no hover)
 export const DefaultInCard: Story = {
   args: {
     value: 4.5,
@@ -39,7 +39,7 @@ export const DefaultInCard: Story = {
   },
 };
 
-// 2. Trạng thái test Nửa Sao (4.5) và Sao Chẵn (4.0)
+// 2. Test half star (4.5) and whole star (4.0)
 export const FullStarOnly: Story = {
   args: {
     value: 4.0,
@@ -56,22 +56,22 @@ export const WithHalfStar: Story = {
   },
 };
 
-// 3. Biến thể hàng chọn trong Bộ lọc (Rating Row - Có hiệu ứng Hover mờ đi)
+// 3. Row variant for Filter selector (with fade hover effect)
 export const FilterRow: Story = {
   args: {
     value: 4.0,
     variant: 'row',
-    showText: false, // Thường bộ lọc bên sidebar chỉ cần hàng sao, không cần text /5
+    showText: false, // Filter sidebar usually only needs the star row, no /5 text
   },
   render: (args) => (
     <div style={{ maxWidth: '200px', padding: '10px', border: '1px dashed #ccc' }}>
-      <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>Rê chuột vào để check hover opacity:</p>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>Hover over to check hover opacity:</p>
       <Rating {...args} />
     </div>
   ),
 };
 
-// 4. Trạng thái ẩn phần chữ số (Chỉ hiển thị cụm sao thuần túy)
+// 4. Hidden numeric text state (stars only, no score text)
 export const StarsOnly: Story = {
   args: {
     value: 5.0,

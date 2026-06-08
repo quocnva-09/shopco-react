@@ -9,9 +9,9 @@ export type TextProps = HTMLAttributes<HTMLElement> & {
   lineClamp?: number;
   showTooltip?: boolean;
   tooltipClassName?: string;
-  /** Số dòng hiển thị trên mobile (override lineClamp). Nếu không truyền → giữ nguyên lineClamp */
+  /** Number of lines to show on mobile (overrides lineClamp). If not provided, lineClamp is used as-is */
   mobileLineClamp?: number;
-  /** Hiện tooltip trên mobile? Nếu không truyền → theo showTooltip */
+  /** Show tooltip on mobile? If not provided, follows showTooltip */
   mobileShowTooltip?: boolean;
   children: React.ReactNode;
 };
@@ -27,10 +27,10 @@ export const Text = ({
   mobileShowTooltip,
   ...rest
 }: TextProps) => {
-  // Trích xuất chuỗi chữ thuần từ children để làm nội dung Tooltip
+  // Extract plain text from children to use as Tooltip content
   const textContent = typeof children === "string" ? children : "";
 
-  // Thẻ text core xử lý cắt chữ
+  // Core text element responsible for text truncation
   const textElement = (
     <Component
       className={clsx(
@@ -56,10 +56,10 @@ export const Text = ({
     </Component>
   );
 
-  // Nếu không cần tooltip, render thẳng thẻ text để tránh dư thừa DOM wrapper
+  // If no tooltip is needed, render the text element directly to avoid unnecessary DOM wrapper
   if (!showTooltip) return textElement;
 
-  // Nếu có tooltip, bọc trong wrapper quản lý hover
+  // If tooltip is present, wrap in the hover-management wrapper
   return (
     <div
       className={clsx(

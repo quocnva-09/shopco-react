@@ -31,7 +31,7 @@
 
     @media (max-width: $breakpoint-tablet) {
       display: block;
-      order: 1; // Đứng đầu tiên trên mobile
+      order: 1; // First item on mobile
     }
   }
 
@@ -44,7 +44,7 @@
     white-space: nowrap;
 
     @media (max-width: $breakpoint-tablet) {
-      order: 2; // Đứng thứ 2 trên mobile
+      order: 2; // Second item on mobile
       margin-right: auto;
       font-size: 25px;
     }

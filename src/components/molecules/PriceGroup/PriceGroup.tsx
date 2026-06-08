@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
-import { PriceText } from "../../atoms/PriceText/PriceText"; // Import Atom con đã có format xịn
+import { PriceText } from "../../atoms/PriceText/PriceText"; // PriceText atom with built-in currency formatting
 import { DEFAULT_CURRENCY } from "@/consts/config";
 import "./PriceGroup.scss";
 

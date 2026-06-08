@@ -12,7 +12,7 @@ const meta: Meta<typeof PriceText> = {
     },
     currency: {
       control: 'text',
-      description: 'Mã tiền tệ ISO (Ví dụ: USD, EUR, VND)',
+      description: 'ISO currency code (e.g. USD, EUR, VND)',
     },
   },
   args: {
@@ -28,14 +28,14 @@ type Story = StoryObj<typeof PriceText>;
 export const CurrentPrice: Story = {
   args: {
     variant: 'current',
-    value: 1250, // Test xem có tự thêm dấu phẩy phân tách hàng nghìn ($1,250) không
+    value: 1250, // Test whether the formatter adds thousands separator ($1,250) automatically
   },
 };
 
 export const OldPrice: Story = {
   args: {
     variant: 'old',
-    value: 1600, // Test xem có ăn gạch ngang và đổi màu xám không
+    value: 1600, // Test whether the strikethrough and grey color are applied correctly
   },
 };
 
@@ -43,6 +43,6 @@ export const OtherCurrency: Story = {
   args: {
     variant: 'current',
     value: 100,
-    currency: 'EUR', // Test độ linh hoạt của hàm với đồng Euro (€100)
+    currency: 'EUR', // Test formatter flexibility with Euro currency (€100)
   },
 };

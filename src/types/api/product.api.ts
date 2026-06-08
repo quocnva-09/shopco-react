@@ -38,7 +38,8 @@ export interface ProductApi {
   slug: string;
   description: string;
   price: string;
-  price_discount: string | null;
+  price_discount: number | null;
+  final_price: number;
   variants: ProductVariantApi[];
   is_active: boolean;
   rating_avg?: number;

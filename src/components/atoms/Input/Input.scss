@@ -22,7 +22,7 @@
     color: rgba($black-color, 0.4);
   }
 
-  // Trạng thái khóa không cho nhập liệu
+  // Disabled state — blocks user input
   &:disabled {
     background-color: $color-neutral;
     color: $text-muted;
@@ -30,7 +30,7 @@
     opacity: 0.6;
   }
 
-  // Trạng thái báo lỗi dữ liệu (khi kết hợp validation)
+  // Invalid state — shown when combined with form validation
   &[aria-invalid="true"] {
     border-color: $color-danger;
     background-color: rgba($color-danger-surface, 0.2);

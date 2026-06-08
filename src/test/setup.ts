@@ -1,3 +1,3 @@
 // src/test/setup.ts
-// Chạy trước mỗi test file – import jest-dom matchers vào Vitest
+// Runs before each test file — imports jest-dom matchers into Vitest
 import "@testing-library/jest-dom";

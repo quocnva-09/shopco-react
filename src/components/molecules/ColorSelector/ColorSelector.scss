@@ -10,23 +10,23 @@
   }
 
   &__label {
-    // Label là wrapper trống — visual do IconButton xử lý
+    // Label is an empty wrapper — visual is handled by IconButton
     cursor: pointer;
   }
 
-  // IconButton swatch: hình tròn, backgroundColor inject từ prop
+  // IconButton swatch: circular, backgroundColor injected via prop
   &__swatch {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     border: 1px solid $color-neutral;
-    pointer-events: none; // Để label xử lý click → toggle radio
+    pointer-events: none; // Let the label handle click → toggle radio
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    // Checkmark icon (vector-tick) — ẩn mặc định
+    // Checkmark icon (vector-tick) — hidden by default
     .icon {
       opacity: 0;
       transition: opacity 0.2s ease;

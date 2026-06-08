@@ -14,20 +14,20 @@
   }
 
   &__label {
-    // Label là wrapper trống — toàn bộ visual do Button atom xử lý
+    // Label is an empty wrapper — all visual is handled by the Button atom
     cursor: pointer;
   }
 
-  // Button bên trong: override padding cho khớp design size pill
+  // Inner Button: override padding to match the design size pill
   &__button {
-    pointer-events: none; // Để label xử lý click → toggle radio
+    pointer-events: none; // Let the label handle click → toggle radio
     padding: 12px 24px;
 
     @media (max-width: $breakpoint-tablet) {
       padding: 10px 20px;
     }
 
-    // Khi radio checked → override Button sang solid-dark styling
+    // When radio is checked → override Button to solid-dark styling
     &.is-active{
       background-color: $black-color !important;
       color: #fff !important;

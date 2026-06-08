@@ -16,7 +16,7 @@
     }
   }
 
-  // Mobile: override lineClamp khi có mobileLineClamp
+  // Mobile: override lineClamp when mobileLineClamp is set
   &--mobile-clamp {
     @media (max-width: $breakpoint-tablet) {
       .heading-text--ellipsis,
@@ -31,7 +31,7 @@
     }
   }
 
-  // Mobile: ẩn tooltip
+  // Mobile: hide tooltip
   &--mobile-no-tooltip {
     @media (max-width: $breakpoint-tablet) {
       .tooltip {

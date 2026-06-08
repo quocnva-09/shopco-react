@@ -1,6 +1,6 @@
 @use "@/styles/abstracts/variables" as *;
 
-// Khối bọc điều hướng hover hiển thị Tooltip toàn cục cho Text
+// Hover-triggered wrapper that shows the global Tooltip for Text
 .text-wrapper {
   position: relative;
   max-width: 100%;
@@ -15,7 +15,7 @@
     }
   }
 
-  // Mobile: ẩn tooltip
+  // Mobile: hide tooltip
   &--mobile-no-tooltip {
     @media (max-width: $breakpoint-tablet) {
       .tooltip {
@@ -25,11 +25,11 @@
   }
 }
 
-// Lõi xử lý định dạng Text
+// Core Text formatting block
 .text {
   margin: 0;
 
-  // Trạng thái cắt chữ nhiều dòng động bằng Biến CSS (CSS Variable)
+  // Multi-line clamp using a CSS Variable
   &--clamp {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -38,7 +38,7 @@
     text-overflow: ellipsis;
   }
 
-  // Mobile: override số dòng clamp
+  // Mobile: override the clamp line count
   &--mobile-clamp {
     @media (max-width: $breakpoint-tablet) {
       display: -webkit-box;

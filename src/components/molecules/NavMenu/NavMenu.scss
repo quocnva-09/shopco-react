@@ -15,7 +15,7 @@
     overflow-y: auto;
 
     &.is-open {
-      left: 0; // Trượt menu ra ngoài khi có trạng thái mở
+      left: 0; // Slide menu into view when the open state is active
     }
   }
 

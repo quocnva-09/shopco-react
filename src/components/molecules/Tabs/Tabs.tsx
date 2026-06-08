@@ -45,7 +45,7 @@ export const Tabs = ({
             "tabs__item",
             tab.id === activeTab && "tabs__item--active"
           )}
-          // TODO: onClick sẽ gọi onTabChange khi implement useState
+          // TODO: onClick will call onTabChange once useState is implemented
           onClick={() => onTabChange?.(tab.id)}
         >
           {tab.label}

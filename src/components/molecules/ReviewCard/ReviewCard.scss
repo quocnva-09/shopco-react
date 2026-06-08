@@ -21,7 +21,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     @include flex-between;
     align-items: center;
 
-    // Stars lớn hơn trên desktop, thu nhỏ về default của ProductCard trên mobile
+    // Stars are larger on desktop, scaled down to ProductCard defaults on mobile
     .rating {
       --star-size: 23px;
       --star-gap: 6.5px;

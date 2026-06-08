@@ -8,7 +8,7 @@ export type NavMenuProps = ComponentPropsWithoutRef<"nav"> & {
   isOpenMobile?: boolean;
 };
 
-// Khởi tạo dữ liệu tĩnh mẫu (Mock Data)
+// Static mock data
 const SHOP_DROPDOWN_ITEMS = [
   { label: "Men's Clothes", href: "/shop/men" },
   { label: "Women's Clothes", href: "/shop/women" },

@@ -72,7 +72,7 @@ export const Image = ({
   const finalIsLoaded = externalIsLoaded ?? internalIsLoaded;
   const finalIsError = externalIsError ?? internalIsError;
 
-  // Xử lý Style inline
+  // Build inline styles
   const baseStyles: CSSProperties = {
     width,
     height,
@@ -88,7 +88,7 @@ export const Image = ({
     finalIsError && errorClassName,
   );
 
-  // TRƯỜNG HỢP 1: Render thuần thẻ <img> không có div bọc ngoài
+  // CASE 1: Render a bare <img> tag without an outer wrapper div
   if (!renderWrapper) {
     return (
       <img
@@ -103,7 +103,7 @@ export const Image = ({
     );
   }
 
-  // TRƯỜNG HỢP 2: Render đầy đủ wrapper hỗ trợ Trạng thái Loading / Placeholder
+  // CASE 2: Render full wrapper with Loading / Placeholder state support
   return (
     <div
       className={clsx(

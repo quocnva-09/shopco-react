@@ -13,16 +13,16 @@ const meta: Meta<typeof SearchBar> = {
 export default meta;
 type Story = StoryObj<typeof SearchBar>;
 
-// 1. Trạng thái hiển thị trên Desktop
+// 1. Desktop view
 export const Desktop: Story = {
   render: () => (
-    <div style={{ width: '400px' }}> {/* Bọc div để giới hạn khung test */}
+    <div style={{ width: '400px' }}> {/* Wrapper div to constrain the test container */}
       <SearchBar />
     </div>
   ),
 };
 
-// 2. Trạng thái hiển thị trên Mobile (Sử dụng viewport giả lập của Storybook)
+// 2. Mobile view (using Storybook's simulated viewport)
 export const Mobile: Story = {
   parameters: {
     viewport: {

@@ -8,19 +8,19 @@ const meta: Meta<typeof PriceGroup> = {
   argTypes: {
     currentPrice: {
       control: 'number',
-      description: 'Giá hiện tại sau khi giảm (Bắt buộc)',
+      description: 'Current price after discount (required)',
     },
     originalPrice: {
       control: 'number',
-      description: 'Giá gốc trước khi giảm (Không bắt buộc)',
+      description: 'Original price before discount (optional)',
     },
     discountPercentage: {
       control: { type: 'number', min: 0, max: 100, step: 1 },
-      description: 'Phần trăm giảm giá hiển thị dạng tag (Không bắt buộc)',
+      description: 'Discount percentage shown as a badge tag (optional)',
     },
     isDetail: {
       control: 'boolean',
-      description: 'Cờ kích hoạt kích thước lớn và khoảng cách của trang Product Detail',
+      description: 'Flag to activate the large size and spacing of the Product Detail page',
     },
   },
   args: {
@@ -34,14 +34,14 @@ const meta: Meta<typeof PriceGroup> = {
 export default meta;
 type Story = StoryObj<typeof PriceGroup>;
 
-// 1. Trạng thái mặc định hiển thị trong ProductCard ngoài Grid danh sách
+// 1. Default state in a ProductCard within the grid list
 export const DefaultInCard: Story = {
   args: {
     isDetail: false,
   },
 };
 
-// 2. Trạng thái phóng to dùng trong trang Chi tiết sản phẩm (Product Detail)
+// 2. Enlarged state used on the Product Detail page
 export const InProductDetail: Story = {
   args: {
     currentPrice: 260,
@@ -51,7 +51,7 @@ export const InProductDetail: Story = {
   },
 };
 
-// 3. Trạng thái sản phẩm bán đúng giá (Không có chương trình giảm giá)
+// 3. Full-price product (no active discount)
 export const NoDiscount: Story = {
   args: {
     currentPrice: 200,
@@ -61,7 +61,7 @@ export const NoDiscount: Story = {
   },
 };
 
-// 4. Trạng thái không giảm giá nhưng nằm trong trang Detail lớn
+// 4. No discount but displayed inside a large Detail page
 export const NoDiscountInDetail: Story = {
   args: {
     currentPrice: 200,

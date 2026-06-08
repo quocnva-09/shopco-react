@@ -11,9 +11,9 @@ export type HeadingProps = ComponentPropsWithoutRef<"h1"> & {
   tooltipClassName?: string;
   fontSize?: string | number;
   fontFamily?: string;
-  /** Số dòng hiển thị trên mobile (override lineClamp). Nếu không truyền → giữ nguyên lineClamp */
+  /** Number of lines to show on mobile (overrides lineClamp). If not provided, lineClamp is used as-is */
   mobileLineClamp?: number;
-  /** Hiện tooltip trên mobile? Nếu không truyền → theo showTooltip */
+  /** Show tooltip on mobile? If not provided, follows showTooltip */
   mobileShowTooltip?: boolean;
 };
 

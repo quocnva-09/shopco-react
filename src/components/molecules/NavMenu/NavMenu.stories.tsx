@@ -10,14 +10,14 @@ const meta: Meta<typeof NavMenu> = {
 export default meta;
 type Story = StoryObj<typeof NavMenu>;
 
-// 1. Giao diện hàng ngang trên Desktop
+// 1. Horizontal layout on Desktop
 export const Desktop: Story = {
   args: {
     isOpenMobile: false,
   },
 };
 
-// 2. Sidebar mobile khi đóng (nằm ngoài màn hình, ẩn)
+// 2. Mobile sidebar when closed (off-screen, hidden)
 export const MobileClosed: Story = {
   parameters: {
     viewport: { defaultViewport: 'mobile1' },
@@ -27,7 +27,7 @@ export const MobileClosed: Story = {
     (Story) => (
       <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#f0f0f0' }}>
         <Story />
-        <p style={{ padding: '20px', color: '#666' }}>Sidebar đang ẩn (trượt ra ngoài màn hình bên trái)</p>
+        <p style={{ padding: '20px', color: '#666' }}>Sidebar is hidden (slid off the left edge of the screen)</p>
       </div>
     ),
   ],
@@ -36,7 +36,7 @@ export const MobileClosed: Story = {
   },
 };
 
-// 3. Sidebar mobile khi mở — kiểm tra layout & dropdown hiển thị
+// 3. Mobile sidebar when open — check layout & dropdown rendering
 export const MobileOpen: Story = {
   parameters: {
     viewport: { defaultViewport: 'mobile1' },
@@ -44,7 +44,7 @@ export const MobileOpen: Story = {
   },
   decorators: [
     (Story) => (
-      // Wrapper cần position:relative và overflow:hidden để .nav fixed bám vào
+      // Wrapper needs position:relative and overflow:hidden so the fixed .nav anchors correctly
       <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: 'rgba(0,0,0,0.5)' }}>
         <Story />
       </div>
@@ -55,26 +55,26 @@ export const MobileOpen: Story = {
   },
 };
 
-// 4. Mobile mở + Dropdown đang mở — kiểm thử xung đột CSS giữa NavMenu và DropdownMenu
-// Vì DropdownMenu dùng state nội bộ, story này chỉ mô phỏng đúng context,
-// bạn cần click vào "Shop" để mở dropdown và quan sát hành vi.
+// 4. Mobile open + Dropdown open — test for CSS conflicts between NavMenu and DropdownMenu
+// Since DropdownMenu uses internal state, this story simulates the correct context;
+// you need to click "Shop" to open the dropdown and observe the behavior.
 export const MobileOpenDropdownTest: Story = {
-  name: '🔍 Mobile — Kiểm tra Dropdown trong Sidebar',
+  name: '🔍 Mobile — Test Dropdown inside Sidebar',
   parameters: {
     viewport: { defaultViewport: 'mobile1' },
     layout: 'fullscreen',
     docs: {
       description: {
         story: `
-**Mục đích kiểm thử:** Xác nhận dropdown "Shop" hiển thị đúng bên trong sidebar mobile.
+**Test Purpose:** Confirm that the "Shop" dropdown renders correctly inside the mobile sidebar.
 
-**Các bước:**
-1. Story render NavMenu ở trạng thái mở (sidebar trượt vào).
-2. Click vào **"Shop"** để mở dropdown.
-3. Kiểm tra:
-   - ✅ Dropdown items hiển thị bên dưới "Shop" (position: static)
-   - ✅ Sidebar scroll được nếu nội dung vượt chiều cao
-   - ❌ Dropdown **không bị clipped** bởi overflow của sidebar
+**Steps:**
+1. Story renders NavMenu in open state (sidebar slides in).
+2. Click **"Shop"** to open the dropdown.
+3. Verify:
+   - ✅ Dropdown items appear below "Shop" (position: static)
+   - ✅ Sidebar is scrollable if content overflows
+   - ❌ Dropdown is **not clipped** by the sidebar's overflow
         `,
       },
     },

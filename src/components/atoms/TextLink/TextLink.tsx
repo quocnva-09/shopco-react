@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import "./TextLink.scss";
 
-// 1. Kế thừa toàn bộ thuộc tính tiêu chuẩn của thẻ <a> (id, target, rel, onClick, style...)
+// 1. Extends all standard <a> element attributes (id, target, rel, onClick, style, etc.)
 export type TextLinkProps = ComponentPropsWithoutRef<"a"> & {
-  href: string; // Ép thuộc tính href bắt buộc phải truyền đối với một liên kết
+  href: string; // Enforces href as a required prop for a link element
   children: React.ReactNode;
 };
 
@@ -18,30 +18,30 @@ export const TextLink = ({
   href,
   className,
   children,
-  ...rest // 2. Gom toàn bộ các thuộc tính HTML tiêu chuẩn còn lại (target, rel, onClick, id...) vào túi rest
+  ...rest // 2. Collects all remaining standard HTML attributes (target, rel, onClick, id, etc.) into rest
 }: TextLinkProps) => {
   const internal = isInternal(href);
   const combinedClassName = clsx("text-link", className);
 
-  // Trường hợp 1: Đường dẫn nội bộ -> Dùng <Link> của React Router để chuyển trang không bị load lại web
+  // Case 1: Internal path → use React Router <Link> for client-side navigation (no full page reload)
   if (internal) {
     return (
       <Link 
         to={href} 
         className={combinedClassName} 
-        {...rest} // 3. Đường ống trung chuyển đẩy tự động target, rel... vào đây
+        {...rest} // 3. Forwards target, rel, etc. automatically to <Link>
       >
         {children}
       </Link>
     );
   }
 
-  // Trường hợp 2: Đường dẫn bên ngoài (ví dụ: link facebook, google...) -> Dùng thẻ <a> truyền thống
+  // Case 2: External URL (e.g. facebook, google, etc.) → use a traditional <a> tag
   return (
     <a 
       href={href} 
       className={combinedClassName} 
-      {...rest} // 3. Đẩy tự động target, rel... xuống thẻ <a> gốc
+      {...rest} // 3. Forwards target, rel, etc. down to the native <a> element
     >
       {children}
     </a>

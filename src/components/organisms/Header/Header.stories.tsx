@@ -9,27 +9,27 @@ const meta: Meta<typeof Header> = {
     layout: "fullscreen",
   },
   argTypes: {
-    onCartClick: { action: "Giỏ hàng được click" },
-    onProfileClick: { action: "Hồ sơ người dùng được click" },
+    onCartClick: { action: "Cart icon clicked" },
+    onProfileClick: { action: "Profile icon clicked" },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-// 1. Giao diện Header chuẩn trên Desktop
+// 1. Standard Header layout on Desktop
 export const DesktopView: Story = {
   render: (args) => (
     <div style={{ backgroundColor: "#f0f0f0", minHeight: "300px" }}>
       <Header {...args} />
       <div style={{ padding: "40px", textAlign: "center", color: "#666" }}>
-        [ Vùng nội dung Body của trang web bên dưới Header ]
+        [ Page body content below the Header ]
       </div>
     </div>
   ),
 };
 
-// 2. Giao diện Header trên Mobile — trạng thái ban đầu (hamburger hiển thị)
+// 2. Header layout on Mobile — initial state (hamburger visible)
 export const MobileView: Story = {
   parameters: {
     viewport: { defaultViewport: "mobile1" },
@@ -38,37 +38,37 @@ export const MobileView: Story = {
     <div style={{ backgroundColor: "#f0f0f0", minHeight: "300px" }}>
       <Header {...args} />
       <div style={{ padding: "20px", color: "#666" }}>
-        Click icon hamburger ☰ để mở sidebar navigation
+        Click the hamburger icon ☰ to open the sidebar navigation
       </div>
     </div>
   ),
 };
 
-// 3. Kiểm tra Sidebar mở trên Mobile + Dropdown trong Sidebar
-// Đây là story quan trọng nhất để debug xung đột CSS giữa .nav và .dropdown__menu
+// 3. Sidebar open on Mobile + Dropdown inside Sidebar
+// The most important story for debugging CSS conflicts between .nav and .dropdown__menu
 export const MobileSidebarWithDropdown: Story = {
-  name: "🔍 Mobile — Sidebar mở + Dropdown Test",
+  name: "🔍 Mobile — Sidebar open + Dropdown Test",
   parameters: {
     viewport: { defaultViewport: "mobile1" },
     layout: "fullscreen",
     docs: {
       description: {
         story: `
-**Mục đích:** Kiểm tra xung đột CSS giữa \`.nav\` (NavMenu) và \`.dropdown__menu\` (DropdownMenu).
+**Purpose:** Test CSS conflicts between \`.nav\` (NavMenu) and \`.dropdown__menu\` (DropdownMenu).
 
-**Các bước kiểm thử:**
-1. Click icon **☰ (hamburger)** → Sidebar trượt vào từ trái.
-2. Click vào **"Shop"** trong sidebar → Dropdown mở ra.
-3. Quan sát:
-   - ✅ Các item "Men's Clothes", "Women's Clothes" hiển thị bên dưới "Shop"
-   - ✅ Sidebar scroll được nếu nội dung tràn
-   - ❌ Dropdown **không bị ẩn hay cắt bởi overflow** của sidebar
+**Test steps:**
+1. Click the **☰ (hamburger)** icon → Sidebar slides in from the left.
+2. Click **"Shop"** in the sidebar → Dropdown opens.
+3. Observe:
+   - ✅ Items "Men's Clothes", "Women's Clothes" appear below "Shop"
+   - ✅ Sidebar is scrollable if content overflows
+   - ❌ Dropdown is **not hidden or clipped by sidebar overflow**
         `,
       },
     },
   },
   render: (args) => (
-    // height: 100vh để .nav { position: fixed } render đúng trong Storybook iframe
+    // height: 100vh so that .nav { position: fixed } renders correctly inside the Storybook iframe
     <div
       style={{
         height: "100vh",
@@ -79,14 +79,13 @@ export const MobileSidebarWithDropdown: Story = {
     >
       <Header {...args} />
       <div style={{ padding: "20px", color: "#666" }}>
-        <strong>Hướng dẫn:</strong> Click ☰ để mở sidebar, sau đó click "Shop"
-        để kiểm tra dropdown
+        <strong>Instructions:</strong> Click ☰ to open the sidebar, then click "Shop" to test the dropdown
       </div>
     </div>
   ),
 };
 
-// 4. Header trong kịch bản Sticky (cuộn trang)
+// 4. Header in Sticky scenario (page scroll)
 export const StickyTest: Story = {
   render: (args) => (
     <div style={{ backgroundColor: "#f0f0f0", height: "1500px" }}>
@@ -94,7 +93,7 @@ export const StickyTest: Story = {
         <Header {...args} />
       </div>
       <div style={{ padding: "60px 20px", lineHeight: "3" }}>
-        <h3>Cuộn chuột xuống để kiểm tra tính năng bám đỉnh (Sticky):</h3>
+        <h3>Scroll down to test the sticky behavior:</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
         <p>
           Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...

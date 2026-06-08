@@ -14,7 +14,7 @@ const meta: Meta<typeof FeedbackSection> = {
   argTypes: {
     title: {
       control: "text",
-      description: "Tiêu đề section",
+      description: "Section title",
     },
   },
   args: {

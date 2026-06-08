@@ -3,13 +3,13 @@
 
 // -----------------------------------------------------------------------------
 // Spinner — Loading indicator atom
-// Variants: sizes (sm | md | lg) và color (inherit | white)
+// Variants: sizes (sm | md | lg) and color (inherit | white)
 // -----------------------------------------------------------------------------
 
 .spinner {
   @include flex-center;
 
-  // Vòng tròn SVG xoay
+  // Rotating SVG circle
   &__svg {
     animation: spinner-rotate 0.8s linear infinite;
   }
@@ -49,7 +49,7 @@
     color: $white-color;
   }
 
-  // "inherit" → dùng màu của parent, không cần override
+  // "inherit" → uses the parent color, no override needed
 }
 
 // --- Keyframes ---

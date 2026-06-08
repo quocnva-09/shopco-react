@@ -10,7 +10,7 @@ const meta: Meta<typeof StyleCategoryCard> = {
   tags: ['autodocs'],
   argTypes: {
     category: {
-      description: 'Dữ liệu category (label, image, variant)',
+      description: 'Category data (label, image, variant)',
     },
   },
   args: {
@@ -41,7 +41,7 @@ export const Formal: Story = {
   ),
 };
 
-// 3. All variants — so sánh kích thước
+// 3. All variants — compare sizes side by side
 export const AllVariants: Story = {
   render: () => (
     <div style={{

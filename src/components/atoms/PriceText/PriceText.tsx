@@ -9,7 +9,7 @@ export type PriceTextVariant = 'current' | 'old';
 export type PriceTextProps = ComponentPropsWithoutRef<'span'> & {
   value: number;
   currency?:string;
-  variant?: PriceTextVariant; // 'current' (màu đen) hoặc 'old' (màu xám gạch ngang)
+  variant?: PriceTextVariant; // 'current' (black, normal) or 'old' (grey, strikethrough)
 };
 
 export const PriceText = ({

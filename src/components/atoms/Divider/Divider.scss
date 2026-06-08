@@ -4,7 +4,7 @@
   flex-shrink: 0;
   background-color: rgba($black-color, 0.1);
 
-  // --- Vertical (dùng trong StatsBar, sidebar...) ---
+  // --- Vertical (used in StatsBar, sidebar, etc.) ---
   &--vertical {
     width: 1px;
     height: 74px;
@@ -14,7 +14,7 @@
     }
   }
 
-  // --- Horizontal (dùng trong footer, section separator...) ---
+  // --- Horizontal (used in footer, section separator, etc.) ---
   &--horizontal {
     width: 100%;
     height: 1px;

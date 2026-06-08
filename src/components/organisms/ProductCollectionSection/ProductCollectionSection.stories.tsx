@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ProductCollectionSection } from './ProductCollectionSection';
 import type { ProductCardData } from '@/components/molecules/ProductCard';
 
-// Mock data — 8 sản phẩm để test slider navigation
+// Mock data — 8 products to test slider navigation
 const mockProducts: ProductCardData[] = [
   {
     id: 1,
@@ -80,19 +80,19 @@ const meta: Meta<typeof ProductCollectionSection> = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Tiêu đề section',
+      description: 'Section title',
     },
     ctaLabel: {
       control: 'text',
-      description: 'Nội dung nút CTA bên dưới',
+      description: 'CTA button label shown below the list',
     },
     enableSlider: {
       control: 'boolean',
-      description: 'Bật/tắt chế độ slider (mũi tên + scroll)',
+      description: 'Enable or disable slider mode (arrows + scroll)',
     },
     visibleCount: {
       control: { type: 'number', min: 1, max: 8 },
-      description: 'Số lượng product hiển thị trên 1 lần xem (desktop)',
+      description: 'Number of products visible per view (desktop)',
     },
     onCtaClick: { action: 'View All clicked' },
   },
@@ -108,7 +108,7 @@ const meta: Meta<typeof ProductCollectionSection> = {
 export default meta;
 type Story = StoryObj<typeof ProductCollectionSection>;
 
-// 1. Default — 4 sản phẩm với slider bật
+// 1. Default — 4 products with slider enabled
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
@@ -117,7 +117,7 @@ export const Default: Story = {
   ),
 };
 
-// 2. Many Products — 8 sản phẩm, test slider navigation
+// 2. Many Products — 8 products, test slider navigation
 export const ManyProducts: Story = {
   args: {
     title: 'TOP SELLING',

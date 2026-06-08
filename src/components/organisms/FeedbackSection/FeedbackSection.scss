@@ -57,7 +57,7 @@
     overflow-x: clip;
     overflow-y: visible;
 
-    // Pseudo elements tạo hiệu ứng blur
+    // Pseudo-elements that create the blur fade effect
     &::before,
     &::after {
       content: "";

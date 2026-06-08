@@ -6,9 +6,9 @@ import ErrorBoundary from "./ErrorBoundary";
 // ---------- Helper ----------
 
 /**
- * Component cố tình throw lỗi trong render phase.
- * Đây là cách duy nhất để trigger ErrorBoundary một cách đáng tin cậy:
- * lỗi PHẢI xảy ra trong quá trình render, không phải trong event handler.
+ * A component that intentionally throws during the render phase.
+ * This is the only reliable way to trigger an ErrorBoundary:
+ * the error MUST occur during rendering, not inside an event handler.
  */
 const BuggyWidget = (): never => {
   throw new Error("Simulated render error");
@@ -16,8 +16,8 @@ const BuggyWidget = (): never => {
 
 // ---------- Setup ----------
 
-// Vitest sẽ in stack trace của lỗi bị bắt ra stderr → làm nhiễu output.
-// Spy và silence console.error trong tất cả các test.
+// Vitest prints the caught error's stack trace to stderr, which pollutes test output.
+// Spy on and silence console.error for all tests.
 beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
@@ -30,33 +30,33 @@ afterEach(() => {
 
 describe("ErrorBoundary", () => {
   // ------------------------------------------------------------------ //
-  // CASE 1: Không có lỗi → render children bình thường
+  // CASE 1: No error — renders children normally
   // ------------------------------------------------------------------ //
-  it("renders children khi không có lỗi", () => {
+  it("renders children when there is no error", () => {
     render(
       <ErrorBoundary>
-        <p>Nội dung bình thường</p>
+        <p>Normal content</p>
       </ErrorBoundary>,
     );
 
-    expect(screen.getByText("Nội dung bình thường")).toBeInTheDocument();
+    expect(screen.getByText("Normal content")).toBeInTheDocument();
   });
 
   // ------------------------------------------------------------------ //
-  // CASE 2: Children throw → hiển thị Fallback UI mặc định
+  // CASE 2: Children throw — renders default Fallback UI
   // ------------------------------------------------------------------ //
-  it("hiển thị fallback UI mặc định khi children throw lỗi trong render", () => {
+  it("shows the default fallback UI when a child throws during render", () => {
     render(
       <ErrorBoundary>
         <BuggyWidget />
       </ErrorBoundary>,
     );
 
-    // Phải có role="alert" để đảm bảo a11y
+    // Must have role="alert" to satisfy a11y requirements
     expect(screen.getByRole("alert")).toBeInTheDocument();
   });
 
-  it("hiển thị thông báo lỗi trong fallback UI", () => {
+  it("shows the error message in the fallback UI", () => {
     render(
       <ErrorBoundary>
         <BuggyWidget />
@@ -66,7 +66,7 @@ describe("ErrorBoundary", () => {
     expect(screen.getByText(/Simulated render error/i)).toBeInTheDocument();
   });
 
-  it("hiển thị nút Retry trong fallback UI", () => {
+  it("shows the Retry button in the fallback UI", () => {
     render(
       <ErrorBoundary>
         <BuggyWidget />
@@ -79,25 +79,25 @@ describe("ErrorBoundary", () => {
   });
 
   // ------------------------------------------------------------------ //
-  // CASE 3: Custom fallback prop → ưu tiên render prop, bỏ qua default
+  // CASE 3: Custom fallback prop — uses the render prop, ignores the default
   // ------------------------------------------------------------------ //
-  it("render custom fallback khi prop fallback được truyền vào", () => {
+  it("renders custom fallback when the fallback prop is provided", () => {
     render(
-      <ErrorBoundary fallback={<p>UI dự phòng tuỳ chỉnh</p>}>
+      <ErrorBoundary fallback={<p>Custom fallback UI</p>}>
         <BuggyWidget />
       </ErrorBoundary>,
     );
 
-    expect(screen.getByText("UI dự phòng tuỳ chỉnh")).toBeInTheDocument();
-    // Không hiển thị fallback mặc định
+    expect(screen.getByText("Custom fallback UI")).toBeInTheDocument();
+    // Default fallback must not be rendered
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 
   // ------------------------------------------------------------------ //
-  // CASE 4: Click Retry → reset state, BuggyWidget throw lại → vẫn hiện alert
-  // (Vì BuggyWidget luôn throw, nên sau reset nó throw ngay lập tức trở lại)
+  // CASE 4: Click Retry — resets state; BuggyWidget re-throws — alert still shown
+  // (BuggyWidget always throws, so after reset it re-throws immediately)
   // ------------------------------------------------------------------ //
-  it("reset state khi click Retry và render lại children", async () => {
+  it("resets state on Retry click and re-renders children", async () => {
     const user = userEvent.setup();
 
     render(
@@ -106,21 +106,21 @@ describe("ErrorBoundary", () => {
       </ErrorBoundary>,
     );
 
-    // Fallback đang hiển thị
+    // Fallback is visible
     expect(screen.getByRole("alert")).toBeInTheDocument();
 
-    // Click Retry → ErrorBoundary reset → mount lại BuggyWidget → throw lại
+    // Click Retry → ErrorBoundary resets → remounts BuggyWidget → re-throws
     await user.click(screen.getByRole("button", { name: /retry/i }));
 
-    // Fallback vẫn hiển thị (do BuggyWidget tiếp tục throw)
-    // → xác nhận handleReset() đã chạy và re-render diễn ra
+    // Fallback is still shown (BuggyWidget keeps throwing)
+    // → confirms handleReset() ran and a re-render occurred
     expect(screen.getByRole("alert")).toBeInTheDocument();
   });
 
   // ------------------------------------------------------------------ //
-  // CASE 5: componentDidCatch được gọi với đúng error
+  // CASE 5: componentDidCatch is called with the correct error
   // ------------------------------------------------------------------ //
-  it("gọi console.error với error khi children throw", () => {
+  it("calls console.error with the error when a child throws", () => {
     render(
       <ErrorBoundary>
         <BuggyWidget />

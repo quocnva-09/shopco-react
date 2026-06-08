@@ -37,7 +37,7 @@
     object-fit: cover;
   }
 
-  // Wrapper bên phải ảnh — chứa toàn bộ thông tin
+  // Right-side wrapper — contains all product info
   &__info {
     flex: 1;
     display: flex;
@@ -46,7 +46,7 @@
     min-width: 0;
   }
 
-  // Khối 1: name + variants (trái) | delete (phải)
+  // Block 1: name + variants (left) | delete button (right)
   &__top {
     display: flex;
     align-items: flex-start;
@@ -54,7 +54,7 @@
     gap: 8px;
   }
 
-  // Khối 1.1: name + variants (flex-column)
+  // Block 1.1: name + variants (flex-column)
   &__meta {
     display: flex;
     flex-direction: column;
@@ -87,7 +87,7 @@
     }
   }
 
-  // Khối 1.2: delete button
+  // Block 1.2: delete button
   &__delete {
     flex-shrink: 0;
     padding-top: 3px;
@@ -105,7 +105,7 @@
     }
   }
 
-  // Khối 2: price (trái) | quantity (phải)
+  // Block 2: price (left) | quantity (right)
   &__bottom {
     display: flex;
     align-items: center;

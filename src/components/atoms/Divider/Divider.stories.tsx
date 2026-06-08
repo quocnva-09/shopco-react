@@ -9,7 +9,7 @@ const meta: Meta<typeof Divider> = {
     direction: {
       control: 'inline-radio',
       options: ['vertical', 'horizontal'],
-      description: 'Hướng hiển thị của đường kẻ phân cách',
+      description: 'Orientation of the divider line',
     },
   },
   args: {
@@ -20,7 +20,7 @@ const meta: Meta<typeof Divider> = {
 export default meta;
 type Story = StoryObj<typeof Divider>;
 
-// 1. Đường kẻ dọc (mặc định — dùng trong StatsBar)
+// 1. Vertical divider (default — used in StatsBar)
 export const Vertical: Story = {
   args: {
     direction: 'vertical',
@@ -34,16 +34,16 @@ export const Vertical: Story = {
   ),
 };
 
-// 2. Đường kẻ ngang (dùng trong footer, section separator)
+// 2. Horizontal divider (used in footer, section separator)
 export const Horizontal: Story = {
   args: {
     direction: 'horizontal',
   },
   render: (args) => (
     <div style={{ width: '400px', padding: '20px' }}>
-      <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Nội dung phía trên</p>
+      <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Content above</p>
       <Divider {...args} />
-      <p style={{ fontSize: '14px', color: '#666', marginTop: '12px' }}>Nội dung phía dưới</p>
+      <p style={{ fontSize: '14px', color: '#666', marginTop: '12px' }}>Content below</p>
     </div>
   ),
 };

@@ -11,7 +11,7 @@
   margin-top: 64px;
   margin-bottom: 64px;
 
-  // Override Heading atom defaults — cho phép title xuống dòng tự nhiên
+  // Override Heading atom defaults — allow title to wrap naturally
   &__title {
     text-align: center;
     font-family: $font-family-title;
@@ -93,7 +93,7 @@
     }
   }
 
-  // Khi không có CTA button, bỏ khoảng cách phía dưới của list
+  // When there is no CTA button, remove the bottom margin from the list
   &--no-btn {
     .product-collection__list {
       margin-bottom: 0;

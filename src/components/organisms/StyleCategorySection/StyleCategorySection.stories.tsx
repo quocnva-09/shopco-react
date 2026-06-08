@@ -12,7 +12,7 @@ const meta: Meta<typeof StyleCategorySection> = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Tiêu đề section',
+      description: 'Section title',
     },
   },
   args: {
@@ -24,7 +24,7 @@ const meta: Meta<typeof StyleCategorySection> = {
 export default meta;
 type Story = StoryObj<typeof StyleCategorySection>;
 
-// 1. Default — full section với 4 categories (ảnh thật từ public/style-categories)
+// 1. Default — full section with 4 categories (real images from public/style-categories)
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>

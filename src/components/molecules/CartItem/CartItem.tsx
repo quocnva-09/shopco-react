@@ -38,7 +38,7 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
       />
 
       <div className="cart-item__info">
-        {/* Khối 1: name + variants | delete */}
+        {/* Block 1: name + variants | delete */}
         <div className="cart-item__top">
           <div className="cart-item__meta">
             <Heading
@@ -75,7 +75,7 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
           />
         </div>
 
-        {/* Khối 2: price | quantity */}
+        {/* Block 2: price | quantity */}
         <div className="cart-item__bottom">
           <PriceText
             value={product.priceDiscount}

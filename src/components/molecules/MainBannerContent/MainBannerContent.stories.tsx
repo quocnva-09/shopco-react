@@ -15,11 +15,11 @@ const meta: Meta<typeof MainBannerContent> = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Tiêu đề chính của banner',
+      description: 'Main banner title',
     },
     description: {
       control: 'text',
-      description: 'Mô tả phụ bên dưới tiêu đề',
+      description: 'Subtitle below the main title',
     },
   },
   args: {
@@ -33,7 +33,7 @@ const meta: Meta<typeof MainBannerContent> = {
 export default meta;
 type Story = StoryObj<typeof MainBannerContent>;
 
-// 1. Desktop — đầy đủ nội dung với CTA Button
+// 1. Desktop — full content with CTA Button
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: '600px', backgroundColor: '#f0eeed', padding: '20px' }}>

@@ -4,7 +4,7 @@ import { IconButton } from "./IconButton";
 const meta: Meta<typeof IconButton> = {
   title: "Atoms/IconButton",
   component: IconButton,
-  // Giúp bạn có một giao diện để click chọn màu, đổi tên SVG trực tiếp trên UI của Storybook
+  // Provides a UI for clicking to choose colors and rename SVGs directly in Storybook
   argTypes: {
     color: { control: "color" },
     variant: {
@@ -17,29 +17,29 @@ const meta: Meta<typeof IconButton> = {
 export default meta;
 type Story = StoryObj<typeof IconButton>;
 
-// Kịch bản 1: Test nút dạng mặc định
+// Scenario 1: Test default button style
 export const Default: Story = {
   args: {
     svgName: "icn-cart",
-    "aria-label": "Giỏ hàng",
+    "aria-label": "Shopping cart",
     variant: "default",
   },
 };
 
-// Kịch bản 2: Test nút dạng Ghost (Nút Close X của bạn)
+// Scenario 2: Test Ghost button style (Close X button)
 export const GhostClose: Story = {
   args: {
     svgName: "icn-close",
-    "aria-label": "Đóng thông báo",
+    "aria-label": "Close notification",
     variant: "ghost",
   },
 };
 
-// Kịch bản 3: Test nút hình tròn
+// Scenario 3: Test circular button style
 export const CircularFilter: Story = {
   args: {
     svgName: "icn-filter",
-    "aria-label": "Lọc",
+    "aria-label": "Filter",
     variant: "circular",
   },
 };
@@ -47,7 +47,7 @@ export const CircularFilter: Story = {
 export const Social: Story = {
   args: {
     svgName: "icn-github",
-    "aria-label": "Người dùng",
+    "aria-label": "User profile",
     variant: "social",
   },
 };

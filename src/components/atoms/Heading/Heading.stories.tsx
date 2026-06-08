@@ -21,14 +21,14 @@ const meta: Meta<typeof Heading> = {
     as: "h3",
     lineClamp: 1,
     showTooltip: true,
-    children: "Đây là một chuỗi tiêu đề sản phẩm siêu siêu dài để kiểm thử tính năng cắt chữ",
+    children: "This is a very very long product heading string to test the text truncation feature",
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Heading>;
 
-// 1. Giả lập đúng case Product Card (Cắt chữ trên 1 dòng kèm Tooltip)
+// 1. Simulate a Product Card use case (truncate to 1 line with Tooltip)
 export const ProductCardStyle: Story = {
   args: {
     as: "h3",
@@ -42,13 +42,13 @@ export const ProductCardStyle: Story = {
   ),
 };
 
-// 2. Giả lập cắt chữ nhiều dòng (Ví dụ: Cắt 2 dòng cho Blog)
+// 2. Simulate multi-line clamping (e.g. 2-line clamp for Blog)
 export const MultiLineClamp: Story = {
   args: {
     as: "h2",
     lineClamp: 2,
     showTooltip: false,
-    children: "Khám phá bộ sưu tập thời trang đường phố mới nhất vừa được ra mắt vào tháng này với những thiết kế vô cùng phá cách và độc đáo.",
+    children: "Explore the latest streetwear collection launched this month with incredibly bold and unique designs.",
   },
   render: (args) => (
     <div style={{ width: "250px", padding: "20px", border: "1px dashed #ccc" }}>

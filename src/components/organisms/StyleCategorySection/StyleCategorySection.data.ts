@@ -1,8 +1,8 @@
 import type { StyleCategoryCardData } from '@/components/molecules/StyleCategoryCard';
 
 /**
- * Default data cho StyleCategorySection — load ảnh từ public/style-categories.
- * Dùng cho HomePage và Storybook stories.
+ * Default data for StyleCategorySection — loads images from public/style-categories.
+ * Used by HomePage and Storybook stories.
  */
 export const defaultStyleCategories: StyleCategoryCardData[] = [
   {

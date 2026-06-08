@@ -8,15 +8,15 @@ const meta: Meta<typeof MainBannerImage> = {
   argTypes: {
     src: {
       control: 'text',
-      description: 'Đường dẫn ảnh hero chính',
+      description: 'Path to the main hero image',
     },
     alt: {
       control: 'text',
-      description: 'Alt text cho ảnh hero',
+      description: 'Alt text for the hero image',
     },
     effectSrc: {
       control: 'text',
-      description: 'Đường dẫn SVG hiệu ứng trang trí (ngôi sao)',
+      description: 'Path to the decorative SVG effect (star)',
     },
   },
   args: {
@@ -29,7 +29,7 @@ const meta: Meta<typeof MainBannerImage> = {
 export default meta;
 type Story = StoryObj<typeof MainBannerImage>;
 
-// 1. Desktop — ảnh hero không có effect
+// 1. Desktop — hero image without effect
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: '600px', backgroundColor: '#f0eeed', overflow: 'hidden' }}>
@@ -38,10 +38,10 @@ export const Default: Story = {
   ),
 };
 
-// 2. Desktop — ảnh hero có hiệu ứng trang trí
+// 2. Desktop — hero image with decorative effect
 export const WithEffects: Story = {
   args: {
-    effectSrc: '/images/vector-tick.svg', // Dùng SVG có sẵn trong public để demo
+    effectSrc: '/images/vector-tick.svg', // Use an existing SVG from public/ for the demo
   },
   render: (args) => (
     <div style={{ maxWidth: '600px', backgroundColor: '#f0eeed', overflow: 'hidden' }}>

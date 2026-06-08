@@ -41,7 +41,7 @@ export const ReviewCard = ({
         )}
       </div>
 
-      {/* 2. Khối Tên + Icon Verified tích hợp Custom Tooltip */}
+      {/* 2. Name + Verified Icon block with integrated Custom Tooltip */}
       <div className="review-card__name">
         <Text
           as="span"
@@ -63,7 +63,7 @@ export const ReviewCard = ({
         )}
       </div>
 
-      {/* 3. Khối Nội dung Comment: Cắt 3 dòng trên Desktop, Bung lụa trên Mobile */}
+      {/* 3. Comment content block: truncated to 3 lines on Desktop, fully expanded on Mobile */}
       <Text
         as="p"
         lineClamp={3}
@@ -74,7 +74,7 @@ export const ReviewCard = ({
         {comment}
       </Text>
 
-      {/* 4. Khối thời gian đăng bài */}
+      {/* 4. Post date block */}
       {showDate && <time className="review-card__date">Posted {date}</time>}
     </div>
   );

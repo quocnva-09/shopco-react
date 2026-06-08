@@ -34,8 +34,8 @@ export const Header = ({
     setIsMobileMenuOpen(false);
   }, []);
 
-  // Tự động đóng mobile menu khi viewport vượt qua breakpoint (991px)
-  // Tránh trường hợp state bị giữ nguyên khi user resize từ mobile → desktop
+  // Auto-close mobile menu when the viewport crosses the breakpoint (991px)
+  // Prevents stale open-menu state when the user resizes from mobile → desktop
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 992px)");
 
@@ -54,7 +54,7 @@ export const Header = ({
   return (
     <header className={clsx("header", className)} {...rest}>
       <div className={clsx("header__container", "container")}>
-        {/* Hamburger: Nếu trên mobile và trạng thái menu không open thì hiển thị icon*/}
+        {/* Hamburger: shown on mobile when the menu is closed */}
         {!isMobileMenuOpen && (
           <IconButton
             className="header__hamburger"
@@ -71,7 +71,7 @@ export const Header = ({
           SHOP.CO
         </TextLink>
 
-        {/* Navigation — slide-in trên mobile khi isMobileMenuOpen */}
+        {/* Navigation — slides in on mobile when isMobileMenuOpen is true */}
         <NavMenu
           className="header__nav-wrapper"
           isOpenMobile={isMobileMenuOpen}
@@ -105,7 +105,7 @@ export const Header = ({
         </div>
       </div>
 
-      {/* Overlay tối màn hình khi menu mở */}
+      {/* Backdrop overlay shown when the mobile menu is open */}
       <div
         className={clsx("overlay", isMobileMenuOpen && "is-active")}
         onClick={closeMobileMenu}

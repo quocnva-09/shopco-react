@@ -41,7 +41,7 @@ export const ReviewsHeader = ({
   const sortRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
-  // Click-outside — đóng dropdown tương ứng
+  // Click-outside — close the corresponding dropdown
   const closeSort = useCallback(() => setIsSortOpen(false), []);
   const closeFilter = useCallback(() => setIsFilterOpen(false), []);
 
@@ -61,7 +61,7 @@ export const ReviewsHeader = ({
     },
   }));
 
-  // Build menu items — Filter (dãy sao 4→1)
+  // Build menu items — Filter (star ratings 4→1)
   const filterMenuItems: MenuItem[] = RATING_FILTERS.map((n) => ({
     id: `rating-${n}`,
     label: <Rating value={n} showText={false} variant="row" />,

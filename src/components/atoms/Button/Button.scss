@@ -1,7 +1,7 @@
 @use "@/styles/abstracts/variables" as *;
 
 .button {
-  // Style chung của mọi loại Button (padding, border-radius, font...)
+  // Shared styles for all Button variants (padding, border-radius, font, etc.)
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +19,7 @@
     font-size: 16px;
   }
 
-  // --- TỔ HỢP 1: SOLID + DARK (Nút Đen Chữ Trắng gốc) ---
+  // --- COMBO 1: SOLID + DARK (Black background, white text) ---
   &--solid-dark {
     background-color: $black-color;
     color: $white-color;
@@ -28,7 +28,7 @@
     }
   }
 
-  // --- TỔ HỢP 2: OUTLINE + DARK (Nút Trắng Viền Xám - View All/Load More) ---
+  // --- COMBO 2: OUTLINE + DARK (White with grey border — View All / Load More) ---
   &--outline-dark {
     background-color: $white-color;
     color: $black-color;
@@ -38,7 +38,7 @@
     }
   }
 
-  // --- TỔ HỢP 3: SOLID + DANGER (Nút Đỏ cảnh báo/xóa) ---
+  // --- COMBO 3: SOLID + DANGER (Red warning / delete button) ---
   &--solid-danger {
     background-color: $color-danger-surface;
     color: $color-danger;
@@ -47,7 +47,7 @@
     }
   }
 
-  // --- TỔ HỢP 4: SOLID + GREY (Nút Xám - Size Selector default) ---
+  // --- COMBO 4: SOLID + GREY (Grey button — Size Selector default) ---
   &--solid-grey {
     background-color: #f0f0f0;
     color: $text-muted;
@@ -56,7 +56,7 @@
     }
   }
 
-  // --- Kích thước ---
+  // --- Sizes ---
   &--full-width {
     display: flex;
     width: 100%;

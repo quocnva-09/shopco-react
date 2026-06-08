@@ -20,7 +20,7 @@ const meta: Meta<typeof DropdownMenu> = {
 export default meta;
 type Story = StoryObj<typeof DropdownMenu>;
 
-// 1. Trạng thái đóng mặc định — click để mở
+// 1. Default closed state — click to open
 export const Default: Story = {
   decorators: [
     (Story) => (
@@ -31,8 +31,8 @@ export const Default: Story = {
   ],
 };
 
-// 2. Trạng thái Desktop — dropdown nổi lên (position: absolute)
-// Click "Shop" để kiểm tra dropdown hiển thị đúng
+// 2. Desktop state — dropdown floats up (position: absolute)
+// Click "Shop" to verify the dropdown renders correctly
 export const DesktopDropdown: Story = {
   name: '🖥️ Desktop — Dropdown absolute',
   decorators: [
@@ -44,27 +44,27 @@ export const DesktopDropdown: Story = {
   ],
 };
 
-// 3. Trạng thái Mobile — dropdown inline (position: static)
-// Kiểm tra dropdown mở ra và đẩy nội dung xuống thay vì bị clipped
+// 3. Mobile state — dropdown inline (position: static)
+// Verify that the dropdown opens inline, pushing content down rather than being clipped
 export const MobileDropdown: Story = {
-  name: '📱 Mobile — Dropdown static (trong sidebar)',
+  name: '📱 Mobile — Dropdown static (inside sidebar)',
   parameters: {
     viewport: { defaultViewport: 'mobile1' },
     layout: 'fullscreen',
     docs: {
       description: {
         story: `
-**Kiểm tra:** Trên mobile, \`.dropdown__menu\` đổi sang \`position: static\`
-nên sẽ **đẩy nội dung xuống** thay vì nổi lên phía trên (absolute).
+**Check:** On mobile, \`.dropdown__menu\` switches to \`position: static\`
+so it will **push content down** rather than floating above (absolute).
 
-Click **"Shop"** để mở dropdown và quan sát nội dung mở ra inline.
+Click **"Shop"** to open the dropdown and observe it opening inline.
         `,
       },
     },
   },
   decorators: [
     (Story) => (
-      // Mô phỏng môi trường sidebar: nền màu, chiều cao cố định, overflow-y: auto
+      // Simulate sidebar environment: colored background, fixed height, overflow-y: auto
       <div
         style={{
           backgroundColor: '#f2f0f1',
@@ -74,7 +74,7 @@ Click **"Shop"** để mở dropdown và quan sát nội dung mở ra inline.
         }}
       >
         <Story />
-        <p style={{ color: '#888', marginTop: '16px' }}>← Các item khác trong sidebar</p>
+        <p style={{ color: '#888', marginTop: '16px' }}>← Other items in the sidebar</p>
       </div>
     ),
   ],

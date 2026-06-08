@@ -1,4 +1,4 @@
-/** Các giá trị hợp lệ cho sort order của reviews */
+/** Valid values for the sort order of reviews */
 export const SORT_ORDER = {
   LATEST: "latest",
   OLDEST: "oldest",
@@ -7,12 +7,12 @@ export const SORT_ORDER = {
 export type SortOrder = (typeof SORT_ORDER)[keyof typeof SORT_ORDER];
 // → "latest" | "oldest"
 
-/** Giá trị sort mặc định */
+/** Default sort value */
 export const DEFAULT_SORT_ORDER: SortOrder = SORT_ORDER.LATEST;
 
 /**
- * Map từ SortOrder sang label hiển thị trên UI.
- * Cập nhật tại đây khi cần đổi tên hiển thị.
+ * Maps SortOrder to the display label shown in the UI.
+ * Update here when display names need to change.
  */
 export const SORT_MENU_LABELS: Record<SortOrder, string> = {
   [SORT_ORDER.LATEST]: "Latest",

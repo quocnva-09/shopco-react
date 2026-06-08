@@ -5,7 +5,7 @@ import type { ReviewData } from "@/types/review";
 
 const mockReview: ReviewData = {
   id: 1,
-  name: "Samantha D. Siêu Cấp Thành Viên VIP Toàn Cầu",
+  name: "Samantha D. — Super Long VIP Member Name For Testing",
   rating: 4.5,
   comment:
     "\"I absolutely love this t-shirt! The material is so soft and comfortable. I've washed it multiple times and the color hasn't faded at all. Highly recommend to anyone looking for a stylish yet everyday essential garment that fits perfectly in any wardrobe.\"",
@@ -20,7 +20,7 @@ const meta: Meta<typeof ReviewCard> = {
   component: ReviewCard,
   tags: ["autodocs"],
   argTypes: {
-    onMenuClick: { action: "Nút 3 chấm được click" },
+    onMenuClick: { action: 'Three-dot menu clicked' },
   },
   args: {
     review: mockReview,
@@ -31,7 +31,7 @@ const meta: Meta<typeof ReviewCard> = {
 export default meta;
 type Story = StoryObj<typeof ReviewCard>;
 
-// 1. Trạng thái hiển thị chuẩn trên Desktop (Cắt chữ + Có nút 3 chấm)
+// 1. Standard desktop view (text truncated + three-dot button visible)
 export const DesktopView: Story = {
   render: (args) => (
     <div style={{ maxWidth: "400px", padding: "20px" }}>
@@ -40,7 +40,7 @@ export const DesktopView: Story = {
   ),
 };
 
-// 2. Trạng thái hiển thị trên Mobile (Bung toàn bộ text comment, ẩn nút 3 chấm)
+// 2. Mobile view (full comment text expanded, three-dot button hidden)
 export const MobileView: Story = {
   parameters: {
     viewport: { defaultViewport: "mobile1" },

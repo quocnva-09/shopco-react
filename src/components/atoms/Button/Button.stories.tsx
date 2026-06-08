@@ -6,28 +6,28 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    // Định nghĩa bảng điều khiển (Controls) trực quan trên Storybook
+    // Define the visual Controls table in Storybook
     variant: {
       control: 'inline-radio',
       options: ['solid', 'outline'],
-      description: 'Kiểu dáng hiển thị của nút',
+      description: 'Visual style of the button',
     },
     colorScheme: {
       control: 'inline-radio',
       options: ['dark', 'danger'],
-      description: 'Hệ màu áp dụng cho nút',
+      description: 'Color scheme applied to the button',
     },
     fullWidth: {
       control: 'boolean',
-      description: 'Bật/tắt chế độ giãn căng 100% chiều ngang',
+      description: 'Toggle full-width (100%) stretch mode',
     },
     disabled: {
       control: 'boolean',
-      description: 'Trạng thái vô hiệu hóa nút',
+      description: 'Disabled state of the button',
     },
   },
   args: {
-    // Giá trị mặc định khi mở Storybook
+    // Default values when opening Storybook
     variant: 'solid',
     colorScheme: 'dark',
     fullWidth: false,
@@ -39,7 +39,7 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-// 1. Trạng thái Solid Dark mặc định (Ví dụ: Shop Now, Add to Cart)
+// 1. Default Solid Dark state (e.g. Shop Now, Add to Cart)
 export const SolidDark: Story = {
   args: {
     variant: 'solid',
@@ -48,7 +48,7 @@ export const SolidDark: Story = {
   },
 };
 
-// 2. Trạng thái Outline Dark (Ví dụ: View All, Load More)
+// 2. Outline Dark state (e.g. View All, Load More)
 export const OutlineDark: Story = {
   args: {
     variant: 'outline',
@@ -57,7 +57,7 @@ export const OutlineDark: Story = {
   },
 };
 
-// 3. Trạng thái Co giãn hết cỡ (Full Width)
+// 3. Full Width state (stretches to container width)
 export const FullWidth: Story = {
   args: {
     variant: 'solid',
@@ -67,13 +67,13 @@ export const FullWidth: Story = {
   },
   render: (args) => (
     <div style={{ width: '400px', padding: '20px', border: '1px dashed #ccc' }}>
-      <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>Khung test giả lập rộng 400px:</p>
+      <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>Test container simulating 400px width:</p>
       <Button {...args} />
     </div>
   ),
 };
 
-// 4. Trạng thái chứa Icon (Kiểm tra căn chỉnh flexbox giữa text và icon)
+// 4. With Icon state (check flexbox alignment between text and icon)
 export const WithIcon: Story = {
   args: {
     variant: 'outline',
@@ -91,7 +91,7 @@ export const WithIcon: Story = {
   },
 };
 
-// 5. Biến thể màu đỏ nguy hiểm (Solid Danger)
+// 5. Red danger variant (Solid Danger)
 export const SolidDanger: Story = {
   args: {
     variant: 'solid',
@@ -100,7 +100,7 @@ export const SolidDanger: Story = {
   },
 };
 
-// 6. Trạng thái bị khóa (Disabled)
+// 6. Disabled (locked) state
 export const Disabled: Story = {
   args: {
     variant: 'solid',

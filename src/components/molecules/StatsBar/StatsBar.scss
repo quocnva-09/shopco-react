@@ -15,7 +15,7 @@
   }
 
   &__entry {
-    display: contents; // Để item và divider nằm cùng cấp flex với stats-bar
+    display: contents; // Lets item and divider sit at the same flex level as stats-bar
   }
 
   &__item {
@@ -23,7 +23,7 @@
     flex-direction: column;
 
     @media (max-width: $breakpoint-tablet) {
-      // Item cuối cùng chiếm 100% chiều rộng để rớt xuống dòng riêng
+      // Last item takes full width so it drops to its own row
       &:last-of-type {
         flex: 0 0 100%;
         align-items: center;

@@ -17,15 +17,15 @@ const meta: Meta<typeof BannerSection> = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Tiêu đề hero chính',
+      description: 'Main hero title',
     },
     description: {
       control: 'text',
-      description: 'Mô tả phụ bên dưới tiêu đề',
+      description: 'Subtitle below the title',
     },
     ctaLabel: {
       control: 'text',
-      description: 'Nội dung nút CTA',
+      description: 'CTA button label',
     },
     onCtaClick: { action: 'CTA button clicked' },
   },
@@ -45,7 +45,7 @@ const meta: Meta<typeof BannerSection> = {
 export default meta;
 type Story = StoryObj<typeof BannerSection>;
 
-// 1. Desktop View — toàn bộ BannerSection đầy đủ
+// 1. Desktop View — full BannerSection
 export const DesktopView: Story = {
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
@@ -54,7 +54,7 @@ export const DesktopView: Story = {
   ),
 };
 
-// 2. Mobile View — kiểm tra responsive layout
+// 2. Mobile View — check responsive layout
 export const MobileView: Story = {
   parameters: {
     viewport: {
@@ -68,7 +68,7 @@ export const MobileView: Story = {
   ),
 };
 
-// 3. Với hiệu ứng trang trí (star effects)
+// 3. With decorative effects (star effects)
 export const WithEffects: Story = {
   args: {
     effectSrc: '/images/banner-effect.svg',

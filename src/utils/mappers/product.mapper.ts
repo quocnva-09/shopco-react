@@ -58,23 +58,16 @@ export const mapProductImage = (apiImage: ProductImageApi): ProductImage => ({
 
 export const mapProductData = (apiProduct: ProductApi): ProductData => {
   const price = parseFloat(apiProduct.price);
-  const priceDiscount = apiProduct.price_discount
-    ? parseFloat(apiProduct.price_discount)
-    : null;
-
-  const discountPercent =
-    priceDiscount !== null && price > priceDiscount
-      ? Math.round(((price - priceDiscount) / price) * 100)
-      : 0;
+  const hasDiscount = apiProduct.price_discount !== null && apiProduct.price_discount > 0;
 
   return {
     id: apiProduct.id,
     name: apiProduct.name,
     slug: apiProduct.slug,
     description: apiProduct.description,
-    currentPrice: priceDiscount ?? price,
-    originalPrice: priceDiscount !== null ? price : undefined,
-    discountPercent,
+    currentPrice: apiProduct.final_price,
+    originalPrice: hasDiscount ? price : undefined,
+    discountPercent: apiProduct.price_discount ?? 0,
     variants: (apiProduct.variants ?? []).map(mapVariant),
     isActive: apiProduct.is_active,
     ratingAvg: apiProduct.rating_avg,
@@ -93,26 +86,19 @@ export const mapProductData = (apiProduct: ProductApi): ProductData => {
 
 export const mapProductCardData = (apiProduct: ProductApi): ProductCardData => {
   const price = parseFloat(apiProduct.price);
-  const priceDiscount = apiProduct.price_discount
-    ? parseFloat(apiProduct.price_discount)
-    : null;
+  const hasDiscount = apiProduct.price_discount !== null && apiProduct.price_discount > 0;
 
   const primaryImage =
     apiProduct.images?.find((img) => img.is_primary)?.img_path ??
     apiProduct.images?.[0]?.img_path;
 
-  const discountPercentage =
-    priceDiscount !== null && price > priceDiscount
-      ? Math.round(((price - priceDiscount) / price) * 100)
-      : undefined;
-
   return {
     id: apiProduct.id,
     name: apiProduct.name,
     primaryImage,
-    currentPrice: priceDiscount ?? price,
-    originalPrice: priceDiscount !== null ? price : undefined,
-    discountPercentage,
+    currentPrice: apiProduct.final_price,
+    originalPrice: hasDiscount ? price : undefined,
+    discountPercentage: apiProduct.price_discount ?? undefined,
     rating: apiProduct.rating_avg ?? 0,
   };
 };

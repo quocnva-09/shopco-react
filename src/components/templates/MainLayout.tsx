@@ -23,7 +23,7 @@ export const MainLayout = () => {
       <Header />
       {isRouteLoading ? (
         <div className="main-layout__spinner" aria-live="polite">
-          <Spinner size="lg" label="Đang tải trang..." />
+          <Spinner size="lg" label="Loading page..." />
         </div>
       ) : (
         <Outlet />

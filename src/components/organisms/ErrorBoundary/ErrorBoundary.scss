@@ -2,7 +2,7 @@
 @use "@/styles/abstracts/mixins" as *;
 
 // -----------------------------------------------------------------------------
-// ErrorBoundary — Fallback UI hiển thị khi có lỗi render trong cây component
+// ErrorBoundary — Fallback UI rendered when a component tree throws during render
 // Block: .error-boundary
 // -----------------------------------------------------------------------------
 
@@ -25,14 +25,14 @@
     line-height: 1;
   }
 
-  // --- Tiêu đề lỗi ---
-  // Override heading-text để áp màu danger mà không phá vỡ atom
+  // --- Error title ---
+  // Override heading-text to apply danger color without breaking the atom
   &__title {
     color: $color-danger;
     margin: 0;
   }
 
-  // --- Hộp thông tin chi tiết lỗi ---
+  // --- Error detail box ---
   &__detail {
     width: 100%;
     padding: 8px 12px;
@@ -45,7 +45,7 @@
     word-break: break-word;
   }
 
-  // --- Khu vực action (nút) ---
+  // --- Action area (button) ---
   &__actions {
     margin-top: 4px;
   }
