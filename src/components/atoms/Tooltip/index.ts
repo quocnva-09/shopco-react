@@ -1,1 +1,1 @@
-import "./Tooltip.scss";
+import "./index.scss";

@@ -1,0 +1,118 @@
+import { useState, type ComponentPropsWithoutRef } from "react";
+import { useDispatch } from "react-redux";
+import clsx from "clsx";
+import toast from "react-hot-toast";
+import { Image } from "@/components/atoms/Image";
+import { Heading } from "@/components/atoms/Heading";
+import { Text } from "@/components/atoms/Text";
+import { PriceText } from "@/components/atoms/PriceText";
+import { IconButton } from "@/components/atoms/IconButton";
+import { QuantitySelector } from "@/components/molecules/QuantitySelector";
+import { ConfirmModal } from "@/components/organisms/ConfirmModal";
+import type { CartItem as CartItemType } from "@/types/cart";
+import type { AppDispatch } from "@/store/store";
+import { removeCartItem, updateQuantity } from "@/slices/cartSlice";
+import { TOAST_MESSAGES } from "@/consts/messages";
+import "./index.scss";
+export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
+  item: CartItemType;
+};
+
+export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const { product, variant, quantity, productVariantId } = item;
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity < 1) {
+      setIsConfirmModalOpen(true);
+    } else {
+      dispatch(updateQuantity({ productVariantId, quantity: newQuantity }));
+    }
+  };
+
+  const handleRemoveClick = () => {
+    setIsConfirmModalOpen(true);
+  };
+
+  const confirmRemove = () => {
+    dispatch(removeCartItem(productVariantId));
+    toast.success(TOAST_MESSAGES.PRODUCT_REMOVED_FROM_CART({ productName: product.name }));
+  };
+
+  return (
+    <>
+      <article className={clsx("cart-item", className)} {...rest}>
+      <Image
+        src={product.imgPath}
+        alt={product.name}
+        className="cart-item__image-wrap"
+        imgClassName="cart-item__image"
+      />
+
+      <div className="cart-item__info">
+        {/* Block 1: name + variants | delete */}
+        <div className="cart-item__top">
+          <div className="cart-item__meta">
+            <Heading
+              as="h2"
+              lineClamp={1}
+              showTooltip={false}
+              className="cart-item__name"
+            >
+              {product.name}
+            </Heading>
+
+            <Text as="p" className="cart-item__variant">
+              Color:{" "}
+              <Text as="span" className="cart-item__variant-value">
+                {variant.color}
+              </Text>
+            </Text>
+
+            <Text as="p" className="cart-item__variant">
+              Size:{" "}
+              <Text as="span" className="cart-item__variant-value">
+                {variant.sizeLabel}
+              </Text>
+            </Text>
+          </div>
+
+          <IconButton
+            svgName="icn-delete"
+            aria-label="Remove item"
+            variant="ghost"
+            color="red"
+            className="cart-item__delete"
+            onClick={handleRemoveClick}
+          />
+        </div>
+
+        {/* Block 2: price | quantity */}
+        <div className="cart-item__bottom">
+          <PriceText
+            value={product.priceDiscount}
+            className="cart-item__price"
+          />
+          <QuantitySelector
+            value={quantity}
+            min={0}
+            className="cart-item__quantity"
+            onChange={handleQuantityChange}
+          />
+        </div>
+      </div>
+    </article>
+
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => setIsConfirmModalOpen(false)}
+        onConfirm={confirmRemove}
+        title="Remove Item"
+        message={`Are you sure you want to remove "${product.name}" from your cart?`}
+        confirmText="Remove"
+        isDestructive
+      />
+    </>
+  );
+};

@@ -1,1 +1,0 @@
-export { MainBannerImage } from './MainBannerImage';

@@ -1,4 +1,4 @@
-import type { ReviewData } from '@/components/molecules/ReviewCard';
+import type { ReviewData } from '@/types/review';
 
 export const MOCK_REVIEWS: ReviewData[] = [
   {

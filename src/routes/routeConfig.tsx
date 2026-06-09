@@ -5,7 +5,7 @@ import { PATHS } from "./paths";
 // pages
 import { MainLayout } from "@/components/templates/MainLayout";
 import { NotFoundPage } from "@/pages/NotFound";
-import { RouteErrorBoundary } from "@/components/organisms/ErrorBoundary";
+import { RouteErrorBoundary } from "@/components/organisms/RouteErrorBoundary";
 
 export const router = createBrowserRouter([
   {

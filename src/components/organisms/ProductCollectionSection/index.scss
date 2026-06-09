@@ -1,0 +1,81 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.product-collection {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 64px;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-block: 40px;
+  }
+
+  // Override Heading atom defaults — allow title to wrap naturally
+  &__title {
+    text-align: center;
+    font-family: $font-family-title;
+    font-size: 48px;
+    font-weight: 700;
+    color: $black-color;
+    margin-top: 0;
+    margin-bottom: 55px;
+
+    // Override Heading atom ellipsis
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 32px;
+      margin-block: 0 32px;
+      padding: 0 30px;
+    }
+  }
+
+  &__list {
+    @include flex-group(20px, flex-start, stretch);
+    flex-wrap: wrap; // Default wraps when not in slider
+    width: 100%;
+    margin-bottom: 36px;
+    list-style: none;
+
+    @media (max-width: $breakpoint-tablet) {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__item {
+    // Exact math: 4 items, 3 gaps of 20px (20*3=60). 60 / 4 = 15px.
+    flex: 0 0 calc(25% - 15px);
+    width: 100%;
+    min-width: 0; // Ensures items can shrink/scale properly without content blowing them out
+
+    @media (max-width: $breakpoint-tablet) {
+      flex: 0 0 calc(60% - 8px);
+      scroll-snap-align: start;
+    }
+  }
+
+  &__slider {
+    width: 100%;
+    // All overflow and scroll logic is now handled by the generic Slider component
+  }
+
+  &__btn {
+    padding: 15px 85px;
+    @media (max-width: $breakpoint-tablet) {
+      width: 100%;
+    }
+  }
+
+  // When there is no CTA button, remove the bottom margin from the list
+  &--no-btn {
+    .product-collection__list {
+      margin-bottom: 0;
+    }
+  }
+}

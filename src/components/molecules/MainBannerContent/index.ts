@@ -1,1 +1,0 @@
-export { MainBannerContent } from './MainBannerContent';

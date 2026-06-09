@@ -1,0 +1,81 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { BannerSection } from './index';
+
+const defaultStats = [
+  { value: '200+', label: 'International Brands' },
+  { value: '2,000+', label: 'High-Quality Products' },
+  { value: '30,000+', label: 'Happy Customers' },
+];
+
+const meta: Meta<typeof BannerSection> = {
+  title: 'Organisms/BannerSection',
+  component: BannerSection,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Main hero title',
+    },
+    description: {
+      control: 'text',
+      description: 'Subtitle below the title',
+    },
+    ctaLabel: {
+      control: 'text',
+      description: 'CTA button label',
+    },
+    onCtaClick: { action: 'CTA button clicked' },
+  },
+  args: {
+    title: 'FIND CLOTHES THAT MATCHES YOUR STYLE',
+    description:
+      'Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.',
+    ctaLabel: 'Shop Now',
+    stats: defaultStats,
+    heroImage: {
+      src: 'main-img.jpg',
+      alt: 'Main banner image',
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof BannerSection>;
+
+// 1. Desktop View — full BannerSection
+export const DesktopView: Story = {
+  render: (args) => (
+    <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
+      <BannerSection {...args} />
+    </div>
+  ),
+};
+
+// 2. Mobile View — check responsive layout
+export const MobileView: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+  render: (args) => (
+    <div style={{ padding: '0 16px' }}>
+      <BannerSection {...args} />
+    </div>
+  ),
+};
+
+// 3. With decorative effects (star effects)
+export const WithEffects: Story = {
+  args: {
+    effectSrc: '/images/banner-effect.svg',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
+      <BannerSection {...args} />
+    </div>
+  ),
+};

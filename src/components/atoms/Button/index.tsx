@@ -1,0 +1,52 @@
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+import clsx from "clsx";
+import "./index.scss";
+
+export type ButtonVariant = "solid" | "outline";
+export type ButtonColor = "dark" | "danger" | "grey";
+
+export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
+  variant?: ButtonVariant;
+  colorScheme?: ButtonColor;
+  fullWidth?: boolean;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
+};
+
+export const Button = ({
+  variant = "solid",
+  colorScheme = "dark",
+  fullWidth = false,
+  icon,
+  iconPosition = "left",
+  className,
+  children,
+  type = "button",
+  onClick,
+  ...rest
+}: ButtonProps) => {
+  return (
+    <button
+      type={type}
+      className={clsx(
+        "button",
+        `button--${variant}-${colorScheme}`, // Outputs a static class string e.g. "button--solid-dark", "button--outline-dark"
+        fullWidth && "button--full-width",
+        icon && "button--icon",
+        className,
+      )}
+      onClick={onClick}
+      {...rest}
+    >
+      {icon && iconPosition === "left" && (
+        <span className="button__icon-wrapper">{icon}</span>
+      )}
+
+      {children && <span>{children}</span>}
+
+      {icon && iconPosition === "right" && (
+        <span className="button__icon-wrapper">{icon}</span>
+      )}
+    </button>
+  );
+};

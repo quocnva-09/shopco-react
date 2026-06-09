@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import clsx from "clsx";
-import { useModalContext } from "./Modal";
-import { Heading } from "@/components/atoms/Heading/Heading";
-import { IconButton } from "@/components/atoms/IconButton/IconButton";
+import { useModalContext } from ".";
+import { Heading } from "@/components/atoms/Heading";
+import { IconButton } from "@/components/atoms/IconButton";
 
 export type ModalHeaderProps = {
   title: string | ReactNode;
