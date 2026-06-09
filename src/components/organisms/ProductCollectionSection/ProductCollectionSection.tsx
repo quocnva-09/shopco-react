@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, useState, useCallback } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Button } from "@/components/atoms/Button";
@@ -6,6 +6,7 @@ import {
   ProductCard,
   type ProductCardData,
 } from "@/components/molecules/ProductCard";
+import { Slider } from "@/components/molecules/Slider";
 import "./ProductCollectionSection.scss";
 
 export type ProductCollectionSectionProps =
@@ -17,6 +18,8 @@ export type ProductCollectionSectionProps =
     enableSlider?: boolean;
     visibleCount?: number;
     showButton?: boolean;
+    autoplay?: boolean;
+    showArrows?: boolean;
   };
 
 export const ProductCollectionSection = ({
@@ -25,38 +28,22 @@ export const ProductCollectionSection = ({
   ctaLabel = "View All",
   onCtaClick,
   enableSlider = true,
+  showArrows = false,
   visibleCount = 4,
   showButton = true,
+  autoplay = false,
   className,
   ...rest
 }: ProductCollectionSectionProps) => {
-  const [slideIndex, setSlideIndex] = useState(0);
-
-  const maxIndex = Math.max(0, products.length - visibleCount);
-
-  const handlePrev = useCallback(() => {
-    setSlideIndex((prev) => Math.max(0, prev - 1));
-  }, []);
-
-  const handleNext = useCallback(() => {
-    setSlideIndex((prev) => Math.min(maxIndex, prev + 1));
-  }, [maxIndex]);
-
-  const itemWidthPercent = 100 / visibleCount;
-  const sliderTransform = enableSlider
-    ? `translateX(-${slideIndex * itemWidthPercent}%)`
-    : undefined;
-
   // Render list products
   const listContent = (
-    <div
-      className="product-collection__list"
-      style={enableSlider ? { transform: sliderTransform } : undefined}
-    >
+    <ul className="product-collection__list">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <li key={product.id} className="product-collection__item">
+          <ProductCard product={product} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 
   return (
@@ -64,7 +51,7 @@ export const ProductCollectionSection = ({
       className={clsx(
         "product-collection",
         !showButton && "product-collection--no-btn",
-        className
+        className,
       )}
       {...rest}
     >
@@ -74,33 +61,15 @@ export const ProductCollectionSection = ({
 
       {/* Slider */}
       {enableSlider ? (
-        <div className="product-collection__slider">{listContent}</div>
+        <Slider
+          className="product-collection__slider"
+          autoplay={autoplay}
+          showArrows={showArrows}
+        >
+          {listContent}
+        </Slider>
       ) : (
         listContent
-      )}
-
-      {/* Navigation arrows */}
-      {enableSlider && products.length > visibleCount && (
-        <>
-          <button
-            type="button"
-            className="product-collection__prev"
-            onClick={handlePrev}
-            disabled={slideIndex === 0}
-            aria-label="Previous products"
-          >
-            &#10094;
-          </button>
-          <button
-            type="button"
-            className="product-collection__next"
-            onClick={handleNext}
-            disabled={slideIndex >= maxIndex}
-            aria-label="Next products"
-          >
-            &#10095;
-          </button>
-        </>
       )}
 
       {/* CTA Button */}

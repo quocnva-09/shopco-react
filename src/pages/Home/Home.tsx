@@ -79,6 +79,7 @@ export const HomePage = () => {
             title="NEW ARRIVALS"
             products={newArrivals}
             ctaLabel="View All"
+            showArrows={false}
           />
         </SectionStateWrapper>
 
@@ -93,6 +94,7 @@ export const HomePage = () => {
             title="TOP SELLING"
             products={topSellings}
             ctaLabel="View All"
+            showArrows={false}
           />
         </SectionStateWrapper>
 

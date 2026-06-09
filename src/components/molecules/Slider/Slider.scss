@@ -1,0 +1,97 @@
+@use "@/styles/abstracts/variables" as *;
+
+.slider {
+  position: relative;
+  width: 100%;
+
+  &__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; // Firefox
+
+    // Hide scrollbar for Chrome/Safari
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // On mobile, allow bleeding out to the right edge if the container has padding
+    @media (max-width: $breakpoint-tablet) {
+      margin-right: -$padding-left-right-mobile;
+      width: calc(100% + #{$padding-left-right-mobile});
+      box-sizing: border-box;
+    }
+  }
+
+  &__track {
+    display: flex;
+    width: 100%;
+
+    // Ensure any wrapper element inside the track doesn't wrap its items
+    > * {
+      flex-wrap: nowrap !important;
+      min-width: 100%;
+      // On mobile, ensure the last item leaves some gap at the end since we bleed the viewport
+      @media (max-width: $breakpoint-tablet) {
+        &::after {
+          content: "";
+          flex: 0 0 1px; // Tiny invisible element to create padding
+        }
+      }
+    }
+  }
+
+  &__prev,
+  &__next {
+    cursor: pointer;
+    position: absolute;
+    top: 32%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $black-color;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    z-index: 10;
+    border-radius: 50%;
+    background: none;
+    border: none;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+
+    &:hover {
+      color: $color-neutral-hover;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+
+  &__prev {
+    left: -40px;
+
+    @media (max-width: 1320px) {
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__next {
+    right: -40px;
+
+    @media (max-width: 1320px) {
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

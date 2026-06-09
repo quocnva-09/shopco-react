@@ -37,57 +37,33 @@
   }
 
   &__list {
-    @include flex-group(16px, center, stretch);
-    flex-wrap: wrap;
+    @include flex-group(16px, flex-start, stretch);
+    flex-wrap: wrap; // Default wraps when not in slider
     width: 100%;
-    transition: transform 0.5s ease;
     margin-bottom: 36px;
+    list-style: none;
+    padding: 8px;
 
     @media (max-width: $breakpoint-tablet) {
-      @include flex-group(16px, flex-start, stretch);
-      margin-left: 0;
       margin-bottom: 24px;
     }
+  }
 
-    .product-card {
-      flex: 0 0 calc(25% - 15px);
-      width: 100%;
+  &__item {
+    // Exact math: 4 items, 3 gaps of 16px (16*3=48). 48 / 4 = 12px.
+    flex: 0 0 calc(25% - 12px);
+    width: 100%;
+    min-width: 0; // Ensures items can shrink/scale properly without content blowing them out
 
-      @media (max-width: $breakpoint-tablet) {
-        flex: 0 0 calc(60% - 8px);
-        scroll-snap-align: start;
-      }
+    @media (max-width: $breakpoint-tablet) {
+      flex: 0 0 calc(60% - 8px);
+      scroll-snap-align: start;
     }
   }
 
   &__slider {
-    overflow: hidden;
     width: 100%;
-
-    .product-collection__list {
-      flex-wrap: nowrap;
-
-      @media (max-width: $breakpoint-tablet) {
-        &::after {
-          content: "";
-          flex: 0 0 1px;
-        }
-      }
-    }
-
-    @media (max-width: $breakpoint-tablet) {
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      margin-right: -$padding-left-right-mobile;
-      width: calc(100% + #{$padding-left-right-mobile});
-      box-sizing: border-box;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
+    // All overflow and scroll logic is now handled by the generic Slider component
   }
 
   &__btn {
@@ -102,44 +78,5 @@
     .product-collection__list {
       margin-bottom: 0;
     }
-  }
-
-  &__prev,
-  &__next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 10px;
-    color: $black-color;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    z-index: 10;
-    border-radius: $radius-lg;
-    background: none;
-    border: none;
-
-    @media (max-width: $breakpoint-tablet) {
-      display: none;
-    }
-
-    &:hover {
-      color: $color-neutral-hover;
-      cursor: pointer;
-    }
-
-    &:disabled {
-      opacity: 0.3;
-      cursor: default;
-    }
-  }
-
-  &__prev {
-    left: -40px;
-  }
-
-  &__next {
-    right: -40px;
   }
 }
