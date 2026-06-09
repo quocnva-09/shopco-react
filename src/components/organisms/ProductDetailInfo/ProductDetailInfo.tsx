@@ -24,6 +24,8 @@ import {
   getUniqueSizes,
 } from "@/utils/mappers/product.mapper";
 import "./ProductDetailInfo.scss";
+import toast from "react-hot-toast";
+import { TOAST_MESSAGES } from "@/consts/messages";
 
 export type ProductDetailInfoProps = Omit<
   ComponentPropsWithoutRef<"div">,
@@ -104,6 +106,9 @@ export const ProductDetailInfo = ({
       };
 
       dispatch(addToCart(payload));
+      toast.success(
+        TOAST_MESSAGES.PRODUCT_ADDED_TO_CART({ productName: product.name }),
+      );
     },
     [dispatch, product, selectedVariant, quantity],
   );

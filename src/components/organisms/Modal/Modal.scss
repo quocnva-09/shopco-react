@@ -1,0 +1,68 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black-color, 0.4);
+  z-index: 9999;
+
+  @include flex-center;
+
+  /* Fade in animation */
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal {
+  background-color: $white-color;
+  border-radius: $radius-lg;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensure rounded corners aren't broken by children */
+  box-shadow: 0 4px 20px rgba($black-color, 0.1);
+
+  &__header {
+    @include flex-between;
+    margin: 0 ($base-spacing * 1.5);
+    padding: ($base-spacing * 1) 0;
+    border-bottom: 1px solid $color-neutral;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    font-family: $font-family-title;
+  }
+
+  &__close-btn {
+    /* Slight negative margin to align icon nicely with padding */
+    margin: 0;
+  }
+
+  &__body {
+    padding: $base-spacing * 1.5;
+    overflow-y: auto; /* Allow scrolling within body if too tall */
+  }
+
+  &__footer {
+    margin: 0 ($base-spacing * 1.5);
+    padding: ($base-spacing * 1.5) 0;
+    border-top: 1px solid $color-neutral;
+    @include flex-group(12px, flex-end, center);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

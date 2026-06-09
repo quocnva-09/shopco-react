@@ -1,35 +1,48 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import { useDispatch } from "react-redux";
 import clsx from "clsx";
+import toast from "react-hot-toast";
 import { Image } from "@/components/atoms/Image";
 import { Heading } from "@/components/atoms/Heading/Heading";
 import { Text } from "@/components/atoms/Text";
 import { PriceText } from "@/components/atoms/PriceText";
 import { IconButton } from "@/components/atoms/IconButton";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
+import { ConfirmModal } from "@/components/organisms/ConfirmModal/ConfirmModal";
 import type { CartItem as CartItemType } from "@/types/cart";
 import type { AppDispatch } from "@/store/store";
 import { removeCartItem, updateQuantity } from "@/slices/cartSlice";
+import { TOAST_MESSAGES } from "@/consts/messages";
 import "./CartItem.scss";
-
 export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
   item: CartItemType;
 };
 
 export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { product, variant, quantity, productVariantId } = item;
 
   const handleQuantityChange = (newQuantity: number) => {
-    dispatch(updateQuantity({ productVariantId, quantity: newQuantity }));
+    if (newQuantity < 1) {
+      setIsConfirmModalOpen(true);
+    } else {
+      dispatch(updateQuantity({ productVariantId, quantity: newQuantity }));
+    }
   };
 
-  const handleRemove = () => {
+  const handleRemoveClick = () => {
+    setIsConfirmModalOpen(true);
+  };
+
+  const confirmRemove = () => {
     dispatch(removeCartItem(productVariantId));
+    toast.success(TOAST_MESSAGES.PRODUCT_REMOVED_FROM_CART({ productName: product.name }));
   };
 
   return (
-    <article className={clsx("cart-item", className)} {...rest}>
+    <>
+      <article className={clsx("cart-item", className)} {...rest}>
       <Image
         src={product.imgPath}
         alt={product.name}
@@ -71,7 +84,7 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
             variant="ghost"
             color="red"
             className="cart-item__delete"
-            onClick={handleRemove}
+            onClick={handleRemoveClick}
           />
         </div>
 
@@ -82,12 +95,24 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
             className="cart-item__price"
           />
           <QuantitySelector
-            defaultValue={quantity}
+            value={quantity}
+            min={0}
             className="cart-item__quantity"
             onChange={handleQuantityChange}
           />
         </div>
       </div>
     </article>
+
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => setIsConfirmModalOpen(false)}
+        onConfirm={confirmRemove}
+        title="Remove Item"
+        message={`Are you sure you want to remove "${product.name}" from your cart?`}
+        confirmText="Remove"
+        isDestructive
+      />
+    </>
   );
 };

@@ -81,6 +81,7 @@
     &--formal {
       grid-column: span 6;
 
+      background-color: $white-color;
       .style-categories__image {
         transform: scale(1.8);
         transform-origin: 80% 58%;

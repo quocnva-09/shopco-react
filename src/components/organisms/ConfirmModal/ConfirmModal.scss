@@ -1,0 +1,11 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.confirm-modal__message {
+  font-size: $font-size-base;
+  text-align: center;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-mobile;
+  }
+}

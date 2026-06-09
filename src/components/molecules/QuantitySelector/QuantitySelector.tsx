@@ -8,28 +8,31 @@ export type QuantitySelectorProps = Omit<
   "onChange"
 > & {
   defaultValue?: number;
+  value?: number;
   min?: number;
   onChange?: (value: number) => void;
 };
 
 export const QuantitySelector = ({
   defaultValue = 1,
+  value: propValue,
   min = 1,
   onChange,
   className,
   ...rest
 }: QuantitySelectorProps) => {
-  const [value, setValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const value = propValue !== undefined ? propValue : internalValue;
 
   const handleDecrease = () => {
     const next = value > min ? value - 1 : value;
-    setValue(next);
+    if (propValue === undefined) setInternalValue(next);
     onChange?.(next);
   };
 
   const handleIncrease = () => {
     const next = value + 1;
-    setValue(next);
+    if (propValue === undefined) setInternalValue(next);
     onChange?.(next);
   };
 
