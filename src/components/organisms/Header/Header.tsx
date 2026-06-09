@@ -11,7 +11,9 @@ import { NavMenu } from "@/components/molecules/NavMenu";
 import { SearchBar } from "@/components/molecules/SearchBar";
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { PATHS } from "@/routes";
+import type { RootState } from "@/store/store";
 
 export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;
@@ -25,6 +27,8 @@ export const Header = ({
   ...rest
 }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -82,7 +86,7 @@ export const Header = ({
 
         {/* Action buttons */}
         <div className="header__actions">
-          <Link to={PATHS.CART}>
+          <Link to={PATHS.CART} className="header__cart-link">
             <IconButton
               svgName="icn-cart"
               aria-label="Open shopping cart"
@@ -92,6 +96,9 @@ export const Header = ({
               iconWidth={24}
               iconHeight={24}
             />
+            {totalCartItems > 0 && (
+              <span className="header__cart-badge">{totalCartItems}</span>
+            )}
           </Link>
           <IconButton
             svgName="icn-user"

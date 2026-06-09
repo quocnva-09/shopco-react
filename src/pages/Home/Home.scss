@@ -4,3 +4,13 @@
   position: relative;
   z-index: 1;
 }
+
+.home__divider-bottom {
+  border-bottom: 1px solid $color-neutral;
+}
+
+.home__main-container {
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 10px;
+  }
+}

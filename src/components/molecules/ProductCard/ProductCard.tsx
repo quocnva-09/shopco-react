@@ -10,7 +10,10 @@ import "./ProductCard.scss";
 
 import type { ProductCardData } from "@/types/product";
 
-export type ProductCardProps = Omit<ComponentPropsWithoutRef<typeof Link>, "to"> & {
+export type ProductCardProps = Omit<
+  ComponentPropsWithoutRef<typeof Link>,
+  "to"
+> & {
   product: ProductCardData;
   isDetail?: boolean;
   to?: string;
@@ -32,9 +35,6 @@ export const ProductCard = ({
     discountPercentage,
     rating,
   } = product;
-
-  const fallbackImage = "default.png";
-
   return (
     <Link
       {...rest}
@@ -49,8 +49,7 @@ export const ProductCard = ({
     >
       <figure className="product-card__image">
         <Image
-          src={primaryImage || fallbackImage}
-          fallbackSrc={fallbackImage}
+          src={primaryImage}
           alt={name}
           title={name}
           renderWrapper={false}

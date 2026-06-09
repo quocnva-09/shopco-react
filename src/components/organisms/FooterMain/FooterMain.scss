@@ -4,12 +4,14 @@
   display: flex;
   justify-content: space-between;
   gap: 80px;
-  padding-bottom: 40px;
+  padding-block: 50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   @media (max-width: $breakpoint-tablet) {
     flex-direction: column;
     gap: 12px;
+    padding-top: 0;
+    padding-bottom: 40px;
   }
 
   &__brand {
@@ -24,13 +26,15 @@
     font-family: $font-family-title;
     font-size: 32px;
     font-weight: 700;
-    margin: 0 0 24px 0;
+    margin: 0 0 25px 0;
+    line-height: 0.8;
+    width: fit-content;
   }
 
   &__desc {
     color: $text-muted;
     line-height: 1.6;
-    margin-bottom: 32px;
+    margin-bottom: 35px;
     font-size: 14px;
 
     @media (max-width: $breakpoint-tablet) {

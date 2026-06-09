@@ -5,7 +5,6 @@ import { Text } from "@/components/atoms/Text";
 import { PriceText } from "@/components/atoms/PriceText";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
-import { Divider } from "@/components/atoms/Divider";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./CartSummary.scss";
 
@@ -53,8 +52,6 @@ export const CartSummary = ({
           </div>
         ))}
       </div>
-
-      <Divider direction="horizontal" className="cart-summary__divider" />
 
       <div className="cart-summary__total">
         <Text as="span" className="cart-summary__label">

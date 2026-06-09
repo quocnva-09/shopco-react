@@ -5,7 +5,6 @@ import { ProductCollectionSection } from "@/components/organisms/ProductCollecti
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
-import { Divider } from "@/components/atoms/Divider";
 import { useParams } from "react-router-dom";
 import { useProductCollection } from "@/hooks/useProductCollection";
 import { useReviews } from "@/hooks/useReviews";
@@ -90,7 +89,6 @@ export const ProductDetailPage = () => {
 
   return (
     <main className="container">
-      <Divider direction="horizontal" />
       <Breadcrumb items={breadcrumbs} />
 
       <SectionStateWrapper

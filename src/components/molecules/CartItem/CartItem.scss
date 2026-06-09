@@ -126,7 +126,14 @@
     padding: 12px 20px;
 
     @media (max-width: $breakpoint-tablet) {
-      padding: 8px 14px;
+      padding: 7.5px 13.5px;
     }
+  }
+}
+
+.quantity-selector__value {
+  margin-inline: 20px;
+
+  @media (max-width: $breakpoint-tablet) {
   }
 }

@@ -49,17 +49,20 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   &__name {
     margin-top: 15px;
     display: flex;
-    align-items: center;
+    align-items: top;
     gap: 8px;
     font-size: 20px;
     font-weight: 700;
     color: $black-color;
     width: 100%;
 
-    span:not(.verified-icon) {
-      white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    // span:not(.verified-icon) {
+    //   white-space: normal;
+    //   overflow: hidden;
+    //   text-overflow: ellipsis;
+    // }
+    .verified-icon {
+      margin-top: 3px;
     }
 
     @media (max-width: $breakpoint-tablet) {

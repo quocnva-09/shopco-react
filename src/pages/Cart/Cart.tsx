@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
-import { Divider } from "@/components/atoms/Divider";
 import { Heading } from "@/components/atoms/Heading";
 import { CartSection } from "@/components/organisms/CartSection";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
@@ -15,7 +14,6 @@ export const CartPage = () => {
 
   return (
     <main className="container">
-      <Divider direction="horizontal" />
       <Breadcrumb items={breadcrumbs} />
       <Heading className="cart-page__title" as="h1">
         YOUR CART

@@ -10,7 +10,6 @@ import {
   HERO_STATS,
   HERO_EFFECTS,
 } from "@/consts/homeData";
-import { Divider } from "@/components/atoms/Divider";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import "./Home.scss";
@@ -67,7 +66,7 @@ export const HomePage = () => {
 
       <BrandLogoBar className="home__brand-logo" />
 
-      <div className="container">
+      <div className="container home__main-container">
         <SectionStateWrapper
           isLoading={isLoadingNewArrivals}
           loadingMessage="Loading new arrivals..."
@@ -76,13 +75,12 @@ export const HomePage = () => {
           onRetry={retryNewArrivals}
         >
           <ProductCollectionSection
+            className="home__divider-bottom"
             title="NEW ARRIVALS"
             products={newArrivals}
             ctaLabel="View All"
           />
         </SectionStateWrapper>
-
-        <Divider direction="horizontal" />
 
         <SectionStateWrapper
           isLoading={isLoadingTopSellings}

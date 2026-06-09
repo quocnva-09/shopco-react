@@ -2,10 +2,10 @@
 @use "@/styles/abstracts/mixins" as *;
 
 .feedback {
-  margin-bottom: 80px;
+  margin-top: 80px;
 
   @media (max-width: $breakpoint-tablet) {
-    margin-bottom: 40px;
+    margin-top: 50px;
   }
 
   &__header {

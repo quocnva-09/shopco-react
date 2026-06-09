@@ -5,11 +5,11 @@
   background-color: $color-neutral;
   border-radius: $radius-pill;
   padding: 70px 64px;
-  margin: 80px 0;
+  margin-top: 16px;
 
   @media (max-width: $breakpoint-tablet) {
     padding: 40px 24px;
-    margin: 40px 0;
+    margin-top: 10px;
     border-radius: $radius-lg;
   }
 
@@ -83,12 +83,12 @@
 
       background-color: $white-color;
       .style-categories__image {
-        transform: scale(1.8);
-        transform-origin: 80% 58%;
+        transform: scale(1.9);
+        transform-origin: 0 52%;
         object-position: center top;
 
         &:hover {
-          transform: scale(1.85);
+          transform: scale(1.95);
         }
 
         @media (max-width: $breakpoint-tablet) {

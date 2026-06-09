@@ -4,14 +4,12 @@ import { Text } from "@/components/atoms/Text/Text";
 import { Button } from "@/components/atoms/Button/Button";
 import { PATHS } from "@/routes/paths";
 import "./NotFound.scss";
-import { Divider } from "@/components/atoms/Divider";
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
     <main className="container">
-      <Divider direction="horizontal" />
       <div className="not-found">
         <div className="not-found__code" aria-hidden="true">
           404

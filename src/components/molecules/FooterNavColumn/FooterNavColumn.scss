@@ -1,6 +1,8 @@
 @use "@/styles/abstracts/variables" as *;
 
 .footer-col {
+  margin: 0;
+  padding: 0;
   &__title {
     font-size: $font-size-base;
     font-weight: 600;
@@ -17,10 +19,12 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   &__item {
-    margin-bottom: 16px;
   }
 
   &__link {

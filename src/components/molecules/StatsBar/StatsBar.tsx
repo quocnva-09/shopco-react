@@ -1,6 +1,5 @@
 import { type ComponentPropsWithoutRef } from 'react';
 import clsx from 'clsx';
-import { Divider } from '../../atoms/Divider';
 import './StatsBar.scss';
 
 export interface StatItemData {
@@ -8,7 +7,7 @@ export interface StatItemData {
   label: string;
 }
 
-export type StatsBarProps = ComponentPropsWithoutRef<'div'> & {
+export type StatsBarProps = ComponentPropsWithoutRef<'ul'> & {
   items: StatItemData[];
 };
 
@@ -18,24 +17,13 @@ export const StatsBar = ({
   ...rest
 }: StatsBarProps) => {
   return (
-    <div className={clsx('stats-bar', className)} {...rest}>
-      {items.map((item, index) => (
-        <div key={item.label} className="stats-bar__entry">
-          <div className="stats-bar__item">
-            <span className="stats-bar__value">{item.value}</span>
-            <span className="stats-bar__label">{item.label}</span>
-          </div>
-          {index < items.length - 1 && (
-            <Divider
-              direction="vertical"
-              className={clsx(
-                "stats-bar__divider",
-                index === items.length - 2 && "stats-bar__divider--end"
-              )}
-            />
-          )}
-        </div>
+    <ul className={clsx('stats-bar', className)} {...rest}>
+      {items.map((item) => (
+        <li key={item.label} className="stats-bar__item">
+          <span className="stats-bar__value">{item.value}</span>
+          <span className="stats-bar__label">{item.label}</span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
