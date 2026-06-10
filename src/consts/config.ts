@@ -1,3 +1,5 @@
 export const DEFAULT_CURRENCY = "USD";
 
 export const TOAST_DEFAULT_DURATION = 3000;
+
+export const DEFAULT_SLIDER_DURATION = 4000;

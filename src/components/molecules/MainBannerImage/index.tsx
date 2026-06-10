@@ -51,7 +51,6 @@ export const MainBannerImage = ({
           alt={alt}
           loading="eager"
           decoding="async"
-          fit="contain"
           renderWrapper={false}
           imgClassName="main-banner__image"
         />

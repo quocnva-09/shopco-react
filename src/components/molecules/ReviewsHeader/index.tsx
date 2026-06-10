@@ -111,7 +111,7 @@ export const ReviewsHeader = ({
         showTooltip={false}
         className="tab-content__title"
       >
-        All Reviews{" "}
+        {ratingFilter != null ? `${ratingFilter}-Star Reviews` : "All Reviews"}{" "}
         <Text as="span" className="reviews__count">
           ({reviewCount})
         </Text>

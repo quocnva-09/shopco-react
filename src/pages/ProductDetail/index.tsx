@@ -70,16 +70,9 @@ export const ProductDetailPage = () => {
       limit: 6,
       sort_by: "created_at",
       sort_dir: sortOrder === SORT_ORDER.LATEST ? "desc" : "asc",
+      rating: ratingFilter ?? undefined,
     },
     { enableLoadMore: true },
-  );
-
-  const filteredReviews = useMemo(
-    () =>
-      ratingFilter != null
-        ? reviews.filter((r) => Math.floor(r.rating) === ratingFilter)
-        : reviews,
-    [reviews, ratingFilter],
   );
 
   const baseBreadcrumbs = useBreadcrumbs();
@@ -112,7 +105,7 @@ export const ProductDetailPage = () => {
       >
         <ProductMoreInfoSection
           reviewCount={totalCount}
-          reviews={filteredReviews}
+          reviews={reviews}
           hasMore={hasMore}
           isLoadingMore={isLoadingMoreReviews}
           onLoadMore={loadMoreReviews}
@@ -137,7 +130,7 @@ export const ProductDetailPage = () => {
           showButton={false}
           className="product-page__product-collections"
           showArrows={true}
-          autoplay={false}
+          autoplay={true}
         />
       </SectionStateWrapper>
     </main>

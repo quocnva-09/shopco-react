@@ -16,7 +16,7 @@ export const CONFIRM_MESSAGES = {
 };
 
 export const CHECKOUT_MESSAGES = {
-  TITLE: "CHECKOUT YOUR ORDER",
+  TITLE: "CHECKOUT ORDER",
   SHOPPING_CART: "Shopping Cart",
   SHIPPING_DETAILS: "Shipping Details",
   PAYMENT_METHOD: "Payment Method",

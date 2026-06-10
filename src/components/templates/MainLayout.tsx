@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, useLocation } from "react-router-dom";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { NotificationBar } from "@/components/organisms/NotificationBar";
 import { Spinner } from "@/components/atoms/Spinner";
+import { PATHS } from "@/routes";
 import "./MainLayout.scss";
 
 export const MainLayout = () => {
   const [isNotificationVisible, setIsNotificationVisible] =
     useState<boolean>(true);
 
-  // navigation.state = "idle" | "loading" | "submitting"
   const { state } = useNavigation();
   const isRouteLoading = state === "loading";
+
+  const { pathname } = useLocation();
+  const isHomePage = pathname === PATHS.HOME;
 
   return (
     <>
@@ -20,7 +23,7 @@ export const MainLayout = () => {
         <NotificationBar onClose={() => setIsNotificationVisible(false)} />
       )}
 
-      <Header />
+      <Header noBorder={isHomePage} />
       {isRouteLoading ? (
         <div className="main-layout__spinner" aria-live="polite">
           <Spinner size="lg" label="Loading page..." />

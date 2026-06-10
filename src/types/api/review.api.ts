@@ -20,6 +20,7 @@ export interface ReviewApi {
 export interface ReviewParams {
   product_id?: number;
   keyword?: string;
+  rating?: number;
   sort_by?: "id" | "created_at" | "rating";
   sort_dir?: "asc" | "desc";
   limit?: number;

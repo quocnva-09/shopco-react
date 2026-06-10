@@ -2,9 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Button } from "@/components/atoms/Button";
-import {
-  ProductCard,
-} from "@/components/molecules/ProductCard";
+import { ProductCard } from "@/components/molecules/ProductCard";
 import { Slider } from "@/components/molecules/Slider";
 import "./index.scss";
 import type { ProductCardData } from "@/types/product";

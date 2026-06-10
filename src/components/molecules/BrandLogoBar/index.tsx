@@ -4,11 +4,11 @@ import { Image } from "../../atoms/Image";
 import "./index.scss";
 
 const defaultLogos = [
-  { src: "/images/logo-versace.svg", alt: "Versace logo" },
-  { src: "/images/logo-zara.svg", alt: "Zara logo" },
-  { src: "/images/logo-gucci.svg", alt: "Gucci logo" },
-  { src: "/images/logo-prada.svg", alt: "Prada logo" },
-  { src: "/images/logo-ck.svg", alt: "Calvin Klein logo" },
+  { src: "/images/logo-versace.svg", alt: "Versace" },
+  { src: "/images/logo-zara.svg", alt: "Zara" },
+  { src: "/images/logo-gucci.svg", alt: "Gucci" },
+  { src: "/images/logo-prada.svg", alt: "Prada" },
+  { src: "/images/logo-ck.svg", alt: "Calvin Klein" },
 ];
 
 export type BrandLogoData = {
@@ -35,7 +35,6 @@ export const BrandLogoBar = ({
               src={logo.src}
               alt={logo.alt}
               renderWrapper={false}
-              fit="contain"
             />
           </figure>
         ))}

@@ -1,7 +1,6 @@
 import {
   useEffect,
   useState,
-  type CSSProperties,
   type ComponentPropsWithoutRef,
 } from "react";
 import clsx from "clsx";
@@ -11,9 +10,6 @@ export type ImageProps = ComponentPropsWithoutRef<"img"> & {
   fallbackSrc?: string;
   imgClassName?: string;
   placeholderClassName?: string;
-  aspectRatio?: number | string;
-  fit?: CSSProperties["objectFit"];
-  objectPosition?: CSSProperties["objectPosition"];
   showPlaceholder?: boolean;
   isLoaded?: boolean;
   isError?: boolean;
@@ -29,11 +25,6 @@ export const Image = ({
   className,
   imgClassName,
   placeholderClassName,
-  width,
-  height,
-  aspectRatio,
-  fit = "cover",
-  objectPosition,
   showPlaceholder = false,
   isLoaded: externalIsLoaded,
   isError: externalIsError,
@@ -72,15 +63,6 @@ export const Image = ({
   const finalIsLoaded = externalIsLoaded ?? internalIsLoaded;
   const finalIsError = externalIsError ?? internalIsError;
 
-  // Build inline styles
-  const baseStyles: CSSProperties = {
-    width,
-    height,
-    aspectRatio: aspectRatio !== undefined ? String(aspectRatio) : undefined,
-    objectFit: fit,
-    objectPosition,
-  };
-
   const resolvedImgClassName = clsx(
     renderWrapper && "image-wrapper__img",
     imgClassName,
@@ -95,7 +77,6 @@ export const Image = ({
         className={clsx("image-bare", className, resolvedImgClassName)}
         src={imgSrc || ""}
         alt={alt}
-        style={baseStyles}
         onLoad={handleLoad}
         onError={handleError}
         {...rest}
@@ -112,23 +93,11 @@ export const Image = ({
         finalIsError && "image-wrapper--error",
         className,
       )}
-      style={{
-        width,
-        height,
-        aspectRatio:
-          aspectRatio !== undefined ? String(aspectRatio) : undefined,
-      }}
     >
       <img
         className={resolvedImgClassName}
         src={imgSrc || ""}
         alt={alt}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: fit,
-          objectPosition,
-        }}
         onLoad={handleLoad}
         onError={handleError}
         {...rest}

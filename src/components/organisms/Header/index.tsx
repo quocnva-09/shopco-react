@@ -18,11 +18,13 @@ import type { RootState } from "@/store/store";
 export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;
   onProfileClick?: () => void;
+  noBorder?: boolean;
 };
 
 export const Header = ({
   onCartClick,
   onProfileClick,
+  noBorder = false,
   className,
   ...rest
 }: HeaderProps) => {
@@ -57,7 +59,7 @@ export const Header = ({
 
   return (
     <header className={clsx("header", className)} {...rest}>
-      <div className={clsx("header__container", "container")}>
+      <div className={clsx("header__container", "container", noBorder && "header__container--no-border")}>
         {/* Hamburger: shown on mobile when the menu is closed */}
         {!isMobileMenuOpen && (
           <IconButton

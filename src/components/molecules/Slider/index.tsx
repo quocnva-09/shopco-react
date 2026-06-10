@@ -6,6 +6,10 @@ import {
 } from "react";
 import clsx from "clsx";
 import "./index.scss";
+import {
+  DEFAULT_SLIDER_DURATION,
+  TOAST_DEFAULT_DURATION,
+} from "@/consts/config";
 
 export type SliderProps = ComponentPropsWithoutRef<"div"> & {
   /** Content of the slider (the list items) */
@@ -21,7 +25,7 @@ export type SliderProps = ComponentPropsWithoutRef<"div"> & {
 export const Slider = ({
   children,
   autoplay = false,
-  autoplayInterval = 3000,
+  autoplayInterval = DEFAULT_SLIDER_DURATION,
   showArrows = true,
   className,
   ...rest
@@ -43,7 +47,9 @@ export const Slider = ({
         const wrapper = viewportRef.current.firstElementChild
           ?.firstElementChild as HTMLElement;
         const item = wrapper?.firstElementChild as HTMLElement;
-        const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
+        const gap = wrapper
+          ? parseFloat(window.getComputedStyle(wrapper).gap) || 0
+          : 0;
         const scrollAmount = item ? item.clientWidth + gap : clientWidth + gap;
         viewportRef.current.scrollBy({
           left: scrollAmount,
@@ -69,8 +75,12 @@ export const Slider = ({
     const wrapper = viewportRef.current.firstElementChild
       ?.firstElementChild as HTMLElement;
     const item = wrapper?.firstElementChild as HTMLElement;
-    const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
-    const scrollAmount = item ? item.clientWidth + gap : viewportRef.current.clientWidth + gap;
+    const gap = wrapper
+      ? parseFloat(window.getComputedStyle(wrapper).gap) || 0
+      : 0;
+    const scrollAmount = item
+      ? item.clientWidth + gap
+      : viewportRef.current.clientWidth + gap;
     viewportRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
   };
 
@@ -87,7 +97,9 @@ export const Slider = ({
     const wrapper = viewportRef.current.firstElementChild
       ?.firstElementChild as HTMLElement;
     const item = wrapper?.firstElementChild as HTMLElement;
-    const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
+    const gap = wrapper
+      ? parseFloat(window.getComputedStyle(wrapper).gap) || 0
+      : 0;
     const scrollAmount = item ? item.clientWidth + gap : clientWidth + gap;
     viewportRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
