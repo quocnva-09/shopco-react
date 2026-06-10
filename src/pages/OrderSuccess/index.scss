@@ -1,0 +1,28 @@
+.order-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 20px;
+  padding: 40px 16px;
+  text-align: center;
+
+  &__image {
+    object-fit: contain;
+  }
+
+  &__title {
+    font-size: 28px;
+  }
+
+  &__description {
+    color: var(--color-text-muted, #666);
+    max-width: 400px;
+  }
+
+  &__cta {
+    margin-top: 8px;
+    padding: 14px 32px;
+  }
+}

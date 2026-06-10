@@ -22,6 +22,7 @@ export const CHECKOUT_MESSAGES = {
   PAYMENT_METHOD: "Payment Method",
   ORDER_SUMMARY: "Order Summary",
   PLACE_ORDER: "Place Order",
+  PLACING_ORDER: "Placing Order...",
   CASH_ON_DELIVERY: "Cash on Delivery",
   PLACEHOLDERS: {
     FULL_NAME: "Enter your fullname",
@@ -47,6 +48,19 @@ export const CHECKOUT_MESSAGES = {
     PHONE_NUMBER_REQUIRED: "Phone number is required",
     PHONE_NUMBER_INVALID: "Invalid phone number",
   },
+};
+
+export const CHECKOUT_API_MESSAGES = {
+  ORDER_SUCCESS: "Order placed successfully!",
+  ORDER_ERROR: "Failed to place order. Please try again.",
+};
+
+export const ORDER_SUCCESS_MESSAGES = {
+  IMAGE_ALT: "Order placed successfully illustration",
+  TITLE: "Thank You for Your Order!",
+  DESCRIPTION: (orderId: number) =>
+    `Your order #${orderId} has been placed and is being processed.`,
+  CTA: "Continue Shopping",
 };
 
 export const WRITE_REVIEW_MESSAGES = {

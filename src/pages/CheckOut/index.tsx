@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
-import { useLocation, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { PATHS } from "@/routes";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { Heading } from "@/components/atoms/Heading";
@@ -9,9 +11,12 @@ import { CartSummary } from "@/components/organisms/CartSummary";
 import { CheckoutShippingForm } from "@/components/organisms/CheckoutShippingForm";
 import { CheckoutPaymentMethod } from "@/components/organisms/CheckoutPaymentMethod";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
-import type { RootState } from "@/store/store";
+import type { RootState, AppDispatch } from "@/store/store";
 import { buildLineItems } from "@/utils/cart";
-import { CHECKOUT_MESSAGES } from "@/consts/messages";
+import { clearCart } from "@/slices/cartSlice";
+import { CheckoutService } from "@/services/checkout.service";
+import type { CheckoutRequest } from "@/types/api/checkout.api";
+import { CHECKOUT_MESSAGES, CHECKOUT_API_MESSAGES } from "@/consts/messages";
 import "./index.scss";
 
 interface CheckoutFormData {
@@ -24,10 +29,15 @@ interface CheckoutFormData {
 
 export const CheckOutPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const breadcrumbs = useBreadcrumbs();
+
   const { cartItems, deliveryFee, discount } = useSelector(
     (state: RootState) => state.cart,
   );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!location.state?.fromCart) {
     return <Navigate to={PATHS.CART} replace />;
@@ -43,10 +53,37 @@ export const CheckOutPage = () => {
     },
   });
 
-  const onSubmit = (data: CheckoutFormData) => {
-    console.log("Order Data:", data, "Cart Items:", cartItems);
-    // TODO: Dispatch action to place order or call API
-    alert("Order placed successfully!");
+  const onSubmit = async (data: CheckoutFormData) => {
+    const payload: CheckoutRequest = {
+      items: cartItems.map((item) => ({
+        product_id: item.productId,
+        product_variant_id: item.productVariantId,
+        color_id: item.variant.colorId,
+        size_id: item.variant.sizeId,
+        quantity: item.quantity,
+      })),
+      delivery_fee: deliveryFee,
+      discount,
+      guest_name: data.fullName,
+      guest_phone: data.phoneNumber,
+      guest_email: data.email,
+      guest_address: data.address,
+    };
+
+    try {
+      setIsLoading(true);
+      const response = await CheckoutService.placeOrder(payload);
+      dispatch(clearCart());
+      navigate(PATHS.ORDER_SUCCESS, {
+        state: { orderId: response.data.id },
+        replace: true,
+      });
+    } catch {
+      toast.error(CHECKOUT_API_MESSAGES.ORDER_ERROR);
+      navigate(PATHS.CART);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const lineItems = buildLineItems(cartItems, deliveryFee, discount);
@@ -82,7 +119,12 @@ export const CheckOutPage = () => {
             </form>
           </FormProvider>
 
-          <CartSummary lineItems={lineItems} total={total} isCheckout />
+          <CartSummary
+            lineItems={lineItems}
+            total={total}
+            isCheckout
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </main>

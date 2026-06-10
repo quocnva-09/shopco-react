@@ -21,12 +21,14 @@ export type CartSummaryProps = ComponentPropsWithoutRef<"aside"> & {
   lineItems: SummaryLineItem[];
   total: number;
   isCheckout?: boolean;
+  isLoading?: boolean;
 };
 
 export const CartSummary = ({
   lineItems,
   total,
   isCheckout,
+  isLoading = false,
   className,
   ...rest
 }: CartSummaryProps) => {
@@ -97,8 +99,9 @@ export const CartSummary = ({
           className="cart-summary__checkout"
           type="submit"
           form="checkout-form"
+          disabled={isLoading}
         >
-          {CHECKOUT_MESSAGES.PLACE_ORDER}
+          {isLoading ? CHECKOUT_MESSAGES.PLACING_ORDER : CHECKOUT_MESSAGES.PLACE_ORDER}
         </Button>
       ) : (
         <Link to={PATHS.CHECKOUT} state={{ fromCart: true }} className="cart-summary__link">

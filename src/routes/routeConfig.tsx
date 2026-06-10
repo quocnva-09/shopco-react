@@ -56,6 +56,13 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: PATHS.ORDER_SUCCESS,
+        lazy: async () => {
+          const { OrderSuccessPage } = await import("@/pages/OrderSuccess");
+          return { Component: OrderSuccessPage };
+        },
+      },
+      {
         path: PATHS.PRODUCT,
         element: <Navigate to={PATHS.HOME} replace />,
       },
