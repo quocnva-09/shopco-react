@@ -6,10 +6,7 @@ import {
 } from "react";
 import clsx from "clsx";
 import "./index.scss";
-import {
-  DEFAULT_SLIDER_DURATION,
-  TOAST_DEFAULT_DURATION,
-} from "@/consts/config";
+import { DEFAULT_SLIDER_DURATION } from "@/consts/config";
 
 export type SliderProps = ComponentPropsWithoutRef<"div"> & {
   /** Content of the slider (the list items) */

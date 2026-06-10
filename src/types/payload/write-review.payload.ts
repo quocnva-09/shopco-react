@@ -1,5 +1,5 @@
 export interface WriteReviewPayload {
-  order_id: number;
+  order_id: number | undefined;
   product_id: number;
   rating: number;
   comment: string;

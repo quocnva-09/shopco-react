@@ -33,7 +33,7 @@ export interface ReviewResponse extends ApiResponse<ReviewApi> {}
 
 // Request body for submitting a guest review
 export interface WriteReviewRequest {
-  order_id: number;
+  order_id?: number;
   product_id: number;
   rating: number;
   comment: string;
