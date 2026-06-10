@@ -29,3 +29,13 @@ export interface ReviewParams {
 export interface ReviewListResponse extends PaginationResponse<ReviewApi> {}
 
 export interface ReviewResponse extends ApiResponse<ReviewApi> {}
+
+// Request body for submitting a guest review
+export interface WriteReviewRequest {
+  order_id: number;
+  product_id: number;
+  rating: number;
+  comment: string;
+  guest_name: string;
+  guest_email: string;
+}

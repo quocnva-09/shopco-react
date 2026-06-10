@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import clsx from "clsx";
 import { Modal } from "../Modal";
@@ -23,10 +24,8 @@ export type WriteReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: WriteReviewPayload) => void;
-  productId?: number;
 };
 
-const PRODUCT_ID_DEFAULT = 7;
 const STAR_COUNT = 5;
 
 const DEFAULT_VALUES: WriteReviewFormValues = {
@@ -41,8 +40,10 @@ export const WriteReviewModal = ({
   isOpen,
   onClose,
   onSubmit,
-  productId = PRODUCT_ID_DEFAULT,
 }: WriteReviewModalProps) => {
+  // Derive product ID from the URL — avoids prop drilling through multiple component layers
+  const { id } = useParams<{ id: string }>();
+  const productId = Number(id);
   const {
     register,
     handleSubmit,

@@ -1,6 +1,6 @@
 import type { ApiResponse } from "./api";
 
-// ─── Request ──────────────────────────────────────────────────────────────────
+//  Request
 
 export interface CheckoutItemRequest {
   product_id: number;
@@ -20,7 +20,7 @@ export interface CheckoutRequest {
   guest_address: string;
 }
 
-// ─── Response ─────────────────────────────────────────────────────────────────
+//  Response
 
 export interface OrderProductImageApi {
   id: number;

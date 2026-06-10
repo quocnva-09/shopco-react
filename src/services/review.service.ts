@@ -1,5 +1,10 @@
-import { get } from "@/lib/axiosClient";
-import type { ReviewListResponse, ReviewParams } from "@/types/api/review.api";
+import { get, post } from "@/lib/axiosClient";
+import type {
+  ReviewListResponse,
+  ReviewParams,
+  ReviewResponse,
+  WriteReviewRequest,
+} from "@/types/api/review.api";
 
 export const ReviewService = {
   async getReviews(params?: ReviewParams) {
@@ -10,5 +15,9 @@ export const ReviewService = {
     return get<ReviewListResponse>(`/products/${productId}/reviews`, {
       params,
     });
+  },
+
+  async submitReview(payload: WriteReviewRequest): Promise<ReviewResponse> {
+    return post<ReviewResponse>("/guest/reviews", payload);
   },
 };

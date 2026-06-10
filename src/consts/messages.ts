@@ -95,3 +95,8 @@ export const WRITE_REVIEW_MESSAGES = {
     REVIEW_MIN: "Review must be at least 10 characters",
   },
 };
+
+export const WRITE_REVIEW_API_MESSAGES = {
+  SUBMIT_SUCCESS: "Thank you! Your review has been submitted.",
+  SUBMIT_ERROR: "Failed to submit review. Please try again.",
+};
