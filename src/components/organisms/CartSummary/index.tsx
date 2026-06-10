@@ -6,7 +6,10 @@ import { PriceText } from "@/components/atoms/PriceText";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
+import { CHECKOUT_MESSAGES } from "@/consts/messages";
 import "./index.scss";
+import { Link } from "react-router-dom";
+import { PATHS } from "@/routes";
 
 export interface SummaryLineItem {
   label: string;
@@ -17,11 +20,13 @@ export interface SummaryLineItem {
 export type CartSummaryProps = ComponentPropsWithoutRef<"aside"> & {
   lineItems: SummaryLineItem[];
   total: number;
+  isCheckout?: boolean;
 };
 
 export const CartSummary = ({
   lineItems,
   total,
+  isCheckout,
   className,
   ...rest
 }: CartSummaryProps) => {
@@ -33,7 +38,7 @@ export const CartSummary = ({
         showTooltip={false}
         className="cart-summary__title"
       >
-        Order Summary
+        {isCheckout ? CHECKOUT_MESSAGES.ORDER_SUMMARY : "Order Summary"}
       </Heading>
 
       <div className="cart-summary__list">
@@ -60,33 +65,49 @@ export const CartSummary = ({
         <PriceText value={total} className="cart-summary__value" />
       </div>
 
-      <form
-        className="cart-summary__promo"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div className="cart-summary__promo-input-wrapper">
-          <IconButton
-            svgName="icn-voucher"
-            aria-label="Voucher icon"
-            variant="ghost"
-            className="cart-summary__icon"
-          />
-          <Input
-            type="text"
-            unstyled
-            placeholder="Add promo code"
-            className="cart-summary__promo-input"
-          />
-        </div>
-        <Button type="submit" variant="solid" className="cart-summary__apply">
-          Apply
-        </Button>
-      </form>
+      {!isCheckout && (
+        <form
+          className="cart-summary__promo"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div className="cart-summary__promo-input-wrapper">
+            <IconButton
+              svgName="icn-voucher"
+              aria-label="Voucher icon"
+              variant="ghost"
+              className="cart-summary__icon"
+            />
+            <Input
+              type="text"
+              unstyled
+              placeholder="Add promo code"
+              className="cart-summary__promo-input"
+            />
+          </div>
+          <Button type="submit" variant="solid" className="cart-summary__apply">
+            Apply
+          </Button>
+        </form>
+      )}
 
-      <Button variant="solid" fullWidth className="cart-summary__checkout">
-        Go to Checkout
-        <span className="cart-summary__checkout-arrow">→</span>
-      </Button>
+      {isCheckout ? (
+        <Button
+          variant="solid"
+          fullWidth
+          className="cart-summary__checkout"
+          type="submit"
+          form="checkout-form"
+        >
+          {CHECKOUT_MESSAGES.PLACE_ORDER}
+        </Button>
+      ) : (
+        <Link to={PATHS.CHECKOUT} state={{ fromCart: true }} className="cart-summary__link">
+          <Button variant="solid" fullWidth className="cart-summary__checkout">
+            Go to Checkout
+            <span className="cart-summary__checkout-arrow">→</span>
+          </Button>
+        </Link>
+      )}
     </aside>
   );
 };

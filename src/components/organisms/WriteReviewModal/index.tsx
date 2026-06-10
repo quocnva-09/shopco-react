@@ -1,84 +1,228 @@
 import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import clsx from "clsx";
 import { Modal } from "../Modal";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { Text } from "@/components/atoms/Text";
+import { WRITE_REVIEW_MESSAGES } from "@/consts/messages";
+import { writeReviewValidationRules } from "@/utils/writeReviewValidation";
+import type { WriteReviewPayload } from "@/types/payload/write-review.payload";
 import "./index.scss";
+
+// Internal form shape — maps to the API payload on submit
+type WriteReviewFormValues = {
+  orderId: number | undefined;
+  guestName: string;
+  guestEmail: string;
+  rating: number;
+  comment: string;
+};
 
 export type WriteReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { rating: number; reviewText: string }) => void;
+  onSubmit: (data: WriteReviewPayload) => void;
+  productId?: number;
+};
+
+const PRODUCT_ID_DEFAULT = 7;
+const STAR_COUNT = 5;
+
+const DEFAULT_VALUES: WriteReviewFormValues = {
+  orderId: undefined,
+  guestName: "",
+  guestEmail: "",
+  rating: 0,
+  comment: "",
 };
 
 export const WriteReviewModal = ({
   isOpen,
   onClose,
   onSubmit,
+  productId = PRODUCT_ID_DEFAULT,
 }: WriteReviewModalProps) => {
-  const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState("");
-  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<WriteReviewFormValues>({ defaultValues: DEFAULT_VALUES });
 
-  const handleSubmit = () => {
-    if (rating === 0) {
-      setError("Please select a rating");
-      return;
-    }
-    if (reviewText.trim().length === 0) {
-      setError("Please write a review");
-      return;
-    }
-    
-    onSubmit({ rating, reviewText });
-    
-    // Reset state after submission
-    setRating(0);
-    setReviewText("");
-    setError("");
+  const [hoverRating, setHoverRating] = useState(0);
+  const currentRating = watch("rating");
+
+  const handleFormSubmit = (values: WriteReviewFormValues) => {
+    onSubmit({
+      order_id: values.orderId,
+      product_id: productId,
+      rating: values.rating,
+      comment: values.comment,
+      guest_name: values.guestName,
+      guest_email: values.guestEmail,
+    });
+    reset();
     onClose();
   };
 
-  return (
-    <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
-      <Modal.Header title="Write a Review" />
-      <Modal.Body>
-        <div className="write-review-modal__form">
-          <div>
-            <Text className="write-review-modal__label">Rating</Text>
-            <select 
-              value={rating} 
-              onChange={(e) => setRating(Number(e.target.value))}
-              className="write-review-modal__select"
-            >
-              <option value={0}>Select a rating...</option>
-              <option value={5}>5 Stars - Excellent</option>
-              <option value={4}>4 Stars - Good</option>
-              <option value={3}>3 Stars - Average</option>
-              <option value={2}>2 Stars - Poor</option>
-              <option value={1}>1 Star - Terrible</option>
-            </select>
-          </div>
-          
-          <div>
-            <Text className="write-review-modal__label">Your Review</Text>
-            <Input
-              value={reviewText}
-              onChange={(e) => setReviewText(e.target.value)}
-              placeholder="Tell us what you think..."
-              className="write-review-modal__input"
-            />
-          </div>
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
 
-          {error && <Text className="write-review-modal__error">{error}</Text>}
-        </div>
+  // Helper to render a standard labeled input field row
+  const renderInputField = (
+    id: keyof WriteReviewFormValues,
+    label: string,
+    registerResult: ReturnType<typeof register>,
+    options: { type?: string; placeholder?: string } = {},
+  ) => {
+    const error = errors[id];
+    return (
+      <li className="write-review-modal__item">
+        <label htmlFor={id} className="write-review-modal__label">
+          {label}
+        </label>
+        <Input
+          id={id}
+          type={options.type}
+          placeholder={options.placeholder}
+          className={clsx(
+            "write-review-modal__input",
+            error && "write-review-modal__input--error",
+          )}
+          {...registerResult}
+        />
+        {error && (
+          <Text as="span" className="write-review-modal__error">
+            {error.message}
+          </Text>
+        )}
+      </li>
+    );
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={handleClose} closeOnOverlayClick={false}>
+      <Modal.Header title={WRITE_REVIEW_MESSAGES.TITLE} />
+      <Modal.Body>
+        <ul className="write-review-modal__list">
+          {renderInputField(
+            "orderId",
+            WRITE_REVIEW_MESSAGES.LABELS.ORDER_ID,
+            register("orderId", writeReviewValidationRules.orderId),
+            {
+              type: "number",
+              placeholder: WRITE_REVIEW_MESSAGES.PLACEHOLDERS.ORDER_ID,
+            },
+          )}
+
+          {renderInputField(
+            "guestName",
+            WRITE_REVIEW_MESSAGES.LABELS.GUEST_NAME,
+            register("guestName", writeReviewValidationRules.guestName),
+            { placeholder: WRITE_REVIEW_MESSAGES.PLACEHOLDERS.GUEST_NAME },
+          )}
+
+          {renderInputField(
+            "guestEmail",
+            WRITE_REVIEW_MESSAGES.LABELS.GUEST_EMAIL,
+            register("guestEmail", writeReviewValidationRules.guestEmail),
+            {
+              type: "email",
+              placeholder: WRITE_REVIEW_MESSAGES.PLACEHOLDERS.GUEST_EMAIL,
+            },
+          )}
+
+          {/* Rating — inline star picker */}
+          <li className="write-review-modal__item">
+            <label className="write-review-modal__label">
+              {WRITE_REVIEW_MESSAGES.LABELS.RATING}
+            </label>
+            <Controller
+              name="rating"
+              control={control}
+              rules={{
+                validate: (v) =>
+                  v > 0 || WRITE_REVIEW_MESSAGES.ERRORS.RATING_REQUIRED,
+              }}
+              render={({ field: { onChange } }) => (
+                <div
+                  className={clsx(
+                    "write-review-modal__stars",
+                    errors.rating && "write-review-modal__stars--error",
+                  )}
+                  role="radiogroup"
+                  aria-label={WRITE_REVIEW_MESSAGES.LABELS.RATING}
+                >
+                  {Array.from({ length: STAR_COUNT }, (_, i) => {
+                    const starValue = i + 1;
+                    const isFilled = starValue <= (hoverRating || currentRating);
+                    return (
+                      <button
+                        key={starValue}
+                        type="button"
+                        role="radio"
+                        aria-checked={starValue === currentRating}
+                        aria-label={`${starValue} star`}
+                        className={clsx(
+                          "rating__star write-review-modal__star",
+                          isFilled
+                            ? "rating__star--full"
+                            : "rating__star--empty",
+                        )}
+                        onClick={() => onChange(starValue)}
+                        onMouseEnter={() => setHoverRating(starValue)}
+                        onMouseLeave={() => setHoverRating(0)}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            />
+            {errors.rating && (
+              <Text as="span" className="write-review-modal__error">
+                {errors.rating.message}
+              </Text>
+            )}
+          </li>
+
+          {/* Comment */}
+          <li className="write-review-modal__item">
+            <label htmlFor="comment" className="write-review-modal__label">
+              {WRITE_REVIEW_MESSAGES.LABELS.REVIEW}
+            </label>
+            <textarea
+              id="comment"
+              placeholder={WRITE_REVIEW_MESSAGES.PLACEHOLDERS.REVIEW}
+              className={clsx(
+                "form-input",
+                "write-review-modal__textarea",
+                errors.comment && "write-review-modal__input--error",
+              )}
+              rows={4}
+              {...register("comment", writeReviewValidationRules.comment)}
+            />
+            {errors.comment && (
+              <Text as="span" className="write-review-modal__error">
+                {errors.comment.message}
+              </Text>
+            )}
+          </li>
+        </ul>
+
+        {/* Hidden product_id — supplied via props, not tracked by RHF */}
+        <input type="hidden" value={productId} name="product_id" />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline" onClick={onClose}>
-          Cancel
+        <Button variant="outline" onClick={handleClose}>
+          {WRITE_REVIEW_MESSAGES.BUTTONS.CANCEL}
         </Button>
-        <Button onClick={handleSubmit}>
-          Submit Review
+        <Button onClick={handleSubmit(handleFormSubmit)}>
+          {WRITE_REVIEW_MESSAGES.BUTTONS.SUBMIT}
         </Button>
       </Modal.Footer>
     </Modal>

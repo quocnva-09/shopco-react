@@ -7,6 +7,8 @@ import { IconButton } from "@/components/atoms/IconButton";
 import { Icon } from "@/components/atoms/Icon";
 import { Rating } from "@/components/atoms/Rating";
 import { MenuList, type MenuItem } from "@/components/molecules/MenuList";
+import { WriteReviewModal } from "@/components/organisms/WriteReviewModal";
+import type { WriteReviewPayload } from "@/types/payload/write-review.payload";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import {
   SORT_ORDER,
@@ -24,6 +26,7 @@ export type ReviewsHeaderProps = ComponentPropsWithoutRef<"div"> & {
   onSortChange?: (order: SortOrder) => void;
   ratingFilter?: RatingFilter | null;
   onRatingFilterChange?: (rating: RatingFilter | null) => void;
+  onWriteReview?: (data: WriteReviewPayload) => void;
 };
 
 export const ReviewsHeader = ({
@@ -32,11 +35,13 @@ export const ReviewsHeader = ({
   onSortChange,
   ratingFilter,
   onRatingFilterChange,
+  onWriteReview,
   className,
   ...rest
 }: ReviewsHeaderProps) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isWriteReviewModalOpen, setIsWriteReviewModalOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
@@ -50,6 +55,13 @@ export const ReviewsHeader = ({
 
   const toggleSort = useCallback(() => setIsSortOpen((prev) => !prev), []);
   const toggleFilter = useCallback(() => setIsFilterOpen((prev) => !prev), []);
+
+  const openWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(true), []);
+  const closeWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(false), []);
+
+  const handleWriteReviewSubmit = useCallback((data: WriteReviewPayload) => {
+    onWriteReview?.(data);
+  }, [onWriteReview]);
 
   // Build menu items — Sort
   const sortMenuItems: MenuItem[] = Object.values(SORT_ORDER).map((order) => ({
@@ -139,10 +151,16 @@ export const ReviewsHeader = ({
           />
         </div>
 
-        <Button variant="solid" className="button--write-review">
+        <Button variant="solid" className="button--write-review" onClick={openWriteReviewModal}>
           Write a Review
         </Button>
       </div>
+
+      <WriteReviewModal
+        isOpen={isWriteReviewModalOpen}
+        onClose={closeWriteReviewModal}
+        onSubmit={handleWriteReviewSubmit}
+      />
     </div>
   );
 };

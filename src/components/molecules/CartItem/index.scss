@@ -129,6 +129,15 @@
       padding: 7.5px 13.5px;
     }
   }
+
+  &__quantity-text {
+    font-size: 16px;
+    font-weight: 500;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 14px;
+    }
+  }
 }
 
 .quantity-selector__value {

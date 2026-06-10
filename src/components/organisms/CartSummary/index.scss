@@ -85,7 +85,7 @@
       display: flex;
       align-items: center;
       padding: 0 16px;
-      gap:10px;
+      gap: 10px;
     }
 
     &-input {
@@ -121,5 +121,9 @@
       font-size: 20px;
       font-weight: 400;
     }
+  }
+
+  &__link {
+    text-decoration: none;
   }
 }

@@ -16,9 +16,10 @@ import { TOAST_MESSAGES } from "@/consts/messages";
 import "./index.scss";
 export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
   item: CartItemType;
+  isCheckout?: boolean;
 };
 
-export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
+export const CartItem = ({ item, isCheckout, className, ...rest }: CartItemProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { product, variant, quantity, productVariantId } = item;
@@ -94,12 +95,18 @@ export const CartItem = ({ item, className, ...rest }: CartItemProps) => {
             value={product.priceDiscount}
             className="cart-item__price"
           />
-          <QuantitySelector
-            value={quantity}
-            min={0}
-            className="cart-item__quantity"
-            onChange={handleQuantityChange}
-          />
+          {isCheckout ? (
+            <Text as="span" className="cart-item__quantity-text">
+              Qty: {quantity}
+            </Text>
+          ) : (
+            <QuantitySelector
+              value={quantity}
+              min={0}
+              className="cart-item__quantity"
+              onChange={handleQuantityChange}
+            />
+          )}
         </div>
       </div>
     </article>

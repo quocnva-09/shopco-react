@@ -1,0 +1,71 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.checkout-payment {
+  @include checkout-box;
+
+  &__title {
+    @include checkout-box-title;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+
+    &--selected {
+      background-color: #f5f5f5; // Already selected look based on image
+    }
+  }
+
+  &__radio {
+    display: none; // Hide original radio
+
+    &:checked + .checkout-payment__custom-radio {
+      border: 6px solid $black-color;
+      background-color: $white-color;
+    }
+  }
+
+  &__custom-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $black-color;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+
+    &__option {
+      padding: 14px 16px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+  }
+}

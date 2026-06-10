@@ -27,18 +27,19 @@ export const BrandLogoBar = ({
 }: BrandLogoBarProps) => {
   return (
     <div className={clsx("brand-logo-wrapper", className)} {...rest}>
-      <figure className="brand-logo container">
+      <div className="brand-logo container">
         {logos.map((logo) => (
-          <Image
-            key={logo.alt}
-            className="brand-logo__item"
-            src={logo.src}
-            alt={logo.alt}
-            renderWrapper={false}
-            fit="contain"
-          />
+          <figure key={logo.alt}>
+            <Image
+              className="brand-logo__item"
+              src={logo.src}
+              alt={logo.alt}
+              renderWrapper={false}
+              fit="contain"
+            />
+          </figure>
         ))}
-      </figure>
+      </div>
     </div>
   );
 };

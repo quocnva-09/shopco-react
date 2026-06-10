@@ -28,7 +28,7 @@ $color-neutral: #f0f0f0;
 $color-neutral-hover: #999;
 
 // Color — semantic
-$color-danger: #FF3333;
+$color-danger: #ff3333;
 $color-danger-surface: #ffebeb;
 $color-success: green;
 
@@ -42,3 +42,6 @@ $base-spacing: 16px;
 // Layout
 $padding-left-right-full-layout: 100px;
 $padding-left-right-mobile: 16px;
+
+// Icon
+$icon-star: url("/images/icn-star.svg") no-repeat center / cover;

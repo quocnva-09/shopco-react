@@ -46,6 +46,16 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: PATHS.CHECKOUT,
+        lazy: async () => {
+          const { CheckOutPage } = await import("@/pages/CheckOut");
+          return { Component: CheckOutPage };
+        },
+        handle: {
+          crumb: () => [{ label: "Checkout" }],
+        },
+      },
+      {
         path: PATHS.PRODUCT,
         element: <Navigate to={PATHS.HOME} replace />,
       },

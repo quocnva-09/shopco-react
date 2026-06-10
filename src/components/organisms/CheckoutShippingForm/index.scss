@@ -1,0 +1,49 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.checkout-form {
+  @include checkout-box;
+
+  &__title {
+    @include checkout-box-title;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $black-color;
+  }
+
+  &__input {
+    width: 100%;
+    border-radius: 12px;
+
+    &--error {
+      border-color: $color-danger;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+}

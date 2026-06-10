@@ -21,69 +21,10 @@
     gap: $base-spacing * 0.5;
   }
 
-  .dropdown {
-    position: relative;
-
-    &.is-open .button--dropdown svg {
-      transition: transform 0.2s ease;
-      transform: rotate(180deg);
-    }
-  }
-
-  .dropdown .dropdown__menu {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    z-index: 20;
-    min-width: 140px;
-    background-color: #fff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    padding: 4px;
-    list-style: none;
-    margin: 0;
-
-    display: none;
-    opacity: 0;
-    transform: translateY(-4px);
-    transition: opacity 0.15s ease, transform 0.15s ease;
-  }
-
-  .dropdown.is-open .dropdown__menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .dropdown__item {
-    border-radius: 6px;
-
-    &:hover {
-      background-color: $color-neutral;
-    }
-  }
-
-  // Button inside menu item (no underline, full-width)
-  .dropdown__item-btn {
-    display: block;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 6px;
-    font-size: 14px;
-    color: $black-color;
-    cursor: pointer;
-    font-family: inherit;
-    border-radius: 6px;
-
-    &:hover {
-      background-color: $color-neutral;
-    }
-  }
+  @include dropdown-menu;
 }
 
-.button--dropdown {
+.reviews__actions .button--dropdown {
   color: $black-color;
   padding: 15px 20px;
 

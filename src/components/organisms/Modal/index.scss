@@ -48,6 +48,7 @@
   &__body {
     padding: $base-spacing * 1.5;
     overflow-y: auto; /* Allow scrolling within body if too tall */
+    scrollbar-gutter: stable both-edges;
   }
 
   &__footer {
