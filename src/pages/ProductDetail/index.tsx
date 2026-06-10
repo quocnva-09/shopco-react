@@ -137,7 +137,7 @@ export const ProductDetailPage = () => {
           showButton={false}
           className="product-page__product-collections"
           showArrows={true}
-          autoplay={true}
+          autoplay={false}
         />
       </SectionStateWrapper>
     </main>

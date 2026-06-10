@@ -42,8 +42,9 @@ export const Slider = ({
       } else {
         const wrapper = viewportRef.current.firstElementChild
           ?.firstElementChild as HTMLElement;
+        const item = wrapper?.firstElementChild as HTMLElement;
         const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
-        const scrollAmount = wrapper ? wrapper.clientWidth + gap : clientWidth;
+        const scrollAmount = item ? item.clientWidth + gap : clientWidth + gap;
         viewportRef.current.scrollBy({
           left: scrollAmount,
           behavior: "smooth",
@@ -67,8 +68,9 @@ export const Slider = ({
 
     const wrapper = viewportRef.current.firstElementChild
       ?.firstElementChild as HTMLElement;
+    const item = wrapper?.firstElementChild as HTMLElement;
     const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
-    const scrollAmount = wrapper ? wrapper.clientWidth + gap : viewportRef.current.clientWidth;
+    const scrollAmount = item ? item.clientWidth + gap : viewportRef.current.clientWidth + gap;
     viewportRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
   };
 
@@ -84,8 +86,9 @@ export const Slider = ({
 
     const wrapper = viewportRef.current.firstElementChild
       ?.firstElementChild as HTMLElement;
+    const item = wrapper?.firstElementChild as HTMLElement;
     const gap = wrapper ? parseFloat(window.getComputedStyle(wrapper).gap) || 0 : 0;
-    const scrollAmount = wrapper ? wrapper.clientWidth + gap : viewportRef.current.clientWidth;
+    const scrollAmount = item ? item.clientWidth + gap : clientWidth + gap;
     viewportRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
 

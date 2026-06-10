@@ -35,7 +35,6 @@ export const ProductCollectionSection = ({
   className,
   ...rest
 }: ProductCollectionSectionProps) => {
-  // Render list products
   const listContent = (
     <ul className="product-collection__list">
       {products.map((product) => (
