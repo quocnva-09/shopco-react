@@ -5,6 +5,9 @@ import { ProductGallerySkeleton } from "@/components/molecules/ProductGallerySke
 import { ProductDetailInfo } from "@/components/organisms/ProductDetailInfo";
 import { ProductDetailInfoSkeleton } from "@/components/organisms/ProductDetailInfoSkeleton";
 import { ProductMoreInfoSection } from "@/components/organisms/ProductMoreInfoSection";
+import { ProductDetailsPanel } from "@/components/organisms/ProductDetailsPanel";
+import { ProductReviewsPanel } from "@/components/organisms/ProductReviewsPanel";
+import { ProductFaqsPanel } from "@/components/organisms/ProductFaqsPanel";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
@@ -101,31 +104,40 @@ export const ProductDetailPage = () => {
             </>
           ) : product ? (
             <>
-              <ProductGallery images={product.images} productName={product.name} />
+              <ProductGallery
+                images={product.images}
+                productName={product.name}
+              />
               <ProductDetailInfo product={product} />
             </>
           ) : null}
         </div>
       </SectionStateWrapper>
 
-      {/* Reviews */}
-      <SectionStateWrapper
-        error={reviewsError}
-        isRetryable={reviewsRetryable}
-        onRetry={retryReviews}
-      >
-        <ProductMoreInfoSection
-          reviewCount={totalCount}
-          reviews={reviews}
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMoreReviews}
-          onLoadMore={loadMoreReviews}
-          sortOrder={sortOrder}
-          onSortChange={handleSortChange}
-          ratingFilter={ratingFilter}
-          onRatingFilterChange={handleRatingFilterChange}
-        />
-      </SectionStateWrapper>
+      {/* More Info Tabs */}
+      <ProductMoreInfoSection
+        detailsPanel={
+          <ProductDetailsPanel description={product?.description || ""} />
+        }
+        faqsPanel={<ProductFaqsPanel content={""} />}
+        reviewsPanel={
+          <ProductReviewsPanel
+            reviewCount={totalCount}
+            reviews={reviews}
+            hasMore={hasMore}
+            isLoading={isLoadingReviews}
+            isLoadingMore={isLoadingMoreReviews}
+            error={reviewsError}
+            isRetryable={reviewsRetryable}
+            onRetry={retryReviews}
+            onLoadMore={loadMoreReviews}
+            sortOrder={sortOrder}
+            onSortChange={handleSortChange}
+            ratingFilter={ratingFilter}
+            onRatingFilterChange={handleRatingFilterChange}
+          />
+        }
+      />
 
       {/* Related products */}
       <SectionStateWrapper
