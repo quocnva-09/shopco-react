@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ProductCollectionSection } from './index';
 import type { ProductCardData } from '@/types/product';
+import { ProductCard } from '@/components/molecules/ProductCard';
 
 // Mock data — 8 products to test slider navigation
 const mockProducts: ProductCardData[] = [
@@ -78,30 +79,13 @@ const meta: Meta<typeof ProductCollectionSection> = {
     layout: 'fullscreen',
   },
   argTypes: {
-    title: {
-      control: 'text',
-      description: 'Section title',
-    },
-    ctaLabel: {
-      control: 'text',
-      description: 'CTA button label shown below the list',
-    },
-    enableSlider: {
+    showButton: {
       control: 'boolean',
-      description: 'Enable or disable slider mode (arrows + scroll)',
+      description: 'Show or hide the CTA button',
     },
-    visibleCount: {
-      control: { type: 'number', min: 1, max: 8 },
-      description: 'Number of products visible per view (desktop)',
-    },
-    onCtaClick: { action: 'View All clicked' },
   },
   args: {
-    title: 'NEW ARRIVALS',
-    products: mockProducts.slice(0, 4),
-    ctaLabel: 'View All',
-    enableSlider: true,
-    visibleCount: 4,
+    showButton: true,
   },
 };
 
@@ -112,34 +96,55 @@ type Story = StoryObj<typeof ProductCollectionSection>;
 export const Default: Story = {
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
-      <ProductCollectionSection {...args} />
+      <ProductCollectionSection {...args}>
+        <ProductCollectionSection.Header title="NEW ARRIVALS" />
+        <ProductCollectionSection.Content enableSlider={true}>
+          {mockProducts.slice(0, 4).map((product) => (
+            <li key={product.id} className="product-collection__item">
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ProductCollectionSection.Content>
+        <ProductCollectionSection.Footer label="View All" />
+      </ProductCollectionSection>
     </div>
   ),
 };
 
 // 2. Many Products — 8 products, test slider navigation
 export const ManyProducts: Story = {
-  args: {
-    title: 'TOP SELLING',
-    products: mockProducts,
-  },
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
-      <ProductCollectionSection {...args} />
+      <ProductCollectionSection {...args}>
+        <ProductCollectionSection.Header title="TOP SELLING" />
+        <ProductCollectionSection.Content enableSlider={true}>
+          {mockProducts.map((product) => (
+            <li key={product.id} className="product-collection__item">
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ProductCollectionSection.Content>
+        <ProductCollectionSection.Footer label="View All" />
+      </ProductCollectionSection>
     </div>
   ),
 };
 
 // 3. No Slider — grid wraps naturally
 export const NoSlider: Story = {
-  args: {
-    title: 'YOU MIGHT ALSO LIKE',
-    products: mockProducts,
-    enableSlider: false,
-  },
   render: (args) => (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
-      <ProductCollectionSection {...args} />
+      <ProductCollectionSection {...args}>
+        <ProductCollectionSection.Header title="YOU MIGHT ALSO LIKE" />
+        <ProductCollectionSection.Content enableSlider={false}>
+          {mockProducts.map((product) => (
+            <li key={product.id} className="product-collection__item">
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ProductCollectionSection.Content>
+        <ProductCollectionSection.Footer label="View All" />
+      </ProductCollectionSection>
     </div>
   ),
 };
@@ -153,21 +158,17 @@ export const MobileView: Story = {
   },
   render: (args) => (
     <div style={{ padding: '0 16px' }}>
-      <ProductCollectionSection {...args} />
-    </div>
-  ),
-};
-
-// 5. Custom Visible Count — 3 items per view
-export const ThreePerView: Story = {
-  args: {
-    title: 'TRENDING NOW',
-    products: mockProducts.slice(0, 6),
-    visibleCount: 3,
-  },
-  render: (args) => (
-    <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 100px' }}>
-      <ProductCollectionSection {...args} />
+      <ProductCollectionSection {...args}>
+        <ProductCollectionSection.Header title="MOBILE VIEW" />
+        <ProductCollectionSection.Content enableSlider={true}>
+          {mockProducts.slice(0, 4).map((product) => (
+            <li key={product.id} className="product-collection__item">
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ProductCollectionSection.Content>
+        <ProductCollectionSection.Footer label="View All" />
+      </ProductCollectionSection>
     </div>
   ),
 };

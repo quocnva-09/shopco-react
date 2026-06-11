@@ -9,6 +9,8 @@ import { ProductDetailsPanel } from "@/components/organisms/ProductDetailsPanel"
 import { ProductReviewsPanel } from "@/components/organisms/ProductReviewsPanel";
 import { ProductFaqsPanel } from "@/components/organisms/ProductFaqsPanel";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
+import { ProductCard } from "@/components/molecules/ProductCard";
+import { ProductCardSkeleton } from "@/components/molecules/ProductCardSkeleton";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
@@ -22,6 +24,17 @@ import {
   type SortOrder,
   type RatingFilter,
 } from "@/consts/reviewFilters";
+
+// Utility component to render a list of skeletons
+const ProductCardSkeletonList = ({ count }: { count: number }) => (
+  <>
+    {Array.from({ length: count }).map((_, i) => (
+      <li key={i} className="product-collection__item">
+        <ProductCardSkeleton />
+      </li>
+    ))}
+  </>
+);
 
 export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -108,7 +121,20 @@ export const ProductDetailPage = () => {
                 images={product.images}
                 productName={product.name}
               />
-              <ProductDetailInfo product={product} />
+              <ProductDetailInfo product={product}>
+                <ProductDetailInfo.Header name={product.name} ratingAvg={product.ratingAvg} />
+                <ProductDetailInfo.Price
+                  currentPrice={product.currentPrice}
+                  originalPrice={product.originalPrice}
+                  discountPercent={product.discountPercent}
+                />
+                <ProductDetailInfo.Description>{product.description}</ProductDetailInfo.Description>
+                <ProductDetailInfo.Form>
+                  <ProductDetailInfo.ColorSelection />
+                  <ProductDetailInfo.SizeSelection />
+                  <ProductDetailInfo.Actions />
+                </ProductDetailInfo.Form>
+              </ProductDetailInfo>
             </>
           ) : null}
         </div>
@@ -145,15 +171,20 @@ export const ProductDetailPage = () => {
         isRetryable={relatedRetryable}
         onRetry={retryRelated}
       >
-        <ProductCollectionSection
-          title="YOU MAY ALSO LIKE"
-          products={relatedProducts}
-          showButton={false}
-          isLoading={isLoadingRelatedProducts}
-          className="product-page__product-collections"
-          showArrows={true}
-          autoplay={true}
-        />
+        <ProductCollectionSection className="product-page__product-collections" showButton={false}>
+          <ProductCollectionSection.Header title="YOU MAY ALSO LIKE" />
+          <ProductCollectionSection.Content enableSlider={true} showArrows={true} autoplay={true}>
+            {isLoadingRelatedProducts ? (
+              <ProductCardSkeletonList count={4} />
+            ) : (
+              relatedProducts.map(p => (
+                <li key={p.id} className="product-collection__item">
+                  <ProductCard product={p} />
+                </li>
+              ))
+            )}
+          </ProductCollectionSection.Content>
+        </ProductCollectionSection>
       </SectionStateWrapper>
     </main>
   );

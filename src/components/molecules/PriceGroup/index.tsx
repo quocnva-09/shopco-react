@@ -6,8 +6,8 @@ import "./index.scss";
 
 export type PriceGroupProps = ComponentPropsWithoutRef<"div"> & {
   currentPrice: number;
-  originalPrice?: number;
-  discountPercentage?: number;
+  originalPrice?: number | null;
+  discountPercentage?: number | null;
   currency?: string;
   isDetail?: boolean;
 };

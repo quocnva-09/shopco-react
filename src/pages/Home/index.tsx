@@ -1,7 +1,14 @@
+import { Suspense } from "react";
+import { useLoaderData, Await } from "react-router-dom";
 import { BannerSection } from "@/components/organisms/BannerSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { StyleCategorySection } from "@/components/organisms/StyleCategorySection";
 import { FeedbackSection } from "@/components/organisms/FeedbackSection";
+import { ProductCard } from "@/components/molecules/ProductCard";
+import { ProductCardSkeleton } from "@/components/molecules/ProductCardSkeleton";
+import { ReviewCard } from "@/components/molecules/ReviewCard";
+import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
+import { FEEDBACK_CONSTS } from "@/consts/feedback";
 import {
   HERO_TITLE,
   HERO_DESCRIPTION,
@@ -11,47 +18,21 @@ import {
   HERO_EFFECTS,
 } from "@/consts/homeData";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
-import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import "./index.scss";
-import { useProductCollection } from "@/hooks/useProductCollection";
-import { useReviews } from "@/hooks/useReviews";
+
+// Utility component to render a list of skeletons
+const ProductCardSkeletonList = ({ count }: { count: number }) => (
+  <>
+    {Array.from({ length: count }).map((_, i) => (
+      <li key={i} className="product-collection__item">
+        <ProductCardSkeleton />
+      </li>
+    ))}
+  </>
+);
 
 export const HomePage = () => {
-  const {
-    products: newArrivals,
-    isLoading: isLoadingNewArrivals,
-    error: newArrivalsError,
-    isRetryable: newArrivalsRetryable,
-    retry: retryNewArrivals,
-  } = useProductCollection({
-    sort_by: "created_at",
-    sort_dir: "desc",
-    per_page: 4,
-  });
-
-  const {
-    products: topSellings,
-    isLoading: isLoadingTopSellings,
-    error: topSellingsError,
-    isRetryable: topSellingsRetryable,
-    retry: retryTopSellings,
-  } = useProductCollection({
-    sort_by: "selling",
-    sort_dir: "desc",
-    per_page: 4,
-  });
-
-  const {
-    reviews: feedBacks,
-    isLoading: isLoadingFeedBacks,
-    error: feedBacksError,
-    isRetryable: feedBacksRetryable,
-    retry: retryFeedBacks,
-  } = useReviews({
-    sort_by: "rating",
-    sort_dir: "desc",
-    limit: 8,
-  });
+  const { newArrivals, topSellings, reviews } = useLoaderData() as any;
 
   return (
     <main>
@@ -67,45 +48,69 @@ export const HomePage = () => {
       <BrandLogoBar className="home__brand-logo" />
 
       <div className="container home__main-container">
-        <SectionStateWrapper
-          error={newArrivalsError}
-          isRetryable={newArrivalsRetryable}
-          onRetry={retryNewArrivals}
-        >
-          <ProductCollectionSection
-            className="home__divider-bottom"
-            title="NEW ARRIVALS"
-            products={newArrivals}
-            isLoading={isLoadingNewArrivals}
-            ctaLabel="View All"
-            showArrows={false}
-          />
-        </SectionStateWrapper>
+        <ProductCollectionSection className="home__divider-bottom">
+          <ProductCollectionSection.Header title="NEW ARRIVALS" />
+          <ProductCollectionSection.Content>
+            <Suspense fallback={<ProductCardSkeletonList count={4} />}>
+              <Await resolve={newArrivals}>
+                {(resolvedNewArrivals) =>
+                  resolvedNewArrivals.map((product: any) => (
+                    <li key={product.id} className="product-collection__item">
+                      <ProductCard product={product} />
+                    </li>
+                  ))
+                }
+              </Await>
+            </Suspense>
+          </ProductCollectionSection.Content>
+          <ProductCollectionSection.Footer label="View All" />
+        </ProductCollectionSection>
 
-        <SectionStateWrapper
-          error={topSellingsError}
-          isRetryable={topSellingsRetryable}
-          onRetry={retryTopSellings}
-        >
-          <ProductCollectionSection
-            title="TOP SELLING"
-            products={topSellings}
-            isLoading={isLoadingTopSellings}
-            ctaLabel="View All"
-            showArrows={false}
-          />
-        </SectionStateWrapper>
+        <ProductCollectionSection>
+          <ProductCollectionSection.Header title="TOP SELLING" />
+          <ProductCollectionSection.Content>
+            <Suspense fallback={<ProductCardSkeletonList count={4} />}>
+              <Await resolve={topSellings}>
+                {(resolvedTopSellings) =>
+                  resolvedTopSellings.map((product: any) => (
+                    <li key={product.id} className="product-collection__item">
+                      <ProductCard product={product} />
+                    </li>
+                  ))
+                }
+              </Await>
+            </Suspense>
+          </ProductCollectionSection.Content>
+          <ProductCollectionSection.Footer label="View All" />
+        </ProductCollectionSection>
 
         <StyleCategorySection title="BROWSE BY DRESS STYLE" />
       </div>
 
-      <SectionStateWrapper
-        error={feedBacksError}
-        isRetryable={feedBacksRetryable}
-        onRetry={retryFeedBacks}
-      >
-        <FeedbackSection reviews={feedBacks} isLoading={isLoadingFeedBacks} />
-      </SectionStateWrapper>
+      <FeedbackSection>
+        <FeedbackSection.Header title={FEEDBACK_CONSTS.DEFAULT_TITLE} />
+        <FeedbackSection.Content>
+          <Suspense
+            fallback={Array.from({
+              length: FEEDBACK_CONSTS.SKELETON_COUNT,
+            }).map((_, i) => (
+              <ReviewCardSkeleton key={`skeleton-${i}`} showDate={false} />
+            ))}
+          >
+            <Await resolve={reviews}>
+              {(resolvedReviews) =>
+                resolvedReviews.map((review: any) => (
+                  <ReviewCard
+                    key={review.id}
+                    review={review}
+                    showDate={false}
+                  />
+                ))
+              }
+            </Await>
+          </Suspense>
+        </FeedbackSection.Content>
+      </FeedbackSection>
     </main>
   );
 };

@@ -1,6 +1,7 @@
 // routes/routeConfig.tsx
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { PATHS } from "./paths";
+import { homeLoader } from "@/pages/Home/loader";
 
 // pages
 import { MainLayout } from "@/components/templates/MainLayout";
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: homeLoader,
         lazy: async () => {
           const { HomePage } = await import("@/pages/Home");
           return { Component: HomePage };

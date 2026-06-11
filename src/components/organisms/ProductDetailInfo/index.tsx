@@ -1,11 +1,4 @@
-import {
-  useState,
-  useMemo,
-  useCallback,
-  type SyntheticEvent,
-  type ComponentPropsWithoutRef,
-} from "react";
-import { useDispatch } from "react-redux";
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Rating } from "@/components/atoms/Rating";
@@ -16,175 +9,129 @@ import { ColorSelector } from "@/components/molecules/ColorSelector";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import type { ProductData } from "@/types/product";
-import type { AppDispatch } from "@/store/store";
-import type { AddToCartPayload } from "@/types/payload/cart.payload";
-import { addToCart } from "@/slices/cartSlice";
-import {
-  getUniqueColors,
-  getUniqueSizes,
-} from "@/utils/mappers/product.mapper";
+import { ProductCartProvider, useProductCartContext } from "./ProductCartContext";
 import "./index.scss";
-import toast from "react-hot-toast";
-import { TOAST_MESSAGES } from "@/consts/messages";
 
-export type ProductDetailInfoProps = Omit<
-  ComponentPropsWithoutRef<"div">,
-  "id"
-> & {
+type RootProps = ComponentPropsWithoutRef<"div"> & {
   product: ProductData;
+  children: ReactNode;
 };
 
-export const ProductDetailInfo = ({
-  product,
-  className,
-  ...rest
-}: ProductDetailInfoProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const rating = product.ratingAvg ?? 0;
-
-  const uniqueColors = useMemo(
-    () => getUniqueColors(product.variants),
-    [product.variants],
-  );
-
-  const uniqueSizes = useMemo(
-    () => getUniqueSizes(product.variants),
-    [product.variants],
-  );
-
-  // Variant selection state
-  const [selectedColorId, setSelectedColorId] = useState<number>(
-    uniqueColors[0]?.id,
-  );
-  const [selectedSizeId, setSelectedSizeId] = useState<number>(
-    uniqueSizes[0]?.id,
-  );
-  const [quantity, setQuantity] = useState(1);
-
-  // Resolve selected variant from current color + size selection
-  const selectedVariant = useMemo(
-    () =>
-      product.variants.find(
-        (v) => v.color.id === selectedColorId && v.size.id === selectedSizeId,
-      ),
-    [product.variants, selectedColorId, selectedSizeId],
-  );
-
-  // Add to cart handler
-  const handleAddToCart = useCallback(
-    (e: SyntheticEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      if (!selectedVariant) return;
-
-      // Resolve primary image — fallback to first image
-      const primaryImage =
-        product.images.find((img) => img.isPrimary)?.imgPath ??
-        product.images[0]?.imgPath ??
-        "";
-
-      const payload: AddToCartPayload = {
-        productId: product.id,
-        productVariantId: selectedVariant.id,
-        quantity,
-        variant: {
-          id: selectedVariant.id,
-          colorId: selectedVariant.color.id,
-          color: selectedVariant.color.name,
-          colorHex: selectedVariant.color.hexCode,
-          sizeId: selectedVariant.size.id,
-          size: selectedVariant.size.name,
-          sizeLabel: selectedVariant.size.label,
-        },
-        product: {
-          id: product.id,
-          name: product.name,
-          imgPath: primaryImage,
-          price: product.originalPrice ?? product.currentPrice,
-          priceDiscount: product.currentPrice,
-        },
-      };
-
-      dispatch(addToCart(payload));
-      toast.success(
-        TOAST_MESSAGES.PRODUCT_ADDED_TO_CART({ productName: product.name }),
-      );
-    },
-    [dispatch, product, selectedVariant, quantity],
-  );
-
+const Root = ({ product, children, className, ...rest }: RootProps) => {
   return (
-    <div className={clsx("product-detail__info", className)} {...rest}>
-      {/* Product Card Info: Name + Rating + Price */}
-      <Heading
-        as="h2"
-        lineClamp={0}
-        showTooltip={false}
-        className="product-detail__name"
-        fontFamily="'IntegralCF', sans-serif"
-      >
-        {product.name}
-      </Heading>
+    <ProductCartProvider product={product}>
+      <div className={clsx("product-detail__info", className)} {...rest}>
+        {children}
+      </div>
+    </ProductCartProvider>
+  );
+};
 
-      <Rating value={rating} className="product-detail__rating" />
+const Header = ({ name, ratingAvg }: { name: string; ratingAvg?: number }) => (
+  <>
+    <Heading
+      as="h2"
+      lineClamp={0}
+      showTooltip={false}
+      className="product-detail__name"
+    >
+      {name}
+    </Heading>
+    <Rating value={ratingAvg ?? 0} className="product-detail__rating" />
+  </>
+);
 
-      <PriceGroup
-        currentPrice={product.currentPrice}
-        originalPrice={product.originalPrice}
-        discountPercentage={product.discountPercent}
-        isDetail={true}
-      />
+const Price = ({
+  currentPrice,
+  originalPrice,
+  discountPercent,
+}: {
+  currentPrice: number;
+  originalPrice?: number | null;
+  discountPercent?: number | null;
+}) => (
+  <PriceGroup
+    currentPrice={currentPrice}
+    originalPrice={originalPrice}
+    discountPercentage={discountPercent}
+    isDetail={true}
+  />
+);
 
-      {/* Description */}
-      <Text as="p" className="product-detail__description">
-        {product.description}
+const Description = ({ children }: { children: ReactNode }) => (
+  <Text as="p" className="product-detail__description">
+    {children}
+  </Text>
+);
+
+const Form = ({ children }: { children: ReactNode }) => {
+  const { handleAddToCart } = useProductCartContext();
+  return (
+    <form className="product-detail__form" onSubmit={handleAddToCart}>
+      {children}
+    </form>
+  );
+};
+
+const ColorSelection = () => {
+  const { uniqueColors, setSelectedColorId } = useProductCartContext();
+  return (
+    <div className="product-detail__variant">
+      <Text as="span" className="product-detail__variant-label">
+        Select Colors
       </Text>
-
-      {/* Form: Color + Size + Quantity + Add to Cart */}
-      <form className="product-detail__form" onSubmit={handleAddToCart}>
-        {/* Color Variant */}
-        <div className="product-detail__variant">
-          <Text as="span" className="product-detail__variant-label">
-            Select Colors
-          </Text>
-          <ColorSelector
-            name="color"
-            colors={uniqueColors}
-            key={product.id}
-            onChange={setSelectedColorId}
-          />
-        </div>
-
-        {/* Size Variant */}
-        <div className="product-detail__variant">
-          <Text as="span" className="product-detail__variant-label">
-            Choose Size
-          </Text>
-          <SizeSelector
-            name="size"
-            sizes={uniqueSizes}
-            key={product.id}
-            onChange={setSelectedSizeId}
-          />
-        </div>
-
-        {/* Actions */}
-        <div className="product-detail__actions">
-          <QuantitySelector
-            className="product-detail__quantity"
-            onChange={setQuantity}
-          />
-          <Button
-            variant="solid"
-            fullWidth
-            type="submit"
-            className="product-detail__btn"
-            disabled={!selectedVariant}
-          >
-            Add to Cart
-          </Button>
-        </div>
-      </form>
+      <ColorSelector
+        name="color"
+        colors={uniqueColors}
+        onChange={setSelectedColorId}
+      />
     </div>
   );
 };
+
+const SizeSelection = () => {
+  const { uniqueSizes, setSelectedSizeId } = useProductCartContext();
+  return (
+    <div className="product-detail__variant">
+      <Text as="span" className="product-detail__variant-label">
+        Choose Size
+      </Text>
+      <SizeSelector
+        name="size"
+        sizes={uniqueSizes}
+        onChange={setSelectedSizeId}
+      />
+    </div>
+  );
+};
+
+const Actions = () => {
+  const { setQuantity, selectedVariant } = useProductCartContext();
+  return (
+    <div className="product-detail__actions">
+      <QuantitySelector
+        className="product-detail__quantity"
+        onChange={setQuantity}
+      />
+      <Button
+        variant="solid"
+        fullWidth
+        type="submit"
+        className="product-detail__btn"
+        disabled={!selectedVariant}
+      >
+        Add to Cart
+      </Button>
+    </div>
+  );
+};
+
+export const ProductDetailInfo = Object.assign(Root, {
+  Header,
+  Price,
+  Description,
+  Form,
+  ColorSelection,
+  SizeSelection,
+  Actions,
+});

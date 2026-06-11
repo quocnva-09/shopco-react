@@ -1,57 +1,16 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Button } from "@/components/atoms/Button";
-import { ProductCard } from "@/components/molecules/ProductCard";
-import { ProductCardSkeleton } from "@/components/molecules/ProductCardSkeleton";
 import { Slider } from "@/components/molecules/Slider";
 import "./index.scss";
-import type { ProductCardData } from "@/types/product";
 
-export type ProductCollectionSectionProps =
-  ComponentPropsWithoutRef<"section"> & {
-    title: string;
-    products: ProductCardData[];
-    isLoading?: boolean;
-    ctaLabel?: string;
-    onCtaClick?: () => void;
-    enableSlider?: boolean;
-    visibleCount?: number;
-    showButton?: boolean;
-    autoplay?: boolean;
-    showArrows?: boolean;
-  };
+type RootProps = ComponentPropsWithoutRef<"section"> & {
+  children: ReactNode;
+  showButton?: boolean;
+};
 
-export const ProductCollectionSection = ({
-  title,
-  products,
-  isLoading = false,
-  ctaLabel = "View All",
-  onCtaClick,
-  enableSlider = true,
-  showArrows = false,
-  visibleCount = 4,
-  showButton = true,
-  autoplay = false,
-  className,
-  ...rest
-}: ProductCollectionSectionProps) => {
-  const listContent = (
-    <ul className="product-collection__list">
-      {isLoading
-        ? Array.from({ length: visibleCount }).map((_, index) => (
-            <li key={index} className="product-collection__item">
-              <ProductCardSkeleton />
-            </li>
-          ))
-        : products.map((product) => (
-            <li key={product.id} className="product-collection__item">
-              <ProductCard product={product} />
-            </li>
-          ))}
-    </ul>
-  );
-
+const Root = ({ children, showButton = true, className, ...rest }: RootProps) => {
   return (
     <section
       className={clsx(
@@ -61,34 +20,60 @@ export const ProductCollectionSection = ({
       )}
       {...rest}
     >
-      <Heading as="h2" lineClamp={0} className="product-collection__title">
-        {title}
-      </Heading>
-
-      {/* Slider */}
-      {enableSlider ? (
-        <Slider
-          className="product-collection__slider"
-          autoplay={autoplay}
-          showArrows={showArrows}
-        >
-          {listContent}
-        </Slider>
-      ) : (
-        listContent
-      )}
-
-      {/* CTA Button */}
-      {showButton && (
-        <Button
-          variant="outline"
-          className="product-collection__btn"
-          colorScheme="dark"
-          onClick={onCtaClick}
-        >
-          {ctaLabel}
-        </Button>
-      )}
+      {children}
     </section>
   );
 };
+
+const Header = ({ title }: { title: string }) => (
+  <Heading as="h2" lineClamp={0} className="product-collection__title">
+    {title}
+  </Heading>
+);
+
+type ContentProps = {
+  children: ReactNode;
+  enableSlider?: boolean;
+  autoplay?: boolean;
+  showArrows?: boolean;
+};
+
+const Content = ({
+  children,
+  enableSlider = true,
+  autoplay = false,
+  showArrows = false,
+}: ContentProps) => {
+  const listContent = <ul className="product-collection__list">{children}</ul>;
+
+  if (!enableSlider) {
+    return listContent;
+  }
+
+  return (
+    <Slider
+      className="product-collection__slider"
+      autoplay={autoplay}
+      showArrows={showArrows}
+    >
+      {listContent}
+    </Slider>
+  );
+};
+
+const Footer = ({ label, onClick }: { label: string; onClick?: () => void }) => (
+  <Button
+    variant="outline"
+    className="product-collection__btn"
+    colorScheme="dark"
+    onClick={onClick}
+  >
+    {label}
+  </Button>
+);
+
+export const ProductCollectionSection = Object.assign(Root, {
+  Header,
+  Content,
+  Footer,
+});

@@ -1,107 +1,85 @@
-import {
-  useCallback,
-  useState,
-  useEffect,
-  type ComponentPropsWithoutRef,
-} from "react";
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { IconButton } from "@/components/atoms/IconButton";
-import { ReviewCard } from "@/components/molecules/ReviewCard";
-import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
-import type { ReviewData } from "@/types/review";
+import { FEEDBACK_CONSTS } from "@/consts/feedback";
+import {
+  FeedbackSliderProvider,
+  useFeedbackSliderContext,
+} from "./FeedbackSliderContext";
 import "./index.scss";
 
-export type FeedbackSectionProps = ComponentPropsWithoutRef<"section"> & {
-  title?: string;
-  reviews: ReviewData[];
-  isLoading?: boolean;
+type RootProps = ComponentPropsWithoutRef<"section"> & {
+  children: ReactNode;
+  initialSlide?: number;
 };
 
-export const FeedbackSection = ({
-  title = "OUR HAPPY CUSTOMERS",
-  reviews,
-  isLoading = false,
-  className,
-  ...rest
-}: FeedbackSectionProps) => {
-  const [slideIndex, setSlideIndex] = useState(3);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 991);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const visibleCount = isMobile ? 1 : 3;
-  const dataLength = isLoading ? 5 : reviews.length;
-  const maxIndex = Math.max(0, dataLength - visibleCount);
-
-  useEffect(() => {
-    if (slideIndex > maxIndex) {
-      setSlideIndex(maxIndex);
-    }
-  }, [maxIndex, slideIndex]);
-
-  const handlePrev = useCallback(() => {
-    setSlideIndex((prev) => Math.max(0, prev - 1));
-  }, []);
-
-  const handleNext = useCallback(() => {
-    setSlideIndex((prev) => Math.min(maxIndex, prev + 1));
-  }, [maxIndex]);
-
+const Root = ({ children, className, initialSlide = 3, ...rest }: RootProps) => {
   return (
-    <section className={clsx("feedback", className)} {...rest}>
-      {/* Header: Title + Navigation Arrows */}
-      <div className="feedback__header container">
-        <Heading as="h2" className="feedback__title">
-          {title}
-        </Heading>
-
-        <div className="feedback__arrows">
-          <IconButton
-            variant="no-fill"
-            svgName="icn-arrow-left"
-            aria-label="Previous reviews"
-            className="feedback__arrow feedback__arrow--prev"
-            iconWidth={24}
-            iconHeight={24}
-            onClick={handlePrev}
-            disabled={slideIndex === 0}
-          />
-          <IconButton
-            variant="no-fill"
-            svgName="icn-arrow-right"
-            aria-label="Next reviews"
-            className="feedback__arrow feedback__arrow--next"
-            iconWidth={24}
-            iconHeight={24}
-            onClick={handleNext}
-            disabled={slideIndex >= maxIndex}
-          />
-        </div>
-      </div>
-
-      {/* Slider: State-driven transform */}
-      <div className="feedback__slider">
-        <div className="feedback__items">
-          <div
-            className="feedback__track"
-            style={{ "--slide-index": slideIndex } as React.CSSProperties}
-          >
-            {isLoading
-              ? Array.from({ length: 5 }).map((_, index) => (
-                  <ReviewCardSkeleton key={`skeleton-${index}`} showDate={false} />
-                ))
-              : reviews.map((review) => (
-                  <ReviewCard key={review.id} review={review} showDate={false} />
-                ))}
-          </div>
-        </div>
-      </div>
-    </section>
+    <FeedbackSliderProvider initialSlide={initialSlide}>
+      <section className={clsx("feedback", className)} {...rest}>
+        {children}
+      </section>
+    </FeedbackSliderProvider>
   );
 };
+
+const Header = ({
+  title = FEEDBACK_CONSTS.DEFAULT_TITLE,
+}: {
+  title?: string;
+}) => {
+  const { handlePrev, handleNext } = useFeedbackSliderContext();
+
+  return (
+    <div className="feedback__header container">
+      <Heading as="h2" className="feedback__title">
+        {title}
+      </Heading>
+
+      <div className="feedback__arrows">
+        <IconButton
+          variant="no-fill"
+          svgName="icn-arrow-left"
+          aria-label={FEEDBACK_CONSTS.ARIA_LABELS.PREV}
+          className="feedback__arrow feedback__arrow--prev"
+          iconWidth={24}
+          iconHeight={24}
+          onClick={handlePrev}
+        />
+        <IconButton
+          variant="no-fill"
+          svgName="icn-arrow-right"
+          aria-label={FEEDBACK_CONSTS.ARIA_LABELS.NEXT}
+          className="feedback__arrow feedback__arrow--next"
+          iconWidth={24}
+          iconHeight={24}
+          onClick={handleNext}
+        />
+      </div>
+    </div>
+  );
+};
+
+type ContentProps = {
+  children: ReactNode;
+};
+
+const Content = ({ children }: ContentProps) => {
+  const { viewportRef } = useFeedbackSliderContext();
+
+  return (
+    <div className="feedback__slider">
+      <div className="feedback__items" ref={viewportRef}>
+        <div className="feedback__track">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const FeedbackSection = Object.assign(Root, {
+  Header,
+  Content,
+});

@@ -8,6 +8,7 @@
 
 .product-detail__name {
   font-size: 40px;
+  font-family: $font-family-title;
   @media (max-width: $breakpoint-tablet) {
     font-size: 24px;
   }
