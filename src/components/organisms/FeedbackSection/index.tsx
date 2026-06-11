@@ -8,17 +8,20 @@ import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { IconButton } from "@/components/atoms/IconButton";
 import { ReviewCard } from "@/components/molecules/ReviewCard";
+import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
 import type { ReviewData } from "@/types/review";
 import "./index.scss";
 
 export type FeedbackSectionProps = ComponentPropsWithoutRef<"section"> & {
   title?: string;
   reviews: ReviewData[];
+  isLoading?: boolean;
 };
 
 export const FeedbackSection = ({
   title = "OUR HAPPY CUSTOMERS",
   reviews,
+  isLoading = false,
   className,
   ...rest
 }: FeedbackSectionProps) => {
@@ -33,7 +36,8 @@ export const FeedbackSection = ({
   }, []);
 
   const visibleCount = isMobile ? 1 : 3;
-  const maxIndex = Math.max(0, reviews.length - visibleCount);
+  const dataLength = isLoading ? 5 : reviews.length;
+  const maxIndex = Math.max(0, dataLength - visibleCount);
 
   useEffect(() => {
     if (slideIndex > maxIndex) {
@@ -88,9 +92,13 @@ export const FeedbackSection = ({
             className="feedback__track"
             style={{ "--slide-index": slideIndex } as React.CSSProperties}
           >
-            {reviews.map((review) => (
-              <ReviewCard key={review.id} review={review} showDate={false} />
-            ))}
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, index) => (
+                  <ReviewCardSkeleton key={`skeleton-${index}`} showDate={false} />
+                ))
+              : reviews.map((review) => (
+                  <ReviewCard key={review.id} review={review} showDate={false} />
+                ))}
           </div>
         </div>
       </div>

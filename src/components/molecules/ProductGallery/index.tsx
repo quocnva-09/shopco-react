@@ -24,7 +24,7 @@ export const ProductGallery = ({
   };
 
   return (
-    <figure className={clsx("product-detail__gallery", className)} {...rest}>
+    <div className={clsx("product-detail__gallery", className)} {...rest}>
       <div className="product-detail__thumbnails">
         {images.map((img, idx) => (
           <Image
@@ -32,7 +32,7 @@ export const ProductGallery = ({
             src={img.imgPath}
             alt={`${productName} - Thumbnail ${idx + 1}`}
             title={`${productName} - Thumbnail ${idx + 1}`}
-            renderWrapper={false}
+            renderWrapper={true}
             className={clsx(
               "product-detail__thumbnail",
               img.imgPath === selectedImage &&
@@ -42,14 +42,14 @@ export const ProductGallery = ({
           />
         ))}
       </div>
-      <div className="product-detail__main-image">
+      <figure className="product-detail__main-image">
         <Image
           src={selectedImage}
           alt={productName}
           title={productName}
           renderWrapper={false}
         />
-      </div>
-    </figure>
+      </figure>
+    </div>
   );
 };

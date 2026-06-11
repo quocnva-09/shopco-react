@@ -1,6 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import "./index.scss";
-import { ProductDetailSection } from "@/components/organisms/ProductDetailSection";
+import { ProductGallery } from "@/components/molecules/ProductGallery";
+import { ProductGallerySkeleton } from "@/components/molecules/ProductGallerySkeleton";
+import { ProductDetailInfo } from "@/components/organisms/ProductDetailInfo";
+import { ProductDetailInfoSkeleton } from "@/components/organisms/ProductDetailInfoSkeleton";
 import { ProductMoreInfoSection } from "@/components/organisms/ProductMoreInfoSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
@@ -86,19 +89,27 @@ export const ProductDetailPage = () => {
       <Breadcrumb items={breadcrumbs} />
 
       <SectionStateWrapper
-        isLoading={isLoadingProduct}
-        loadingMessage="Loading product..."
         error={productError}
         isRetryable={productRetryable}
         onRetry={retryProduct}
       >
-        {product && <ProductDetailSection data={product} />}
+        <div className="product-detail">
+          {isLoadingProduct ? (
+            <>
+              <ProductGallerySkeleton />
+              <ProductDetailInfoSkeleton />
+            </>
+          ) : product ? (
+            <>
+              <ProductGallery images={product.images} productName={product.name} />
+              <ProductDetailInfo product={product} />
+            </>
+          ) : null}
+        </div>
       </SectionStateWrapper>
 
       {/* Reviews */}
       <SectionStateWrapper
-        isLoading={isLoadingReviews}
-        loadingMessage="Loading reviews..."
         error={reviewsError}
         isRetryable={reviewsRetryable}
         onRetry={retryReviews}
@@ -118,8 +129,6 @@ export const ProductDetailPage = () => {
 
       {/* Related products */}
       <SectionStateWrapper
-        isLoading={isLoadingRelatedProducts}
-        loadingMessage="Loading related products..."
         error={relatedError}
         isRetryable={relatedRetryable}
         onRetry={retryRelated}
@@ -128,6 +137,7 @@ export const ProductDetailPage = () => {
           title="YOU MAY ALSO LIKE"
           products={relatedProducts}
           showButton={false}
+          isLoading={isLoadingRelatedProducts}
           className="product-page__product-collections"
           showArrows={true}
           autoplay={true}

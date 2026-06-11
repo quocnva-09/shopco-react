@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Button } from "@/components/atoms/Button";
 import { ProductCard } from "@/components/molecules/ProductCard";
+import { ProductCardSkeleton } from "@/components/molecules/ProductCardSkeleton";
 import { Slider } from "@/components/molecules/Slider";
 import "./index.scss";
 import type { ProductCardData } from "@/types/product";
@@ -11,6 +12,7 @@ export type ProductCollectionSectionProps =
   ComponentPropsWithoutRef<"section"> & {
     title: string;
     products: ProductCardData[];
+    isLoading?: boolean;
     ctaLabel?: string;
     onCtaClick?: () => void;
     enableSlider?: boolean;
@@ -23,6 +25,7 @@ export type ProductCollectionSectionProps =
 export const ProductCollectionSection = ({
   title,
   products,
+  isLoading = false,
   ctaLabel = "View All",
   onCtaClick,
   enableSlider = true,
@@ -35,11 +38,17 @@ export const ProductCollectionSection = ({
 }: ProductCollectionSectionProps) => {
   const listContent = (
     <ul className="product-collection__list">
-      {products.map((product) => (
-        <li key={product.id} className="product-collection__item">
-          <ProductCard product={product} />
-        </li>
-      ))}
+      {isLoading
+        ? Array.from({ length: visibleCount }).map((_, index) => (
+            <li key={index} className="product-collection__item">
+              <ProductCardSkeleton />
+            </li>
+          ))
+        : products.map((product) => (
+            <li key={product.id} className="product-collection__item">
+              <ProductCard product={product} />
+            </li>
+          ))}
     </ul>
   );
 

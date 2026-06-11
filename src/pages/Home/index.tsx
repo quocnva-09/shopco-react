@@ -68,8 +68,6 @@ export const HomePage = () => {
 
       <div className="container home__main-container">
         <SectionStateWrapper
-          isLoading={isLoadingNewArrivals}
-          loadingMessage="Loading new arrivals..."
           error={newArrivalsError}
           isRetryable={newArrivalsRetryable}
           onRetry={retryNewArrivals}
@@ -78,14 +76,13 @@ export const HomePage = () => {
             className="home__divider-bottom"
             title="NEW ARRIVALS"
             products={newArrivals}
+            isLoading={isLoadingNewArrivals}
             ctaLabel="View All"
             showArrows={false}
           />
         </SectionStateWrapper>
 
         <SectionStateWrapper
-          isLoading={isLoadingTopSellings}
-          loadingMessage="Loading top selling..."
           error={topSellingsError}
           isRetryable={topSellingsRetryable}
           onRetry={retryTopSellings}
@@ -93,6 +90,7 @@ export const HomePage = () => {
           <ProductCollectionSection
             title="TOP SELLING"
             products={topSellings}
+            isLoading={isLoadingTopSellings}
             ctaLabel="View All"
             showArrows={false}
           />
@@ -102,13 +100,11 @@ export const HomePage = () => {
       </div>
 
       <SectionStateWrapper
-        isLoading={isLoadingFeedBacks}
-        loadingMessage="Loading reviews..."
         error={feedBacksError}
         isRetryable={feedBacksRetryable}
         onRetry={retryFeedBacks}
       >
-        <FeedbackSection reviews={feedBacks} />
+        <FeedbackSection reviews={feedBacks} isLoading={isLoadingFeedBacks} />
       </SectionStateWrapper>
     </main>
   );

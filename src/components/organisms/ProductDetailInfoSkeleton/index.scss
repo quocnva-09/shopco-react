@@ -1,0 +1,81 @@
+@use "@/styles/abstracts/variables" as *;
+
+.product-detail__info {
+  &--skeleton {
+    pointer-events: none;
+  }
+}
+
+.product-detail__info-skeleton-title {
+  width: 80%;
+  height: 48px;
+
+  @media (max-width: $breakpoint-tablet) {
+    height: 32px;
+  }
+}
+
+.product-detail__info-skeleton-rating {
+  width: 150px;
+  height: 24px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.product-detail__info-skeleton-price {
+  width: 200px;
+  height: 36px;
+  margin-bottom: 24px;
+}
+
+.product-detail__info-skeleton-desc {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+
+  &-last {
+    width: 80%;
+  }
+}
+
+.product-detail__info-skeleton-label {
+  width: 100px;
+  height: 20px;
+}
+
+.product-detail__info-skeleton-colors {
+  display: flex;
+  gap: 12px;
+}
+
+.product-detail__info-skeleton-color {
+  width: 37px;
+  height: 37px;
+}
+
+.product-detail__info-skeleton-sizes {
+  display: flex;
+  gap: 12px;
+}
+
+.product-detail__info-skeleton-size {
+  width: 80px;
+  height: 46px;
+  border-radius: 62px;
+}
+
+.product-detail__info-skeleton-qty {
+  width: 130px;
+  height: 52px;
+  border-radius: 62px;
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 110px;
+  }
+}
+
+.product-detail__info-skeleton-btn {
+  flex: 1;
+  height: 52px;
+  border-radius: 62px;
+}

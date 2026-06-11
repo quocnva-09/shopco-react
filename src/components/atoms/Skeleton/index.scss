@@ -1,0 +1,40 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.skeleton {
+  display: block;
+  background-color: #f3f3f3;
+  background: linear-gradient(
+    90deg,
+    #f3f3f3 0%,
+    #e8e8e8 50%,
+    #f3f3f3 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+
+  &--circular {
+    border-radius: 50%;
+  }
+
+  &--rectangular {
+    border-radius: 8px;
+  }
+
+  &--text {
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    &:empty:before {
+      content: "\00a0";
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

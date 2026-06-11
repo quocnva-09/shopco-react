@@ -1,8 +1,4 @@
-import {
-  useEffect,
-  useState,
-  type ComponentPropsWithoutRef,
-} from "react";
+import { useEffect, useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import "./index.scss";
 
@@ -86,7 +82,7 @@ export const Image = ({
 
   // CASE 2: Render full wrapper with Loading / Placeholder state support
   return (
-    <div
+    <figure
       className={clsx(
         "image-wrapper",
         finalIsLoaded && "image-wrapper--loaded",
@@ -108,6 +104,6 @@ export const Image = ({
           aria-hidden="true"
         />
       )}
-    </div>
+    </figure>
   );
 };

@@ -45,7 +45,6 @@ export const ProductCard = ({
         className,
       )}
       onClick={onClick}
-      style={{ cursor: "pointer", textDecoration: "none", color: "inherit" }}
     >
       <figure className="product-card__image">
         <Image

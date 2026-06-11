@@ -1,0 +1,38 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.product-card {
+  &--skeleton {
+    pointer-events: none;
+  }
+
+  &__skeleton-img {
+    border-radius: 20px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  &__skeleton-name {
+    height: 24px;
+    width: 80%;
+
+    @media (max-width: $breakpoint-tablet) {
+      height: 20px;
+    }
+  }
+
+  &__skeleton-rating {
+    height: 18px;
+    width: 40%;
+  }
+
+  &__skeleton-price {
+    margin-top: 8px;
+    height: 28px;
+    width: 60%;
+
+    @media (max-width: $breakpoint-tablet) {
+      height: 24px;
+    }
+  }
+}
