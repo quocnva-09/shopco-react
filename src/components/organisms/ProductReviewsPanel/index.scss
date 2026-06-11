@@ -10,6 +10,14 @@
       grid-template-columns: 1fr;
     }
   }
+
+  &__empty-message {
+    text-align: center;
+    color: $text-muted;
+    padding: $base-spacing 0;
+    width: 100%;
+    font-size: 16px;
+  }
 }
 
 .btn--load-more {

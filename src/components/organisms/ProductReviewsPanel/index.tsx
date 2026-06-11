@@ -2,6 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { ReviewCard } from "@/components/molecules/ReviewCard";
 import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
+import { Text } from "@/components/atoms/Text";
 import type { ReviewData } from "@/types/review";
 import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
@@ -52,15 +53,21 @@ export const ProductReviewsPanel = ({
         onRatingFilterChange={onRatingFilterChange}
       />
 
-      <div className="reviews__grid">
-        {isLoading
-          ? Array.from({ length: 6 }).map((_, index) => (
-              <ReviewCardSkeleton key={`skeleton-${index}`} />
-            ))
-          : reviews.map((review) => (
-              <ReviewCard key={review.id} review={review} showMenu />
-            ))}
-      </div>
+      {isLoading ? (
+        <div className="reviews__grid">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <ReviewCardSkeleton key={`skeleton-${index}`} />
+          ))}
+        </div>
+      ) : reviews.length > 0 ? (
+        <div className="reviews__grid">
+          {reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} showMenu />
+          ))}
+        </div>
+      ) : (
+        <Text className="reviews__empty-message">No reviews found.</Text>
+      )}
 
       {hasMore && (
         <Button

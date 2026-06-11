@@ -47,6 +47,8 @@
     color: $black-color;
     text-decoration: none;
     white-space: nowrap;
+    line-height: 0.8;
+    width: fit-content;
 
     @media (max-width: $breakpoint-tablet) {
       order: 2; // Second item on mobile

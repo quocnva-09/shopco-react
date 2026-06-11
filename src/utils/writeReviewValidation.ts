@@ -14,6 +14,10 @@ export const writeReviewValidationRules = {
       value: /^[\p{L}\s]+$/u,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_INVALID,
     },
+    maxLength: {
+      value: 50,
+      message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_MAX,
+    },
   },
   guestEmail: {
     required: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_REQUIRED,
@@ -21,12 +25,20 @@ export const writeReviewValidationRules = {
       value: /\S+@\S+\.\S+/,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_INVALID,
     },
+    maxLength: {
+      value: 255,
+      message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_MAX,
+    },
   },
   comment: {
     required: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_REQUIRED,
     minLength: {
       value: 10,
       message: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_MIN,
+    },
+    maxLength: {
+      value: 500,
+      message: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_MAX,
     },
   },
 };

@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .menu-list {
   list-style: none;
@@ -8,9 +8,10 @@
   &__item {
     color: #000;
     font-size: 14px;
-    padding: 10px 16px;
-    border-radius: 4px;
+    padding: 8px 10px;
+    border-radius: 6px;
     cursor: pointer;
+    border: solid 3px $white-color;
 
     &:hover {
       background-color: $color-neutral;

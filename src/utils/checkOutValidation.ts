@@ -11,12 +11,20 @@ export const checkoutValidationRules = {
       value: /^[\p{L}\s]+$/u,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_INVALID,
     },
+    maxLength: {
+      value: 50,
+      message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_MAX,
+    },
   },
   email: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_REQUIRED,
     pattern: {
       value: /\S+@\S+\.\S+/,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_INVALID,
+    },
+    maxLength: {
+      value: 255,
+      message: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_MAX,
     },
   },
   address: {
@@ -29,12 +37,20 @@ export const checkoutValidationRules = {
       value: /^[\p{L}0-9\s,.\-/]+$/u,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_INVALID,
     },
+    maxLength: {
+      value: 500,
+      message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_MAX,
+    },
   },
   phoneNumber: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_REQUIRED,
     pattern: {
       value: /^\+?[0-9\s\-\(\)]+$/,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_INVALID,
+    },
+    maxLength: {
+      value: 10,
+      message: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_MAX,
     },
   },
 };

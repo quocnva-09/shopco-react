@@ -3,7 +3,6 @@ import {
   cloneElement,
   type ComponentPropsWithoutRef,
   type ReactElement,
-  type ReactNode,
 } from "react";
 import clsx from "clsx";
 import { Tabs } from "@/components/molecules/Tabs";

@@ -87,6 +87,7 @@ export const ReviewsHeader = ({
   const sortMenuItems: MenuItem[] = Object.values(SORT_ORDER).map((order) => ({
     id: `sort-${order}`,
     label: SORT_MENU_LABELS[order],
+    className: sortOrder === order ? "dropdown__item--active" : undefined,
     onClick: () => {
       onSortChange?.(order);
       setIsSortOpen(false);
@@ -97,6 +98,7 @@ export const ReviewsHeader = ({
   const filterMenuItems: MenuItem[] = RATING_FILTERS.map((n) => ({
     id: `rating-${n}`,
     label: <Rating value={n} showText={false} variant="row" />,
+    className: ratingFilter === n ? "dropdown__item--active" : undefined,
     onClick: () => {
       onRatingFilterChange?.(n);
       setIsFilterOpen(false);

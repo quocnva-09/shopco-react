@@ -8,6 +8,7 @@ export interface MenuItem {
   label: ReactNode;
   href?: string;
   onClick?: () => void;
+  className?: string;
 }
 
 export type MenuListProps = ComponentPropsWithoutRef<"ul"> & {
@@ -27,7 +28,7 @@ export const MenuList = memo(
     return (
       <ul className={clsx("menu-list", className)} {...rest}>
         {items.map((item) => (
-          <li key={item.id ?? String(item.label)} className={clsx("menu-list__item", itemClassName)}>
+          <li key={item.id ?? String(item.label)} className={clsx("menu-list__item", itemClassName, item.className)}>
             {item.onClick ? (
               <button
                 type="button"

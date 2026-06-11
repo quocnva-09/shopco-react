@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useNavigation, useLocation } from "react-router-dom";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
@@ -16,6 +16,10 @@ export const MainLayout = () => {
 
   const { pathname } = useLocation();
   const isHomePage = pathname === PATHS.HOME;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>

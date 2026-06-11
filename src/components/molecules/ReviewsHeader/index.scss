@@ -42,3 +42,10 @@
     font-size: 12px;
   }
 }
+
+.dropdown__item {
+  &--active {
+    background-color: rgba($black-color, 0.05);
+    font-weight: 700;
+  }
+}

@@ -40,13 +40,17 @@ export const CHECKOUT_MESSAGES = {
     FULL_NAME_REQUIRED: "Full name is required",
     FULL_NAME_MIN: "Full name must be at least 2 characters",
     FULL_NAME_INVALID: "Full name can only contain letters and spaces",
+    FULL_NAME_MAX: "Full name must be at most 50 characters",
     EMAIL_REQUIRED: "Email is required",
     EMAIL_INVALID: "Invalid email address",
+    EMAIL_MAX: "Email must be at most 255 characters",
     ADDRESS_REQUIRED: "Address is required",
     ADDRESS_MIN: "Address must be at least 10 characters",
     ADDRESS_INVALID: "Address contains invalid characters",
+    ADDRESS_MAX: "Address must be at most 500 characters",
     PHONE_NUMBER_REQUIRED: "Phone number is required",
     PHONE_NUMBER_INVALID: "Invalid phone number",
+    PHONE_NUMBER_MAX: "Phone number must be at most 10 characters",
   },
 };
 
@@ -88,11 +92,14 @@ export const WRITE_REVIEW_MESSAGES = {
     ORDER_ID_INVALID: "Order ID must be a positive number",
     GUEST_NAME_REQUIRED: "Guest name is required",
     GUEST_NAME_INVALID: "Guest name can only contain letters and spaces",
+    GUEST_NAME_MAX: "Guest name must be at most 50 characters",
     GUEST_EMAIL_REQUIRED: "Guest email is required",
     GUEST_EMAIL_INVALID: "Invalid email address",
+    GUEST_EMAIL_MAX: "Guest email must be at most 255 characters",
     RATING_REQUIRED: "Please select a rating",
     REVIEW_REQUIRED: "Please write a review",
     REVIEW_MIN: "Review must be at least 10 characters",
+    REVIEW_MAX: "Review must be at most 500 characters",
   },
 };
 
