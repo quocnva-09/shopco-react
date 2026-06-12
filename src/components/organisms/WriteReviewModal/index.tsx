@@ -51,7 +51,10 @@ export const WriteReviewModal = ({
     reset,
     watch,
     formState: { errors },
-  } = useForm<WriteReviewFormValues>({ defaultValues: DEFAULT_VALUES });
+  } = useForm<WriteReviewFormValues>({
+    defaultValues: DEFAULT_VALUES,
+    mode: "onChange",
+  });
 
   const [hoverRating, setHoverRating] = useState(0);
   const currentRating = watch("rating");
@@ -151,36 +154,65 @@ export const WriteReviewModal = ({
                   v > 0 || WRITE_REVIEW_MESSAGES.ERRORS.RATING_REQUIRED,
               }}
               render={({ field: { onChange } }) => (
-                <div
-                  className={clsx(
-                    "write-review-modal__stars",
-                    errors.rating && "write-review-modal__stars--error",
-                  )}
-                  role="radiogroup"
-                  aria-label={WRITE_REVIEW_MESSAGES.LABELS.RATING}
-                >
-                  {Array.from({ length: STAR_COUNT }, (_, i) => {
-                    const starValue = i + 1;
-                    const isFilled = starValue <= (hoverRating || currentRating);
-                    return (
-                      <button
-                        key={starValue}
-                        type="button"
-                        role="radio"
-                        aria-checked={starValue === currentRating}
-                        aria-label={`${starValue} star`}
-                        className={clsx(
-                          "rating__star write-review-modal__star",
-                          isFilled
-                            ? "rating__star--full"
-                            : "rating__star--empty",
-                        )}
-                        onClick={() => onChange(starValue)}
-                        onMouseEnter={() => setHoverRating(starValue)}
-                        onMouseLeave={() => setHoverRating(0)}
-                      />
-                    );
-                  })}
+                <div className="write-review-modal__rating-wrapper">
+                  <div
+                    className={clsx(
+                      "write-review-modal__stars",
+                      errors.rating && "write-review-modal__stars--error",
+                    )}
+                    role="radiogroup"
+                    aria-label={WRITE_REVIEW_MESSAGES.LABELS.RATING}
+                  >
+                    {Array.from({ length: STAR_COUNT }, (_, i) => {
+                      const fullStarValue = i + 1;
+                      const leftHalfValue = fullStarValue - 0.5;
+                      const rightHalfValue = fullStarValue;
+
+                      const effectiveRating = hoverRating || currentRating;
+                      const isLeftFilled = leftHalfValue <= effectiveRating;
+                      const isRightFilled = rightHalfValue <= effectiveRating;
+
+                      return (
+                        <div key={fullStarValue} className="write-review-modal__star-container">
+                          <button
+                            type="button"
+                            role="radio"
+                            aria-checked={leftHalfValue === currentRating}
+                            aria-label={`${leftHalfValue} stars`}
+                            className={clsx(
+                              "write-review-modal__half-star",
+                              isLeftFilled
+                                ? "half-star--left"
+                                : "half-star-left--empty",
+                            )}
+                            onClick={() => onChange(leftHalfValue)}
+                            onMouseEnter={() => setHoverRating(leftHalfValue)}
+                            onMouseLeave={() => setHoverRating(0)}
+                          />
+                          <button
+                            type="button"
+                            role="radio"
+                            aria-checked={rightHalfValue === currentRating}
+                            aria-label={`${rightHalfValue} stars`}
+                            className={clsx(
+                              "write-review-modal__half-star",
+                              isRightFilled
+                                ? "half-star--right"
+                                : "half-star-right--empty",
+                            )}
+                            onClick={() => onChange(rightHalfValue)}
+                            onMouseEnter={() => setHoverRating(rightHalfValue)}
+                            onMouseLeave={() => setHoverRating(0)}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <span className="write-review-modal__rating-text">
+                    {currentRating > 0 || hoverRating > 0
+                      ? `${(hoverRating || currentRating).toFixed(1)}/5`
+                      : "0.0/5"}
+                  </span>
                 </div>
               )}
             />

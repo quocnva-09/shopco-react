@@ -2,6 +2,7 @@ import { useState, useEffect, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
+import { MAX_PER_ITEM } from "@/consts/config";
 
 export type QuantitySelectorProps = Omit<
   ComponentPropsWithoutRef<"div">,
@@ -10,14 +11,18 @@ export type QuantitySelectorProps = Omit<
   defaultValue?: number;
   value?: number;
   min?: number;
+  max?: number;
   onChange?: (value: number) => void;
+  onMaxExceeded?: () => void;
 };
 
 export const QuantitySelector = ({
   defaultValue = 1,
   value: propValue,
   min = 1,
+  max = MAX_PER_ITEM,
   onChange,
+  onMaxExceeded,
   className,
   ...rest
 }: QuantitySelectorProps) => {
@@ -39,6 +44,10 @@ export const QuantitySelector = ({
 
   const handleIncrease = () => {
     const next = value + 1;
+    if (max !== undefined && next > max) {
+      onMaxExceeded?.();
+      return;
+    }
     if (propValue === undefined) setInternalValue(next);
     onChange?.(next);
   };
@@ -62,12 +71,22 @@ export const QuantitySelector = ({
 
   const handleBlur = () => {
     let finalVal = inputValue === "" ? min : parseInt(String(inputValue), 10);
+    let exceeded = false;
+
     if (isNaN(finalVal) || finalVal < min) {
       finalVal = min;
+    } else if (max !== undefined && finalVal > max) {
+      finalVal = max;
+      exceeded = true;
     }
-    
+
     setInputValue(finalVal);
     if (propValue === undefined) setInternalValue(finalVal);
+
+    if (exceeded) {
+      onMaxExceeded?.();
+    }
+
     if (finalVal !== value) {
       onChange?.(finalVal);
     }

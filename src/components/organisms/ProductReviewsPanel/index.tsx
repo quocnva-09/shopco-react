@@ -1,4 +1,9 @@
-import { type ComponentPropsWithoutRef } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+} from "react";
 import clsx from "clsx";
 import { ReviewCard } from "@/components/molecules/ReviewCard";
 import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
@@ -7,8 +12,16 @@ import type { ReviewData } from "@/types/review";
 import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import { Button } from "@/components/atoms/Button";
-import type { SortOrder, RatingFilter } from "@/consts/reviewFilters";
+import {
+  type SortOrder,
+  type RatingFilter,
+  SORT_ORDER,
+  REVIEW_MENU_ACTIONS,
+  REVIEW_MENU_LABELS,
+} from "@/consts/reviewFilters";
 import "./index.scss";
+import { useClickOutside } from "@/hooks/useClickOutside";
+import type { MenuItem } from "@/components/molecules/MenuList";
 
 export type ProductReviewsPanelProps = ComponentPropsWithoutRef<"section"> & {
   reviews: ReviewData[];
@@ -42,43 +55,49 @@ export const ProductReviewsPanel = ({
   onRatingFilterChange,
   className,
   ...rest
-}: ProductReviewsPanelProps) => (
-  <section className={clsx("tab-content", "reviews", className)} {...rest}>
-    <SectionStateWrapper error={error} isRetryable={isRetryable} onRetry={onRetry}>
-      <ReviewsHeader
-        reviewCount={reviewCount}
-        sortOrder={sortOrder}
-        onSortChange={onSortChange}
-        ratingFilter={ratingFilter}
-        onRatingFilterChange={onRatingFilterChange}
-      />
+}: ProductReviewsPanelProps) => {
+  return (
+    <section className={clsx("tab-content", "reviews", className)} {...rest}>
+      <SectionStateWrapper
+        error={error}
+        isRetryable={isRetryable}
+        onRetry={onRetry}
+      >
+        <ReviewsHeader
+          reviewCount={reviewCount}
+          sortOrder={sortOrder}
+          onSortChange={onSortChange}
+          ratingFilter={ratingFilter}
+          onRatingFilterChange={onRatingFilterChange}
+        />
 
-      {isLoading ? (
-        <div className="reviews__grid">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <ReviewCardSkeleton key={`skeleton-${index}`} />
-          ))}
-        </div>
-      ) : reviews.length > 0 ? (
-        <div className="reviews__grid">
-          {reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} showMenu />
-          ))}
-        </div>
-      ) : (
-        <Text className="reviews__empty-message">No reviews found.</Text>
-      )}
+        {isLoading ? (
+          <div className="reviews__grid">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <ReviewCardSkeleton key={`skeleton-${index}`} />
+            ))}
+          </div>
+        ) : reviews.length > 0 ? (
+          <div className="reviews__grid">
+            {reviews.map((review) => (
+              <ReviewCard key={review.id} review={review} showMenu />
+            ))}
+          </div>
+        ) : (
+          <Text className="reviews__empty-message">No reviews found.</Text>
+        )}
 
-      {hasMore && (
-        <Button
-          variant="outline"
-          className="btn--load-more"
-          onClick={onLoadMore}
-          disabled={isLoadingMore}
-        >
-          {isLoadingMore ? "Loading..." : "Load More Reviews"}
-        </Button>
-      )}
-    </SectionStateWrapper>
-  </section>
-);
+        {hasMore && (
+          <Button
+            variant="outline"
+            className="btn--load-more"
+            onClick={onLoadMore}
+            disabled={isLoadingMore}
+          >
+            {isLoadingMore ? "Loading..." : "Load More Reviews"}
+          </Button>
+        )}
+      </SectionStateWrapper>
+    </section>
+  );
+};

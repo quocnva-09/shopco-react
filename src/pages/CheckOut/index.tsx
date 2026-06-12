@@ -51,6 +51,7 @@ export const CheckOutPage = () => {
       phoneNumber: "",
       paymentMethod: "cod",
     },
+    mode: "onChange",
   });
 
   const onSubmit = async (data: CheckoutFormData) => {

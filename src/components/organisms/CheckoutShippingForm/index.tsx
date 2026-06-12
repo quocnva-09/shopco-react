@@ -36,7 +36,7 @@ export const CheckoutShippingForm = ({
             placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.FULL_NAME}
             className={clsx(
               "checkout-form__input",
-              errors.fullName && "checkout-form__input--error"
+              errors.fullName && "checkout-form__input--error",
             )}
             {...register("fullName", checkoutValidationRules.fullName)}
           />
@@ -58,7 +58,7 @@ export const CheckoutShippingForm = ({
             placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.EMAIL}
             className={clsx(
               "checkout-form__input",
-              errors.email && "checkout-form__input--error"
+              errors.email && "checkout-form__input--error",
             )}
             {...register("email", checkoutValidationRules.email)}
           />
@@ -81,7 +81,7 @@ export const CheckoutShippingForm = ({
               "form-input",
               "checkout-form__input",
               "checkout-form__textarea",
-              errors.address && "checkout-form__input--error"
+              errors.address && "checkout-form__input--error",
             )}
             rows={3}
             {...register("address", checkoutValidationRules.address)}
@@ -103,7 +103,7 @@ export const CheckoutShippingForm = ({
             placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.PHONE_NUMBER}
             className={clsx(
               "checkout-form__input",
-              errors.phoneNumber && "checkout-form__input--error"
+              errors.phoneNumber && "checkout-form__input--error",
             )}
             {...register("phoneNumber", checkoutValidationRules.phoneNumber)}
           />

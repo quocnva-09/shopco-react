@@ -1,5 +1,5 @@
 import { useState, type ComponentPropsWithoutRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { Image } from "@/components/atoms/Image";
@@ -10,9 +10,10 @@ import { IconButton } from "@/components/atoms/IconButton";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import { ConfirmModal } from "@/components/organisms/ConfirmModal";
 import type { CartItem as CartItemType } from "@/types/cart";
-import type { AppDispatch } from "@/store/store";
+import type { AppDispatch, RootState } from "@/store/store";
 import { removeCartItem, updateQuantity } from "@/slices/cartSlice";
-import { TOAST_MESSAGES } from "@/consts/messages";
+import { TOAST_MESSAGES, CART_LIMIT_MESSAGES } from "@/consts/messages";
+import { MAX_PER_ITEM, MAX_TOTAL_QUANTITY } from "@/consts/config";
 import "./index.scss";
 export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
   item: CartItemType;
@@ -21,8 +22,21 @@ export type CartItemProps = ComponentPropsWithoutRef<"article"> & {
 
 export const CartItem = ({ item, isCheckout, className, ...rest }: CartItemProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { product, variant, quantity, productVariantId } = item;
+
+  const totalQuantity = cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
+  const remainingGlobal = MAX_TOTAL_QUANTITY - totalQuantity + quantity;
+  const maxAllowed = Math.min(MAX_PER_ITEM, remainingGlobal);
+
+  const handleMaxExceeded = () => {
+    if (remainingGlobal < MAX_PER_ITEM) {
+      toast.error(CART_LIMIT_MESSAGES.MAX_TOTAL_QUANTITY(MAX_TOTAL_QUANTITY));
+    } else {
+      toast.error(CART_LIMIT_MESSAGES.MAX_PER_ITEM(MAX_PER_ITEM, product.name));
+    }
+  };
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity < 1) {
@@ -103,6 +117,8 @@ export const CartItem = ({ item, isCheckout, className, ...rest }: CartItemProps
             <QuantitySelector
               value={quantity}
               min={0}
+              max={maxAllowed}
+              onMaxExceeded={handleMaxExceeded}
               className="cart-item__quantity"
               onChange={handleQuantityChange}
             />

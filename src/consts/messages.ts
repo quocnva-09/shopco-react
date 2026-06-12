@@ -107,3 +107,12 @@ export const WRITE_REVIEW_API_MESSAGES = {
   SUBMIT_SUCCESS: "Thank you! Your review has been submitted.",
   SUBMIT_ERROR: "Failed to submit review. Please try again.",
 };
+
+export const CART_LIMIT_MESSAGES = {
+  MAX_PER_ITEM: (max: number, name: string) =>
+    `You can only add up to ${max} of ${name} item.`,
+  MAX_TOTAL_QUANTITY: (max: number) =>
+    `Your cart has reached the maximum capacity of ${max} items.`,
+  PARTIAL_ADD: (quantity: number) =>
+    `Only added ${quantity} item(s) to reach the limit.`,
+};

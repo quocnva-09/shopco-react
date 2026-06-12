@@ -1,4 +1,9 @@
-import { type ComponentPropsWithoutRef } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+} from "react";
 import clsx from "clsx";
 import { Rating } from "@/components/atoms/Rating";
 import { Text } from "@/components/atoms/Text";
@@ -6,6 +11,12 @@ import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
 import { Icon } from "@/components/atoms/Icon";
 import type { ReviewData } from "@/types/review";
+import { Dropdown } from "@/components/molecules/Dropdown";
+import type { MenuItem } from "@/components/molecules/MenuList";
+import {
+  REVIEW_MENU_ACTIONS,
+  REVIEW_MENU_LABELS,
+} from "@/consts/reviewFilters";
 
 export type ReviewCardProps = ComponentPropsWithoutRef<"div"> & {
   review: ReviewData;
@@ -24,20 +35,38 @@ export const ReviewCard = ({
 }: ReviewCardProps) => {
   const { name, rating, comment, date, isVerified = true } = review;
 
+  const menuItems: MenuItem[] = Object.values(REVIEW_MENU_ACTIONS).map(
+    (action) => ({
+      id: `review-${action}`,
+      label: REVIEW_MENU_LABELS[action],
+      onClick: () => {
+        // Dropdown automatically handles its own closure if needed, or we can leave this empty
+      },
+    }),
+  );
+
   return (
     <div className={clsx("review-card", className)} {...rest}>
       <div className="review-card__header">
         <Rating value={rating} showText={false} />
 
-        {(showMenu || onMenuClick) && (
-          <IconButton
-            svgName="icn-3-dot"
-            aria-label="Review options"
-            className="review-card__menu"
-            iconHeight={24}
-            iconWidth={24}
-            onClick={onMenuClick}
-          />
+        {showMenu && (
+          <Dropdown>
+            <Dropdown.Trigger>
+              <IconButton
+                svgName="icn-3-dot"
+                aria-label="Review options"
+                className="review-card__menu"
+              />
+            </Dropdown.Trigger>
+
+            <Dropdown.Menu
+              items={menuItems}
+              itemClassName="dropdown__item"
+              linkClassName="dropdown__item-btn"
+              aria-label="Review options"
+            />
+          </Dropdown>
         )}
       </div>
 

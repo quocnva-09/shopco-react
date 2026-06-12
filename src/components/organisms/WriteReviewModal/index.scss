@@ -27,34 +27,72 @@
     gap: 8px;
     padding: 4px 0;
 
-    &--error .write-review-modal__star {
+    &--error .write-review-modal__star-container {
       outline: 2px solid $color-danger;
       border-radius: 4px;
     }
   }
 
-  &__star {
-    all: unset;
-    display: block;
+  &__rating-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__rating-text {
+    font-size: 14px;
+    color: $text-muted;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__star-container {
+    position: relative;
     width: 24px;
     height: 24px;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-
-    // Rating__star--empty has `background: none` globally — restore the star image at low opacity
-    &.rating__star--empty {
-      background: $icon-star;
-      opacity: 0.25;
-    }
-
-    &.rating__star--full {
-      background: $icon-star;
-      opacity: 1;
-    }
 
     @media (max-width: $breakpoint-mobile) {
       width: 18px;
       height: 18px;
+    }
+  }
+
+  &__half-star {
+    all: unset;
+    position: absolute;
+    top: 0;
+    width: 12px;
+    height: 24px;
+    cursor: pointer;
+    background: $icon-star;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease;
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &.half-star--left,
+    &.half-star-left--empty {
+      left: 0;
+      background-position: left center;
+    }
+
+    &.half-star--right,
+    &.half-star-right--empty {
+      right: 0;
+      background-position: right center;
+    }
+
+    &.half-star-left--empty,
+    &.half-star-right--empty {
+      opacity: 0.25;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 9px;
+      height: 18px;
+      background-size: 18px 18px;
     }
   }
 

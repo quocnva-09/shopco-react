@@ -19,5 +19,18 @@ export const SORT_MENU_LABELS: Record<SortOrder, string> = {
   [SORT_ORDER.OLDEST]: "Oldest",
 };
 
+export const REVIEW_MENU_ACTIONS = {
+  SHARE: "share",
+  REPORT: "report",
+} as const;
+
+export type ReviewMenuAction =
+  (typeof REVIEW_MENU_ACTIONS)[keyof typeof REVIEW_MENU_ACTIONS];
+
+export const REVIEW_MENU_LABELS: Record<ReviewMenuAction, string> = {
+  [REVIEW_MENU_ACTIONS.SHARE]: "Share",
+  [REVIEW_MENU_ACTIONS.REPORT]: "Report",
+};
+
 export const RATING_FILTERS = [5, 4, 3, 2, 1] as const;
 export type RatingFilter = (typeof RATING_FILTERS)[number];

@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { CartItem } from "@/types/cart";
 import type { AddToCartPayload } from "@/types/payload/cart.payload";
+import { MAX_PER_ITEM, MAX_TOTAL_QUANTITY } from "@/consts/config";
 
 interface InitialState {
   cartItems: CartItem[];
@@ -27,10 +28,22 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find(
         (item) => item.productVariantId === payload.productVariantId,
       );
+      const totalQuantity = state.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
       if (existingItem) {
-        existingItem.quantity += payload.quantity;
+        const remainingGlobal = MAX_TOTAL_QUANTITY - totalQuantity;
+        const remainingItem = MAX_PER_ITEM - existingItem.quantity;
+        const maxAddable = Math.max(0, Math.min(remainingGlobal, remainingItem));
+        
+        existingItem.quantity += Math.min(payload.quantity, maxAddable);
       } else {
-        state.cartItems.push(payload);
+        const remainingGlobal = MAX_TOTAL_QUANTITY - totalQuantity;
+        const maxAddable = Math.max(0, Math.min(remainingGlobal, MAX_PER_ITEM));
+        
+        payload.quantity = Math.min(payload.quantity, maxAddable);
+        if (payload.quantity > 0) {
+          state.cartItems.push(payload);
+        }
       }
     },
     updateQuantity: (
@@ -42,7 +55,13 @@ const cartSlice = createSlice({
         (item) => item.productVariantId === productVariantId,
       );
       if (existingItem) {
-        existingItem.quantity = quantity;
+        const otherItemsQuantity = state.cartItems.reduce(
+          (sum, item) => sum + (item.productVariantId === productVariantId ? 0 : item.quantity),
+          0
+        );
+        const remainingGlobal = MAX_TOTAL_QUANTITY - otherItemsQuantity;
+        const maxAllowed = Math.min(remainingGlobal, MAX_PER_ITEM);
+        existingItem.quantity = Math.max(1, Math.min(quantity, maxAllowed));
       }
     },
     removeCartItem: (state, action: PayloadAction<number>) => {
@@ -60,6 +79,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, updateQuantity, removeCartItem, clearCart } = cartSlice.actions;
+export const { addToCart, updateQuantity, removeCartItem, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

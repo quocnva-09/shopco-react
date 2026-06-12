@@ -1,0 +1,80 @@
+@use "@/styles/abstracts/variables" as *;
+
+.dropdown {
+  position: relative;
+
+  &__trigger-wrapper {
+    display: inline-block;
+    cursor: pointer;
+
+    /* If the consumer provides a custom .dropdown__trigger */
+    .dropdown__trigger {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &:hover {
+        opacity: 0.8;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+
+  &__text {
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  &.is-open &__icon {
+    transition: all 0.2s ease;
+    transform: rotate(180deg);
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    min-width: 160px;
+    border-radius: 8px;
+    padding: 3px;
+    list-style: none;
+    margin: 0;
+    margin-top: 5px;
+    z-index: 10;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: block;
+      position: static;
+      box-shadow: none;
+      background-color: transparent;
+      border-radius: 0;
+      min-width: unset;
+    }
+  }
+
+  &__item {
+    border-radius: 6px;
+    &:hover {
+      background-color: $color-neutral;
+    }
+  }
+
+  &__item-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    padding: 8px 10px;
+    color: $black-color;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: $color-neutral;
+    }
+  }
+}

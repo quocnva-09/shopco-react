@@ -1,8 +1,10 @@
 import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { TextLink } from "@/components/atoms/TextLink";
-import { DropdownMenu } from "@/components/molecules/DropdownMenu";
+import { Dropdown } from "@/components/molecules/Dropdown";
 import "./index.scss";
+import { Icon } from "@/components/atoms/Icon";
+import { Text } from "@/components/atoms/Text";
 
 export type NavMenuProps = ComponentPropsWithoutRef<"nav"> & {
   isOpenMobile?: boolean;
@@ -26,7 +28,19 @@ export const NavMenu = ({
     >
       <ul className="nav__menu">
         <li className="nav__menu-item">
-          <DropdownMenu title="Shop" items={SHOP_DROPDOWN_ITEMS} />
+          <Dropdown>
+            <Dropdown.Trigger>
+              <div className="dropdown__trigger">
+                <Text className="dropdown__text">Shop</Text>
+                <Icon
+                  svgName="icn-arrow-down"
+                  aria-label="icn-arrow-down"
+                  className="dropdown__icon"
+                />
+              </div>
+            </Dropdown.Trigger>
+            <Dropdown.Menu items={SHOP_DROPDOWN_ITEMS} />
+          </Dropdown>
         </li>
         <li className="nav__menu-item">
           <TextLink href="/on-sale" className="nav__menu-link">

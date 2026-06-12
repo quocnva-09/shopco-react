@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type ComponentPropsWithoutRef } from "react";
+import { useCallback, useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Text } from "@/components/atoms/Text";
@@ -6,11 +6,11 @@ import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
 import { Icon } from "@/components/atoms/Icon";
 import { Rating } from "@/components/atoms/Rating";
-import { MenuList, type MenuItem } from "@/components/molecules/MenuList";
+import { Dropdown } from "@/components/molecules/Dropdown";
+import type { MenuItem } from "@/components/molecules/MenuList";
 import { WriteReviewModal } from "@/components/organisms/WriteReviewModal";
 import type { WriteReviewPayload } from "@/types/payload/write-review.payload";
 import { ReviewService } from "@/services/review.service";
-import { useClickOutside } from "@/hooks/useClickOutside";
 import toast from "react-hot-toast";
 import {
   SORT_ORDER,
@@ -42,22 +42,7 @@ export const ReviewsHeader = ({
   className,
   ...rest
 }: ReviewsHeaderProps) => {
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isWriteReviewModalOpen, setIsWriteReviewModalOpen] = useState(false);
-
-  const sortRef = useRef<HTMLDivElement>(null);
-  const filterRef = useRef<HTMLDivElement>(null);
-
-  // Click-outside — close the corresponding dropdown
-  const closeSort = useCallback(() => setIsSortOpen(false), []);
-  const closeFilter = useCallback(() => setIsFilterOpen(false), []);
-
-  useClickOutside(sortRef, closeSort);
-  useClickOutside(filterRef, closeFilter);
-
-  const toggleSort = useCallback(() => setIsSortOpen((prev) => !prev), []);
-  const toggleFilter = useCallback(() => setIsFilterOpen((prev) => !prev), []);
 
   const openWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(true), []);
   const closeWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(false), []);
@@ -90,7 +75,6 @@ export const ReviewsHeader = ({
     className: sortOrder === order ? "dropdown__item--active" : undefined,
     onClick: () => {
       onSortChange?.(order);
-      setIsSortOpen(false);
     },
   }));
 
@@ -101,7 +85,6 @@ export const ReviewsHeader = ({
     className: ratingFilter === n ? "dropdown__item--active" : undefined,
     onClick: () => {
       onRatingFilterChange?.(n);
-      setIsFilterOpen(false);
     },
   }));
 
@@ -121,57 +104,45 @@ export const ReviewsHeader = ({
 
       <div className="reviews__actions">
         {/* Filter dropdown */}
-        <div
-          ref={filterRef}
-          className={clsx("dropdown", isFilterOpen && "is-open")}
-        >
-          <IconButton
-            svgName="icn-filter"
-            variant="circular"
-            className="button--filter"
-            aria-label="Filter reviews"
-            onClick={toggleFilter}
-            aria-expanded={isFilterOpen}
-            aria-haspopup="listbox"
-          />
+        <Dropdown>
+          <Dropdown.Trigger>
+            <IconButton
+              svgName="icn-filter"
+              variant="circular"
+              className="button--filter"
+              aria-label="Filter reviews"
+            />
+          </Dropdown.Trigger>
 
-          <MenuList
+          <Dropdown.Menu
             items={filterMenuItems}
-            className="dropdown__menu"
             itemClassName="dropdown__item"
             linkClassName="dropdown__item-btn"
-            role="listbox"
             aria-label="Filter by rating"
           />
-        </div>
+        </Dropdown>
 
         {/* Sort dropdown */}
-        <div
-          ref={sortRef}
-          className={clsx("dropdown", isSortOpen && "is-open")}
-        >
-          <Button
-            variant="solid"
-            colorScheme="grey"
-            className="button--dropdown"
-            icon={<Icon svgName="icn-arrow-down" />}
-            iconPosition="right"
-            onClick={toggleSort}
-            aria-expanded={isSortOpen}
-            aria-haspopup="listbox"
-          >
-            {SORT_MENU_LABELS[sortOrder]}
-          </Button>
+        <Dropdown>
+          <Dropdown.Trigger>
+            <Button
+              variant="solid"
+              colorScheme="grey"
+              className="button--dropdown"
+              icon={<Icon svgName="icn-arrow-down" />}
+              iconPosition="right"
+            >
+              {SORT_MENU_LABELS[sortOrder]}
+            </Button>
+          </Dropdown.Trigger>
 
-          <MenuList
+          <Dropdown.Menu
             items={sortMenuItems}
-            className="dropdown__menu"
             itemClassName="dropdown__item"
             linkClassName="dropdown__item-btn"
-            role="listbox"
             aria-label="Sort reviews"
           />
-        </div>
+        </Dropdown>
 
         <Button variant="solid" className="button--write-review" onClick={openWriteReviewModal}>
           Write a Review

@@ -20,8 +20,6 @@
   @media (max-width: $breakpoint-tablet) {
     gap: $base-spacing * 0.5;
   }
-
-  @include dropdown-menu;
 }
 
 .reviews__actions .button--dropdown {

@@ -9,7 +9,10 @@ import { ColorSelector } from "@/components/molecules/ColorSelector";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { QuantitySelector } from "@/components/molecules/QuantitySelector";
 import type { ProductData } from "@/types/product";
-import { ProductCartProvider, useProductCartContext } from "./ProductCartContext";
+import {
+  ProductCartProvider,
+  useProductCartContext,
+} from "./ProductCartContext";
 import "./index.scss";
 
 type RootProps = ComponentPropsWithoutRef<"div"> & {
@@ -106,12 +109,15 @@ const SizeSelection = () => {
 };
 
 const Actions = () => {
-  const { setQuantity, selectedVariant } = useProductCartContext();
+  const { setQuantity, selectedVariant, maxAllowed, handleMaxExceeded } = useProductCartContext();
+
   return (
     <div className="product-detail__actions">
       <QuantitySelector
         className="product-detail__quantity"
         onChange={setQuantity}
+        max={maxAllowed}
+        onMaxExceeded={handleMaxExceeded}
       />
       <Button
         variant="solid"
