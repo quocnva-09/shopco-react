@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import {
   Form,
   redirect,
   useActionData,
   useNavigation,
+  useFetcher,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from "react-router-dom";
@@ -13,7 +15,9 @@ import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { OtpInput } from "@/components/molecules/OtpInput";
 import { CountdownButton } from "@/components/molecules/CountdownButton";
 import { PATHS } from "@/routes/paths";
-import { VERIFY_OTP_MESSAGES } from "@/consts/messages";
+import { VERIFY_OTP_MESSAGES, VERIFY_OTP_API_MESSAGES } from "@/consts/messages";
+import { OTP_COOLDOWN_SECONDS, OTP_LENGTH } from "@/consts/config";
+import { CheckoutService } from "@/services/checkout.service";
 import toast from "react-hot-toast";
 import "./index.scss";
 
@@ -23,46 +27,78 @@ export const verifyOrderLoader = ({ params }: LoaderFunctionArgs) => {
   if (!orderId || isNaN(Number(orderId))) {
     return redirect(PATHS.CHECKOUT);
   }
+  
+  if (!sessionStorage.getItem("fromCheckout")) {
+    return redirect(PATHS.CHECKOUT);
+  }
+  
   return { orderId };
 };
 
 // --- RRv7 Action ---
 type VerifyActionData = {
   error?: string;
+  intent?: string;
+  success?: boolean;
 };
 
 export const verifyOrderAction = async ({
   request,
+  params,
 }: ActionFunctionArgs): Promise<VerifyActionData | Response> => {
   const formData = await request.formData();
+  const intent = formData.get("intent") as string;
+  const orderId = Number(params.orderId);
+
+  if (intent === "resend") {
+    try {
+      await CheckoutService.resendOtp(orderId);
+      return { success: true, intent: "resend" };
+    } catch (error) {
+      return { error: VERIFY_OTP_API_MESSAGES.RESEND_ERROR, intent: "resend" };
+    }
+  }
+
+  // Intent = verify (default)
   const otp = formData.get("otp") as string;
 
-  if (!otp || otp.length !== 6) {
+  if (!otp || otp.length !== OTP_LENGTH) {
     return { error: VERIFY_OTP_MESSAGES.ERRORS.REQUIRED };
   }
 
-  // --- MOCK API CALL ---
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-
-  if (otp === "123456") {
-    // Success: redirect to order success
+  try {
+    await CheckoutService.verifyOtp(orderId, { otp });
+    
+    // Clear session storage before redirecting
+    sessionStorage.removeItem("fromCheckout");
+    sessionStorage.setItem("completedOrderId", String(orderId));
+    
     return redirect(PATHS.ORDER_SUCCESS);
+  } catch (error) {
+    return { error: VERIFY_OTP_API_MESSAGES.VERIFY_ERROR };
   }
-
-  // Error: return the error object
-  return { error: VERIFY_OTP_MESSAGES.ERRORS.INVALID_OTP };
 };
 
 // --- Component ---
 export const VerifyOrderPage = () => {
   const actionData = useActionData() as VerifyActionData | undefined;
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const fetcher = useFetcher<VerifyActionData>();
+  
+  const isSubmitting = navigation.state === "submitting" || fetcher.state === "submitting";
 
-  const handleResend = async () => {
-    // Mock resend
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast.success(VERIFY_OTP_MESSAGES.SUCCESS.RESENT);
+  useEffect(() => {
+    if (fetcher.data?.intent === "resend") {
+      if (fetcher.data.success) {
+        toast.success(VERIFY_OTP_API_MESSAGES.RESEND_SUCCESS);
+      } else if (fetcher.data.error) {
+        toast.error(fetcher.data.error);
+      }
+    }
+  }, [fetcher.data]);
+
+  const handleResend = () => {
+    fetcher.submit({ intent: "resend" }, { method: "post" });
   };
 
   return (
@@ -86,9 +122,10 @@ export const VerifyOrderPage = () => {
         </div>
 
         <Form method="post" className="verify-order__form">
+          <input type="hidden" name="intent" value="verify" />
           <div className="verify-order__input-group">
-            <OtpInput disabled={isSubmitting} />
-            {actionData?.error && (
+            <OtpInput disabled={isSubmitting} length={OTP_LENGTH} />
+            {actionData?.error && actionData?.intent !== "resend" && (
               <Text as="span" className="verify-order__error">
                 {actionData.error}
               </Text>
@@ -105,7 +142,7 @@ export const VerifyOrderPage = () => {
             <CountdownButton
               onResend={handleResend}
               disabled={isSubmitting}
-              initialSeconds={60}
+              initialSeconds={OTP_COOLDOWN_SECONDS}
               fullWidth
             />
           </div>

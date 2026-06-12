@@ -5,19 +5,20 @@ import type {
   ReviewResponse,
   WriteReviewRequest,
 } from "@/types/api/review.api";
+import { API_ENDPOINTS } from "@/consts/api";
 
 export const ReviewService = {
   async getReviews(params?: ReviewParams) {
-    return get<ReviewListResponse>(`/reviews`, { params });
+    return get<ReviewListResponse>(API_ENDPOINTS.REVIEWS, { params });
   },
 
   async getReviewsByProductId(productId: number, params?: ReviewParams) {
-    return get<ReviewListResponse>(`/products/${productId}/reviews`, {
+    return get<ReviewListResponse>(API_ENDPOINTS.PRODUCT_REVIEWS(productId), {
       params,
     });
   },
 
   async submitReview(payload: WriteReviewRequest): Promise<ReviewResponse> {
-    return post<ReviewResponse>("/guest/reviews", payload);
+    return post<ReviewResponse>(API_ENDPOINTS.GUEST_REVIEWS, payload);
   },
 };

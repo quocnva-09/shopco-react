@@ -1,9 +1,4 @@
-import {
-  useCallback,
-  useRef,
-  useState,
-  type ComponentPropsWithoutRef,
-} from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { ReviewCard } from "@/components/molecules/ReviewCard";
 import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
@@ -12,16 +7,8 @@ import type { ReviewData } from "@/types/review";
 import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
 import { SectionStateWrapper } from "@/components/molecules/SectionStateWrapper";
 import { Button } from "@/components/atoms/Button";
-import {
-  type SortOrder,
-  type RatingFilter,
-  SORT_ORDER,
-  REVIEW_MENU_ACTIONS,
-  REVIEW_MENU_LABELS,
-} from "@/consts/reviewFilters";
+import { type SortOrder, type RatingFilter } from "@/consts/reviewFilters";
 import "./index.scss";
-import { useClickOutside } from "@/hooks/useClickOutside";
-import type { MenuItem } from "@/components/molecules/MenuList";
 
 export type ProductReviewsPanelProps = ComponentPropsWithoutRef<"section"> & {
   reviews: ReviewData[];

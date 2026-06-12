@@ -1,9 +1,4 @@
-import {
-  useCallback,
-  useRef,
-  useState,
-  type ComponentPropsWithoutRef,
-} from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Rating } from "@/components/atoms/Rating";
 import { Text } from "@/components/atoms/Text";

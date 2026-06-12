@@ -139,3 +139,10 @@ export const VERIFY_OTP_MESSAGES = {
     RESENT: "A new OTP has been sent to your email.",
   }
 };
+
+export const VERIFY_OTP_API_MESSAGES = {
+  VERIFY_SUCCESS: "OTP verified successfully.",
+  VERIFY_ERROR: "Invalid or expired OTP. Please try again.",
+  RESEND_SUCCESS: "OTP resent successfully to your email.",
+  RESEND_ERROR: "Failed to resend OTP. Order may already be verified.",
+};

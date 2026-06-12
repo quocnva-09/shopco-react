@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  useLocation,
+  Navigate,
+  useNavigation,
+  redirect,
+  type ActionFunctionArgs,
+} from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { PATHS } from "@/routes";
 import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { Heading } from "@/components/atoms/Heading";
@@ -11,33 +15,50 @@ import { CartSummary } from "@/components/organisms/CartSummary";
 import { CheckoutShippingForm } from "@/components/organisms/CheckoutShippingForm";
 import { CheckoutPaymentMethod } from "@/components/organisms/CheckoutPaymentMethod";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
-import type { RootState, AppDispatch } from "@/store/store";
+import type { RootState } from "@/store/store";
 import { buildLineItems } from "@/utils/cart";
-import { clearCart } from "@/slices/cartSlice";
+import {
+  useCheckoutSubmit,
+  type CheckoutFormData,
+} from "./hooks/useCheckoutSubmit";
 import { CheckoutService } from "@/services/checkout.service";
 import type { CheckoutRequest } from "@/types/api/checkout.api";
 import { CHECKOUT_MESSAGES, CHECKOUT_API_MESSAGES } from "@/consts/messages";
+import { clearCart } from "@/slices/cartSlice";
 import "./index.scss";
+import store from "@/store/store";
 
-interface CheckoutFormData {
-  fullName: string;
-  email: string;
-  address: string;
-  phoneNumber: string;
-  paymentMethod: string;
-}
+export const checkoutAction = async ({ request }: ActionFunctionArgs) => {
+  const data = await request.json();
+  const payload: CheckoutRequest = JSON.parse(data.payload);
+
+  try {
+    const response = await CheckoutService.placeOrder(payload);
+
+    // Clear the cart directly via store since action runs outside React
+    store.dispatch(clearCart());
+
+    // Set flag in sessionStorage to authorize the Verify OTP page load
+    sessionStorage.setItem("fromCheckout", "true");
+
+    return redirect(`${PATHS.VERIFY_ORDER}/${response.data.id}`);
+  } catch (error) {
+    // Returning an error response which can be caught by an ErrorBoundary or useActionData
+    throw new Response(CHECKOUT_API_MESSAGES.ORDER_ERROR, { status: 400 });
+  }
+};
 
 export const CheckOutPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
   const breadcrumbs = useBreadcrumbs();
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "submitting";
 
   const { cartItems, deliveryFee, discount } = useSelector(
     (state: RootState) => state.cart,
   );
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { onSubmit } = useCheckoutSubmit();
 
   if (!location.state?.fromCart) {
     return <Navigate to={PATHS.CART} replace />;
@@ -53,39 +74,6 @@ export const CheckOutPage = () => {
     },
     mode: "onChange",
   });
-
-  const onSubmit = async (data: CheckoutFormData) => {
-    const payload: CheckoutRequest = {
-      items: cartItems.map((item) => ({
-        product_id: item.productId,
-        product_variant_id: item.productVariantId,
-        color_id: item.variant.colorId,
-        size_id: item.variant.sizeId,
-        quantity: item.quantity,
-      })),
-      delivery_fee: deliveryFee,
-      discount,
-      guest_name: data.fullName,
-      guest_phone: data.phoneNumber,
-      guest_email: data.email,
-      guest_address: data.address,
-    };
-
-    try {
-      setIsLoading(true);
-      const response = await CheckoutService.placeOrder(payload);
-      dispatch(clearCart());
-      navigate(PATHS.ORDER_SUCCESS, {
-        state: { orderId: response.data.id },
-        replace: true,
-      });
-    } catch {
-      toast.error(CHECKOUT_API_MESSAGES.ORDER_ERROR);
-      navigate(PATHS.CART);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const lineItems = buildLineItems(cartItems, deliveryFee, discount);
   const total = lineItems.reduce((sum, item) => sum + item.value, 0);

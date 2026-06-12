@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Image } from "@/components/atoms/Image";
 import { Heading } from "@/components/atoms/Heading";
 import { Text } from "@/components/atoms/Text";
@@ -8,15 +8,16 @@ import { ORDER_SUCCESS_MESSAGES } from "@/consts/messages";
 import "./index.scss";
 
 export const OrderSuccessPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  // Guard: must arrive via navigate with orderId in state
-  if (!location.state?.orderId) {
+  const completedOrderId = sessionStorage.getItem("completedOrderId");
+
+  // Guard: must arrive via successful verification
+  if (!completedOrderId) {
     return <Navigate to={PATHS.HOME} replace />;
   }
 
-  const { orderId } = location.state as { orderId: number };
+  const orderId = Number(completedOrderId);
 
   return (
     <main className="order-success">

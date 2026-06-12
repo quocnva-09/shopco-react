@@ -50,8 +50,8 @@ export const router = createBrowserRouter([
       {
         path: PATHS.CHECKOUT,
         lazy: async () => {
-          const { CheckOutPage } = await import("@/pages/CheckOut");
-          return { Component: CheckOutPage };
+          const { CheckOutPage, checkoutAction } = await import("@/pages/CheckOut");
+          return { Component: CheckOutPage, action: checkoutAction };
         },
         handle: {
           crumb: () => [{ label: "Checkout" }],
