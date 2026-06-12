@@ -1,0 +1,41 @@
+@use "@/styles/abstracts/variables" as *;
+
+.otp-input {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  &__field {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    border: 1px solid rgba($black-color, 0.4);
+    border-radius: 8px;
+    background-color: $white-color;
+    color: $black-color;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $black-color;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
+      color: $text-muted;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 40px;
+      height: 48px;
+      font-size: 20px;
+      gap: 8px;
+    }
+  }
+}

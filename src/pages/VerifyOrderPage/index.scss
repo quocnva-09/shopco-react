@@ -1,0 +1,74 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixins" as *;
+
+.verify-order {
+  display: flex;
+  flex-direction: column;
+
+  &__breadcrumb {
+    margin-bottom: $base-spacing * 1.5;
+  }
+
+  &__content {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $base-spacing * 2;
+  }
+
+  &__header {
+    text-align: center;
+    font-size: 24px;
+    font-family: $font-family-title;
+
+    h1 {
+      margin-bottom: $base-spacing * 0.5;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 20px;
+    }
+  }
+
+  &__subtitle {
+    color: $text-muted;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: $font-family-base;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $base-spacing * 2;
+    background-color: $white-color;
+    padding: $base-spacing * 2;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: $base-spacing * 1.5;
+    }
+  }
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: $base-spacing;
+    align-items: center;
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $base-spacing;
+  }
+}

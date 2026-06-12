@@ -58,6 +58,16 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: `${PATHS.VERIFY_ORDER}/:orderId`,
+        lazy: async () => {
+          const { VerifyOrderPage, verifyOrderLoader, verifyOrderAction } = await import("@/pages/VerifyOrderPage");
+          return { Component: VerifyOrderPage, loader: verifyOrderLoader, action: verifyOrderAction };
+        },
+        handle: {
+          crumb: () => [{ label: "Verify Order" }],
+        },
+      },
+      {
         path: PATHS.ORDER_SUCCESS,
         lazy: async () => {
           const { OrderSuccessPage } = await import("@/pages/OrderSuccess");
