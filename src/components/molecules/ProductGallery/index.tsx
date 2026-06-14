@@ -32,7 +32,7 @@ export const ProductGallery = ({
             src={img.imgPath}
             alt={`${productName} - Thumbnail ${idx + 1}`}
             title={`${productName} - Thumbnail ${idx + 1}`}
-            renderWrapper={true}
+            renderWrapper={false}
             className={clsx(
               "product-detail__thumbnail",
               img.imgPath === selectedImage &&

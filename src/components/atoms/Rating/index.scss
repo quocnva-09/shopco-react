@@ -1,7 +1,7 @@
 @use "@/styles/abstracts/variables" as *;
 @use "@/styles/abstracts/mixins" as *;
 
-// Local icon references (moved from global _variables.scss)
+// Local icon references
 $-icn-star: url("/images/icn-star.svg") no-repeat center/cover;
 $-icn-half-star: url("/images/icn-half-star.svg") no-repeat center/cover;
 
@@ -35,13 +35,32 @@ $-icn-half-star: url("/images/icn-half-star.svg") no-repeat center/cover;
 
     &--half {
       background: $-icn-half-star;
-      width: calc(var(--star-size, 18px) * 0.55);
+      width: calc(var(--star-size, 18.5px) * 0.55);
     }
 
     &--empty {
       background: none;
       opacity: 0.2;
     }
+  }
+}
+
+// Size variants — controls gap (star ↔ text) on the outer container
+// and star dimensions via descendant .rating
+.rating-size {
+  &--sm {
+    gap: 13px;
+    .rating { --star-size: 18.5px; }
+  }
+
+  &--md {
+    gap: 14px;
+    .rating { --star-size: 22.5px; --star-gap: 6px; }
+  }
+
+  &--lg {
+    gap: 16px;
+    .rating { --star-size: 24.5px; --star-gap: 7px; }
   }
 }
 

@@ -14,7 +14,7 @@ export const CartPage = () => {
 
   return (
     <main className="container">
-      <Breadcrumb items={breadcrumbs} />
+      <Breadcrumb items={breadcrumbs} className="cart-page__breadcrumb"/>
       <Heading className="cart-page__title" as="h1">
         YOUR CART
       </Heading>

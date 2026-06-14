@@ -3,7 +3,7 @@
 .product-detail__gallery {
   display: flex;
   margin: 0;
-  gap: 16px;
+  gap: 14px;
   min-height: 0;
   min-width: 0;
   contain: size;
@@ -18,8 +18,9 @@
 .product-detail__thumbnails {
   display: flex;
   flex-direction: column;
+  flex: 0 0 26%;
+  max-width: 152px;
   gap: 12px;
-  width: 120px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -32,10 +33,11 @@
   }
 
   @media (max-width: $breakpoint-tablet) {
+    flex: none;
+    max-width: none;
     flex-direction: row;
     width: 100%;
     order: 2;
-    gap: 10px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -46,11 +48,11 @@
 .product-detail__thumbnail {
   width: 100%;
   height: auto;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1.1;
   object-fit: cover;
   border-radius: $radius-lg;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   transition: border-color 0.3s ease;
 
   &--active,

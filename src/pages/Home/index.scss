@@ -1,16 +1,18 @@
 @use "@/styles/abstracts/variables" as *;
 
-.home__brand-logo {
-  position: relative;
-  z-index: 1;
-}
+.home {
+  &__brand-logo {
+    position: relative;
+    z-index: 1;
+  }
 
-.home__divider-bottom {
-  border-bottom: 1px solid $color-neutral;
-}
+  &__product-collection {
+    padding-top: 72px;
+    border-bottom: 1px solid rgba($color: $black-color, $alpha: 0.1);
 
-.home__main-container {
-  @media (max-width: $breakpoint-tablet) {
-    margin-top: 10px;
+    @media (max-width: $breakpoint-tablet) {
+      padding-top: 50px;
+    }
   }
 }
+

@@ -34,13 +34,6 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   }
 
   &__menu {
-    background: $-icn-3-dot;
-    border: none;
-    cursor: pointer;
-    width: 24px;
-    height: 7px;
-    padding: 0;
-
     @media (max-width: $breakpoint-tablet) {
       display: none;
     }

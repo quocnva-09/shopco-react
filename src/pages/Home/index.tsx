@@ -47,8 +47,8 @@ export const HomePage = () => {
 
       <BrandLogoBar className="home__brand-logo" />
 
-      <div className="container home__main-container">
-        <ProductCollectionSection className="home__divider-bottom">
+      <div className="container">
+        <ProductCollectionSection className="home__product-collection">
           <ProductCollectionSection.Header title="NEW ARRIVALS" />
           <ProductCollectionSection.Content>
             <Suspense fallback={<ProductCardSkeletonList count={4} />}>

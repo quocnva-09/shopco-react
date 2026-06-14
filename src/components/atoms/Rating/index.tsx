@@ -3,48 +3,41 @@ import clsx from 'clsx';
 import './index.scss';
 
 export type RatingVariant = 'default' | 'row';
+export type RatingSize = 'sm' | 'md' | 'lg';
 
 export type RatingProps = ComponentPropsWithoutRef<'div'> & {
   value: number;
   showText?: boolean;
   variant?: RatingVariant;
-  starSize?: number;
-  starGap?: number;
+  size?: RatingSize;
 };
 
 export const Rating = ({
   value,
   showText = true,
   variant = 'default',
-  starSize,
-  starGap,
+  size = 'sm',
   className,
   ...rest
 }: RatingProps) => {
   const roundedValue = Math.round(value * 2) / 2;
   const displayRating = roundedValue % 1 === 0 ? `${roundedValue}.0` : roundedValue;
 
-  // 2. Calculate the actual number of stars to render
   const fullStarsCount = Math.floor(roundedValue);
   const hasHalfStar = roundedValue % 1 !== 0;
 
   const fullStarsArray = Array.from({ length: fullStarsCount });
 
   return (
-    <div 
+    <div
       className={clsx(
-        variant === 'row' ? 'rating-row' : 'rating-container', 
+        variant === 'row' ? 'rating-row' : 'rating-container',
+        `rating-size--${size}`,
         className
-      )} 
+      )}
       {...rest}
     >
-      <div
-        className="rating"
-        style={{
-          ...(starSize !== undefined && { '--star-size': `${starSize}px` } as React.CSSProperties),
-          ...(starGap !== undefined && { '--star-gap': `${starGap}px` } as React.CSSProperties),
-        }}
-      >
+      <div className="rating">
         {fullStarsArray.map((_, index) => (
           <span key={`full-${index}`} className="rating__star rating__star--full" aria-hidden="true" />
         ))}

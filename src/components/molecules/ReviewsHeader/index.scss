@@ -25,7 +25,11 @@
 .reviews__actions .button--dropdown {
   color: $black-color;
   padding: 15px 20px;
+}
 
+// Hide the entire Dropdown flex item (not just the inner trigger)
+// so it doesn't contribute a gap on mobile
+.reviews__actions > *:has(.button--dropdown) {
   @media (max-width: $breakpoint-tablet) {
     display: none;
   }

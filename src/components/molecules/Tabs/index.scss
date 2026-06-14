@@ -3,12 +3,7 @@
 
 .tabs {
   @include flex-center(row);
-  gap: $base-spacing;
   border-bottom: 1px solid $color-neutral;
-
-  @media (max-width: $breakpoint-tablet) {
-    gap: 0;
-  }
 
   &__item {
     max-width: 414px;
@@ -19,13 +14,14 @@
     font-size: 20px;
     cursor: pointer;
     color: $text-muted;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
     position: relative;
     flex: 1;
 
     @media (max-width: $breakpoint-tablet) {
-      font-size: $font-size-mobile;
+      font-size: 16px;
       white-space: nowrap;
+      padding: 0 0 20px;
 
       &:first-child {
         flex: 2.5;

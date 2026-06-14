@@ -47,13 +47,16 @@
     color: $black-color;
     text-decoration: none;
     white-space: nowrap;
-    line-height: 0.8;
+    // line-height: 1;
     width: fit-content;
+    padding-bottom: 8px;
+    align-self: center;
 
     @media (max-width: $breakpoint-tablet) {
       order: 2; // Second item on mobile
       margin-right: auto;
       font-size: 25px;
+      padding-bottom: 6px;
     }
   }
 

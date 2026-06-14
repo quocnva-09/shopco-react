@@ -2,11 +2,6 @@
 @use "@/styles/abstracts/mixins" as *;
 
 .product-more-info {
-  margin-top: 60px;
-
-  @media (max-width: $breakpoint-tablet) {
-    margin-top: 40px;
-  }
 }
 
 // Tab content: show/hide panels
@@ -22,8 +17,12 @@
   &--active {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $base-spacing;
+    gap: 24px;
     align-items: center;
+
+    @media (max-width: $breakpoint-tablet) {
+      gap: 20px;
+    }
   }
 
   &__header {

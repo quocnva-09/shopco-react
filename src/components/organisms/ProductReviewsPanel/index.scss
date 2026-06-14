@@ -21,12 +21,13 @@
 }
 
 .btn--load-more {
-  margin-top: 15px;
+  margin-top: 16px;
   padding: 15px 45px;
   justify-self: center;
   display: block;
 
   @media (max-width: $breakpoint-tablet) {
     padding: 14px 36px;
+    margin-top:0;
   }
 }

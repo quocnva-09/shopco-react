@@ -19,6 +19,10 @@
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
+
+      @media (max-width: $breakpoint-tablet) {
+        border-radius: 14px;
+      }
     }
   }
 

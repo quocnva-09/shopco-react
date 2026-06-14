@@ -43,7 +43,7 @@ export const ReviewCard = ({
   return (
     <div className={clsx("review-card", className)} {...rest}>
       <div className="review-card__header">
-        <Rating value={rating} showText={false} />
+        <Rating value={rating} showText={false} size="md" />
 
         {showMenu && (
           <Dropdown>
@@ -51,6 +51,8 @@ export const ReviewCard = ({
               <IconButton
                 svgName="icn-3-dot"
                 aria-label="Review options"
+                iconWidth={24}
+                iconHeight={7}
                 className="review-card__menu"
               />
             </Dropdown.Trigger>

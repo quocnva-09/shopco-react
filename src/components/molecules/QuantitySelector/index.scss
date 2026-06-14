@@ -3,9 +3,10 @@
 .quantity-selector {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #f0f0f0;
-  border-radius: 24px;
-  padding: 12px 20px;
+  border-radius: $radius-pill;
+  padding: 14px 20px;
 
   &__btn {
     flex-shrink: 0;

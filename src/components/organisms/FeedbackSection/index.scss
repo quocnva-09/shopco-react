@@ -11,10 +11,10 @@
   &__header {
     @include flex-between;
     align-items: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
     @media (max-width: $breakpoint-tablet) {
-      margin-bottom: 4px;
+      margin-bottom: 24px;
     }
   }
 
@@ -101,7 +101,6 @@
 
   &__items {
     // Align items with the container's inner content
-    padding-top: 20px;
     padding-left: max(calc((100vw - #{$max-width}) / 2), 0px);
     padding-right: max(calc((100vw - #{$max-width}) / 2), 0px);
     pointer-events: auto;

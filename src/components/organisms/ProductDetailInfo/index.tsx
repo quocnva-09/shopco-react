@@ -40,7 +40,11 @@ const Header = ({ name, ratingAvg }: { name: string; ratingAvg?: number }) => (
     >
       {name}
     </Heading>
-    <Rating value={ratingAvg ?? 0} className="product-detail__rating" />
+    <Rating
+      value={ratingAvg ?? 0}
+      className="product-detail__rating"
+      size="lg"
+    />
   </>
 );
 
@@ -121,7 +125,6 @@ const Actions = () => {
       />
       <Button
         variant="solid"
-        fullWidth
         type="submit"
         className="product-detail__btn"
         disabled={!selectedVariant}
