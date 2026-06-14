@@ -1,13 +1,18 @@
 import { createContext, useContext, useEffect, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
+import { Heading } from "@/components/atoms/Heading";
+import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
+
+// ---------------------------------------------------------------------------
+// Context
+// ---------------------------------------------------------------------------
 
 type ModalContextType = {
   onClose: () => void;
 };
 
-// Create a context to share the onClose function with child components (Header, Footer, etc.)
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const useModalContext = () => {
@@ -18,6 +23,10 @@ export const useModalContext = () => {
   return context;
 };
 
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
 export type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -26,14 +35,71 @@ export type ModalProps = {
   closeOnOverlayClick?: boolean;
 };
 
-export const ModalBase = ({
+export type ModalHeaderProps = {
+  title: string | ReactNode;
+  className?: string;
+  hideCloseButton?: boolean;
+};
+
+export type ModalBodyProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+export type ModalFooterProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Sub-components
+// ---------------------------------------------------------------------------
+
+const Header = ({ title, className, hideCloseButton = false }: ModalHeaderProps) => {
+  const { onClose } = useModalContext();
+
+  return (
+    <div className={clsx("modal__header", className)}>
+      {typeof title === "string" ? (
+        <Heading as="h3" className="modal__title">
+          {title}
+        </Heading>
+      ) : (
+        title
+      )}
+      {!hideCloseButton && (
+        <IconButton
+          svgName="icn-close"
+          variant="ghost"
+          onClick={onClose}
+          aria-label="Close modal"
+          className="modal__close-btn"
+        />
+      )}
+    </div>
+  );
+};
+
+const Body = ({ children, className }: ModalBodyProps) => (
+  <div className={clsx("modal__body", className)}>{children}</div>
+);
+
+const Footer = ({ children, className }: ModalFooterProps) => (
+  <div className={clsx("modal__footer", className)}>{children}</div>
+);
+
+// ---------------------------------------------------------------------------
+// Root
+// ---------------------------------------------------------------------------
+
+const Root = ({
   isOpen,
   onClose,
   children,
   className,
   closeOnOverlayClick = true,
 }: ModalProps) => {
-  // Prevent scrolling on body when modal is open to ensure only modal content scrolls
+  // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -45,7 +111,7 @@ export const ModalBase = ({
     };
   }, [isOpen]);
 
-  // Handle Escape key to close the modal
+  // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -56,7 +122,6 @@ export const ModalBase = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // If not open or running on server (SSR), render nothing
   if (!isOpen || typeof document === "undefined") return null;
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -67,29 +132,26 @@ export const ModalBase = ({
 
   const modalContent = (
     <ModalContext.Provider value={{ onClose }}>
-      <div 
-        className="modal-overlay" 
+      <div
+        className="modal-overlay"
         onClick={handleOverlayClick}
         aria-modal="true"
         role="dialog"
       >
-        <div className={clsx("modal", className)}>
-          {children}
-        </div>
+        <div className={clsx("modal", className)}>{children}</div>
       </div>
     </ModalContext.Provider>
   );
 
-  // Use createPortal to mount the modal outside the main DOM hierarchy
   return createPortal(modalContent, document.body);
 };
 
-import { ModalHeader } from "./ModalHeader";
-import { ModalBody } from "./ModalBody";
-import { ModalFooter } from "./ModalFooter";
+// ---------------------------------------------------------------------------
+// Compound export
+// ---------------------------------------------------------------------------
 
-export const Modal = Object.assign(ModalBase, {
-  Header: ModalHeader,
-  Body: ModalBody,
-  Footer: ModalFooter,
+export const Modal = Object.assign(Root, {
+  Header,
+  Body,
+  Footer,
 });

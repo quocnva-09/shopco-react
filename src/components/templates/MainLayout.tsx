@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Outlet, useNavigation, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { NotificationBar } from "@/components/organisms/NotificationBar";
 import { Spinner } from "@/components/atoms/Spinner";
+import type { RootState } from "@/store/store";
 import { PATHS } from "@/routes";
 import "./MainLayout.scss";
 
@@ -17,6 +19,11 @@ export const MainLayout = () => {
   const { pathname } = useLocation();
   const isHomePage = pathname === PATHS.HOME;
 
+  // Lifted from Header organism — the template is the correct owner of layout-wide Redux state
+  const cartItemCount = useSelector((state: RootState) =>
+    state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0)
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -27,7 +34,7 @@ export const MainLayout = () => {
         <NotificationBar onClose={() => setIsNotificationVisible(false)} />
       )}
 
-      <Header noBorder={isHomePage} />
+      <Header noBorder={isHomePage} cartItemCount={cartItemCount} />
       {isRouteLoading ? (
         <div className="main-layout__spinner" aria-live="polite">
           <Spinner size="lg" label="Loading page..." />

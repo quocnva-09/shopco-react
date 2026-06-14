@@ -148,6 +148,7 @@ export const ProductDetailPage = () => {
         faqsPanel={<ProductFaqsPanel content={""} />}
         reviewsPanel={
           <ProductReviewsPanel
+            productId={Number(id)}
             reviewCount={totalCount}
             reviews={reviews}
             hasMore={hasMore}

@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { Heading } from "@/components/atoms/Heading";
 import { CartSection } from "@/components/organisms/CartSection";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
+import { buildLineItems } from "@/utils/cart";
 import type { RootState } from "@/store/store";
 import "./index.scss";
 
@@ -11,6 +12,10 @@ export const CartPage = () => {
   const { cartItems, deliveryFee, discount } = useSelector(
     (state: RootState) => state.cart,
   );
+
+  // Business logic lives at the page level — CartSection receives pre-computed values
+  const lineItems = buildLineItems(cartItems, deliveryFee, discount);
+  const total = lineItems.reduce((sum, item) => sum + item.value, 0);
 
   return (
     <main className="container">
@@ -21,8 +26,8 @@ export const CartPage = () => {
 
       <CartSection
         items={cartItems}
-        deliveryFee={deliveryFee}
-        discount={discount}
+        lineItems={lineItems}
+        total={total}
       />
     </main>
   );

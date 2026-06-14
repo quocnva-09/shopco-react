@@ -1,4 +1,4 @@
-import { useCallback, useState, type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Text } from "@/components/atoms/Text";
@@ -8,10 +8,6 @@ import { Icon } from "@/components/atoms/Icon";
 import { Rating } from "@/components/atoms/Rating";
 import { Dropdown } from "@/components/molecules/Dropdown";
 import type { MenuItem } from "@/components/molecules/MenuList";
-import { WriteReviewModal } from "@/components/organisms/WriteReviewModal";
-import type { WriteReviewPayload } from "@/types/payload/write-review.payload";
-import { ReviewService } from "@/services/review.service";
-import toast from "react-hot-toast";
 import {
   SORT_ORDER,
   SORT_MENU_LABELS,
@@ -20,7 +16,6 @@ import {
   type SortOrder,
   type RatingFilter,
 } from "@/consts/reviewFilters";
-import { WRITE_REVIEW_API_MESSAGES } from "@/consts/messages";
 import "./index.scss";
 
 export type ReviewsHeaderProps = ComponentPropsWithoutRef<"div"> & {
@@ -29,7 +24,8 @@ export type ReviewsHeaderProps = ComponentPropsWithoutRef<"div"> & {
   onSortChange?: (order: SortOrder) => void;
   ratingFilter?: RatingFilter | null;
   onRatingFilterChange?: (rating: RatingFilter | null) => void;
-  onWriteReview?: (data: WriteReviewPayload) => void;
+  /** Called when the user clicks "Write a Review". The parent organism owns the modal. */
+  onWriteReviewClick?: () => void;
 };
 
 export const ReviewsHeader = ({
@@ -38,36 +34,10 @@ export const ReviewsHeader = ({
   onSortChange,
   ratingFilter,
   onRatingFilterChange,
-  onWriteReview,
+  onWriteReviewClick,
   className,
   ...rest
 }: ReviewsHeaderProps) => {
-  const [isWriteReviewModalOpen, setIsWriteReviewModalOpen] = useState(false);
-
-  const openWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(true), []);
-  const closeWriteReviewModal = useCallback(() => setIsWriteReviewModalOpen(false), []);
-
-  const handleWriteReviewSubmit = useCallback(
-    async (data: WriteReviewPayload) => {
-      try {
-        await ReviewService.submitReview({
-          order_id: data.order_id,
-          product_id: data.product_id,
-          rating: data.rating,
-          comment: data.comment,
-          guest_name: data.guest_name,
-          guest_email: data.guest_email,
-        });
-        toast.success(WRITE_REVIEW_API_MESSAGES.SUBMIT_SUCCESS);
-        closeWriteReviewModal();
-        onWriteReview?.(data);
-      } catch {
-        toast.error(WRITE_REVIEW_API_MESSAGES.SUBMIT_ERROR);
-      }
-    },
-    [closeWriteReviewModal, onWriteReview],
-  );
-
   // Build menu items — Sort
   const sortMenuItems: MenuItem[] = Object.values(SORT_ORDER).map((order) => ({
     id: `sort-${order}`,
@@ -144,16 +114,10 @@ export const ReviewsHeader = ({
           />
         </Dropdown>
 
-        <Button variant="solid" className="button--write-review" onClick={openWriteReviewModal}>
+        <Button variant="solid" className="button--write-review" onClick={onWriteReviewClick}>
           Write a Review
         </Button>
       </div>
-
-      <WriteReviewModal
-        isOpen={isWriteReviewModalOpen}
-        onClose={closeWriteReviewModal}
-        onSubmit={handleWriteReviewSubmit}
-      />
     </div>
   );
 };

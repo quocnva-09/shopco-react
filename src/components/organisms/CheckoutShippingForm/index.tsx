@@ -6,6 +6,7 @@ import { Input } from "@/components/atoms/Input";
 import { Text } from "@/components/atoms/Text";
 import { CHECKOUT_MESSAGES } from "@/consts/messages";
 import { checkoutValidationRules } from "@/utils/checkOutValidation";
+import type { CheckoutFormData } from "@/hooks/useCheckoutSubmit";
 import "./index.scss";
 
 export type CheckoutShippingFormProps = ComponentPropsWithoutRef<"section">;
@@ -14,10 +15,19 @@ export const CheckoutShippingForm = ({
   className,
   ...rest
 }: CheckoutShippingFormProps) => {
+  const methods = useFormContext<CheckoutFormData>();
+
+  if (!methods) {
+    throw new Error(
+      "<CheckoutShippingForm> must be rendered inside a <FormProvider>. " +
+      "Wrap it with <FormProvider {...methods}> in the parent page."
+    );
+  }
+
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = methods;
 
   return (
     <section className={clsx("checkout-form", className)} {...rest}>

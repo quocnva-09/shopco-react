@@ -20,7 +20,7 @@ import { buildLineItems } from "@/utils/cart";
 import {
   useCheckoutSubmit,
   type CheckoutFormData,
-} from "./hooks/useCheckoutSubmit";
+} from "../../hooks/useCheckoutSubmit";
 import { CheckoutService } from "@/services/checkout.service";
 import type { CheckoutRequest } from "@/types/api/checkout.api";
 import { CHECKOUT_MESSAGES, CHECKOUT_API_MESSAGES } from "@/consts/messages";
@@ -60,10 +60,6 @@ export const CheckOutPage = () => {
 
   const { onSubmit } = useCheckoutSubmit();
 
-  if (!location.state?.fromCart) {
-    return <Navigate to={PATHS.CART} replace />;
-  }
-
   const methods = useForm<CheckoutFormData>({
     defaultValues: {
       fullName: "",
@@ -78,6 +74,10 @@ export const CheckOutPage = () => {
   const lineItems = buildLineItems(cartItems, deliveryFee, discount);
   const total = lineItems.reduce((sum, item) => sum + item.value, 0);
 
+  if (!location.state?.fromCart) {
+    return <Navigate to={PATHS.CART} replace />;
+  }
+
   return (
     <main className="container">
       <Breadcrumb items={breadcrumbs} />
@@ -90,7 +90,7 @@ export const CheckOutPage = () => {
           <section className="checkout-cart">
             <div className="checkout-cart__items">
               {cartItems.map((item) => (
-                <CartItem key={item.productVariantId} item={item} isCheckout />
+                <CartItem key={item.productVariantId} item={item} isReadOnly />
               ))}
             </div>
           </section>
