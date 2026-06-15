@@ -11,7 +11,7 @@
     min-height: 663px;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     min-height: 448px;
   }
 }
@@ -34,7 +34,7 @@
     right: auto;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     width: 44px;
     height: 44px;
     left: 10px;
@@ -53,7 +53,7 @@
     right: calc(50% - 280px);
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     width: 76px;
     height: 76px;
     right: calc(50% - 170px);
@@ -79,7 +79,7 @@
     height: 663px;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     left: 50%;
     right: auto;
     bottom: 90px;
@@ -106,7 +106,7 @@
     transform: translateX(-50%);
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     left: 50%;
     right: auto;
     transform: translateX(-50%);

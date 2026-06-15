@@ -9,7 +9,7 @@
   margin: $base-spacing * 3 0 0 0;
   flex-wrap: wrap;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     justify-content: center;
     gap: 28px;
     row-gap: 12px;
@@ -27,7 +27,7 @@
       border-right: none;
     }
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       padding-right: 28px;
       
       &:nth-child(2) {
@@ -51,7 +51,7 @@
     font-weight: 700;
     color: $black-color;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 24px;
     }
   }
@@ -61,7 +61,7 @@
     font-size: $font-size-mobile;
     color: $text-muted;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 12px;
     }
   }

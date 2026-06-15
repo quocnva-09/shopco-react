@@ -30,7 +30,7 @@
     font-size: 16px;
     margin-inline: 38px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-inline: 16px;
     }
 

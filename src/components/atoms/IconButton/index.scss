@@ -23,7 +23,7 @@
   // Size
   font-size: $font-size-base;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: $font-size-mobile;
   }
 
@@ -47,7 +47,7 @@
     border-radius: 50%;
     background-color: $color-neutral;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       width: 40px;
       height: 40px;
     }

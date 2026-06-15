@@ -11,7 +11,7 @@
     font-size: 40px;
     font-family: $font-family-title;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 24px;
       line-height: 28px;
     }
@@ -25,7 +25,7 @@
     margin-bottom: 24px;
     border-bottom: 1px solid #eee;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: $font-size-mobile;
       margin-bottom: 24px;
     }
@@ -36,7 +36,7 @@
     flex-direction: column;
     gap: 24px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       gap: 20px;
     }
   }
@@ -53,7 +53,7 @@
     font-size: $font-size-base;
     color: $text-muted;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: $font-size-mobile;
     }
   }
@@ -61,7 +61,7 @@
   &__rating {
     margin-block: 14px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-block: 12px;
       gap: 13px; // sm: gap star ↔ text
 
@@ -76,7 +76,7 @@
     display: flex;
     gap: 20px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       gap: 12px;
     }
   }

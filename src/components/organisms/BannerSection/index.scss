@@ -18,7 +18,7 @@ $bg-banner: #f2f0f1;
     grid-template-columns: 1fr;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     grid-template-columns: 1fr;
     gap: 0;
   }
@@ -28,7 +28,7 @@ $bg-banner: #f2f0f1;
   margin-top: 32px;
   min-width: 204px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     width: 100%;
     max-width: 358px;
     height: 52px;

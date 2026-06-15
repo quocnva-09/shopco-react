@@ -9,7 +9,7 @@
     letter-spacing: 2px;
     margin: 0 0 24px 0;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: $font-size-mobile;
       margin: 0 0 16px 0;
     }

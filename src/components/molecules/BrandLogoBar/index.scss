@@ -4,7 +4,7 @@
   background-color: $black-color;
   padding: 44px 0;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     padding: 39px 0;
   }
 }
@@ -15,11 +15,16 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0 auto;
-  gap: 20px;
+  gap: 106px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-lg) {
     justify-content: center;
-    gap: 16px;
+    gap: 72px;
+  }
+
+  @media (max-width: $bp-sm) {
+    justify-content: center;
+    gap: 20px 34px; // row-gap vertical | column-gap horizontal
   }
 
   &__item {
@@ -28,7 +33,7 @@
     object-fit: contain;
     filter: brightness(0) invert(1); // White logo on black background
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       max-height: 26px;
     }
   }

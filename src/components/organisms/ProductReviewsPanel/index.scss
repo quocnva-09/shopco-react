@@ -25,7 +25,7 @@
     justify-self: center;
     display: block;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       padding: 14px 36px;
       margin-top: 0;
     }

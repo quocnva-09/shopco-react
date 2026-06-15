@@ -15,7 +15,7 @@
     }
 
     // On mobile, allow bleeding out to the right edge if the container has padding
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-right: -$padding-left-right-mobile;
       width: calc(100% + #{$padding-left-right-mobile});
       box-sizing: border-box;
@@ -31,7 +31,7 @@
       flex-wrap: nowrap !important;
       min-width: 100%;
       // On mobile, ensure the last item leaves some gap at the end since we bleed the viewport
-      @media (max-width: $breakpoint-tablet) {
+      @media (max-width: $bp-sm) {
         &::after {
           content: "";
           flex: 0 0 1px; // Tiny invisible element to create padding
@@ -59,7 +59,7 @@
     background: none;
     border: none;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       display: none;
     }
 

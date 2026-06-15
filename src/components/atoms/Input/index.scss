@@ -13,7 +13,7 @@
   box-sizing: border-box;
   transition: all 0.2s ease;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: $font-size-mobile;
     padding: 10px 14px;
   }

@@ -6,7 +6,7 @@
   align-items: center;
   padding-top: 20px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     flex-direction: column;
     gap: 16px;
     padding-top: 16px;

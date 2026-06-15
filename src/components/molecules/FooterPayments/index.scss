@@ -27,13 +27,13 @@
       transition: transform 0.3s ease;
     }
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       width: 40px;
       height: 26px;
     }
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     gap: 10px;
   }
 }

@@ -9,7 +9,7 @@
     opacity: 0.8;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: 12px;
   }
 }

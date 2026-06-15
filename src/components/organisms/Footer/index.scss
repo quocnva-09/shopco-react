@@ -8,12 +8,12 @@
     background-color: #f0f0f0;
     padding-bottom: 82px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       padding-top: 32px;
     }
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     margin-top: 50px;
   }
 }

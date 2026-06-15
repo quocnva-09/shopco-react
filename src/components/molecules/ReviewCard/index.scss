@@ -13,7 +13,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   max-width: auto;
   height: auto;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     padding: 24px;
   }
 
@@ -31,7 +31,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
       --star-size: 23px;
       --star-gap: 6.5px;
 
-      @media (max-width: $breakpoint-tablet) {
+      @media (max-width: $bp-sm) {
         --star-size: 18.5px;
         --star-gap: 5.5px;
       }
@@ -39,7 +39,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   }
 
   &__menu {
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       display: none;
     }
   }
@@ -63,7 +63,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
       margin-top: 3px;
     }
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-top: 12px;
     }
   }
@@ -75,7 +75,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     color: $text-muted;
     width: 100%;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-top: 8px;
       font-size: $font-size-mobile;
       display: block !important;
@@ -90,7 +90,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     font-size: $font-size-base;
     font-weight: 500;
     color: $text-muted;
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-top: 16px;
       font-size: $font-size-mobile;
     }

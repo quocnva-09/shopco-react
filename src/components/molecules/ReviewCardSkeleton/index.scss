@@ -10,7 +10,7 @@
     width: 140px;
     height: 23px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       width: 110px;
       height: 18.5px;
     }
@@ -28,7 +28,7 @@
     flex-direction: column;
     gap: 4px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-top: 8px;
     }
   }
@@ -37,7 +37,7 @@
     width: 100%;
     height: 22px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       height: 20px;
     }
 
@@ -51,7 +51,7 @@
     height: 20px;
     margin-top: 24px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       margin-top: 16px;
       height: 18px;
     }

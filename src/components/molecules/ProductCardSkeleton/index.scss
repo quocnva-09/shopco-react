@@ -16,7 +16,7 @@
     height: 24px;
     width: 80%;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       height: 20px;
     }
   }
@@ -31,7 +31,7 @@
     height: 28px;
     width: 60%;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       height: 24px;
     }
   }

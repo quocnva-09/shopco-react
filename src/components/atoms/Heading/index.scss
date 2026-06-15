@@ -18,7 +18,7 @@
 
   // Mobile: override lineClamp when mobileLineClamp is set
   &--mobile-clamp {
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       .heading-text--ellipsis,
       .heading-text--clamp {
         white-space: normal;
@@ -33,7 +33,7 @@
 
   // Mobile: hide tooltip
   &--mobile-no-tooltip {
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       .tooltip {
         display: none;
       }

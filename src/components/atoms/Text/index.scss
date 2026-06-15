@@ -17,7 +17,7 @@
 
   // Mobile: hide tooltip
   &--mobile-no-tooltip {
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       .tooltip {
         display: none;
       }
@@ -40,7 +40,7 @@
 
   // Mobile: override the clamp line count
   &--mobile-clamp {
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: var(--mobile-line-clamp, 2);

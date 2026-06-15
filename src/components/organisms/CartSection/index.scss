@@ -8,7 +8,7 @@
   align-items: flex-start;
   margin-bottom: 80px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     margin-bottom: 32px;
@@ -20,7 +20,7 @@
     margin: 24px 0;
     text-transform: uppercase;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 28px;
       margin: 16px 0;
     }
@@ -33,7 +33,7 @@
     border-radius: $radius-lg;
     padding: 20px 24px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       padding: 14px;
     }
   }
@@ -41,7 +41,7 @@
   &__summary {
     width: 100%;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       width: 100%;
     }
   }

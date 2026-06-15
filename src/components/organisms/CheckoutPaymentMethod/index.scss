@@ -58,7 +58,7 @@
     color: $black-color;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
 
     &__option {
       padding: 14px 16px;

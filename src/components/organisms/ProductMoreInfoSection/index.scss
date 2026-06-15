@@ -10,7 +10,7 @@
   width: 100%;
   margin: 24px auto 0;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     margin-top: 20px;
   }
 
@@ -20,7 +20,7 @@
     gap: 24px;
     align-items: center;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       gap: 20px;
     }
   }
@@ -37,7 +37,7 @@
     font-weight: 700;
     flex-grow: 5;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 20px;
       margin: 0;
     }

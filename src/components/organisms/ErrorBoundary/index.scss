@@ -32,7 +32,7 @@
     margin: 0;
     font-size: 24px;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       font-size: 18px;
     }
   }

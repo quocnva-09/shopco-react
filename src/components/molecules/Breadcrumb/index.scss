@@ -7,7 +7,7 @@
   color: $text-muted;
   margin: 24px 0 36px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     margin: 20px 0;
   }
 

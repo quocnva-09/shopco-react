@@ -6,8 +6,13 @@
   gap: 40px;
   margin-bottom: 80px;
 
-  @media (max-width: $breakpoint-tablet) {
+  // Tablet (≤ $bp-md): collapse to single column, gallery stays horizontal
+  @media (max-width: $bp-md) {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: $bp-sm) {
     gap: 20px;
     margin-bottom: 50px;
   }

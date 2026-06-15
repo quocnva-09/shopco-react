@@ -13,7 +13,7 @@
     padding: 54px 0 24px;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     padding: 40px 0 0;
     align-items: stretch;
   }
@@ -38,7 +38,7 @@
     font-size: 54px;
   }
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: 36px;
     line-height: 34px;
   }
@@ -52,7 +52,7 @@
   color: $text-muted;
   line-height: 1.5;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: 14px;
     margin-top: 20px;
   }

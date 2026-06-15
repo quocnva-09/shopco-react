@@ -38,7 +38,7 @@
   flex-direction: column;
   gap: 24px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     padding: 20px;
   }
 }
@@ -48,7 +48,7 @@
   font-weight: 700;
   margin: 0;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-sm) {
     font-size: 20px;
   }
 }
