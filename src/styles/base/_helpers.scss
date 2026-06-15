@@ -14,14 +14,19 @@
   margin-right: auto;
   width: 100%;
 
-  @media (max-width: 1260px) {
+  @media (max-width: $bp-lg) {
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  @media (max-width: $breakpoint-tablet) {
-    padding-left: $padding-left-right-mobile;
-    padding-right: $padding-left-right-mobile;
+  @media (max-width: $bp-md) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding-left: 16px;
+    padding-right: 16px;
     font-size: $font-size-mobile;
   }
 }

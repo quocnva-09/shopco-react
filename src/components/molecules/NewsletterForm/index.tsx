@@ -1,6 +1,6 @@
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
-import { IconButton } from "@/components/atoms/IconButton";
+import { Icon } from "@/components/atoms/Icon";
 import "./index.scss";
 
 export type NewsletterFormProps = {
@@ -26,12 +26,9 @@ export const NewsletterForm = ({
   return (
     <form className="newsletter-form" onSubmit={handleSubmit}>
       <div className="newsletter-form__input-wrapper">
-        <IconButton
-          svgName="icn-email-input"
-          aria-label="Mail input"
-          variant="default"
-          className="newsletter-form__icon"
-        />
+        <span className="newsletter-form__icon" aria-hidden="true">
+          <Icon svgName="icn-email-input" />
+        </span>
         <Input
           type="email"
           name="email"

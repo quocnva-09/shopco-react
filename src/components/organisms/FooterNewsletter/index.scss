@@ -11,7 +11,15 @@
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-lg) {
+      padding: 36px 48px;
+    }
+
+    @media (max-width: $bp-md) {
+      padding: 32px 36px;
+    }
+
+    @media (max-width: $bp-sm) {
       flex-direction: column;
       align-items: stretch;
       padding: 32px 24px;
@@ -20,10 +28,11 @@
   }
 
   &__title-wrapper {
-    max-width: 50%;
+    // Strict 50/50 split with the form at all row-layout breakpoints
+    flex: 0 0 50%;
 
-    @media (max-width: $breakpoint-tablet) {
-      max-width: 100%;
+    @media (max-width: $bp-sm) {
+      flex: 0 0 100%;
     }
   }
 
@@ -35,8 +44,13 @@
     margin: 0;
     white-space: normal;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-lg) {
+      font-size: 36px;
+    }
+
+    @media (max-width: $bp-md) {
       font-size: 32px;
     }
   }
 }
+

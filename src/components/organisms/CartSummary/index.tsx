@@ -5,6 +5,7 @@ import { Text } from "@/components/atoms/Text";
 import { PriceText } from "@/components/atoms/PriceText";
 import { Input } from "@/components/atoms/Input";
 import { Button } from "@/components/atoms/Button";
+import { Icon } from "@/components/atoms/Icon";
 import { CHECKOUT_MESSAGES } from "@/consts/messages";
 import "./index.scss";
 import { Link } from "react-router-dom";
@@ -72,6 +73,9 @@ export const CartSummary = ({
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="cart-summary__promo-input-wrapper">
+            <span className="cart-summary__promo-icon" aria-hidden="true">
+              <Icon svgName="icn-voucher" />
+            </span>
             <Input
               type="text"
               unstyled

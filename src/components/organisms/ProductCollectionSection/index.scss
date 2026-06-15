@@ -10,7 +10,7 @@
   justify-content: center;
   padding-block: 64px;
 
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $bp-md) {
     padding-block: 40px;
   }
 
@@ -29,7 +29,7 @@
     overflow: visible;
     text-overflow: unset;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-md) {
       font-size: 32px;
       margin-block: 0 32px;
       padding: 0 40px;
@@ -38,26 +38,44 @@
   }
 
   &__list {
-    @include flex-group(20px, flex-start, stretch);
-    flex-wrap: wrap; // Default wraps when not in slider
+    @include flex-group(20px, flex-start);
+    flex-wrap: nowrap; // Fixed-width slider: never wrap — scroll horizontally
     width: 100%;
     margin-bottom: 36px;
     list-style: none;
 
-    @media (max-width: $breakpoint-tablet) {
+    // Tablet Landscape
+    @media (max-width: $bp-lg) {
+      gap: 18px;
+    }
+
+    // Tablet Portrait & Mobile
+    @media (max-width: $bp-md) {
+      gap: 16px;
       margin-bottom: 24px;
     }
   }
 
   &__item {
-    // Exact math: 4 items, 3 gaps of 20px (20*3=60). 60 / 4 = 15px.
-    flex: 0 0 calc(25% - 15px);
-    width: 100%;
+    // Desktop: 295px cards — 4 cards fit perfectly (4×295 + 3×20 = 1240px)
+    flex: 0 0 295px;
+    width: 295px;
+    max-width: 295px;
     min-width: 0; // Ensures items can shrink/scale properly without content blowing them out
+    scroll-snap-align: start;
 
-    @media (max-width: $breakpoint-tablet) {
-      flex: 0 0 calc(60% - 8px);
-      scroll-snap-align: start;
+    // Tablet Portrait (≤ $bp-md): ~3.5 cards visible
+    @media (max-width: $bp-md) {
+      flex: 0 0 250px;
+      width: 250px;
+      max-width: 250px;
+    }
+
+    // Mobile (≤ $bp-sm): ~1.8 cards on a 390px screen — bleeding edge effect
+    @media (max-width: $bp-sm) {
+      flex: 0 0 198px;
+      width: 198px;
+      max-width: 198px;
     }
   }
 
@@ -68,7 +86,8 @@
 
   &__btn {
     padding: 15px 85px;
-    @media (max-width: $breakpoint-tablet) {
+
+    @media (max-width: $bp-md) {
       width: 100%;
     }
   }
@@ -80,3 +99,4 @@
     }
   }
 }
+

@@ -6,7 +6,7 @@
     @include grid-layout(2, 1fr);
     gap: $base-spacing;
 
-    @media (max-width: $breakpoint-tablet) {
+    @media (max-width: $bp-sm) {
       grid-template-columns: 1fr;
     }
   }

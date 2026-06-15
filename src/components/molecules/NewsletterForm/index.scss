@@ -1,44 +1,45 @@
 @use "@/styles/abstracts/variables" as *;
 
 .newsletter-form {
-  flex: 1;
+  width: 100%;
+  max-width: 390px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-left: 15%;
 
-  @media (max-width: $breakpoint-tablet) {
-    padding-left: 0;
+  @media (max-width: $bp-sm) {
+    max-width: none;
   }
 
   &__input-wrapper {
+    width: 100%;
     display: flex;
     align-items: center;
     background-color: $white-color;
     border-radius: $radius-pill;
     overflow: hidden;
-
-    &:focus-within {
-      box-shadow: 0 0 0 1px rgba($black-color, 0.2);
-    }
+    gap: 12px;
+    padding: 12px 0 12px 16px;
   }
 
+  // Decorative icon prefix — rendered as <span aria-hidden>
   &__icon {
     flex-shrink: 0;
-    padding: 12px 0 12px 16px;
-    scale: 1.2;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   &__input {
     background-color: $white-color;
+    padding: 0;
   }
 
   &__submit {
+    width: 100%;
+    padding-block: 12px;
     white-space: nowrap;
-    padding: 12px 88px;
     font-weight: 500;
   }
 }
+
+

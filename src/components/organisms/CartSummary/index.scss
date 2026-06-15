@@ -97,21 +97,12 @@
       align-items: center;
       padding: 12px 16px;
       gap: 10px;
+    }
 
-      // Voucher icon as CSS placeholder — no component needed
-      &::before {
-        content: '';
-        display: block;
-        width: 21px;
-        height: 21px;
-        flex-shrink: 0;
-        background: url('/images/icn-voucher.svg') no-repeat center / contain;
-
-        @media (max-width: $breakpoint-tablet) {
-          width: 17.5px;
-          height: 17.5px;
-        }
-      }
+    &-icon {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
 
     &-input {
