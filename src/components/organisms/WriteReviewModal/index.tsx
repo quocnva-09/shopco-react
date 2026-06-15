@@ -8,6 +8,7 @@ import { Text } from "@/components/atoms/Text";
 import { WRITE_REVIEW_MESSAGES } from "@/consts/messages";
 import { writeReviewValidationRules } from "@/utils/writeReviewValidation";
 import type { WriteReviewPayload } from "@/types/payload/write-review.payload";
+import { MAX_STAR_RATING } from "@/consts/config";
 import "./index.scss";
 
 // Internal form shape — maps to the API payload on submit
@@ -27,7 +28,6 @@ export type WriteReviewModalProps = {
   productId: number;
 };
 
-const STAR_COUNT = 5;
 
 const DEFAULT_VALUES: WriteReviewFormValues = {
   orderId: undefined,
@@ -162,7 +162,7 @@ export const WriteReviewModal = ({
                     role="radiogroup"
                     aria-label={WRITE_REVIEW_MESSAGES.LABELS.RATING}
                   >
-                    {Array.from({ length: STAR_COUNT }, (_, i) => {
+                    {Array.from({ length: MAX_STAR_RATING }, (_, i) => {
                       const fullStarValue = i + 1;
                       const leftHalfValue = fullStarValue - 0.5;
                       const rightHalfValue = fullStarValue;
@@ -209,8 +209,8 @@ export const WriteReviewModal = ({
                   </div>
                   <span className="write-review-modal__rating-text">
                     {currentRating > 0 || hoverRating > 0
-                      ? `${(hoverRating || currentRating).toFixed(1)}/5`
-                      : "0.0/5"}
+                      ? `${(hoverRating || currentRating).toFixed(1)}/${MAX_STAR_RATING}`
+                      : `0.0/${MAX_STAR_RATING}`}
                   </span>
                 </div>
               )}

@@ -3,6 +3,8 @@ import clsx from "clsx";
 import toast from "react-hot-toast";
 import { ReviewCard } from "@/components/molecules/ReviewCard";
 import { ReviewCardSkeleton } from "@/components/molecules/ReviewCardSkeleton";
+import { PRODUCT_REVIEWS_MESSAGES } from "@/consts/messages";
+import { PRODUCT_REVIEWS_SKELETON_COUNT } from "@/consts/config";
 import { Text } from "@/components/atoms/Text";
 import type { ReviewData } from "@/types/review";
 import { ReviewsHeader } from "@/components/molecules/ReviewsHeader";
@@ -95,7 +97,7 @@ export const ProductReviewsPanel = ({
 
           {isLoading ? (
             <div className="product-reviews__grid">
-              {Array.from({ length: 6 }).map((_, index) => (
+              {Array.from({ length: PRODUCT_REVIEWS_SKELETON_COUNT }).map((_, index) => (
                 <ReviewCardSkeleton key={`skeleton-${index}`} />
               ))}
             </div>
@@ -106,7 +108,7 @@ export const ProductReviewsPanel = ({
               ))}
             </div>
           ) : (
-            <Text className="product-reviews__empty-message">No reviews found.</Text>
+            <Text className="product-reviews__empty-message">{PRODUCT_REVIEWS_MESSAGES.EMPTY}</Text>
           )}
 
           {hasMore && (

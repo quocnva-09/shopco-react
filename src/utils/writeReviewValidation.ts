@@ -1,5 +1,6 @@
 import { WRITE_REVIEW_MESSAGES } from "@/consts/messages";
 import { VALIDATION_PATTERNS } from "@/utils/validationPatterns";
+import { FIELD_LIMITS } from "@/consts/config";
 
 export const writeReviewValidationRules = {
   orderId: {
@@ -16,7 +17,7 @@ export const writeReviewValidationRules = {
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_INVALID,
     },
     maxLength: {
-      value: 50,
+      value: FIELD_LIMITS.NAME_MAX,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_MAX,
     },
   },
@@ -27,18 +28,18 @@ export const writeReviewValidationRules = {
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_INVALID,
     },
     maxLength: {
-      value: 255,
+      value: FIELD_LIMITS.EMAIL_MAX,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_MAX,
     },
   },
   comment: {
     required: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_REQUIRED,
     minLength: {
-      value: 10,
+      value: FIELD_LIMITS.REVIEW_MIN,
       message: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_MIN,
     },
     maxLength: {
-      value: 500,
+      value: FIELD_LIMITS.REVIEW_MAX,
       message: WRITE_REVIEW_MESSAGES.ERRORS.REVIEW_MAX,
     },
   },

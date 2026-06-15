@@ -12,6 +12,7 @@ import { SearchBar } from "@/components/molecules/SearchBar";
 import "./index.scss";
 import { Link } from "react-router-dom";
 import { PATHS } from "@/routes";
+import { BREAKPOINT_LG_PX } from "@/consts/config";
 
 export type HeaderProps = ComponentPropsWithoutRef<"header"> & {
   onCartClick?: () => void;
@@ -42,7 +43,7 @@ export const Header = ({
   // Auto-close mobile menu when the viewport crosses the breakpoint (991px)
   // Prevents stale open-menu state when the user resizes from mobile → desktop
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 992px)");
+    const mediaQuery = window.matchMedia(`(min-width: ${BREAKPOINT_LG_PX}px)`);
 
     const handleBreakpointChange = (e: MediaQueryListEvent) => {
       if (e.matches) {

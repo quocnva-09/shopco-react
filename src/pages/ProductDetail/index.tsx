@@ -24,6 +24,10 @@ import {
   type SortOrder,
   type RatingFilter,
 } from "@/consts/reviewFilters";
+import {
+  PRODUCT_DETAIL_RELATED_PER_PAGE,
+  PRODUCT_DETAIL_REVIEWS_LIMIT,
+} from "@/consts/config";
 
 // Utility component to render a list of skeletons
 const ProductCardSkeletonList = ({ count }: { count: number }) => (
@@ -68,7 +72,7 @@ export const ProductDetailPage = () => {
     isRetryable: relatedRetryable,
     retry: retryRelated,
   } = useProductCollection(
-    { category_id: product?.category?.id, per_page: 8 },
+    { category_id: product?.category?.id, per_page: PRODUCT_DETAIL_RELATED_PER_PAGE },
     { enabled: !isLoadingProduct && Boolean(product?.category?.id) },
   );
 
@@ -86,7 +90,7 @@ export const ProductDetailPage = () => {
     {
       product_id: Number(id),
       is_approved: true,
-      limit: 6,
+      limit: PRODUCT_DETAIL_REVIEWS_LIMIT,
       sort_by: "created_at",
       sort_dir: sortOrder === SORT_ORDER.LATEST ? "desc" : "asc",
       rating: ratingFilter ?? undefined,

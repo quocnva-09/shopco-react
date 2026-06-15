@@ -4,6 +4,10 @@ import { mapProductCardData } from "@/utils/mappers/product.mapper";
 import { mapReviewData } from "@/utils/mappers/review.mapper";
 import type { ProductCardData } from "@/types/product";
 import type { ReviewData } from "@/types/review";
+import {
+  HOME_PRODUCTS_PER_PAGE,
+  HOME_REVIEWS_LIMIT,
+} from "@/consts/config";
 
 export interface HomeLoaderData {
   newArrivals: Promise<ProductCardData[]>;
@@ -15,19 +19,19 @@ export const homeLoader = (): HomeLoaderData => {
   const newArrivals = ProductService.getProducts({
     sort_by: "created_at",
     sort_dir: "desc",
-    per_page: 4,
+    per_page: HOME_PRODUCTS_PER_PAGE,
   }).then((res) => res.data.map(mapProductCardData));
 
   const topSellings = ProductService.getProducts({
     sort_by: "selling",
     sort_dir: "desc",
-    per_page: 4,
+    per_page: HOME_PRODUCTS_PER_PAGE,
   }).then((res) => res.data.map(mapProductCardData));
 
   const reviews = ReviewService.getReviews({
     sort_by: "rating",
     sort_dir: "desc",
-    limit: 8,
+    limit: HOME_REVIEWS_LIMIT,
   }).then((res) => res.data.map(mapReviewData));
 
   return { newArrivals, topSellings, reviews };

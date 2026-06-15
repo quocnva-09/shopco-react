@@ -146,3 +146,7 @@ export const VERIFY_OTP_API_MESSAGES = {
   RESEND_SUCCESS: "OTP resent successfully to your email.",
   RESEND_ERROR: "Failed to resend OTP. Order may already be verified.",
 };
+
+export const PRODUCT_REVIEWS_MESSAGES = {
+  EMPTY: "No reviews found.",
+} as const;

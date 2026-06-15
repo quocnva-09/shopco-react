@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import { DEFAULT_SLIDER_DURATION } from "@/consts/config";
+import { DEFAULT_SLIDER_DURATION, SLIDER_SCROLL_THRESHOLD_PX } from "@/consts/config";
 
 type UseSliderProps = {
   autoplay?: boolean;
@@ -49,7 +49,7 @@ export const useSlider = ({
       const { scrollLeft, scrollWidth, clientWidth } = viewportRef.current;
 
       // If we've reached the end, scroll back to start
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      if (scrollLeft + clientWidth >= scrollWidth - SLIDER_SCROLL_THRESHOLD_PX) {
         viewportRef.current.scrollTo({ left: 0, behavior: "smooth" });
       } else {
         const elements = getSliderElements();
@@ -68,7 +68,7 @@ export const useSlider = ({
     const { scrollLeft, scrollWidth } = viewportRef.current;
 
     // If at the beginning, scroll to the end
-    if (scrollLeft <= 10) {
+    if (scrollLeft <= SLIDER_SCROLL_THRESHOLD_PX) {
       viewportRef.current.scrollTo({ left: scrollWidth, behavior: "smooth" });
       return;
     }
@@ -84,7 +84,7 @@ export const useSlider = ({
     const { scrollLeft, scrollWidth, clientWidth } = viewportRef.current;
 
     // If at the end, scroll back to start
-    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+    if (scrollLeft + clientWidth >= scrollWidth - SLIDER_SCROLL_THRESHOLD_PX) {
       viewportRef.current.scrollTo({ left: 0, behavior: "smooth" });
       return;
     }

@@ -1,11 +1,12 @@
 import { CHECKOUT_MESSAGES } from "@/consts/messages";
 import { VALIDATION_PATTERNS } from "@/utils/validationPatterns";
+import { FIELD_LIMITS } from "@/consts/config";
 
 export const checkoutValidationRules = {
   fullName: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_REQUIRED,
     minLength: {
-      value: 2,
+      value: FIELD_LIMITS.NAME_MIN,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_MIN,
     },
     pattern: {
@@ -13,7 +14,7 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_INVALID,
     },
     maxLength: {
-      value: 50,
+      value: FIELD_LIMITS.NAME_MAX,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_MAX,
     },
   },
@@ -24,14 +25,14 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_INVALID,
     },
     maxLength: {
-      value: 255,
+      value: FIELD_LIMITS.EMAIL_MAX,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_MAX,
     },
   },
   address: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_REQUIRED,
     minLength: {
-      value: 10,
+      value: FIELD_LIMITS.ADDRESS_MIN,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_MIN,
     },
     pattern: {
@@ -39,7 +40,7 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_INVALID,
     },
     maxLength: {
-      value: 500,
+      value: FIELD_LIMITS.ADDRESS_MAX,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_MAX,
     },
   },
@@ -50,7 +51,7 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_INVALID,
     },
     maxLength: {
-      value: 10,
+      value: FIELD_LIMITS.PHONE_MAX,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_MAX,
     },
   },
