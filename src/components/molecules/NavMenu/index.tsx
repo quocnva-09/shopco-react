@@ -23,19 +23,19 @@ export const NavMenu = ({
 }: NavMenuProps) => {
   return (
     <nav
-      className={clsx("nav", isOpenMobile && "is-open", className)}
+      className={clsx("nav", isOpenMobile && "nav--open", className)}
       {...rest}
     >
       <ul className="nav__menu">
         <li className="nav__menu-item">
           <Dropdown>
             <Dropdown.Trigger>
-              <div className="dropdown__trigger">
-                <Text className="dropdown__text">Shop</Text>
+              <div className="nav__shop-trigger">
+                <Text className="nav__shop-text">Shop</Text>
                 <Icon
                   svgName="icn-arrow-down"
-                  aria-label="icn-arrow-down"
-                  className="dropdown__icon"
+                  aria-hidden="true"
+                  className="nav__shop-icon"
                 />
               </div>
             </Dropdown.Trigger>

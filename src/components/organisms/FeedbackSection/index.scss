@@ -130,6 +130,9 @@
     // Each column = exactly 1/3 of inner container (minus 2 gaps)
     grid-auto-columns: var(--feedback-card-w);
     gap: var(--feedback-gap);
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     .review-card {
       pointer-events: auto;

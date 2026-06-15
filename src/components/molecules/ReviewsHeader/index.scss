@@ -1,47 +1,68 @@
 @use "@/styles/abstracts/variables" as *;
 @use "@/styles/abstracts/mixins" as *;
 
-.reviews__count {
-  font-size: $font-size-base;
-  font-weight: 400;
-  color: $text-muted;
-
-  @media (max-width: $breakpoint-tablet) {
-    font-size: $font-size-mobile;
-  }
-}
-
-.reviews__actions {
+.reviews-header {
   @include flex-center(row);
-  gap: $base-spacing;
-  position: relative;
-  flex-grow: 5;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
 
-  @media (max-width: $breakpoint-tablet) {
-    gap: $base-spacing * 0.5;
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    flex-grow: 5;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 20px;
+      margin: 0;
+    }
   }
-}
 
-.reviews__actions .button--dropdown {
-  color: $black-color;
-  padding: 15px 20px;
-}
+  &__count {
+    font-size: $font-size-base;
+    font-weight: 400;
+    color: $text-muted;
 
-// Hide the entire Dropdown flex item (not just the inner trigger)
-// so it doesn't contribute a gap on mobile
-.reviews__actions > *:has(.button--dropdown) {
-  @media (max-width: $breakpoint-tablet) {
-    display: none;
+    @media (max-width: $breakpoint-tablet) {
+      font-size: $font-size-mobile;
+    }
   }
-}
 
-.button--write-review {
-  padding: 15px 30px;
-  white-space: nowrap;
+  &__actions {
+    @include flex-center(row);
+    gap: $base-spacing;
+    position: relative;
+    flex-grow: 5;
 
-  @media (max-width: $breakpoint-tablet) {
-    padding: 12px 16px;
-    font-size: 12px;
+    @media (max-width: $breakpoint-tablet) {
+      gap: $base-spacing * 0.5;
+    }
+
+    // Hide the sort Dropdown on mobile so it doesn't contribute a gap
+    > *:has(.reviews-header__sort-btn) {
+      @media (max-width: $breakpoint-tablet) {
+        display: none;
+      }
+    }
+
+    // Reuse the shared mixin: positions dropdown__menu absolutely (overriding
+    // the mobile position:static from Dropdown/index.scss), sets shadows,
+    // and rotates reviews-header__sort-btn's SVG arrow on open.
+    @include dropdown-menu($sort-btn-class: 'reviews-header__sort-btn');
+  }
+
+  &__sort-btn {
+    padding: 15px 20px;
+  }
+
+  &__write-btn {
+    padding: 15px 30px;
+    white-space: nowrap;
+
+    @media (max-width: $breakpoint-tablet) {
+      padding: 12px 16px;
+      font-size: 12px;
+    }
   }
 }
 
@@ -51,3 +72,4 @@
     font-weight: 700;
   }
 }
+

@@ -59,27 +59,27 @@ export const ReviewsHeader = ({
   }));
 
   return (
-    <div className={clsx("tab-content__header", className)} {...rest}>
+    <div className={clsx("reviews-header", className)} {...rest}>
       <Heading
         as="h2"
         lineClamp={0}
         showTooltip={false}
-        className="tab-content__title"
+        className="reviews-header__title"
       >
         {ratingFilter != null ? `${ratingFilter}-Star Reviews` : "All Reviews"}{" "}
-        <Text as="span" className="reviews__count">
+        <Text as="span" className="reviews-header__count">
           ({reviewCount})
         </Text>
       </Heading>
 
-      <div className="reviews__actions">
+      <div className="reviews-header__actions">
         {/* Filter dropdown */}
         <Dropdown>
           <Dropdown.Trigger>
             <IconButton
               svgName="icn-filter"
               variant="circular"
-              className="button--filter"
+              className="reviews-header__filter-btn"
               aria-label="Filter reviews"
             />
           </Dropdown.Trigger>
@@ -98,7 +98,7 @@ export const ReviewsHeader = ({
             <Button
               variant="solid"
               colorScheme="grey"
-              className="button--dropdown"
+              className="reviews-header__sort-btn"
               icon={<Icon svgName="icn-arrow-down" />}
               iconPosition="right"
             >
@@ -114,7 +114,7 @@ export const ReviewsHeader = ({
           />
         </Dropdown>
 
-        <Button variant="solid" className="button--write-review" onClick={onWriteReviewClick}>
+        <Button variant="solid" className="reviews-header__write-btn" onClick={onWriteReviewClick}>
           Write a Review
         </Button>
       </div>

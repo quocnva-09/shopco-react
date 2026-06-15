@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
@@ -61,7 +61,7 @@ const Header = ({ title, className, hideCloseButton = false }: ModalHeaderProps)
   return (
     <div className={clsx("modal__header", className)}>
       {typeof title === "string" ? (
-        <Heading as="h3" className="modal__title">
+        <Heading as="h3" className="modal__title" id="modal-title">
           {title}
         </Heading>
       ) : (
@@ -99,6 +99,20 @@ const Root = ({
   className,
   closeOnOverlayClick = true,
 }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  // Focus management: store previous focus, move into modal on open, restore on close
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      // Defer focus so the DOM has fully painted before attempting focus
+      const timer = setTimeout(() => modalRef.current?.focus(), 0);
+      return () => clearTimeout(timer);
+    } else {
+      previousFocusRef.current?.focus();
+    }
+  }, [isOpen]);
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -137,8 +151,15 @@ const Root = ({
         onClick={handleOverlayClick}
         aria-modal="true"
         role="dialog"
+        aria-labelledby="modal-title"
       >
-        <div className={clsx("modal", className)}>{children}</div>
+        <div
+          className={clsx("modal", className)}
+          ref={modalRef}
+          tabIndex={-1}
+        >
+          {children}
+        </div>
       </div>
     </ModalContext.Provider>
   );

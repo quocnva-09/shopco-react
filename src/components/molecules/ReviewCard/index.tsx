@@ -83,7 +83,7 @@ export const ReviewCard = ({
         {isVerified && (
           <Icon
             svgName="icn-verified"
-            className="verified-icon"
+            className="review-card__verified-icon"
             color="green"
           />
         )}

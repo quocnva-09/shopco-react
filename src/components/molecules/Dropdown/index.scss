@@ -6,17 +6,6 @@
   &__trigger-wrapper {
     display: inline-block;
     cursor: pointer;
-
-    /* If the consumer provides a custom .dropdown__trigger */
-    .dropdown__trigger {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      &:hover {
-        opacity: 0.8;
-        transition: all 0.2s ease;
-      }
-    }
   }
 
   &__text {
@@ -24,7 +13,7 @@
     font-size: 16px;
   }
 
-  &.is-open &__icon {
+  &--open &__icon {
     transition: all 0.2s ease;
     transform: rotate(180deg);
   }

@@ -49,12 +49,12 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     color: $black-color;
     width: 100%;
 
-    // span:not(.verified-icon) {
+    // span:not(.review-card__verified-icon) {
     //   white-space: normal;
     //   overflow: hidden;
     //   text-overflow: ellipsis;
     // }
-    .verified-icon {
+    &__verified-icon {
       margin-top: 3px;
     }
 

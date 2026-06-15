@@ -39,7 +39,11 @@ export const CartItem = ({
   const { product, variant, quantity } = item;
 
   return (
-    <article className={clsx("cart-item", className)} {...rest}>
+    <article
+      className={clsx("cart-item", className)}
+      aria-label={`Cart item: ${product.name}`}
+      {...rest}
+    >
       <Image
         src={product.imgPath}
         alt={product.name}

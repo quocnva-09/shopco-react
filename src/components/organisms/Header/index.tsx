@@ -115,7 +115,7 @@ export const Header = ({
 
       {/* Backdrop overlay shown when the mobile menu is open */}
       <div
-        className={clsx("overlay", isMobileMenuOpen && "is-active")}
+        className={clsx("header__overlay", isMobileMenuOpen && "header__overlay--active")}
         onClick={closeMobileMenu}
       />
     </header>

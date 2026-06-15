@@ -78,7 +78,7 @@ export const ProductReviewsPanel = ({
 
   return (
     <>
-      <section className={clsx("tab-content", "reviews", className)} {...rest}>
+      <section className={clsx("tab-content", className)} {...rest}>
         <SectionStateWrapper
           error={error}
           isRetryable={isRetryable}
@@ -94,25 +94,25 @@ export const ProductReviewsPanel = ({
           />
 
           {isLoading ? (
-            <div className="reviews__grid">
+            <div className="product-reviews__grid">
               {Array.from({ length: 6 }).map((_, index) => (
                 <ReviewCardSkeleton key={`skeleton-${index}`} />
               ))}
             </div>
           ) : reviews.length > 0 ? (
-            <div className="reviews__grid">
+            <div className="product-reviews__grid">
               {reviews.map((review) => (
                 <ReviewCard key={review.id} review={review} showMenu />
               ))}
             </div>
           ) : (
-            <Text className="reviews__empty-message">No reviews found.</Text>
+            <Text className="product-reviews__empty-message">No reviews found.</Text>
           )}
 
           {hasMore && (
             <Button
               variant="outline"
-              className="btn--load-more"
+              className="product-reviews__load-more-btn"
               onClick={onLoadMore}
               disabled={isLoadingMore}
             >

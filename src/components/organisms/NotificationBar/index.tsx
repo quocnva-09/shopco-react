@@ -16,7 +16,7 @@ export const NotificationBar = ({
 }: NotificationBarProps) => {
 
   return (
-    <div className="notification-bar" {...rest}>
+    <div className="notification-bar" aria-live="polite" {...rest}>
       <div className={clsx('notification-bar__container', 'container')}>
         <Text as="p" className="notification-bar__text">
           Sign up and get 20% off to your first order.

@@ -100,7 +100,7 @@ export const CartSummary = ({
         <Link to={PATHS.CHECKOUT} state={{ fromCart: true }} className="cart-summary__link">
           <Button variant="solid" fullWidth className="cart-summary__checkout">
             Go to Checkout
-            <span className="cart-summary__checkout-arrow">→</span>
+            <span className="cart-summary__checkout-arrow" aria-hidden="true">→</span>
           </Button>
         </Link>
       )}

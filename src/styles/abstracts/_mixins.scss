@@ -53,10 +53,11 @@
   }
 }
 
-/// Applies full dropdown panel styles (position, animation, item & button styles).
-/// Accepts an optional $full-width flag: when true, the menu and trigger button
-/// stretch to 100% width (useful inside forms or modals).
-@mixin dropdown-menu($full-width: false) {
+/// Applies full dropdown panel styles (position, shadows, item & button styles).
+/// @param {Boolean} $full-width [false] - Stretches menu and trigger to 100% width.
+/// @param {String} $sort-btn-class ['button--dropdown'] - Class of the trigger button
+///   whose SVG arrow rotates 180deg when the dropdown opens.
+@mixin dropdown-menu($full-width: false, $sort-btn-class: "button--dropdown") {
   .dropdown {
     position: relative;
 
@@ -64,7 +65,7 @@
       width: 100%;
     }
 
-    &.is-open .button--dropdown svg {
+    &.dropdown--open .#{$sort-btn-class} svg {
       transition: transform 0.2s ease;
       transform: rotate(180deg);
     }
@@ -87,19 +88,6 @@
     } @else {
       min-width: 140px;
     }
-
-    display: none;
-    opacity: 0;
-    transform: translateY(-4px);
-    transition:
-      opacity 0.15s ease,
-      transform 0.15s ease;
-  }
-
-  .dropdown.is-open .dropdown__menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .dropdown__item {
@@ -116,7 +104,7 @@
     text-align: left;
     background: none;
     border: none;
-    padding: 6px;
+    padding: 8px 10px;
     font-size: 14px;
     color: $black-color;
     cursor: pointer;
@@ -128,7 +116,7 @@
     }
   }
 
-  .button--dropdown {
+  .#{$sort-btn-class} {
     color: $black-color;
 
     @if $full-width {

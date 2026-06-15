@@ -54,7 +54,7 @@ const Root = ({ children, className, ...rest }: DropdownProps) => {
   return (
     <DropdownContext.Provider value={{ isOpen, toggle, close }}>
       <div
-        className={clsx("dropdown", isOpen && "is-open", className)}
+        className={clsx("dropdown", isOpen && "dropdown--open", className)}
         ref={ref}
         {...rest}
       >

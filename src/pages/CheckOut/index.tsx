@@ -88,11 +88,13 @@ export const CheckOutPage = () => {
       <div className="checkout-page__layout">
         <div className="checkout-page__left">
           <section className="checkout-cart">
-            <div className="checkout-cart__items">
+            <ul className="checkout-cart__items" aria-label="Items in your order">
               {cartItems.map((item) => (
-                <CartItem key={item.productVariantId} item={item} isReadOnly />
+                <li key={item.productVariantId}>
+                  <CartItem item={item} isReadOnly />
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
         </div>
 

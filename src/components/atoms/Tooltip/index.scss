@@ -29,11 +29,11 @@
     left: -6px;
     width: calc(100% + 12px);
     font-weight: 700;
-    span:not(.verified-icon) {
+    span:not(.review-card__verified-icon) {
       word-break: break-word;
     }
 
-    .verified-icon {
+    .review-card__verified-icon {
       flex-shrink: 0;
     }
   }

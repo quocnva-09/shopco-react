@@ -71,9 +71,9 @@ const Content = ({ children }: ContentProps) => {
   return (
     <div className="feedback__slider">
       <div className="feedback__items" ref={viewportRef}>
-        <div className="feedback__track">
+        <ul className="feedback__track">
           {children}
-        </div>
+        </ul>
       </div>
     </div>
   );

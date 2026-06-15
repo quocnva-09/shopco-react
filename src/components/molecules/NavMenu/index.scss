@@ -14,7 +14,7 @@
     padding-top: 64px;
     overflow-y: auto;
 
-    &.is-open {
+    &--open {
       left: 0; // Slide menu into view when the open state is active
     }
   }
@@ -52,6 +52,32 @@
 
     @media (max-width: $breakpoint-tablet) {
       font-size: $font-size-mobile;
+    }
+  }
+
+  // Shop dropdown trigger — NavMenu owns these classes (not Dropdown)
+  &__shop-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+      transition: all 0.2s ease;
+    }
+  }
+
+  &__shop-text {
+    font-size: $font-size-base;
+    text-decoration: none;
+  }
+
+  &__shop-icon {
+    transition: all 0.2s ease;
+
+    .dropdown--open & {
+      transform: rotate(180deg);
     }
   }
 }

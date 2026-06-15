@@ -94,17 +94,17 @@ export const HomePage = () => {
             fallback={Array.from({
               length: FEEDBACK_CONSTS.SKELETON_COUNT,
             }).map((_, i) => (
-              <ReviewCardSkeleton key={`skeleton-${i}`} showDate={false} />
+              <li key={`skeleton-${i}`}>
+                <ReviewCardSkeleton showDate={false} />
+              </li>
             ))}
           >
             <Await resolve={reviews}>
               {(resolvedReviews) =>
                 resolvedReviews.map((review: any) => (
-                  <ReviewCard
-                    key={review.id}
-                    review={review}
-                    showDate={false}
-                  />
+                  <li key={review.id}>
+                    <ReviewCard review={review} showDate={false} />
+                  </li>
                 ))
               }
             </Await>
