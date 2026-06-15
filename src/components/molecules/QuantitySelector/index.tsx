@@ -79,7 +79,10 @@ export const QuantitySelector = ({
     setEditValue(null); // exit edit mode; displayValue re-derives from `value`
     if (propValue === undefined) setInternalValue(finalVal);
 
-    if (exceeded) onMaxExceeded?.();
+    if (exceeded) {
+      onMaxExceeded?.();
+      return;
+    }
     if (finalVal !== value) onChange?.(finalVal);
   };
 

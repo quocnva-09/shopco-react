@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import {
   useLocation,
   Navigate,
@@ -65,6 +64,7 @@ export const CheckOutPage = () => {
       paymentMethod: "cod" as const,
     },
     mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   if (!location.state?.fromCart) {
@@ -81,7 +81,10 @@ export const CheckOutPage = () => {
       <div className="checkout-page__layout">
         <div className="checkout-page__left">
           <section className="checkout-cart">
-            <ul className="checkout-cart__items" aria-label="Items in your order">
+            <ul
+              className="checkout-cart__items"
+              aria-label="Items in your order"
+            >
               {cartItems.map((item) => (
                 <li key={item.productVariantId}>
                   <CartItem item={item} isReadOnly />

@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState, type FieldError } from "react-hook-form";
 import clsx from "clsx";
 import { type ComponentPropsWithoutRef } from "react";
 import { Heading } from "@/components/atoms/Heading";
@@ -20,14 +20,44 @@ export const CheckoutShippingForm = ({
   if (!methods) {
     throw new Error(
       "<CheckoutShippingForm> must be rendered inside a <FormProvider>. " +
-      "Wrap it with <FormProvider {...methods}> in the parent page."
+        "Wrap it with <FormProvider {...methods}> in the parent page.",
     );
   }
 
-  const {
-    register,
-    formState: { errors },
-  } = methods;
+  const { register } = methods;
+  const { errors } = useFormState<CheckoutFormData>();
+
+  // Helper to render a standard labeled input field row — mirrors WriteReviewModal's renderInputField.
+  // `error` is passed explicitly at the call site (e.g. errors.fullName) so the useFormState
+  // Proxy registers a named subscription for that field in the component body.
+  const renderField = (
+    id: string,
+    label: string,
+    registerResult: ReturnType<typeof register>,
+    error: FieldError | undefined,
+    options: { type?: string; placeholder?: string } = {},
+  ) => (
+    <div className="checkout-form__field">
+      <label htmlFor={id} className="checkout-form__label">
+        {label}
+      </label>
+      <Input
+        id={id}
+        type={options.type}
+        placeholder={options.placeholder}
+        className={clsx(
+          "checkout-form__input",
+          error && "checkout-form__input--error",
+        )}
+        {...registerResult}
+      />
+      {error && (
+        <Text as="span" className="checkout-form__error">
+          {error.message}
+        </Text>
+      )}
+    </div>
+  );
 
   return (
     <section className={clsx("checkout-form", className)} {...rest}>
@@ -36,50 +66,26 @@ export const CheckoutShippingForm = ({
       </Heading>
 
       <div className="checkout-form__fields">
-        {/* Full Name */}
-        <div className="checkout-form__field">
-          <label htmlFor="fullName" className="checkout-form__label">
-            {CHECKOUT_MESSAGES.LABELS.FULL_NAME}
-          </label>
-          <Input
-            id="fullName"
-            placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.FULL_NAME}
-            className={clsx(
-              "checkout-form__input",
-              errors.fullName && "checkout-form__input--error",
-            )}
-            {...register("fullName", checkoutValidationRules.fullName)}
-          />
-          {errors.fullName && (
-            <Text as="span" className="checkout-form__error">
-              {errors.fullName.message as string}
-            </Text>
-          )}
-        </div>
+        {renderField(
+          "fullName",
+          CHECKOUT_MESSAGES.LABELS.FULL_NAME,
+          register("fullName", checkoutValidationRules.fullName),
+          errors.fullName,
+          { placeholder: CHECKOUT_MESSAGES.PLACEHOLDERS.FULL_NAME },
+        )}
 
-        {/* Email */}
-        <div className="checkout-form__field">
-          <label htmlFor="email" className="checkout-form__label">
-            {CHECKOUT_MESSAGES.LABELS.EMAIL}
-          </label>
-          <Input
-            id="email"
-            type="email"
-            placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.EMAIL}
-            className={clsx(
-              "checkout-form__input",
-              errors.email && "checkout-form__input--error",
-            )}
-            {...register("email", checkoutValidationRules.email)}
-          />
-          {errors.email && (
-            <Text as="span" className="checkout-form__error">
-              {errors.email.message as string}
-            </Text>
-          )}
-        </div>
+        {renderField(
+          "email",
+          CHECKOUT_MESSAGES.LABELS.EMAIL,
+          register("email", checkoutValidationRules.email),
+          errors.email,
+          {
+            type: "email",
+            placeholder: CHECKOUT_MESSAGES.PLACEHOLDERS.EMAIL,
+          },
+        )}
 
-        {/* Address */}
+        {/* Address — textarea, rendered inline (mirrors WriteReviewModal's comment field) */}
         <div className="checkout-form__field">
           <label htmlFor="address" className="checkout-form__label">
             {CHECKOUT_MESSAGES.LABELS.ADDRESS}
@@ -98,31 +104,18 @@ export const CheckoutShippingForm = ({
           />
           {errors.address && (
             <Text as="span" className="checkout-form__error">
-              {errors.address.message as string}
+              {errors.address?.message}
             </Text>
           )}
         </div>
 
-        {/* Phone Number */}
-        <div className="checkout-form__field">
-          <label htmlFor="phoneNumber" className="checkout-form__label">
-            {CHECKOUT_MESSAGES.LABELS.PHONE_NUMBER}
-          </label>
-          <Input
-            id="phoneNumber"
-            placeholder={CHECKOUT_MESSAGES.PLACEHOLDERS.PHONE_NUMBER}
-            className={clsx(
-              "checkout-form__input",
-              errors.phoneNumber && "checkout-form__input--error",
-            )}
-            {...register("phoneNumber", checkoutValidationRules.phoneNumber)}
-          />
-          {errors.phoneNumber && (
-            <Text as="span" className="checkout-form__error">
-              {errors.phoneNumber.message as string}
-            </Text>
-          )}
-        </div>
+        {renderField(
+          "phoneNumber",
+          CHECKOUT_MESSAGES.LABELS.PHONE_NUMBER,
+          register("phoneNumber", checkoutValidationRules.phoneNumber),
+          errors.phoneNumber,
+          { placeholder: CHECKOUT_MESSAGES.PLACEHOLDERS.PHONE_NUMBER },
+        )}
       </div>
     </section>
   );

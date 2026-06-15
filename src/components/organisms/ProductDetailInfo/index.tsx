@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { useState, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import clsx from "clsx";
 import { Heading } from "@/components/atoms/Heading";
 import { Rating } from "@/components/atoms/Rating";
@@ -113,21 +113,48 @@ const SizeSelection = () => {
 };
 
 const Actions = () => {
-  const { setQuantity, selectedVariant, maxAllowed, handleMaxExceeded } = useProductCartContext();
+  const { setQuantity, selectedVariant, maxAllowed, handleMaxExceeded } =
+    useProductCartContext();
+
+  const [isExceeded, setIsExceeded] = useState(false);
+
+  const handleChange = (value: number) => {
+    setIsExceeded(false);
+    setQuantity(value);
+  };
+
+  const handleExceeded = () => {
+    setIsExceeded(true);
+    handleMaxExceeded();
+  };
+
+  const handleSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isExceeded) {
+      // Prevent the form's onSubmit from firing while quantity is still out-of-range.
+      e.preventDefault();
+      e.stopPropagation();
+      handleMaxExceeded();
+      // Commit the clamped value so the NEXT submit goes through with the correct quantity.
+      // QuantitySelector's display already shows Math.max(1, maxAllowed); sync the context.
+      setQuantity(Math.max(1, maxAllowed));
+      setIsExceeded(false);
+    }
+  };
 
   return (
     <div className="product-detail__actions">
       <QuantitySelector
         className="product-detail__quantity"
-        onChange={setQuantity}
+        onChange={handleChange}
         max={maxAllowed}
-        onMaxExceeded={handleMaxExceeded}
+        onMaxExceeded={handleExceeded}
       />
       <Button
         variant="solid"
         type="submit"
         className="product-detail__btn"
         disabled={!selectedVariant}
+        onClick={handleSubmitClick}
       >
         Add to Cart
       </Button>

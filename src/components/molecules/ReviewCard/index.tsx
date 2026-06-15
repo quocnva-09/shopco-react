@@ -62,6 +62,7 @@ export const ReviewCard = ({
               itemClassName="dropdown__item"
               linkClassName="dropdown__item-btn"
               aria-label="Review options"
+              className="review-card__dropdown"
             />
           </Dropdown>
         )}

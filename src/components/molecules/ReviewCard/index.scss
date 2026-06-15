@@ -17,6 +17,11 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     padding: 24px;
   }
 
+  &__dropdown {
+    right: 0;
+    left: auto;
+  }
+
   &__header {
     @include flex-between;
     align-items: center;
@@ -90,5 +95,4 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
       font-size: $font-size-mobile;
     }
   }
-
 }
