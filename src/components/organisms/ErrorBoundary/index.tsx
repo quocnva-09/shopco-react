@@ -70,8 +70,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
           <div className="error-boundary__actions">
             <Button
-              colorScheme="danger"
-              variant="solid"
+              //colorScheme="danger"
+              variant="outline"
               onClick={this.handleReset}
             >
               Retry

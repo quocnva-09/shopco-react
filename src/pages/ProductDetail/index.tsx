@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, Suspense } from "react";
+import { useLoaderData, Await } from "react-router-dom";
 import "./index.scss";
 import { ProductGallery } from "@/components/molecules/ProductGallery";
 import { ProductGallerySkeleton } from "@/components/molecules/ProductGallerySkeleton";
@@ -17,7 +18,8 @@ import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 import { useParams } from "react-router-dom";
 import { useProductCollection } from "@/hooks/useProductCollection";
 import { useReviews } from "@/hooks/useReviews";
-import { useProduct } from "@/hooks/useProduct";
+import type { ProductData } from "@/types/product";
+import { ErrorBoundary } from "@/components/organisms/ErrorBoundary";
 import {
   SORT_ORDER,
   DEFAULT_SORT_ORDER,
@@ -28,6 +30,8 @@ import {
   PRODUCT_DETAIL_RELATED_PER_PAGE,
   PRODUCT_DETAIL_REVIEWS_LIMIT,
 } from "@/consts/config";
+
+import type { ProductDetailLoaderData } from "./loader";
 
 // Utility component to render a list of skeletons
 const ProductCardSkeletonList = ({ count }: { count: number }) => (
@@ -41,6 +45,32 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 );
 
 export const ProductDetailPage = () => {
+  const { product } = useLoaderData() as ProductDetailLoaderData;
+
+  return (
+    <ErrorBoundary className="error-boundary--center">
+      <Suspense
+        fallback={
+          <main className="container">
+            <Breadcrumb items={[]} />
+            <div className="product-detail">
+              <ProductGallerySkeleton />
+              <ProductDetailInfoSkeleton />
+            </div>
+          </main>
+        }
+      >
+        <Await resolve={product}>
+          {(resolvedProduct) => (
+            <ProductDetailContent product={resolvedProduct} />
+          )}
+        </Await>
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+const ProductDetailContent = ({ product }: { product: ProductData }) => {
   const { id } = useParams<{ id: string }>();
 
   const [sortOrder, setSortOrder] = useState<SortOrder>(DEFAULT_SORT_ORDER);
@@ -58,22 +88,17 @@ export const ProductDetailPage = () => {
   );
 
   const {
-    product,
-    isLoading: isLoadingProduct,
-    error: productError,
-    isRetryable: productRetryable,
-    retry: retryProduct,
-  } = useProduct(Number(id));
-
-  const {
     products: relatedProducts,
     isLoading: isLoadingRelatedProducts,
     error: relatedError,
     isRetryable: relatedRetryable,
     retry: retryRelated,
   } = useProductCollection(
-    { category_id: product?.category?.id, per_page: PRODUCT_DETAIL_RELATED_PER_PAGE },
-    { enabled: !isLoadingProduct && Boolean(product?.category?.id) },
+    {
+      category_id: product?.category?.id,
+      per_page: PRODUCT_DETAIL_RELATED_PER_PAGE,
+    },
+    { enabled: Boolean(product?.category?.id) },
   );
 
   const {
@@ -108,41 +133,28 @@ export const ProductDetailPage = () => {
     <main className="container">
       <Breadcrumb items={breadcrumbs} />
 
-      <SectionStateWrapper
-        error={productError}
-        isRetryable={productRetryable}
-        onRetry={retryProduct}
-      >
-        <div className="product-detail">
-          {isLoadingProduct ? (
-            <>
-              <ProductGallerySkeleton />
-              <ProductDetailInfoSkeleton />
-            </>
-          ) : product ? (
-            <>
-              <ProductGallery
-                images={product.images}
-                productName={product.name}
-              />
-              <ProductDetailInfo product={product}>
-                <ProductDetailInfo.Header name={product.name} ratingAvg={product.ratingAvg} />
-                <ProductDetailInfo.Price
-                  currentPrice={product.currentPrice}
-                  originalPrice={product.originalPrice}
-                  discountPercent={product.discountPercent}
-                />
-                <ProductDetailInfo.Description>{product.description}</ProductDetailInfo.Description>
-                <ProductDetailInfo.Form>
-                  <ProductDetailInfo.ColorSelection />
-                  <ProductDetailInfo.SizeSelection />
-                  <ProductDetailInfo.Actions />
-                </ProductDetailInfo.Form>
-              </ProductDetailInfo>
-            </>
-          ) : null}
-        </div>
-      </SectionStateWrapper>
+      <div className="product-detail">
+        <ProductGallery images={product.images} productName={product.name} />
+        <ProductDetailInfo product={product}>
+          <ProductDetailInfo.Header
+            name={product.name}
+            ratingAvg={product.ratingAvg}
+          />
+          <ProductDetailInfo.Price
+            currentPrice={product.currentPrice}
+            originalPrice={product.originalPrice}
+            discountPercent={product.discountPercent}
+          />
+          <ProductDetailInfo.Description>
+            {product.description}
+          </ProductDetailInfo.Description>
+          <ProductDetailInfo.Form>
+            <ProductDetailInfo.ColorSelection />
+            <ProductDetailInfo.SizeSelection />
+            <ProductDetailInfo.Actions />
+          </ProductDetailInfo.Form>
+        </ProductDetailInfo>
+      </div>
 
       {/* More Info Tabs */}
       <ProductMoreInfoSection
@@ -176,13 +188,20 @@ export const ProductDetailPage = () => {
         isRetryable={relatedRetryable}
         onRetry={retryRelated}
       >
-        <ProductCollectionSection className="product-page__product-collections" showButton={false}>
+        <ProductCollectionSection
+          className="product-page__product-collections"
+          showButton={false}
+        >
           <ProductCollectionSection.Header title="YOU MAY ALSO LIKE" />
-          <ProductCollectionSection.Content enableSlider={true} showArrows={true} autoplay={true}>
+          <ProductCollectionSection.Content
+            enableSlider={true}
+            showArrows={true}
+            autoplay={true}
+          >
             {isLoadingRelatedProducts ? (
               <ProductCardSkeletonList count={4} />
             ) : (
-              relatedProducts.map(p => (
+              relatedProducts.map((p) => (
                 <li key={p.id} className="product-collection__item">
                   <ProductCard product={p} />
                 </li>

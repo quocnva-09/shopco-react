@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
+import { ErrorBoundary } from "@/components/organisms/ErrorBoundary";
 import { BannerSection } from "@/components/organisms/BannerSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
 import { StyleCategorySection } from "@/components/organisms/StyleCategorySection";
@@ -35,7 +36,6 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 );
 
 export const HomePage = () => {
-
   const { newArrivals, topSellings, reviews } =
     useLoaderData() as HomeLoaderData;
 
@@ -55,38 +55,52 @@ export const HomePage = () => {
       <div className="container">
         <ProductCollectionSection className="home__product-collection">
           <ProductCollectionSection.Header title="NEW ARRIVALS" />
-          <ProductCollectionSection.Content>
-            <Suspense fallback={<ProductCardSkeletonList count={4} />}>
-              <Await resolve={newArrivals}>
-                {(resolvedNewArrivals) =>
-                  (resolvedNewArrivals as ProductCardData[]).map((product) => (
-                    <li key={product.id} className="product-collection__item">
-                      <ProductCard product={product} />
-                    </li>
-                  ))
-                }
-              </Await>
-            </Suspense>
-          </ProductCollectionSection.Content>
-          <ProductCollectionSection.Footer label="View All" />
+          <ErrorBoundary>
+            <ProductCollectionSection.Content>
+              <Suspense fallback={<ProductCardSkeletonList count={4} />}>
+                <Await resolve={newArrivals}>
+                  {(resolvedNewArrivals) =>
+                    (resolvedNewArrivals as ProductCardData[]).map(
+                      (product) => (
+                        <li
+                          key={product.id}
+                          className="product-collection__item"
+                        >
+                          <ProductCard product={product} />
+                        </li>
+                      ),
+                    )
+                  }
+                </Await>
+              </Suspense>
+            </ProductCollectionSection.Content>
+            <ProductCollectionSection.Footer label="View All" />
+          </ErrorBoundary>
         </ProductCollectionSection>
 
         <ProductCollectionSection>
           <ProductCollectionSection.Header title="TOP SELLING" />
-          <ProductCollectionSection.Content>
-            <Suspense fallback={<ProductCardSkeletonList count={4} />}>
-              <Await resolve={topSellings}>
-                {(resolvedTopSellings) =>
-                  (resolvedTopSellings as ProductCardData[]).map((product) => (
-                    <li key={product.id} className="product-collection__item">
-                      <ProductCard product={product} />
-                    </li>
-                  ))
-                }
-              </Await>
-            </Suspense>
-          </ProductCollectionSection.Content>
-          <ProductCollectionSection.Footer label="View All" />
+          <ErrorBoundary>
+            <ProductCollectionSection.Content>
+              <Suspense fallback={<ProductCardSkeletonList count={4} />}>
+                <Await resolve={topSellings}>
+                  {(resolvedTopSellings) =>
+                    (resolvedTopSellings as ProductCardData[]).map(
+                      (product) => (
+                        <li
+                          key={product.id}
+                          className="product-collection__item"
+                        >
+                          <ProductCard product={product} />
+                        </li>
+                      ),
+                    )
+                  }
+                </Await>
+              </Suspense>
+            </ProductCollectionSection.Content>
+            <ProductCollectionSection.Footer label="View All" />
+          </ErrorBoundary>
         </ProductCollectionSection>
 
         <StyleCategorySection title="BROWSE BY DRESS STYLE" />
@@ -94,27 +108,29 @@ export const HomePage = () => {
 
       <FeedbackSection>
         <FeedbackSection.Header title={FEEDBACK_CONSTS.DEFAULT_TITLE} />
-        <FeedbackSection.Content>
-          <Suspense
-            fallback={Array.from({
-              length: FEEDBACK_CONSTS.SKELETON_COUNT,
-            }).map((_, i) => (
-              <li key={`skeleton-${i}`}>
-                <ReviewCardSkeleton showDate={false} />
-              </li>
-            ))}
-          >
-            <Await resolve={reviews}>
-               {(resolvedReviews) =>
-                (resolvedReviews as ReviewData[]).map((review) => (
-                  <li key={review.id}>
-                    <ReviewCard review={review} showDate={false} />
-                  </li>
-                ))
-              }
-            </Await>
-          </Suspense>
-        </FeedbackSection.Content>
+        <ErrorBoundary className="error-boundary--center">
+          <FeedbackSection.Content>
+            <Suspense
+              fallback={Array.from({
+                length: FEEDBACK_CONSTS.SKELETON_COUNT,
+              }).map((_, i) => (
+                <li key={`skeleton-${i}`}>
+                  <ReviewCardSkeleton showDate={false} />
+                </li>
+              ))}
+            >
+              <Await resolve={reviews}>
+                {(resolvedReviews) =>
+                  (resolvedReviews as ReviewData[]).map((review) => (
+                    <li key={review.id}>
+                      <ReviewCard review={review} showDate={false} />
+                    </li>
+                  ))
+                }
+              </Await>
+            </Suspense>
+          </FeedbackSection.Content>
+        </ErrorBoundary>
       </FeedbackSection>
     </main>
   );

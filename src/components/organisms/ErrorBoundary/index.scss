@@ -10,18 +10,18 @@
   @include flex-center(column);
 
   gap: $base-spacing;
-  max-width: 480px;
-  margin: 40px auto;
   padding: $base-spacing * 2;
-  border: 2px solid $color-danger;
-  border-radius: 12px;
-  background-color: $color-danger-surface;
+  // border: 2px solid $color-danger;
+  // border-radius: 12px;
+  // background-color: $color-danger-surface;
   text-align: center;
   font-family: $font-family-base;
+  align-self: stretch;
+  max-width: $max-width;
 
   // --- Icon ---
   &__icon {
-    font-size: 2.5rem;
+    font-size: 24px;
     line-height: 1;
   }
 
@@ -30,23 +30,28 @@
   &__title {
     color: $color-danger;
     margin: 0;
+    font-size: 24px;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 18px;
+    }
   }
 
   // --- Error detail box ---
   &__detail {
-    width: 100%;
-    padding: 8px 12px;
-    background-color: $white-color;
-    border-radius: 6px;
     font-family: $font-family-base;
-    font-size: 0.875rem;
+    font-size: 16px;
     color: $text-muted;
-    text-align: left;
+    text-align: center;
     word-break: break-word;
   }
 
   // --- Action area (button) ---
   &__actions {
     margin-top: 4px;
+  }
+
+  &--center {
+    margin-inline: auto;
   }
 }
