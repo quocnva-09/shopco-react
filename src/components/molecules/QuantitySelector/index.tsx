@@ -1,4 +1,4 @@
-import { useState, useEffect, type ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
@@ -29,12 +29,11 @@ export const QuantitySelector = ({
   const [internalValue, setInternalValue] = useState(defaultValue);
   const value = propValue !== undefined ? propValue : internalValue;
 
-  const [inputValue, setInputValue] = useState<string | number>(value);
+  // null = not editing (show committed value); string = user is mid-edit (show raw)
+  const [editValue, setEditValue] = useState<string | null>(null);
 
-  // Sync internal input text when true value changes
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+  // Derived at render — no useEffect needed
+  const displayValue = editValue ?? String(value);
 
   const handleDecrease = () => {
     const next = value > min ? value - 1 : value;
@@ -53,43 +52,35 @@ export const QuantitySelector = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    if (val === "") {
-      setInputValue("");
-      return;
-    }
-    const num = parseInt(val, 10);
-    if (!isNaN(num)) {
-      setInputValue(num);
-      // Chỉ báo ra ngoài nếu giá trị >= min
-      if (num >= min) {
-        if (propValue === undefined) setInternalValue(num);
-        onChange?.(num);
-      }
+    const raw = e.target.value;
+    setEditValue(raw); // store raw string for display only
+    if (raw === "") return;
+    const num = parseInt(raw, 10);
+    // Only commit valid-range values during typing — blur handles clamping
+    if (!isNaN(num) && num >= min && (max === undefined || num <= max)) {
+      if (propValue === undefined) setInternalValue(num);
+      onChange?.(num);
     }
   };
 
   const handleBlur = () => {
-    let finalVal = inputValue === "" ? min : parseInt(String(inputValue), 10);
+    const raw = editValue ?? "";
+    let finalVal = raw === "" ? min : parseInt(raw, 10);
     let exceeded = false;
 
     if (isNaN(finalVal) || finalVal < min) {
       finalVal = min;
     } else if (max !== undefined && finalVal > max) {
-      finalVal = max;
+      // Guard against max < min (e.g. max=0 when cart is full) — never go below min
+      finalVal = Math.max(min, max);
       exceeded = true;
     }
 
-    setInputValue(finalVal);
+    setEditValue(null); // exit edit mode; displayValue re-derives from `value`
     if (propValue === undefined) setInternalValue(finalVal);
 
-    if (exceeded) {
-      onMaxExceeded?.();
-    }
-
-    if (finalVal !== value) {
-      onChange?.(finalVal);
-    }
+    if (exceeded) onMaxExceeded?.();
+    if (finalVal !== value) onChange?.(finalVal);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -110,9 +101,9 @@ export const QuantitySelector = ({
       <input
         type="number"
         className="quantity-selector__value"
-        value={inputValue}
+        value={displayValue}
         min={min}
-        style={{ width: `${Math.max(String(inputValue).length, 1)}ch` }}
+        style={{ width: `${Math.max(String(displayValue).length, 1)}ch` }}
         aria-label="Quantity"
         onChange={handleChange}
         onBlur={handleBlur}

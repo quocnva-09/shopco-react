@@ -1,4 +1,5 @@
 import { CHECKOUT_MESSAGES } from "@/consts/messages";
+import { VALIDATION_PATTERNS } from "@/utils/validationPatterns";
 
 export const checkoutValidationRules = {
   fullName: {
@@ -8,7 +9,7 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_MIN,
     },
     pattern: {
-      value: /^[\p{L}\s]+$/u,
+      value: VALIDATION_PATTERNS.fullName,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.FULL_NAME_INVALID,
     },
     maxLength: {
@@ -19,7 +20,7 @@ export const checkoutValidationRules = {
   email: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_REQUIRED,
     pattern: {
-      value: /\S+@\S+\.\S+/,
+      value: VALIDATION_PATTERNS.email,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.EMAIL_INVALID,
     },
     maxLength: {
@@ -34,7 +35,7 @@ export const checkoutValidationRules = {
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_MIN,
     },
     pattern: {
-      value: /^[\p{L}0-9\s,.\-/]+$/u,
+      value: VALIDATION_PATTERNS.address,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.ADDRESS_INVALID,
     },
     maxLength: {
@@ -45,7 +46,7 @@ export const checkoutValidationRules = {
   phoneNumber: {
     required: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_REQUIRED,
     pattern: {
-      value: /^\+?[0-9\s\-\(\)]+$/,
+      value: VALIDATION_PATTERNS.phoneVN,
       message: CHECKOUT_MESSAGES.ERROR_MESSAGES.PHONE_NUMBER_INVALID,
     },
     maxLength: {

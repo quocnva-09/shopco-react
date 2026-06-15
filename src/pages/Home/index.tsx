@@ -18,6 +18,9 @@ import {
   HERO_EFFECTS,
 } from "@/consts/homeData";
 import { BrandLogoBar } from "@/components/molecules/BrandLogoBar";
+import type { HomeLoaderData } from "./loader";
+import type { ProductCardData } from "@/types/product";
+import type { ReviewData } from "@/types/review";
 import "./index.scss";
 
 // Utility component to render a list of skeletons
@@ -32,7 +35,9 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 );
 
 export const HomePage = () => {
-  const { newArrivals, topSellings, reviews } = useLoaderData() as any;
+
+  const { newArrivals, topSellings, reviews } =
+    useLoaderData() as HomeLoaderData;
 
   return (
     <main>
@@ -54,7 +59,7 @@ export const HomePage = () => {
             <Suspense fallback={<ProductCardSkeletonList count={4} />}>
               <Await resolve={newArrivals}>
                 {(resolvedNewArrivals) =>
-                  resolvedNewArrivals.map((product: any) => (
+                  (resolvedNewArrivals as ProductCardData[]).map((product) => (
                     <li key={product.id} className="product-collection__item">
                       <ProductCard product={product} />
                     </li>
@@ -72,7 +77,7 @@ export const HomePage = () => {
             <Suspense fallback={<ProductCardSkeletonList count={4} />}>
               <Await resolve={topSellings}>
                 {(resolvedTopSellings) =>
-                  resolvedTopSellings.map((product: any) => (
+                  (resolvedTopSellings as ProductCardData[]).map((product) => (
                     <li key={product.id} className="product-collection__item">
                       <ProductCard product={product} />
                     </li>
@@ -100,8 +105,8 @@ export const HomePage = () => {
             ))}
           >
             <Await resolve={reviews}>
-              {(resolvedReviews) =>
-                resolvedReviews.map((review: any) => (
+               {(resolvedReviews) =>
+                (resolvedReviews as ReviewData[]).map((review) => (
                   <li key={review.id}>
                     <ReviewCard review={review} showDate={false} />
                   </li>

@@ -3,12 +3,14 @@ import { useSubmit } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
 
+export type PaymentMethod = "cod" | "bank_transfer" | "credit_card";
+
 export interface CheckoutFormData {
   fullName: string;
   email: string;
   address: string;
   phoneNumber: string;
-  paymentMethod: string;
+  paymentMethod: PaymentMethod;
 }
 
 export const useCheckoutSubmit = () => {

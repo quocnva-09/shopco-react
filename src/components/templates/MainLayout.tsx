@@ -5,7 +5,7 @@ import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { NotificationBar } from "@/components/organisms/NotificationBar";
 import { Spinner } from "@/components/atoms/Spinner";
-import type { RootState } from "@/store/store";
+import { selectCartItemCount } from "@/store/selectors";
 import { PATHS } from "@/routes";
 import "./MainLayout.scss";
 
@@ -19,10 +19,7 @@ export const MainLayout = () => {
   const { pathname } = useLocation();
   const isHomePage = pathname === PATHS.HOME;
 
-  // Lifted from Header organism — the template is the correct owner of layout-wide Redux state
-  const cartItemCount = useSelector((state: RootState) =>
-    state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0)
-  );
+  const cartItemCount = useSelector(selectCartItemCount);
 
   useEffect(() => {
     window.scrollTo(0, 0);

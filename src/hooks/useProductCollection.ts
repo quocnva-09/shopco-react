@@ -1,11 +1,9 @@
+import { useCallback, useEffect } from "react";
 import { ProductService } from "@/services/product.service";
 import type { ProductParams } from "@/types/api/product.api";
 import type { ProductCardData } from "@/types/product";
-import { isRetryableErrorKind } from "@/consts/errorKinds";
-import { isApiError } from "@/utils/ApiError";
 import { mapProductCardData } from "@/utils/mappers/product.mapper";
-import { useCallback, useEffect, useState } from "react";
-import { DEFAULT_ERROR_MESSAGE } from "@/consts/errorCodes";
+import { useAsync } from "@/hooks/useAsync";
 
 type UseProductCollectionOptions = {
   enabled?: boolean;
@@ -16,42 +14,24 @@ export const useProductCollection = (
   options: UseProductCollectionOptions = {},
 ) => {
   const { enabled = true } = options;
-  const [products, setProducts] = useState<ProductCardData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isRetryable, setIsRetryable] = useState<boolean>(false);
 
-  const fetchProductCollection = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
+  const fetcher = useCallback(
+    () =>
+      ProductService.getProducts(params).then((r) =>
+        r.data.map(mapProductCardData),
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [JSON.stringify(params)],
+  );
 
-    try {
-      const response = await ProductService.getProducts(params);
-      const mappedData = response.data.map(mapProductCardData);
-      setProducts(mappedData);
-    } catch (err) {
-      if (isApiError(err)) {
-        setError(err.uiMessage);
-        setIsRetryable(isRetryableErrorKind(err.kind));
-      } else {
-        setError(DEFAULT_ERROR_MESSAGE);
-        setIsRetryable(false);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [JSON.stringify(params)]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { data, execute, ...rest } = useAsync<ProductCardData[]>(fetcher);
+  const products = data ?? [];
 
   useEffect(() => {
     if (!enabled) return;
-    fetchProductCollection();
-  }, [enabled, fetchProductCollection]);
+    execute();
+  }, [enabled, execute]);
 
-  return {
-    products,
-    isLoading,
-    error,
-    isRetryable,
-    retry: fetchProductCollection,
-  };
+  return { products, retry: execute, ...rest };
 };
+

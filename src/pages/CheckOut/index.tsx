@@ -15,8 +15,7 @@ import { CartSummary } from "@/components/organisms/CartSummary";
 import { CheckoutShippingForm } from "@/components/organisms/CheckoutShippingForm";
 import { CheckoutPaymentMethod } from "@/components/organisms/CheckoutPaymentMethod";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
-import type { RootState } from "@/store/store";
-import { buildLineItems } from "@/utils/cart";
+import { useCartSummary } from "@/hooks/useCartSummary";
 import {
   useCheckoutSubmit,
   type CheckoutFormData,
@@ -54,11 +53,8 @@ export const CheckOutPage = () => {
   const navigation = useNavigation();
   const isLoading = navigation.state === "submitting";
 
-  const { cartItems, deliveryFee, discount } = useSelector(
-    (state: RootState) => state.cart,
-  );
-
   const { onSubmit } = useCheckoutSubmit();
+  const { cartItems, lineItems, total } = useCartSummary();
 
   const methods = useForm<CheckoutFormData>({
     defaultValues: {
@@ -66,13 +62,10 @@ export const CheckOutPage = () => {
       email: "",
       address: "",
       phoneNumber: "",
-      paymentMethod: "cod",
+      paymentMethod: "cod" as const,
     },
     mode: "onChange",
   });
-
-  const lineItems = buildLineItems(cartItems, deliveryFee, discount);
-  const total = lineItems.reduce((sum, item) => sum + item.value, 0);
 
   if (!location.state?.fromCart) {
     return <Navigate to={PATHS.CART} replace />;

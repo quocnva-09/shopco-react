@@ -1,4 +1,5 @@
 import { WRITE_REVIEW_MESSAGES } from "@/consts/messages";
+import { VALIDATION_PATTERNS } from "@/utils/validationPatterns";
 
 export const writeReviewValidationRules = {
   orderId: {
@@ -11,7 +12,7 @@ export const writeReviewValidationRules = {
   guestName: {
     required: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_REQUIRED,
     pattern: {
-      value: /^[\p{L}\s]+$/u,
+      value: VALIDATION_PATTERNS.fullName,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_NAME_INVALID,
     },
     maxLength: {
@@ -22,7 +23,7 @@ export const writeReviewValidationRules = {
   guestEmail: {
     required: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_REQUIRED,
     pattern: {
-      value: /\S+@\S+\.\S+/,
+      value: VALIDATION_PATTERNS.email,
       message: WRITE_REVIEW_MESSAGES.ERRORS.GUEST_EMAIL_INVALID,
     },
     maxLength: {

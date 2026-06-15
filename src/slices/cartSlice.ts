@@ -3,20 +3,17 @@ import type { CartItem } from "@/types/cart";
 import type { AddToCartPayload } from "@/types/payload/cart.payload";
 import { MAX_PER_ITEM, MAX_TOTAL_QUANTITY } from "@/consts/config";
 
-interface InitialState {
+// subtotal and total are derived values — computed by selectors in store/selectors.ts
+export interface CartState {
   cartItems: CartItem[];
-  subtotal: number;
   discount: number;
   deliveryFee: number;
-  total: number;
 }
 
-const initialState: InitialState = {
+const initialState: CartState = {
   cartItems: [],
-  subtotal: 0,
   discount: 0,
   deliveryFee: 15,
-  total: 0,
 };
 
 const cartSlice = createSlice({
@@ -34,12 +31,12 @@ const cartSlice = createSlice({
         const remainingGlobal = MAX_TOTAL_QUANTITY - totalQuantity;
         const remainingItem = MAX_PER_ITEM - existingItem.quantity;
         const maxAddable = Math.max(0, Math.min(remainingGlobal, remainingItem));
-        
+
         existingItem.quantity += Math.min(payload.quantity, maxAddable);
       } else {
         const remainingGlobal = MAX_TOTAL_QUANTITY - totalQuantity;
         const maxAddable = Math.max(0, Math.min(remainingGlobal, MAX_PER_ITEM));
-        
+
         payload.quantity = Math.min(payload.quantity, maxAddable);
         if (payload.quantity > 0) {
           state.cartItems.push(payload);
@@ -72,9 +69,7 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.cartItems = [];
-      state.subtotal = 0;
       state.discount = 0;
-      state.total = 0;
     },
   },
 });
@@ -83,3 +78,4 @@ export const { addToCart, updateQuantity, removeCartItem, clearCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
+
