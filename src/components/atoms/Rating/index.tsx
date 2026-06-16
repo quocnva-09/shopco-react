@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import './index.scss';
 
 export type RatingVariant = 'default' | 'row';
-export type RatingSize = 'sm' | 'md' | 'lg';
+export type RatingSize = 'xs' | 'sm' | 'md' | 'lg';
 
 export type RatingProps = ComponentPropsWithoutRef<'div'> & {
   value: number;

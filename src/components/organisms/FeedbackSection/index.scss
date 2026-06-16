@@ -77,14 +77,22 @@
 
     &::before {
       left: 0;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.9),
+        transparent
+      );
       mask-image: linear-gradient(to right, black, transparent);
       -webkit-mask-image: linear-gradient(to right, black, transparent);
     }
 
     &::after {
       right: 0;
-      background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+      background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0.9),
+        transparent
+      );
       mask-image: linear-gradient(to left, black, transparent);
       -webkit-mask-image: linear-gradient(to left, black, transparent);
     }
@@ -107,7 +115,7 @@
       display: none;
     }
 
-    @media (max-width: $bp-lg) {
+    @media (max-width: $bp-xl) {
       padding-inline: 16px;
       scroll-padding-inline: 16px;
     }
@@ -132,8 +140,8 @@
       scroll-snap-align: center;
     }
 
-    // Landscape tablet (≤ $bp-lg): 3 cards — 100vw minus 2×16px padding and 2×16px gaps
-    @media (max-width: $bp-lg) {
+    // Landscape tablet (≤ $bp-xl): 3 cards — 100vw minus 2×16px padding and 2×16px gaps
+    @media (max-width: $bp-xl) {
       gap: 16px;
 
       .review-card {
@@ -160,4 +168,4 @@
       }
     }
   }
-}
+}

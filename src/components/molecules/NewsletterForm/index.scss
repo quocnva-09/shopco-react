@@ -2,7 +2,7 @@
 
 .newsletter-form {
   width: 100%;
-  max-width: 390px;
+  max-width: 349px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -39,7 +39,9 @@
     padding-block: 12px;
     white-space: nowrap;
     font-weight: 500;
+
+    @media (max-width: $bp-sm) {
+      padding-block: 11px;
+    }
   }
 }
-
-

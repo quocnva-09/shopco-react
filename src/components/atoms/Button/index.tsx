@@ -42,7 +42,7 @@ export const Button = ({
         <span className="button__icon-wrapper">{icon}</span>
       )}
 
-      {children && <span>{children}</span>}
+      {children && <span className="button__text">{children}</span>}
 
       {icon && iconPosition === "right" && (
         <span className="button__icon-wrapper">{icon}</span>

@@ -39,9 +39,10 @@
   // --- VARIANT FOR PRODUCT DETAIL (`isDetail={true}`) ---
   &--detail {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     font-size: 32px; // Scale up font-size for the detail variant
     gap: 12px;
+    line-height: 100%;
 
     @media (max-width: $bp-sm) {
       font-size: 24px;

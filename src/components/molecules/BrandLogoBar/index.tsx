@@ -11,6 +11,12 @@ const defaultLogos = [
   { src: "/images/logo-ck.svg", alt: "Calvin Klein" },
 ];
 
+const toSlug = (str: string) =>
+  str
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+
 export type BrandLogoData = {
   src: string;
   alt: string;
@@ -31,7 +37,7 @@ export const BrandLogoBar = ({
         {logos.map((logo) => (
           <figure key={logo.alt}>
             <Image
-              className="brand-logo__item"
+              className={clsx("brand-logo__item", `brand-logo__item--${toSlug(logo.alt)}`)}
               src={logo.src}
               alt={logo.alt}
               renderWrapper={false}

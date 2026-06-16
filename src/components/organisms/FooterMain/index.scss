@@ -7,17 +7,17 @@
   padding-block: 50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  @media (max-width: $bp-sm) {
+  @media (max-width: $bp-md) {
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     padding-top: 0;
-    padding-bottom: 40px;
+    padding-bottom: 38px;
   }
 
   &__brand {
     max-width: 280px;
 
-    @media (max-width: $bp-sm) {
+    @media (max-width: $bp-md) {
       max-width: 100%;
     }
   }
@@ -30,16 +30,23 @@
     line-height: 100%;
     width: fit-content;
     overflow: visible;
+
+    @media (max-width: $bp-sm) {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
   }
 
   &__desc {
     color: $text-muted;
-    line-height: 1.6;
+    line-height: 22px;
     margin-bottom: 35px;
     font-size: 14px;
 
-    @media (max-width: $bp-sm) {
+    @media (max-width: $bp-md) {
       width: 100%;
+      line-height: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -49,10 +56,10 @@
     justify-content: space-between;
     gap: 20px;
 
-    @media (max-width: $bp-sm) {
+    @media (max-width: $bp-md) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px 16px;
+      gap: 23px 14px;
     }
   }
 }

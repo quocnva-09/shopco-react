@@ -10,8 +10,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   padding: 28px 32px;
   display: flex;
   flex-direction: column;
-  max-width: auto;
-  height: auto;
+  // justify-content: space-between;
 
   @media (max-width: $bp-sm) {
     padding: 24px;
@@ -53,6 +52,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
     font-weight: 700;
     color: $black-color;
     width: 100%;
+    line-height: 22px;
 
     // span:not(.review-card__verified-icon) {
     //   white-space: normal;
@@ -65,6 +65,7 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
 
     @media (max-width: $bp-sm) {
       margin-top: 12px;
+      font-size: 16px;
     }
   }
 
@@ -86,12 +87,13 @@ $-icn-3-dot: url("/images/icn-3-dot.svg") no-repeat center/cover;
   }
 
   &__date {
-    margin-top: 24px;
+    margin-top: auto; // pushes date to the bottom of the flex column
     font-size: $font-size-base;
     font-weight: 500;
     color: $text-muted;
+
     @media (max-width: $bp-sm) {
-      margin-top: 16px;
+      padding-top: 16px;
       font-size: $font-size-mobile;
     }
   }

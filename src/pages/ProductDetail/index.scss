@@ -2,12 +2,12 @@
 
 .product-detail {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr auto;
   gap: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
 
   // Tablet (≤ $bp-md): collapse to single column, gallery stays horizontal
-  @media (max-width: $bp-md) {
+  @media (max-width: $bp-lg) {
     grid-template-columns: 1fr;
     gap: 24px;
   }

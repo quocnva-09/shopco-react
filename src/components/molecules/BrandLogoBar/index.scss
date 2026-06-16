@@ -1,4 +1,4 @@
-@use '@/styles/abstracts/variables' as *;
+@use "@/styles/abstracts/variables" as *;
 
 .brand-logo-wrapper {
   background-color: $black-color;
@@ -17,7 +17,7 @@
   margin: 0 auto;
   gap: 106px;
 
-  @media (max-width: $bp-lg) {
+  @media (max-width: $bp-xl) {
     justify-content: center;
     gap: 72px;
   }
@@ -28,13 +28,54 @@
   }
 
   &__item {
-    max-height: 34px;
     width: auto;
     object-fit: contain;
     filter: brightness(0) invert(1); // White logo on black background
+  }
 
-    @media (max-width: $bp-sm) {
-      max-height: 26px;
+  // ── Per-logo desktop sizes ──────────────────────────────────────────────
+  &__item--versace {
+    width: 166px;
+    height: 33px;
+  }
+  &__item--zara {
+    width: 91px;
+    height: 38px;
+  }
+  &__item--gucci {
+    width: 156px;
+    height: 36px;
+  }
+  &__item--prada {
+    width: 194px;
+    height: 32px;
+  }
+  &__item--calvin-klein {
+    width: 206px;
+    height: 33px;
+  }
+
+  // ── Per-logo mobile sizes ───────────────────────────────────────────────
+  @media (max-width: $bp-sm) {
+    &__item--versace {
+      width: 116px;
+      height: 23px;
+    }
+    &__item--zara {
+      width: 63px;
+      height: 26px;
+    }
+    &__item--gucci {
+      width: 109px;
+      height: 25px;
+    }
+    &__item--prada {
+      width: 127px;
+      height: 21px;
+    }
+    &__item--calvin-klein {
+      width: 134px;
+      height: 21px;
     }
   }
 }

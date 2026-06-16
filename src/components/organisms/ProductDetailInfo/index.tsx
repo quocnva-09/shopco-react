@@ -66,9 +66,16 @@ const Price = ({
 );
 
 const Description = ({ children }: { children: ReactNode }) => (
-  <Text as="p" className="product-detail__description">
-    {children}
-  </Text>
+  <div className="product-detail__description-wrapper">
+    <Text
+      as="p"
+      className="product-detail__description"
+      showTooltip={false}
+      lineClamp={2}
+    >
+      {children}
+    </Text>
+  </div>
 );
 
 const Form = ({ children }: { children: ReactNode }) => {

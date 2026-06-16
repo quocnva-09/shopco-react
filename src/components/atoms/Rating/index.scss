@@ -48,19 +48,36 @@ $-icn-half-star: url("/images/icn-half-star.svg") no-repeat center/cover;
 // Size variants — controls gap (star ↔ text) on the outer container
 // and star dimensions via descendant .rating
 .rating-size {
+  &--xs {
+    gap: 11px;
+    .rating {
+      --star-size: 15.5px;
+      --star-gap: 4.5px;
+    }
+  }
+
   &--sm {
     gap: 13px;
-    .rating { --star-size: 18.5px; }
+    .rating {
+      --star-size: 18.5px;
+      --star-gap: 5.5px;
+    }
   }
 
   &--md {
     gap: 14px;
-    .rating { --star-size: 22.5px; --star-gap: 6px; }
+    .rating {
+      --star-size: 22.5px;
+      --star-gap: 6px;
+    }
   }
 
   &--lg {
     gap: 16px;
-    .rating { --star-size: 24.5px; --star-gap: 7px; }
+    .rating {
+      --star-size: 24.5px;
+      --star-gap: 7px;
+    }
   }
 }
 

@@ -39,7 +39,7 @@
     height: 44px;
     left: 10px;
     right: auto;
-    bottom: 265px;
+    bottom: 270px;
   }
 }
 
@@ -56,8 +56,8 @@
   @media (max-width: $bp-sm) {
     width: 76px;
     height: 76px;
-    right: calc(50% - 170px);
-    top: 44px;
+    right: calc(50% - 175px);
+    top: 35px;
   }
 }
 
@@ -109,6 +109,7 @@
   @media (max-width: $bp-sm) {
     left: 50%;
     right: auto;
+    bottom: -275px;
     transform: translateX(-50%);
   }
 }

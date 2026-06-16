@@ -33,12 +33,30 @@
     width: 100%;
 
     @media (max-width: $bp-sm) {
+      margin-top: 10px;
       font-size: 16px;
     }
   }
 
   &__rating {
     margin-top: 8px;
+
+    // --sm by default; switch to --xs specs at bp-md
+    @media (max-width: $bp-md) {
+      margin-top: 4px;
+      gap: 11px;
+      .rating {
+        --star-size: 15.5px;
+        --star-gap: 4.5px;
+      }
+    }
   }
 
+  &__price {
+    margin-top: 8px;
+
+    @media (max-width: $bp-sm) {
+      margin-top: 2px;
+    }
+  }
 }

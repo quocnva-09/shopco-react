@@ -3,6 +3,7 @@
 .product-detail {
   &__info {
     min-width: 0;
+    max-width: 590px;
     display: flex;
     flex-direction: column;
   }
@@ -10,8 +11,12 @@
   &__name {
     font-size: 40px;
     font-family: $font-family-title;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding-top: 10px;
 
     @media (max-width: $bp-sm) {
+      padding-top: 0;
       font-size: 24px;
       line-height: 28px;
     }
@@ -19,16 +24,21 @@
 
   &__description {
     font-size: $font-size-base;
-    line-height: 1.5;
+    line-height: 20px;
     color: $text-muted;
-    padding-bottom: 24px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 0;
+    padding-bottom: 0;
 
     @media (max-width: $bp-sm) {
-      font-size: $font-size-mobile;
-      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 20px;
     }
+  }
+
+  &__description-wrapper {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
   }
 
   &__form {
@@ -46,12 +56,13 @@
     flex-direction: column;
     gap: 16px;
     border-bottom: 1px solid rgba($black-color, 0.1);
-    padding-bottom: 24px;
+    padding-bottom: 20px;
   }
 
   &__variant-label {
     font-size: $font-size-base;
     color: $text-muted;
+    line-height: 100%;
 
     @media (max-width: $bp-sm) {
       font-size: $font-size-mobile;
@@ -59,7 +70,7 @@
   }
 
   &__rating {
-    margin-block: 14px;
+    margin-block: 14px 15px;
 
     @media (max-width: $bp-sm) {
       margin-block: 12px;

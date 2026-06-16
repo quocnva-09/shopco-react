@@ -3,12 +3,12 @@
 
 .style-categories {
   background-color: $color-neutral;
-  border-radius: $radius-pill;
+  border-radius: 40px;
   padding: 70px 64px;
   margin-top: 16px;
 
   @media (max-width: $bp-sm) {
-    padding: 40px 24px;
+    padding: 40px 24px 27px;
     margin-top: 10px;
     border-radius: $radius-lg;
   }
@@ -21,7 +21,7 @@
     text-align: center;
     color: $black-color;
     margin-top: 0;
-    margin-bottom: 64px;
+    margin-bottom: 60px;
 
     white-space: normal;
     overflow: visible;
@@ -29,22 +29,19 @@
 
     @media (max-width: $bp-sm) {
       font-size: 32px;
+      line-height: 36px;
       margin-bottom: 28px;
     }
   }
 
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 
-    grid-auto-rows: clamp(200px, 22vw, 300px);
-
     @media (max-width: $bp-sm) {
-      grid-template-columns: 1fr;
+      flex-direction: column;
       gap: 16px;
-
-      grid-auto-rows: auto;
     }
   }
 
@@ -55,14 +52,19 @@
     background-color: $white-color;
     text-decoration: none;
 
+    // height: clamp(200px, 22vw, 300px);
+    max-height: 289px;
+
     @media (max-width: $bp-sm) {
       width: 100%;
-      grid-column: 1 / -1 !important;
+      max-width: none;
+      height: auto;
       aspect-ratio: 310 / 190;
     }
 
     &--casual {
-      grid-column: span 4;
+      flex: 4 1 calc(40% - 10px);
+      max-width: 407px;
 
       .style-categories__image {
         transform: scale(2.2);
@@ -79,7 +81,8 @@
     }
 
     &--formal {
-      grid-column: span 6;
+      flex: 6 1 calc(60% - 10px);
+      max-width: 684px;
 
       background-color: $white-color;
       .style-categories__image {
@@ -99,7 +102,8 @@
     }
 
     &--party {
-      grid-column: span 6;
+      flex: 6 1 calc(60% - 10px);
+      max-width: 684px;
 
       .style-categories__image {
         transform: scale(1.1);
@@ -119,7 +123,8 @@
     }
 
     &--gym {
-      grid-column: span 4;
+      flex: 4 1 calc(40% - 10px);
+      max-width: 407px;
 
       .style-categories__image {
         transform: scale(1);
