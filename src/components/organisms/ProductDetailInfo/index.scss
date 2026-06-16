@@ -6,6 +6,10 @@
     max-width: 590px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: $bp-lg) {
+      max-width: 100%;
+    }
   }
 
   &__name {

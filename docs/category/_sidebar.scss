@@ -1,0 +1,71 @@
+@use "../abstracts/variables" as *;
+
+.sidebar {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $radius-lg;
+  padding: 20px 24px;
+  background-color: $white-color;
+  display: flex;
+  flex-direction: column;
+  max-width: 295px;
+
+  @media (max-width: $breakpoint) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-radius: 20px 20px 0 0;
+    max-width: none;
+    max-height: 85vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+    &.sidebar--active {
+      transform: translateY(0);
+      visibility: visible;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__divider {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 24px 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+}

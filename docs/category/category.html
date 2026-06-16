@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category Page - Casual</title>
+  <link rel="stylesheet" href="./css/main.css" />
+</head>
+
+<body oncontextmenu="return false;" ondragstart="return false;" ondrop="return false;">
+  <header class="header"></header>
+
+  <main class="container">
+    <div class="page-divider"></div>
+    <div class="breadcrumb">
+      <a href="#" class="breadcrumb__item">Home</a>
+      <span class="breadcrumb__separator">&#10095;</span>
+      <span class="breadcrumb__item breadcrumb__item--active">Casual</span>
+    </div>
+
+    <div class="category">
+      <!-- Sidebar Filters -->
+      <aside class="sidebar js-sidebar-filter">
+        <div class="sidebar__header">
+          <h2 class="sidebar__title">Filters</h2>
+          <button class="sidebar__icon-btn js-close-filter">
+            <img src="assets/icons/icn-filter.svg" alt="Filter icon" title="Filter icon" />
+          </button>
+        </div>
+
+        <hr class="sidebar__divider" />
+
+        <div class="sidebar__content">
+          <!-- Categories -->
+          <div class="filter-group filter-group--categories js-categories-filter">
+            <ul class="filter-group__list">
+              <!-- JS will populate categories here -->
+            </ul>
+          </div>
+
+          <hr class="sidebar__divider" />
+
+          <!-- Price -->
+          <div class="filter-group">
+            <div class="filter-group__header js-filter-toggle">
+              <h3 class="filter-group__title">Price</h3>
+              <img src="assets/icons/icn-arrow-down.svg" class="filter-group__icon" alt="Toggle" />
+            </div>
+            <div class="filter-group__content">
+              <div class="range-slider js-range-slider" data-min="10" data-max="500" data-current-min="10"
+                data-current-max="500">
+                <div class="range-slider__track js-range-track"></div>
+                <div class="range-slider__thumb range-slider__thumb--left js-range-thumb-left" tabindex="0"
+                  role="slider" aria-valuemin="10" aria-valuemax="500" aria-valuenow="10" aria-label="Minimum price">
+                </div>
+                <div class="range-slider__thumb range-slider__thumb--right js-range-thumb-right" tabindex="0"
+                  role="slider" aria-valuemin="10" aria-valuemax="500" aria-valuenow="500" aria-label="Maximum price">
+                </div>
+                <div class="range-slider__values js-range-values">
+                  <span>$10</span>
+                  <span>$500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="sidebar__divider" />
+
+          <!-- Colors -->
+          <div class="filter-group">
+            <div class="filter-group__header js-filter-toggle">
+              <h3 class="filter-group__title">Colors</h3>
+              <img src="assets/icons/icn-arrow-down.svg" class="filter-group__icon" alt="Toggle" />
+            </div>
+            <div class="filter-group__content ">
+              <div class="color-selector js-color-selector">
+                <!-- JS will populate colors here -->
+              </div>
+            </div>
+          </div>
+
+          <hr class="sidebar__divider" />
+
+          <!-- Size -->
+          <div class="filter-group">
+            <div class="filter-group__header js-filter-toggle">
+              <h3 class="filter-group__title">Size</h3>
+              <img src="assets/icons/icn-arrow-down.svg" class="filter-group__icon" alt="Toggle" />
+            </div>
+            <div class="filter-group__content">
+              <div class="size-selector size-selector--grid js-size-selector">
+                <!-- JS will populate sizes here -->
+              </div>
+            </div>
+          </div>
+
+          <hr class="sidebar__divider" />
+
+          <!-- Dress Style -->
+          <div class="filter-group">
+            <div class="filter-group__header js-filter-toggle">
+              <h3 class="filter-group__title">Dress Style</h3>
+              <img src="assets/icons/icn-arrow-down.svg" class="filter-group__icon" alt="Toggle" />
+            </div>
+            <div class="filter-group__content">
+              <ul class="filter-group__list">
+                <li class="filter-group__item">
+                  <a href="#">Casual</a>
+                  <img src="assets/icons/vector-direct-right.svg" alt="Right" />
+                </li>
+                <li class="filter-group__item">
+                  <a href="#">Formal</a>
+                  <img src="assets/icons/vector-direct-right.svg" alt="Right" />
+                </li>
+                <li class="filter-group__item">
+                  <a href="#">Party</a>
+                  <img src="assets/icons/vector-direct-right.svg" alt="Right" />
+                </li>
+                <li class="filter-group__item">
+                  <a href="#">Gym</a>
+                  <img src="assets/icons/vector-direct-right.svg" alt="Right" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <button class="btn btn--apply-filter js-apply-filter">
+            Apply Filter
+          </button>
+        </div>
+      </aside>
+
+      <!-- Product Grid Area -->
+      <section class="category-content">
+        <div class="category-content__header">
+          <div class="category-content__header-left">
+            <h1 class="category-content__title">Casual</h1>
+            <div class="category-content__meta">
+              <span class="category-content__count">Showing 1-10 of 100 Products</span>
+              <div class="category-content__sort">
+                <span>Sort by:</span>
+                <select class="category-content__sort-select">
+                  <option value="popular">Most Popular</option>
+                  <option value="newest">Newest</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="js-mobile-filter-toggle btn btn--filter mobile-filter-toggle"></button>
+        </div>
+
+        <div class="product-grid" id="js-category-products">
+          <!-- JS will populate products here -->
+        </div>
+
+        <hr class="category-content__divider" />
+
+        <div class="pagination" id="js-pagination"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"></footer>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

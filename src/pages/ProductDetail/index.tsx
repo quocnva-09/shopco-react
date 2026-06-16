@@ -134,7 +134,11 @@ const ProductDetailContent = ({ product }: { product: ProductData }) => {
       <Breadcrumb items={breadcrumbs} />
 
       <div className="product-detail">
-        <ProductGallery images={product.images} productName={product.name} />
+        <ProductGallery
+          key={product.id}
+          images={product.images}
+          productName={product.name}
+        />
         <ProductDetailInfo product={product}>
           <ProductDetailInfo.Header
             name={product.name}

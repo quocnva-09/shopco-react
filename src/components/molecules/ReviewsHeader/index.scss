@@ -48,15 +48,15 @@
     // Reuse the shared mixin: positions dropdown__menu absolutely (overriding
     // the mobile position:static from Dropdown/index.scss), sets shadows,
     // and rotates reviews-header__sort-btn's SVG arrow on open.
-    @include dropdown-menu($sort-btn-class: 'reviews-header__sort-btn');
+    @include dropdown-menu($sort-btn-class: "reviews-header__sort-btn");
   }
 
   &__sort-btn {
-    padding: 15px 20px;
+    padding: 13px 20px;
   }
 
   &__write-btn {
-    padding: 15px 30px;
+    padding: 13px 29.5px;
     white-space: nowrap;
 
     @media (max-width: $bp-sm) {
@@ -72,4 +72,3 @@
     font-weight: 700;
   }
 }
-

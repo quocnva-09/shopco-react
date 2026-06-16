@@ -1,0 +1,105 @@
+@use "../abstracts/variables" as *;
+
+.category-content {
+  flex: 1;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: 100%;
+
+      @media (max-width: 767px) {
+        flex-direction: row;
+        margin-left: 0;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+    }
+
+    .mobile-filter-toggle {
+      display: none; // Assuming toggle isn't needed on tablet/desktop if sidebar is visible
+
+      @media (max-width: 767px) {
+        display: flex;
+        max-width: 32px;
+        min-height: 32px;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    margin-top: 5px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  &__count {
+    padding-bottom: 0;
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &-select {
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-color;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+
+      &:focus {
+        border: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__divider {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 32px 0;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,5 +1,5 @@
 @use "@/styles/abstracts/variables" as *;
-@use '@/styles/abstracts/mixins' as *;
+@use "@/styles/abstracts/mixins" as *;
 
 .tabs {
   @include flex-center(row);
@@ -12,9 +12,10 @@
     background: transparent;
     border: none;
     font-size: 20px;
+    line-height: 22px;
     cursor: pointer;
     color: $text-muted;
-    padding-bottom: 24px;
+    padding-bottom: 20px;
     position: relative;
     flex: 1;
 
@@ -57,5 +58,4 @@
       margin-right: 8px;
     }
   }
-
 }

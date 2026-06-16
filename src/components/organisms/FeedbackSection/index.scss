@@ -22,13 +22,14 @@
     font-family: $font-family-title;
     font-size: 48px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 100%;
     margin: 0;
     white-space: normal;
     overflow: visible;
 
     @media (max-width: $bp-md) {
       font-size: 32px;
+      line-height: 36px;
     }
   }
 

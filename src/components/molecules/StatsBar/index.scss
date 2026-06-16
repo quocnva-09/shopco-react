@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: $base-spacing * 2;
-  margin: $base-spacing * 3 0 0 0;
+  margin: 52px 0 0 0;
   flex-wrap: wrap;
 
   @media (max-width: $bp-sm) {
@@ -29,12 +29,12 @@
 
     @media (max-width: $bp-sm) {
       padding-right: 28px;
-      
+
       &:nth-child(2) {
         border-right: none;
         padding-right: 0;
       }
-      
+
       // Last item takes full width so it drops to its own row
       &:last-of-type {
         flex: 0 0 100%;
@@ -50,6 +50,7 @@
     font-size: 40px;
     font-weight: 700;
     color: $black-color;
+    line-height: 100%;
 
     @media (max-width: $bp-sm) {
       font-size: 24px;
@@ -58,10 +59,13 @@
 
   &__label {
     font-family: $font-family-base;
-    font-size: $font-size-mobile;
+    font-size: 16px;
     color: $text-muted;
+    line-height: 22px;
+    margin-top: 5px;
 
     @media (max-width: $bp-sm) {
+      margin-top: 0;
       font-size: 12px;
     }
   }
