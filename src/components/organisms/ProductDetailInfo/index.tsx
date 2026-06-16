@@ -70,7 +70,7 @@ const Description = ({ children }: { children: ReactNode }) => (
     <Text
       as="p"
       className="product-detail__description"
-      showTooltip={false}
+      showTooltip={true}
       lineClamp={2}
     >
       {children}

@@ -2,6 +2,7 @@
 
 .product-detail {
   &__info {
+    flex: 1;
     min-width: 0;
     max-width: 590px;
     display: flex;
@@ -17,7 +18,7 @@
     font-family: $font-family-title;
     line-height: 100%;
     letter-spacing: 0;
-    padding-top: 10px;
+    padding-top: 5px;
 
     @media (max-width: $bp-sm) {
       padding-top: 0;
@@ -74,7 +75,7 @@
   }
 
   &__rating {
-    margin-block: 14px 15px;
+    margin-block: 15px 20px;
 
     @media (max-width: $bp-sm) {
       margin-block: 12px;
@@ -104,4 +105,12 @@
   &__quantity {
     flex: 30;
   }
+}
+
+.tooltip {
+  font-size: $font-size-base;
+  line-height: 20px;
+  color: $text-muted;
+  margin-bottom: 0;
+  padding: 0;
 }

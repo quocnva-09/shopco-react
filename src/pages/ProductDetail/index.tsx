@@ -149,9 +149,11 @@ const ProductDetailContent = ({ product }: { product: ProductData }) => {
             originalPrice={product.originalPrice}
             discountPercent={product.discountPercent}
           />
-          <ProductDetailInfo.Description>
-            {product.description}
-          </ProductDetailInfo.Description>
+          {product.description && (
+            <ProductDetailInfo.Description>
+              {product.description}
+            </ProductDetailInfo.Description>
+          )}
           <ProductDetailInfo.Form>
             <ProductDetailInfo.ColorSelection />
             <ProductDetailInfo.SizeSelection />
