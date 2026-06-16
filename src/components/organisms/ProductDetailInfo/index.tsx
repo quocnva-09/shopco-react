@@ -71,6 +71,8 @@ const Description = ({ children }: { children: ReactNode }) => (
       as="p"
       className="product-detail__description"
       showTooltip={true}
+      mobileShowTooltip={false}
+      mobileLineClamp={0}
       lineClamp={2}
     >
       {children}

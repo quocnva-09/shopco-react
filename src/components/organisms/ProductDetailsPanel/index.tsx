@@ -20,7 +20,7 @@ export const ProductDetailsPanel = ({
           Product Details
         </Heading>
       </div>
-      <Text as="p">{description}</Text>
+      <Text as="p" className="details__description">{description}</Text>
     </section>
   );
 };

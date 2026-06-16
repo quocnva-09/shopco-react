@@ -27,7 +27,7 @@ export const NewsletterForm = ({
     <form className="newsletter-form" onSubmit={handleSubmit}>
       <div className="newsletter-form__input-wrapper">
         <span className="newsletter-form__icon" aria-hidden="true">
-          <Icon svgName="icn-email-input" />
+          <Icon svgName="icn-email-input" height={16} width={16} />
         </span>
         <Input
           type="email"

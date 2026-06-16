@@ -8,7 +8,7 @@
   align-items: flex-start;
   margin-bottom: 80px;
 
-  @media (max-width: $bp-sm) {
+  @media (max-width: $bp-md) {
     grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     margin-bottom: 32px;

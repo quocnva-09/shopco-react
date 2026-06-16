@@ -92,6 +92,10 @@
     display: flex;
     gap: 20px;
 
+    @media (max-width: $bp-lg) {
+      width: 70%;
+    }
+
     @media (max-width: $bp-sm) {
       gap: 12px;
     }
@@ -105,12 +109,16 @@
   &__quantity {
     flex: 30;
   }
-}
 
-.tooltip {
-  font-size: $font-size-base;
-  line-height: 20px;
-  color: $text-muted;
-  margin-bottom: 0;
-  padding: 0;
+  .tooltip {
+    font-size: $font-size-base;
+    line-height: 20px;
+    color: $text-muted;
+    margin-bottom: 0;
+    padding: 0;
+
+    @media (max-width: $bp-lg) {
+      display: none;
+    }
+  }
 }

@@ -74,7 +74,7 @@ export const CartSummary = ({
         >
           <div className="cart-summary__promo-input-wrapper">
             <span className="cart-summary__promo-icon" aria-hidden="true">
-              <Icon svgName="icn-voucher" />
+              <Icon svgName="icn-voucher" height={17} width={17} />
             </span>
             <Input
               type="text"
