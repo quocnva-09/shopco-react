@@ -1,0 +1,34 @@
+@use "@/styles/abstracts/variables" as *;
+
+.sidebar-filter {
+  padding: 20px 24px 24px 24px;
+  max-width: 295px; // 247px (content max-width) + 24px*2 (padding)
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background-color: $white-color;
+
+  &__divider {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 24px 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__apply-btn {
+    margin-top: 24px;
+    padding-block: 13px;
+    width: 100%;
+  }
+}

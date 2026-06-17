@@ -1,0 +1,31 @@
+@use "@/styles/abstracts/variables" as *;
+
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: $black-color;
+  border-radius: 50%;
+  cursor: grab;
+  z-index: 2;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &__value {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    color: $black-color;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+}

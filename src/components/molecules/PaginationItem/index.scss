@@ -1,0 +1,81 @@
+@use "@/styles/abstracts/variables" as *;
+
+.pagination-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: $text-muted;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--page {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+
+    @media (max-width: $bp-md) {
+      width: 36px;
+      height: 36px;
+    }
+
+    &:hover:not(:disabled),
+    &.pagination-item--active {
+      color: $black-color;
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  &--previous,
+  &--next {
+    height: 36px; // From design
+    padding: 0 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    gap: 8px;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  &--ellipsis {
+    width: 40px;
+    height: 40px;
+    cursor: default;
+
+    @media (max-width: $bp-md) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__text {
+    color: $black-color;
+    @media (max-width: $bp-sm) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@use "@/styles/abstracts/variables" as *;
+
+.sort-selector {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+
+  &__label {
+    color: $text-muted;
+    margin-right: 6px;
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: $black-color;
+  }
+
+  &__value {
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,57 @@
+@use "@/styles/abstracts/variables" as *;
+
+.filter-group {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__icon {
+    transition: transform 0.3s ease;
+  }
+
+  &--open &__icon {
+    transform: rotate(180deg);
+  }
+
+  &__content {
+    margin-top: 20px;
+
+    @media (max-width: $bp-md) {
+      margin-top: 16px;
+    }
+  }
+
+  .size-selector {
+    gap: 8px;
+
+    &__button {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+  }
+
+  .color-selector {
+    justify-content: flex-start;
+    gap: 15px;
+  }
+}

@@ -10,6 +10,7 @@ export interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
   className?: string;
+  onReset?: () => void;
 }
 
 interface ErrorBoundaryState {
@@ -40,6 +41,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   /** Reset ErrorBoundary  */
   handleReset(): void {
+    this.props.onReset?.();
     this.setState({ hasError: false, error: null });
   }
 

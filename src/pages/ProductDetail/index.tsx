@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, Suspense } from "react";
-import { useLoaderData, Await } from "react-router-dom";
+import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import "./index.scss";
 import { ProductGallery } from "@/components/molecules/ProductGallery";
 import { ProductGallerySkeleton } from "@/components/molecules/ProductGallerySkeleton";
@@ -46,9 +46,10 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 
 export const ProductDetailPage = () => {
   const { product } = useLoaderData() as ProductDetailLoaderData;
+  const navigate = useNavigate();
 
   return (
-    <ErrorBoundary className="error-boundary--center">
+    <ErrorBoundary className="error-boundary--center" onReset={() => navigate(0)}>
       <Suspense
         fallback={
           <main className="container">

@@ -1,0 +1,26 @@
+@use "@/styles/abstracts/variables" as *;
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  
+  &[role="button"] {
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__icon {
+    transition: transform 0.3s ease;
+  }
+
+  &--open &__icon {
+    transform: rotate(180deg);
+  }
+}

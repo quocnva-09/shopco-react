@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { useLoaderData, Await } from "react-router-dom";
+import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "@/components/organisms/ErrorBoundary";
 import { BannerSection } from "@/components/organisms/BannerSection";
 import { ProductCollectionSection } from "@/components/organisms/ProductCollectionSection";
@@ -38,6 +38,7 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 export const HomePage = () => {
   const { newArrivals, topSellings, reviews } =
     useLoaderData() as HomeLoaderData;
+  const navigate = useNavigate();
 
   return (
     <main>
@@ -55,7 +56,7 @@ export const HomePage = () => {
       <div className="container">
         <ProductCollectionSection className="home__product-collection">
           <ProductCollectionSection.Header title="NEW ARRIVALS" />
-          <ErrorBoundary>
+          <ErrorBoundary onReset={() => navigate(0)}>
             <ProductCollectionSection.Content>
               <Suspense fallback={<ProductCardSkeletonList count={4} />}>
                 <Await resolve={newArrivals}>
@@ -80,7 +81,7 @@ export const HomePage = () => {
 
         <ProductCollectionSection>
           <ProductCollectionSection.Header title="TOP SELLING" />
-          <ErrorBoundary>
+          <ErrorBoundary onReset={() => navigate(0)}>
             <ProductCollectionSection.Content>
               <Suspense fallback={<ProductCardSkeletonList count={4} />}>
                 <Await resolve={topSellings}>
@@ -108,7 +109,7 @@ export const HomePage = () => {
 
       <FeedbackSection>
         <FeedbackSection.Header title={FEEDBACK_CONSTS.DEFAULT_TITLE} />
-        <ErrorBoundary className="error-boundary--center">
+        <ErrorBoundary className="error-boundary--center" onReset={() => navigate(0)}>
           <FeedbackSection.Content>
             <Suspense
               fallback={Array.from({

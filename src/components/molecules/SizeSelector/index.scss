@@ -28,7 +28,7 @@
     }
 
     // When radio is checked → override Button to solid-dark styling
-    &.is-active{
+    &.is-active {
       background-color: $black-color !important;
       color: #fff !important;
     }

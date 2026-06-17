@@ -12,7 +12,7 @@ function App() {
     <StrictMode>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ErrorBoundary>
+          <ErrorBoundary onReset={() => window.location.reload()}>
             <AppRouter />
             <AppToaster />
           </ErrorBoundary>

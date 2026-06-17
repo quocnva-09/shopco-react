@@ -1,0 +1,27 @@
+@use "@/styles/abstracts/variables" as *;
+
+.filter-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__link {
+    font-size: 16px;
+    line-height: 100%;
+    color: $text-muted;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $black-color;
+    }
+  }
+
+  &__icon {
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

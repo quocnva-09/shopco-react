@@ -1,0 +1,27 @@
+@use "@/styles/abstracts/variables" as *;
+
+.product-grid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__showing-text {
+    font-size: 16px;
+    line-height: 1;
+    color: $text-muted;
+  }
+}
