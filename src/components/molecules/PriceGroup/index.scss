@@ -52,8 +52,9 @@
 
     // Override discount tag size specifically for the detail variant
     .price--discount {
-      padding: 4px 12px;
-      font-size: 14px;
+      padding: 10px 14px;
+      font-size: 16px;
+      line-height: 100%;
     }
   }
 }

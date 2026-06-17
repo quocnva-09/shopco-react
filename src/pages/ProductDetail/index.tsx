@@ -198,7 +198,7 @@ const ProductDetailContent = ({ product }: { product: ProductData }) => {
           className="product-page__product-collections"
           showButton={false}
         >
-          <ProductCollectionSection.Header title="YOU MAY ALSO LIKE" />
+          <ProductCollectionSection.Header title="YOU MIGHT ALSO LIKE" />
           <ProductCollectionSection.Content
             enableSlider={true}
             showArrows={true}
