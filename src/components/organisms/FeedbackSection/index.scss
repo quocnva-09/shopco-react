@@ -2,7 +2,7 @@
 @use "@/styles/abstracts/mixins" as *;
 
 .feedback {
-  margin-top: 80px;
+  margin-top: 90px;
 
   @media (max-width: $bp-md) {
     margin-top: 50px;

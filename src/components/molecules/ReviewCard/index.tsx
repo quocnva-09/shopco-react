@@ -95,6 +95,8 @@ export const ReviewCard = ({
         as="p"
         lineClamp={3}
         showTooltip={true}
+        mobileLineClamp={0}
+        mobileShowTooltip={false}
         className="review-card__comment"
         tooltipClassName="tooltip--comment"
       >
