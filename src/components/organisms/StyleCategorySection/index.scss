@@ -81,9 +81,9 @@
         transform: scale(2.2);
         transform-origin: 58% 35%;
 
-        &:hover {
-          transform: scale(2.25);
-        }
+        // &:hover {
+        //   transform: scale(2.25);
+        // }
 
         @media (max-width: $bp-sm) {
           transform: scale(1.8);
@@ -101,9 +101,9 @@
         transform-origin: 0 60%;
         object-position: center top;
 
-        &:hover {
-          transform: scale(1.9);
-        }
+        // &:hover {
+        //   transform: scale(1.9);
+        // }
 
         @media (max-width: $bp-sm) {
           transform: scale(2.3);
@@ -122,9 +122,9 @@
         margin-left: 15%;
         transform-origin: 90% 58%;
 
-        &:hover {
-          transform: scale(1.15);
-        }
+        // &:hover {
+        //   transform: scale(1.15);
+        // }
 
         @media (max-width: $bp-sm) {
           transform: scale(1.2);
@@ -142,9 +142,9 @@
         object-position: center 40%;
         margin-left: 20%;
 
-        &:hover {
-          transform: scale(1.05);
-        }
+        // &:hover {
+        //   transform: scale(1.05);
+        // }
 
         @media (max-width: $bp-sm) {
           margin-right: auto;
