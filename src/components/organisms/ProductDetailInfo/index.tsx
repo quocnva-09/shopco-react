@@ -32,14 +32,18 @@ const Root = ({ product, children, className, ...rest }: RootProps) => {
 
 const Header = ({ name, ratingAvg }: { name: string; ratingAvg?: number }) => (
   <>
-    <Heading
-      as="h2"
-      lineClamp={0}
-      showTooltip={false}
-      className="product-detail__name"
-    >
-      {name}
-    </Heading>
+    <div className="product-detail__header-name-wrapper">
+      <Heading
+        as="h2"
+        className="product-detail__name"
+        showTooltip={true}
+        mobileShowTooltip={false}
+        mobileLineClamp={0}
+        lineClamp={1}
+      >
+        {name}
+      </Heading>
+    </div>
     <Rating
       value={ratingAvg ?? 0}
       className="product-detail__rating"

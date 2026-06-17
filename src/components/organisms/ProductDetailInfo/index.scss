@@ -27,6 +27,27 @@
     }
   }
 
+  &__header-name-wrapper {
+    .tooltip {
+      font-size: 40px;
+      font-family: $font-family-title;
+      line-height: 100%;
+      letter-spacing: 0;
+      top: 5px;
+      padding: 0;
+
+      @media (max-width: $bp-lg) {
+        display: none;
+      }
+    }
+
+    @media (max-width: $bp-lg) {
+      .heading-text--ellipsis {
+        white-space: wrap;
+      }
+    }
+  }
+
   &__description {
     font-size: $font-size-base;
     line-height: 20px;
@@ -44,6 +65,18 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
+
+    .tooltip {
+      font-size: $font-size-base;
+      line-height: 20px;
+      color: $text-muted;
+      margin-bottom: 0;
+      padding: 0;
+
+      @media (max-width: $bp-lg) {
+        display: none;
+      }
+    }
   }
 
   &__form {
@@ -116,18 +149,6 @@
 
     @media (max-width: $bp-sm) {
       padding: 12.5px;
-    }
-  }
-
-  .tooltip {
-    font-size: $font-size-base;
-    line-height: 20px;
-    color: $text-muted;
-    margin-bottom: 0;
-    padding: 0;
-
-    @media (max-width: $bp-lg) {
-      display: none;
     }
   }
 }
