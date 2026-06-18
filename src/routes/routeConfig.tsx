@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { PATHS } from "./paths";
 import { homeLoader } from "@/pages/Home/loader";
 import { productDetailLoader } from "@/pages/ProductDetail/loader";
+import { categoryLoader } from "@/pages/Category/loader";
 
 // pages
 import { MainLayout } from "@/components/templates/MainLayout";
@@ -31,7 +32,8 @@ export const router = createBrowserRouter([
             },
           },
           {
-            path: `${PATHS.CATEGORY}/:slug`,
+            path: `${PATHS.CATEGORY}`,
+            loader: categoryLoader,
             lazy: async () => {
               const { CategoryPage } = await import("@/pages/Category");
               return { Component: CategoryPage };

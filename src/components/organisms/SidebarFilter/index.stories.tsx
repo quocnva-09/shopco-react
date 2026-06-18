@@ -10,14 +10,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    onApplyFilter: () => console.log("Apply filter clicked"),
-    onClose: () => console.log("Close clicked"),
-  },
-  render: (args) => (
-    <div style={{ padding: "40px", backgroundColor: "#f9f9f9" }}>
-      <SidebarFilter {...args} />
-    </div>
-  ),
-};
+// export const Default: Story = {
+//   args: {
+//     onApplyFilter: () => console.log("Apply filter clicked"),
+//     onClose: () => console.log("Close clicked"),
+//   },
+//   render: (args) => (
+//     <div style={{ padding: "40px", backgroundColor: "#f9f9f9" }}>
+//       <SidebarFilter {...args} />
+//     </div>
+//   ),
+// };
