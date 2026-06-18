@@ -23,4 +23,13 @@
   &__value {
     margin-right: 4px;
   }
+
+  &__icon {
+    transition: transform 0.2s ease;
+  }
+
+  // Rotate the arrow icon when dropdown is open
+  .dropdown--open &__icon {
+    transform: rotate(180deg);
+  }
 }

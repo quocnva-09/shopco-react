@@ -13,7 +13,7 @@
   }
 
   &__sidebar {
-    flex-shrink: 0;
+    flex: 1;
 
     @media (max-width: $bp-sm) {
       position: absolute;
@@ -24,7 +24,7 @@
   }
 
   &__content {
-    flex: 1;
+    max-width: 925px;
     min-width: 0;
     width: 100%;
   }

@@ -9,6 +9,10 @@ import type {
   StyleApi,
   CategoryApi,
 } from "@/types/api/master-data.api";
+import {
+  CATEGORY_PER_PAGE_DESKTOP,
+} from "@/consts/config";
+import { getResponsivePerPage } from "@/hooks/useResponsivePagination";
 
 export const SORT_OPTIONS = [
   { id: "popular", label: "Most Popular" },
@@ -23,6 +27,7 @@ export interface CategoryLoaderData {
     total: number;
     currentPage: number;
     lastPage: number;
+    perPage: number;
   }>;
   masterData: Promise<[CategoryApi[], ColorApi[], SizeApi[], StyleApi[]]>;
   sortData: typeof SORT_OPTIONS;
@@ -33,10 +38,24 @@ export const categoryLoader = ({
 }: LoaderFunctionArgs): CategoryLoaderData => {
   const url = new URL(request.url);
 
-  // Extract pagination and sort
+  // ── Pagination ──────────────────────────────────────────────────────────────
   const page = Number(url.searchParams.get("page")) || 1;
-  const per_page = 9;
-  // Map single sort string to sort_by and sort_dir
+
+  // Read per_page from URL (single source of truth).
+  // On initial visit (no param yet), detect viewport via matchMedia
+  // so the very first API call already uses the correct per_page — no
+  // double-fetch needed.
+  const perPageParam = url.searchParams.get("per_page");
+  const per_page = perPageParam
+    ? Number(perPageParam)
+    : getResponsivePerPage();
+
+  // Clamp to allowed values as a safety net
+  const safePer_page = [6, 9].includes(per_page)
+    ? per_page
+    : CATEGORY_PER_PAGE_DESKTOP;
+
+  // ── Sort ─────────────────────────────────────────────────────────────────────
   const sortParam = url.searchParams.get("sort_by") || "popular";
   let sortBy: "price" | "created_at" | "selling" | undefined;
   let sortDir: "asc" | "desc" | undefined;
@@ -61,7 +80,7 @@ export const categoryLoader = ({
       break;
   }
 
-  // Extract filters
+  // ── Filters ──────────────────────────────────────────────────────────────────
   const category_slug = url.searchParams.get("category_slug") || undefined;
   const colorsParam = url.searchParams.get("colors");
   const colors = colorsParam ? colorsParam.split(",") : undefined;
@@ -78,9 +97,10 @@ export const categoryLoader = ({
   const maxPriceParam = url.searchParams.get("max_price");
   const max_price = maxPriceParam ? Number(maxPriceParam) : undefined;
 
+  // ── API call ─────────────────────────────────────────────────────────────────
   const productsPromise = ProductService.getProducts({
     page,
-    per_page,
+    per_page: safePer_page,
     sort_by: sortBy,
     sort_dir: sortDir,
     category_slug,
@@ -94,6 +114,7 @@ export const categoryLoader = ({
     total: res.meta?.total || 0,
     currentPage: res.meta?.current_page || 1,
     lastPage: res.meta?.last_page || 1,
+    perPage: safePer_page,
   }));
 
   const masterDataPromise = Promise.all([

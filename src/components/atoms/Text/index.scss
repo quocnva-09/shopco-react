@@ -36,6 +36,7 @@
     -webkit-line-clamp: var(--line-clamp);
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
   }
 
   // Mobile: override the clamp line count

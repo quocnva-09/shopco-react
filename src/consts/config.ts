@@ -13,6 +13,21 @@ export const OTP_COOLDOWN_SECONDS = 60;
 /** JS-side mirror of the `$breakpoint-lg` SCSS variable (992px). Used for matchMedia listeners. */
 export const BREAKPOINT_LG_PX = 992;
 
+/** JS-side mirror of the `$bp-md` SCSS variable (768px). Used for responsive pagination. */
+export const BREAKPOINT_MD_PX = 768;
+
+// ─── Category page pagination ────────────────────────────────────────────────
+/** Desktop (> 768px): 3 columns × 3 rows */
+export const CATEGORY_PER_PAGE_DESKTOP = 9;
+/** Mobile (≤ 768px): 2 columns × 3 rows */
+export const CATEGORY_PER_PAGE_MOBILE = 6;
+
+// ─── Price range slider ──────────────────────────────────────────────────────
+/** Minimum value for the price range filter slider. */
+export const PRICE_RANGE_MIN = 0;
+/** Maximum value for the price range filter slider. */
+export const PRICE_RANGE_MAX = 200;
+
 /** Pixel tolerance for detecting scroll start/end boundaries in the slider. */
 export const SLIDER_SCROLL_THRESHOLD_PX = 10;
 

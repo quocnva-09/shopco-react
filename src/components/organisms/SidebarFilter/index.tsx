@@ -8,6 +8,7 @@ import { ColorSelector } from "@/components/molecules/ColorSelector";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { Button } from "@/components/atoms/Button";
 import { IconButton } from "@/components/atoms/IconButton";
+import { PRICE_RANGE_MIN, PRICE_RANGE_MAX } from "@/consts/config";
 import "./index.scss";
 
 import type { CategoryApi, ColorApi, SizeApi, StyleApi } from "@/types/api/master-data.api";
@@ -51,8 +52,8 @@ export const SidebarFilter = ({
 
   // Internal state for filters
   const [priceRange, setPriceRange] = useState<[number, number]>([
-    initialFilters?.min_price ?? 50,
-    initialFilters?.max_price ?? 200,
+    initialFilters?.min_price ?? PRICE_RANGE_MIN,
+    initialFilters?.max_price ?? PRICE_RANGE_MAX,
   ]);
   
   // Note: Since ColorSelector and SizeSelector currently only support single selection (radio), 
@@ -67,8 +68,8 @@ export const SidebarFilter = ({
   // Sync internal state when initialFilters prop changes (e.g., from URL updates)
   useEffect(() => {
     setPriceRange([
-      initialFilters?.min_price ?? 50,
-      initialFilters?.max_price ?? 200,
+      initialFilters?.min_price ?? PRICE_RANGE_MIN,
+      initialFilters?.max_price ?? PRICE_RANGE_MAX,
     ]);
     setSelectedColorId(colors.find(c => initialFilters?.colors?.includes(c.name))?.id);
     setSelectedSizeId(sizes.find(s => initialFilters?.sizes?.includes(s.name))?.id);
@@ -148,8 +149,8 @@ export const SidebarFilter = ({
               <FilterGroup.Header title="Price" />
               <FilterGroup.Content>
                 <PriceRangeSlider
-                  min={50}
-                  max={200}
+                  min={PRICE_RANGE_MIN}
+                  max={PRICE_RANGE_MAX}
                   defaultMinValue={priceRange[0]}
                   defaultMaxValue={priceRange[1]}
                   onChange={setPriceRange}

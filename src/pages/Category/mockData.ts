@@ -1,4 +1,3 @@
-import type { ProductCardData } from "@/types/product";
 
 export const mockSortOptions = [
   { id: "popular", label: "Most Popular" },

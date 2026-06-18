@@ -26,3 +26,22 @@ export function formatDate(dateValue: string): string {
     day: "numeric",
   });
 }
+
+/**
+ * Converts a URL slug to a human-readable title.
+ * e.g. "shorts" → "Shorts", "t-shirts" → "T-Shirts"
+ *
+ * Returns `null` for empty / null input so callers can provide a fallback.
+ */
+export function formatSlugToTitle(slug: string | null | undefined): string | null {
+  if (!slug) return null;
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("-")
+    .replace(/-/g, (_, offset, str) => {
+      // Keep hyphens for compound words (T-Shirts), use space for multi-word slugs
+      const prevChar = str[offset - 1];
+      return prevChar && prevChar === prevChar.toUpperCase() ? "-" : " ";
+    });
+}
