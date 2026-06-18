@@ -8,9 +8,9 @@ import type {
   ProductCardData,
   ProductImage,
   ProductVariant,
-  ColorItem,
-  SizeItem,
 } from "@/types/product";
+import type { ColorItem } from "@/types/color";
+import type { SizeItem } from "@/types/size";
 
 export const mapVariant = (v: ProductVariantApi): ProductVariant => ({
   id: v.id,
@@ -35,7 +35,7 @@ export const getUniqueColors = (variants: ProductVariant[]): ColorItem[] => {
     }
     return acc;
   }, []);
-}; 
+};
 
 export const getUniqueSizes = (variants: ProductVariant[]): SizeItem[] => {
   const seen = new Set<string>();
@@ -58,7 +58,8 @@ export const mapProductImage = (apiImage: ProductImageApi): ProductImage => ({
 
 export const mapProductData = (apiProduct: ProductApi): ProductData => {
   const price = parseFloat(apiProduct.price);
-  const hasDiscount = apiProduct.price_discount !== null && apiProduct.price_discount > 0;
+  const hasDiscount =
+    apiProduct.price_discount !== null && apiProduct.price_discount > 0;
 
   return {
     id: apiProduct.id,
@@ -81,12 +82,18 @@ export const mapProductData = (apiProduct: ProductApi): ProductData => {
       slug: apiProduct.category?.slug,
     },
     images: (apiProduct.images ?? []).map(mapProductImage),
+    styles: (apiProduct.styles ?? []).map((s) => ({
+      id: s.id,
+      name: s.name,
+      slug: s.slug,
+    })),
   };
 };
 
 export const mapProductCardData = (apiProduct: ProductApi): ProductCardData => {
   const price = parseFloat(apiProduct.price);
-  const hasDiscount = apiProduct.price_discount !== null && apiProduct.price_discount > 0;
+  const hasDiscount =
+    apiProduct.price_discount !== null && apiProduct.price_discount > 0;
 
   const primaryImage =
     apiProduct.images?.find((img) => img.is_primary)?.img_path ??

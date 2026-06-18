@@ -14,9 +14,12 @@
     justify-self: center; // Center the card if the grid cell is larger than 295px
   }
 
-  @media (max-width: $bp-md) {
-    grid-template-columns: repeat(2, minmax(172px, 1fr));
+  @media (max-width: $bp-lg) {
     column-gap: 14px;
     row-gap: 24px;
+  }
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(2, minmax(172px, 1fr));
   }
 }

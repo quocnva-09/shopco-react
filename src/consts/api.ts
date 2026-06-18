@@ -7,4 +7,8 @@ export const API_ENDPOINTS = {
   CHECKOUT: "/guest/orders/checkout",
   VERIFY_OTP: (id: number) => `/guest/orders/${id}/verify-otp`,
   RESEND_OTP: (id: number) => `/guest/orders/${id}/resend-otp`,
+  CATEGORIES: "/categories",
+  COLORS: "/colors",
+  SIZES: "/sizes",
+  STYLES: "/styles",
 };

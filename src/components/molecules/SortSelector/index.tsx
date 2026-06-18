@@ -56,7 +56,11 @@ export const SortSelector = ({
             />
           </div>
         </Dropdown.Trigger>
-        <Dropdown.Menu items={menuItems} />
+        <Dropdown.Menu
+          items={menuItems}
+          itemClassName="dropdown__item"
+          linkClassName="dropdown__item-btn"
+        />
       </Dropdown>
     </div>
   );

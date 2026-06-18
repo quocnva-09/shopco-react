@@ -2,7 +2,7 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
-import type { ColorItem } from "@/types/product";
+import type { ColorItem } from "@/types/color";
 
 export type ColorSelectorProps = Omit<
   ComponentPropsWithoutRef<"div">,

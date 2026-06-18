@@ -1,4 +1,7 @@
 import type { ProductCategory } from "./category";
+import type { ColorItem } from "./color";
+import type { SizeItem } from "./size";
+import type { StyleItem } from "./style";
 
 export interface ProductCardData {
   id: number;
@@ -10,17 +13,6 @@ export interface ProductCardData {
   rating: number;
 }
 
-export interface ColorItem {
-  id: number;
-  name: string;
-  hexCode: string;
-}
-
-export interface SizeItem {
-  id: number;
-  name: string;
-  label: string;
-}
 
 export interface ProductVariant {
   id: number;
@@ -53,4 +45,5 @@ export interface ProductData {
   updatedAt: string;
   category: ProductCategory;
   images: ProductImage[];
+  styles: StyleItem[];
 }

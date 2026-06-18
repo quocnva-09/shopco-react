@@ -20,4 +20,15 @@
   &__grid {
     margin-bottom: 26px;
   }
+
+  // ── Loading overlay: keeps old content visible while loader re-runs ──────
+  &__content {
+    position: relative;
+    transition: opacity 0.2s ease;
+
+    &--loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
 }

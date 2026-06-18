@@ -2,7 +2,7 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Button } from "@/components/atoms/Button";
 import "./index.scss";
-import type { SizeItem } from "@/types/product";
+import type { SizeItem } from "@/types/size";
 
 export type SizeSelectorProps = Omit<
   ComponentPropsWithoutRef<"div">,

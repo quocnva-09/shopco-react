@@ -49,7 +49,8 @@
 
   &__header-container {
     @media (max-width: $bp-sm) {
-      padding: 20px 18px 16px 19px;
+      padding-block: 20px 16px;
+      margin-inline: 19px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       background: $white-color;
       position: sticky;
@@ -97,7 +98,8 @@
 
   &__footer-container {
     @media (max-width: $bp-sm) {
-      padding: 20px 24px;
+      margin-inline: 19px;
+      padding-block: 20px;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       background: $white-color;
       position: sticky;

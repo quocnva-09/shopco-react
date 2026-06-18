@@ -32,6 +32,12 @@ export interface ProductImageApi {
   is_primary: number | boolean;
 }
 
+export interface ProductStyleApi {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export interface ProductApi {
   id: number;
   name: string;
@@ -49,13 +55,16 @@ export interface ProductApi {
   updated_at: string;
   category: ProductCategoryApi;
   images: ProductImageApi[];
+  styles?: ProductStyleApi[];
 }
 
 export interface ProductParams {
   search?: string;
   category_id?: number;
-  colors?: string;
-  sizes?: string;
+  category_slug?: string;
+  colors?: string[];
+  sizes?: string[];
+  style_slugs?: string[];
   min_price?: number;
   max_price?: number;
   page?: number;
