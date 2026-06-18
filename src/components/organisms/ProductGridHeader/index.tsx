@@ -36,6 +36,7 @@ export const ProductGridHeader = ({
           Showing {showingStart}-{showingEnd} of {totalProducts} Products
         </span>
         <SortSelector
+          className="product-grid-header__sort"
           options={sortOptions}
           value={sortValue}
           onChange={onSortChange}

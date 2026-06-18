@@ -1,0 +1,23 @@
+@use "@/styles/abstracts/variables" as *;
+
+.category-page {
+  .breadcrumb {
+    margin-bottom: 24px;
+
+    @media (max-width: $bp-sm) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__header {
+    margin-bottom: 16px;
+
+    @media (max-width: $bp-sm) {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__grid {
+    margin-bottom: 26px;
+  }
+}

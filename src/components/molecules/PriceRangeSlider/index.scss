@@ -1,3 +1,5 @@
+@use "@/styles/abstracts/variables" as *;
+
 .price-range-slider {
   &__wrapper {
     position: relative;
@@ -6,5 +8,10 @@
     display: flex;
     align-items: center;
     touch-action: none; // Prevent scrolling when dragging on mobile
+    margin-bottom: 24px;
+
+    @media (max-width: $bp-sm) {
+      margin-bottom: 24px;
+    }
   }
 }

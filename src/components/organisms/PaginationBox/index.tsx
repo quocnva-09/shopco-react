@@ -9,19 +9,28 @@ export type PaginationBoxProps = ComponentPropsWithoutRef<"nav"> & {
   onPageChange: (page: number) => void;
 };
 
-const generatePaginationRange = (current: number, total: number) => {
-  if (total <= 7) {
+const generatePaginationRange = (current: number, total: number, maxLength: 5 | 7) => {
+  if (total <= maxLength) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
+  if (maxLength === 5) {
+    if (current <= 2) {
+      return [1, 2, "...", total - 1, total];
+    }
+    if (current >= total - 1) {
+      return [1, 2, "...", total - 1, total];
+    }
+    return [1, "...", current, "...", total];
+  }
+
+  // maxLength === 7
   if (current <= 3) {
     return [1, 2, 3, "...", total - 2, total - 1, total];
   }
-
   if (current >= total - 2) {
     return [1, 2, 3, "...", total - 2, total - 1, total];
   }
-
   return [1, "...", current - 1, current, current + 1, "...", total];
 };
 
@@ -32,7 +41,27 @@ export const PaginationBox = ({
   className,
   ...rest
 }: PaginationBoxProps) => {
-  const range = generatePaginationRange(currentPage, totalPages);
+  const rangeDesktop = generatePaginationRange(currentPage, totalPages, 7);
+  const rangeMobile = generatePaginationRange(currentPage, totalPages, 5);
+
+  const renderPages = (range: (number | string)[]) => {
+    return range.map((item, index) => {
+      if (item === "...") {
+        return <PaginationItem key={`ellipsis-${index}`} variant="ellipsis" />;
+      }
+
+      const pageNum = item as number;
+      return (
+        <PaginationItem
+          key={pageNum}
+          variant="page"
+          page={pageNum}
+          isActive={currentPage === pageNum}
+          onClick={() => onPageChange(pageNum)}
+        />
+      );
+    });
+  };
 
   return (
     <nav className={clsx("pagination-box", className)} aria-label="Pagination" {...rest}>
@@ -42,23 +71,12 @@ export const PaginationBox = ({
         onClick={() => onPageChange(currentPage - 1)}
       />
 
-      <div className="pagination-box__pages">
-        {range.map((item, index) => {
-          if (item === "...") {
-            return <PaginationItem key={`ellipsis-${index}`} variant="ellipsis" />;
-          }
+      <div className="pagination-box__pages pagination-box__pages--desktop">
+        {renderPages(rangeDesktop)}
+      </div>
 
-          const pageNum = item as number;
-          return (
-            <PaginationItem
-              key={pageNum}
-              variant="page"
-              page={pageNum}
-              isActive={currentPage === pageNum}
-              onClick={() => onPageChange(pageNum)}
-            />
-          );
-        })}
+      <div className="pagination-box__pages pagination-box__pages--mobile">
+        {renderPages(rangeMobile)}
       </div>
 
       <PaginationItem

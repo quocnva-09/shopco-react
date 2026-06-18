@@ -1,6 +1,7 @@
 // routes/paths.ts
 export const PATHS = {
   HOME: "/",
+  CATEGORY: "/category",
   PRODUCT: "/product",
   CART: "/cart",
   CHECKOUT: "/checkout",

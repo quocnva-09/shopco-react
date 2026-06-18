@@ -1,0 +1,22 @@
+@use "@/styles/abstracts/variables" as *;
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(172px, 1fr));
+  column-gap: 20px;
+  row-gap: 36px;
+  justify-content: center;
+
+  // Enforce max-width on children to match design specs
+  & > * {
+    max-width: 295px;
+    width: 100%;
+    justify-self: center; // Center the card if the grid cell is larger than 295px
+  }
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(2, minmax(172px, 1fr));
+    column-gap: 14px;
+    row-gap: 24px;
+  }
+}

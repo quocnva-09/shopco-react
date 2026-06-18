@@ -38,3 +38,29 @@ export const Default: Story = {
     );
   },
 };
+
+export const Mobile: Story = {
+  args: {
+    title: "Casual",
+    showingStart: 1,
+    showingEnd: 10,
+    totalProducts: 100,
+    sortOptions: MOCK_SORT_OPTIONS,
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: "mobile1",
+    },
+  },
+  render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [sort, setSort] = useState("popular");
+    return (
+      <ProductGridHeader
+        {...args}
+        sortValue={sort}
+        onSortChange={setSort}
+      />
+    );
+  },
+};

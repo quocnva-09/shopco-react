@@ -11,6 +11,24 @@
   &__pages {
     display: flex;
     align-items: center;
+    gap: 2px;
     margin-inline: auto;
+
+    &--desktop {
+      @media (max-width: $bp-sm) {
+        display: none;
+      }
+    }
+
+    &--mobile {
+      display: none;
+      @media (max-width: $bp-sm) {
+        display: flex;
+      }
+    }
+
+    @media (max-width: $bp-sm) {
+      gap: 0;
+    }
   }
 }

@@ -6,11 +6,25 @@
   align-items: center;
   white-space: nowrap;
 
+  .heading-wrapper {
+    width: fit-content;
+  }
+
+  @media (max-width: $bp-sm) {
+    justify-content: flex-start;
+    align-items: baseline; // aligns text nicely
+    gap: 8px;
+  }
+
   &__title {
     font-size: 32px;
     font-weight: 700;
     line-height: 1;
     margin: 0;
+
+    @media (max-width: $bp-sm) {
+      font-size: 24px;
+    }
   }
 
   &__controls {
@@ -23,5 +37,15 @@
     font-size: 16px;
     line-height: 1;
     color: $text-muted;
+
+    @media (max-width: $bp-sm) {
+      font-size: 14px;
+    }
+  }
+
+  &__sort {
+    @media (max-width: $bp-sm) {
+      display: none;
+    }
   }
 }

@@ -95,6 +95,13 @@
     gap: 16px;
     border-bottom: 1px solid rgba($black-color, 0.1);
     padding-bottom: 20px;
+
+    .color-selector__swatch {
+      @media (max-width: $bp-md) {
+        width: 39px;
+        height: 39px;
+      }
+    }
   }
 
   &__variant-label {

@@ -20,6 +20,11 @@
     cursor: not-allowed;
   }
 
+  @media (max-width: $bp-sm) {
+    font-size: 12px;
+    letter-spacing: 0%;
+  }
+
   &--page {
     width: 40px;
     height: 40px;
@@ -48,6 +53,10 @@
     &:hover:not(:disabled) {
       background-color: rgba(0, 0, 0, 0.03);
     }
+
+    @media (max-width: $bp-sm) {
+      padding: 0 12px;
+    }
   }
 
   &--ellipsis {
@@ -69,13 +78,15 @@
     svg {
       width: 16px;
       height: 16px;
+
+      @media (max-width: $bp-sm) {
+        width: 12px;
+        height: 12px;
+      }
     }
   }
 
   &__text {
     color: $black-color;
-    @media (max-width: $bp-sm) {
-      display: none;
-    }
   }
 }

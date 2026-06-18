@@ -1,0 +1,31 @@
+@use "@/styles/abstracts/variables" as *;
+
+.category-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  position: relative;
+
+  @media (max-width: $bp-sm) {
+    flex-direction: column;
+    gap: 0; // mobile trigger is handled internally
+  }
+
+  &__sidebar {
+    flex-shrink: 0;
+
+    @media (max-width: $bp-sm) {
+      position: absolute;
+      top: -4px;
+      right: 0;
+      z-index: 5;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+}

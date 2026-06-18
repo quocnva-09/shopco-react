@@ -7,7 +7,7 @@ import { NotificationBar } from "@/components/organisms/NotificationBar";
 import { Spinner } from "@/components/atoms/Spinner";
 import { selectCartItemCount } from "@/store/selectors";
 import { PATHS } from "@/routes";
-import "./MainLayout.scss";
+import "./index.scss";
 
 export const MainLayout = () => {
   const [isNotificationVisible, setIsNotificationVisible] =

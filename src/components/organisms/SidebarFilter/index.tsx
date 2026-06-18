@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { FilterHeader } from "@/components/molecules/FilterHeader";
 import { FilterGroup } from "@/components/molecules/FilterGroup";
@@ -7,6 +7,7 @@ import { PriceRangeSlider } from "@/components/molecules/PriceRangeSlider";
 import { ColorSelector } from "@/components/molecules/ColorSelector";
 import { SizeSelector } from "@/components/molecules/SizeSelector";
 import { Button } from "@/components/atoms/Button";
+import { IconButton } from "@/components/atoms/IconButton";
 import "./index.scss";
 
 // Mock data
@@ -61,83 +62,137 @@ export const SidebarFilter = ({
   className,
   ...rest
 }: SidebarFilterProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    onClose?.();
+  };
+
   return (
-    <aside className={clsx("sidebar-filter", className)} {...rest}>
-      <FilterHeader
-        title="Filters"
-        iconName="icn-filter"
-        iconWidth={20}
-        iconHeight={19}
-        onIconClick={onClose}
-        className="sidebar-filter__main-header"
+    <>
+      <IconButton
+        svgName="icn-filter"
+        className="sidebar-filter__mobile-trigger"
+        onClick={() => setIsOpen(true)}
       />
 
-      <div className="sidebar-filter__divider" />
+      <div
+        className={clsx(
+          "sidebar-filter__overlay",
+          isOpen && "sidebar-filter__overlay--open",
+        )}
+        onClick={handleClose}
+      />
 
-      <div className="sidebar-filter__content">
-        {/* Categories (No Header) */}
-        <div className="filter-group">
-          <div className="sidebar-filter__list">
-            {CATEGORIES.map((cat) => (
-              <FilterListItem key={cat.id} label={cat.label} href={cat.href} />
-            ))}
+      <aside
+        className={clsx(
+          "sidebar-filter",
+          isOpen && "sidebar-filter--open",
+          className,
+        )}
+        {...rest}
+      >
+        <div className="sidebar-filter__header-container">
+          <FilterHeader
+            title="Filters"
+            iconName={isOpen ? "icn-close" : "icn-filter"}
+            iconWidth={20}
+            iconHeight={19}
+            onIconClick={isOpen ? handleClose : onClose}
+            className="sidebar-filter__main-header"
+          />
+        </div>
+
+        <div className="sidebar-filter__divider" />
+
+        <div className="sidebar-filter__scrollable-content">
+          <div className="sidebar-filter__content">
+            {/* Categories (No Header) */}
+            <div className="filter-group">
+              <div className="sidebar-filter__list">
+                {CATEGORIES.map((cat) => (
+                  <FilterListItem
+                    key={cat.id}
+                    label={cat.label}
+                    href={cat.href}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Price */}
+            <FilterGroup defaultOpen>
+              <FilterGroup.Header title="Price" />
+              <FilterGroup.Content>
+                <PriceRangeSlider
+                  min={50}
+                  max={200}
+                  defaultMinValue={50}
+                  defaultMaxValue={200}
+                />
+              </FilterGroup.Content>
+            </FilterGroup>
+
+            {/* Colors */}
+            <FilterGroup defaultOpen>
+              <FilterGroup.Header title="Colors" />
+              <FilterGroup.Content>
+                <ColorSelector name="sidebar-colors" colors={COLORS} />
+              </FilterGroup.Content>
+            </FilterGroup>
+
+            {/* Size */}
+            <FilterGroup defaultOpen>
+              <FilterGroup.Header title="Size" />
+              <FilterGroup.Content>
+                <SizeSelector name="sidebar-sizes" sizes={SIZES} />
+              </FilterGroup.Content>
+            </FilterGroup>
+
+            {/* Dress Style */}
+            <FilterGroup defaultOpen>
+              <FilterGroup.Header title="Dress Style" />
+              <FilterGroup.Content>
+                <div className="sidebar-filter__list">
+                  {DRESS_STYLES.map((style) => (
+                    <FilterListItem
+                      key={style.id}
+                      label={style.label}
+                      href={style.href}
+                    />
+                  ))}
+                </div>
+              </FilterGroup.Content>
+            </FilterGroup>
           </div>
         </div>
 
-        {/* Price */}
-        <FilterGroup defaultOpen>
-          <FilterGroup.Header title="Price" />
-          <FilterGroup.Content>
-            <PriceRangeSlider
-              min={50}
-              max={200}
-              defaultMinValue={50}
-              defaultMaxValue={200}
-            />
-          </FilterGroup.Content>
-        </FilterGroup>
-
-        {/* Colors */}
-        <FilterGroup defaultOpen>
-          <FilterGroup.Header title="Colors" />
-          <FilterGroup.Content>
-            <ColorSelector name="sidebar-colors" colors={COLORS} />
-          </FilterGroup.Content>
-        </FilterGroup>
-
-        {/* Size */}
-        <FilterGroup defaultOpen>
-          <FilterGroup.Header title="Size" />
-          <FilterGroup.Content>
-            <SizeSelector name="sidebar-sizes" sizes={SIZES} />
-          </FilterGroup.Content>
-        </FilterGroup>
-
-        {/* Dress Style */}
-        <FilterGroup defaultOpen>
-          <FilterGroup.Header title="Dress Style" />
-          <FilterGroup.Content>
-            <div className="sidebar-filter__list">
-              {DRESS_STYLES.map((style) => (
-                <FilterListItem
-                  key={style.id}
-                  label={style.label}
-                  href={style.href}
-                />
-              ))}
-            </div>
-          </FilterGroup.Content>
-        </FilterGroup>
-      </div>
-
-      <Button
-        variant="solid"
-        colorScheme="dark"
-        className="sidebar-filter__apply-btn"
-        onClick={onApplyFilter}
-      >
-        Apply Filter
-      </Button>
-    </aside>
+        <div className="sidebar-filter__footer-container">
+          <Button
+            variant="solid"
+            colorScheme="dark"
+            className="sidebar-filter__apply-btn"
+            onClick={() => {
+              handleClose();
+              onApplyFilter?.();
+            }}
+          >
+            Apply Filter
+          </Button>
+        </div>
+      </aside>
+    </>
   );
 };

@@ -1,18 +1,87 @@
 @use "@/styles/abstracts/variables" as *;
 
 .sidebar-filter {
-  padding: 20px 24px 24px 24px;
-  max-width: 295px; // 247px (content max-width) + 24px*2 (padding)
+  padding: 24px;
+  max-width: 295px;
   width: 100%;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   background-color: $white-color;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: $bp-sm) {
+    display: none;
+
+    &--open {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      height: 90vh;
+      z-index: 1000;
+      border-radius: 20px 20px 0 0;
+      border: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      animation: slideUp 0.3s ease-out;
+    }
+  }
+
+  &__overlay {
+    display: none;
+
+    @media (max-width: $bp-sm) {
+      &--open {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        animation: fadeIn 0.3s ease-out;
+      }
+    }
+  }
+
+  &__header-container {
+    @media (max-width: $bp-sm) {
+      padding: 20px 18px 16px 19px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      background: $white-color;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+  }
 
   &__divider {
     height: 1px;
     background-color: rgba(0, 0, 0, 0.1);
     margin: 24px 0;
+
+    @media (max-width: $bp-sm) {
+      display: none;
+    }
+  }
+
+  &__scrollable-content {
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: $bp-sm) {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 18px 20px 19px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 
   &__content {
@@ -26,9 +95,56 @@
     gap: 20px;
   }
 
+  &__footer-container {
+    @media (max-width: $bp-sm) {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      background: $white-color;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+    }
+  }
+
   &__apply-btn {
-    margin-top: 24px;
+    margin-top: 22px;
     padding-block: 13px;
     width: 100%;
+
+    @media (max-width: $bp-sm) {
+      margin-top: 0;
+    }
+  }
+
+  &__mobile-trigger {
+    display: none;
+
+    @media (max-width: $bp-sm) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      min-height: 32px;
+      background-color: rgba(0, 0, 0, 0.06);
+      border-radius: 50%;
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
