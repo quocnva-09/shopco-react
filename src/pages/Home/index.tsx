@@ -23,6 +23,7 @@ import type { HomeLoaderData } from "./loader";
 import type { ProductCardData } from "@/types/product";
 import type { ReviewData } from "@/types/review";
 import "./index.scss";
+import { API_ENDPOINTS } from "@/consts/api";
 
 // Utility component to render a list of skeletons
 const ProductCardSkeletonList = ({ count }: { count: number }) => (
@@ -36,7 +37,7 @@ const ProductCardSkeletonList = ({ count }: { count: number }) => (
 );
 
 export const HomePage = () => {
-  const { newArrivals, topSellings, reviews } =
+  const { newArrivals, topSellings, reviews, styles } =
     useLoaderData() as HomeLoaderData;
   const navigate = useNavigate();
 
@@ -75,7 +76,10 @@ export const HomePage = () => {
                 </Await>
               </Suspense>
             </ProductCollectionSection.Content>
-            <ProductCollectionSection.Footer label="View All" />
+            <ProductCollectionSection.Footer
+              label="View All"
+              onClick={() => navigate(API_ENDPOINTS.LINK_TO_NEW_ARRIVALS)}
+            />
           </ErrorBoundary>
         </ProductCollectionSection>
 
@@ -100,16 +104,43 @@ export const HomePage = () => {
                 </Await>
               </Suspense>
             </ProductCollectionSection.Content>
-            <ProductCollectionSection.Footer label="View All" />
+            <ProductCollectionSection.Footer
+              label="View All"
+              onClick={() => navigate(API_ENDPOINTS.LINK_TO_TOP_SELLINGS)}
+            />
           </ErrorBoundary>
         </ProductCollectionSection>
 
-        <StyleCategorySection title="BROWSE BY DRESS STYLE" />
+        <Suspense
+          fallback={
+            <div style={{ padding: "40px 0", textAlign: "center" }}>
+              Loading styles...
+            </div>
+          }
+        >
+          <Await resolve={styles}>
+            {(resolvedStyles) => (
+              <StyleCategorySection
+                title="BROWSE BY DRESS STYLE"
+                categories={resolvedStyles.map((s) => ({
+                  id: s.id,
+                  label: s.name,
+                  image: `/style-categories/${s.slug}-style.png`,
+                  variant: s.slug as any,
+                  href: API_ENDPOINTS.LINK_TO_STYLE_SLUG(s.slug),
+                }))}
+              />
+            )}
+          </Await>
+        </Suspense>
       </div>
 
       <FeedbackSection>
         <FeedbackSection.Header title={FEEDBACK_CONSTS.DEFAULT_TITLE} />
-        <ErrorBoundary className="error-boundary--center" onReset={() => navigate(0)}>
+        <ErrorBoundary
+          className="error-boundary--center"
+          onReset={() => navigate(0)}
+        >
           <FeedbackSection.Content>
             <Suspense
               fallback={Array.from({

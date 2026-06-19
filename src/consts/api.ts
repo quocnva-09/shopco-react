@@ -11,4 +11,12 @@ export const API_ENDPOINTS = {
   COLORS: "/colors",
   SIZES: "/sizes",
   STYLES: "/styles",
+
+  //LINK TO CATEGORY
+  LINK_TO_NEW_ARRIVALS: "category?sort_by=newest",
+  LINK_TO_TOP_SELLINGS: "category?sort_by=popular",
+  LINK_TO_CATEGORY_SLUG: (category_slug: string) =>
+    `category?category_slug=${category_slug}`,
+  LINK_TO_STYLE_SLUG: (style_slug: string) =>
+    `category?style_slugs=${style_slug}`,
 };

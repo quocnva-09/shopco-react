@@ -17,6 +17,7 @@ import { useResponsivePagination } from "@/hooks/useResponsivePagination";
 import { formatSlugToTitle } from "@/utils/formatter";
 import type { CategoryLoaderData } from "./loader";
 import "./index.scss";
+import { PRICE_RANGE_MAX, PRICE_RANGE_MIN } from "@/consts/config";
 
 export const CategoryPage = () => {
   const { products, masterData, sortData } =
@@ -74,11 +75,11 @@ export const CategoryPage = () => {
         prev.set("style_slugs", filters.style_slugs.join(","));
       else prev.delete("style_slugs");
 
-      if (filters.min_price)
+      if (filters.min_price !== undefined)
         prev.set("min_price", filters.min_price.toString());
       else prev.delete("min_price");
 
-      if (filters.max_price)
+      if (filters.max_price !== undefined)
         prev.set("max_price", filters.max_price.toString());
       else prev.delete("max_price");
 
@@ -93,21 +94,19 @@ export const CategoryPage = () => {
     style_slugs: searchParams.get("style_slugs")?.split(","),
     min_price: searchParams.get("min_price")
       ? Number(searchParams.get("min_price"))
-      : undefined,
+      : PRICE_RANGE_MIN,
     max_price: searchParams.get("max_price")
       ? Number(searchParams.get("max_price"))
-      : undefined,
+      : PRICE_RANGE_MAX,
   };
 
   // ── Dynamic page title from URL params ──────────────────────────────────
   const categorySlug = searchParams.get("category_slug");
   const styleSlug = searchParams.get("style_slugs");
-  const pageTitle = formatSlugToTitle(categorySlug || styleSlug) || "All Products";
+  const pageTitle =
+    formatSlugToTitle(categorySlug || styleSlug) || "All Products";
 
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: pageTitle },
-  ];
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: pageTitle }];
 
   return (
     <main className="category-page">

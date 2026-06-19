@@ -3,7 +3,7 @@
 
 .cart {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: 20px;
   align-items: flex-start;
   margin-bottom: 80px;
@@ -12,6 +12,7 @@
     grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     margin-bottom: 32px;
+    gap: 18px;
   }
 
   &__title {

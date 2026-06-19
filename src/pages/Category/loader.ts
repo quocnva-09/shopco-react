@@ -118,7 +118,10 @@ export const categoryLoader = ({
   }));
 
   const masterDataPromise = Promise.all([
-    MasterDataService.getCategories(true).then((res) => res.data),
+    MasterDataService.getCategories(true).then((res) => [
+      { id: 0, name: "All Products", slug: "" },
+      ...res.data,
+    ]),
     MasterDataService.getColors().then((res) => res.data),
     MasterDataService.getSizes().then((res) => res.data),
     MasterDataService.getStyles().then((res) => res.data),

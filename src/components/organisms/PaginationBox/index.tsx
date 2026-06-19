@@ -9,7 +9,11 @@ export type PaginationBoxProps = ComponentPropsWithoutRef<"nav"> & {
   onPageChange: (page: number) => void;
 };
 
-const generatePaginationRange = (current: number, total: number, maxLength: 5 | 7) => {
+const generatePaginationRange = (
+  current: number,
+  total: number,
+  maxLength: 5 | 7,
+) => {
   if (total <= maxLength) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
@@ -64,7 +68,11 @@ export const PaginationBox = ({
   };
 
   return (
-    <nav className={clsx("pagination-box", className)} aria-label="Pagination" {...rest}>
+    <nav
+      className={clsx("pagination-box", className)}
+      aria-label="Pagination"
+      {...rest}
+    >
       <PaginationItem
         variant="previous"
         disabled={currentPage <= 1}

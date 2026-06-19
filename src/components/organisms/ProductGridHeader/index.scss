@@ -29,7 +29,7 @@
 
   &__controls {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 12px;
   }
 
@@ -38,12 +38,15 @@
     line-height: 1;
     color: $text-muted;
 
-    @media (max-width: $bp-sm) {
+    @media (max-width: $bp-lg) {
       font-size: 14px;
     }
   }
 
   &__sort {
+    @media (max-width: $bp-lg) {
+      font-size: 14px;
+    }
     @media (max-width: $bp-md) {
       display: none;
     }

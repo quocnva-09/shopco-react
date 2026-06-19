@@ -15,19 +15,19 @@
     margin-inline: auto;
 
     &--desktop {
-      @media (max-width: $bp-sm) {
+      @media (max-width: $bp-md) {
         display: none;
       }
     }
 
     &--mobile {
       display: none;
-      @media (max-width: $bp-sm) {
+      @media (max-width: $bp-md) {
         display: flex;
       }
     }
 
-    @media (max-width: $bp-sm) {
+    @media (max-width: $bp-md) {
       gap: 0;
     }
   }

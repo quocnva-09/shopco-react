@@ -11,7 +11,12 @@ import { IconButton } from "@/components/atoms/IconButton";
 import { PRICE_RANGE_MIN, PRICE_RANGE_MAX } from "@/consts/config";
 import "./index.scss";
 
-import type { CategoryApi, ColorApi, SizeApi, StyleApi } from "@/types/api/master-data.api";
+import type {
+  CategoryApi,
+  ColorApi,
+  SizeApi,
+  StyleApi,
+} from "@/types/api/master-data.api";
 
 export type SidebarFilterProps = ComponentPropsWithoutRef<"aside"> & {
   categories: CategoryApi[];
@@ -55,15 +60,23 @@ export const SidebarFilter = ({
     initialFilters?.min_price ?? PRICE_RANGE_MIN,
     initialFilters?.max_price ?? PRICE_RANGE_MAX,
   ]);
-  
-  // Note: Since ColorSelector and SizeSelector currently only support single selection (radio), 
+
+  // Note: Since ColorSelector and SizeSelector currently only support single selection (radio),
   // we will map the first array element to the ID.
   // We need to map string name from URL to ID for the selectors.
-  const initialColor = colors.find(c => initialFilters?.colors?.includes(c.name))?.id;
-  const initialSize = sizes.find(s => initialFilters?.sizes?.includes(s.name))?.id;
-  
-  const [selectedColorId, setSelectedColorId] = useState<number | undefined>(initialColor);
-  const [selectedSizeId, setSelectedSizeId] = useState<number | undefined>(initialSize);
+  const initialColor = colors.find((c) =>
+    initialFilters?.colors?.includes(c.name),
+  )?.id;
+  const initialSize = sizes.find((s) =>
+    initialFilters?.sizes?.includes(s.name),
+  )?.id;
+
+  const [selectedColorId, setSelectedColorId] = useState<number | undefined>(
+    initialColor,
+  );
+  const [selectedSizeId, setSelectedSizeId] = useState<number | undefined>(
+    initialSize,
+  );
 
   // Sync internal state when initialFilters prop changes (e.g., from URL updates)
   useEffect(() => {
@@ -71,10 +84,13 @@ export const SidebarFilter = ({
       initialFilters?.min_price ?? PRICE_RANGE_MIN,
       initialFilters?.max_price ?? PRICE_RANGE_MAX,
     ]);
-    setSelectedColorId(colors.find(c => initialFilters?.colors?.includes(c.name))?.id);
-    setSelectedSizeId(sizes.find(s => initialFilters?.sizes?.includes(s.name))?.id);
+    setSelectedColorId(
+      colors.find((c) => initialFilters?.colors?.includes(c.name))?.id,
+    );
+    setSelectedSizeId(
+      sizes.find((s) => initialFilters?.sizes?.includes(s.name))?.id,
+    );
   }, [initialFilters, colors, sizes]);
-
 
   useEffect(() => {
     if (isOpen) {
@@ -138,7 +154,7 @@ export const SidebarFilter = ({
                   <FilterListItem
                     key={cat.id}
                     label={cat.name}
-                    href={`/category?category_slug=${cat.slug}`}
+                    href={cat.slug ? `/category?category_slug=${cat.slug}` : `/category`}
                   />
                 ))}
               </div>
@@ -162,9 +178,13 @@ export const SidebarFilter = ({
             <FilterGroup defaultOpen>
               <FilterGroup.Header title="Colors" />
               <FilterGroup.Content>
-                <ColorSelector 
-                  name="sidebar-colors" 
-                  colors={colors.map(c => ({ id: c.id, name: c.name, hexCode: c.hex_code }))} 
+                <ColorSelector
+                  name="sidebar-colors"
+                  colors={colors.map((c) => ({
+                    id: c.id,
+                    name: c.name,
+                    hexCode: c.hex_code,
+                  }))}
                   defaultValue={selectedColorId}
                   onChange={setSelectedColorId}
                 />
@@ -175,9 +195,9 @@ export const SidebarFilter = ({
             <FilterGroup defaultOpen>
               <FilterGroup.Header title="Size" />
               <FilterGroup.Content>
-                <SizeSelector 
-                  name="sidebar-sizes" 
-                  sizes={sizes} 
+                <SizeSelector
+                  name="sidebar-sizes"
+                  sizes={sizes}
                   defaultValue={selectedSizeId}
                   onChange={setSelectedSizeId}
                 />
@@ -190,12 +210,16 @@ export const SidebarFilter = ({
               <FilterGroup.Content>
                 <div className="sidebar-filter__list">
                   {styles.map((style) => {
-                    const currentCategorySlug = initialFilters?.category_slug ? `category_slug=${initialFilters.category_slug}&` : "";
+                    const params = new URLSearchParams();
+                    if (initialFilters?.category_slug) {
+                      params.set("category_slug", initialFilters.category_slug);
+                    }
+                    params.set("style_slugs", style.slug);
                     return (
                       <FilterListItem
                         key={style.id}
                         label={style.name}
-                        href={`/category?${currentCategorySlug}style_slugs=${style.slug}`}
+                        href={`/category?${params.toString()}`}
                       />
                     );
                   })}
@@ -213,9 +237,13 @@ export const SidebarFilter = ({
             onClick={() => {
               handleClose();
               if (onApplyFilter) {
-                const selectedColorName = colors.find(c => c.id === selectedColorId)?.name;
-                const selectedSizeName = sizes.find(s => s.id === selectedSizeId)?.name;
-                
+                const selectedColorName = colors.find(
+                  (c) => c.id === selectedColorId,
+                )?.name;
+                const selectedSizeName = sizes.find(
+                  (s) => s.id === selectedSizeId,
+                )?.name;
+
                 onApplyFilter({
                   category_slug: initialFilters?.category_slug,
                   style_slugs: initialFilters?.style_slugs,
