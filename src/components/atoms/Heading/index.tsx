@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import "./index.scss";
 
-export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
 
 export type HeadingProps = ComponentPropsWithoutRef<"h1"> & {
   as?: HeadingTag;

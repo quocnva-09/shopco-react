@@ -86,7 +86,7 @@ export const CartSection = ({
   return (
     <>
       <div className={clsx("cart", className)} {...rest}>
-        <div className="cart__items">
+        <section className="cart__items" aria-label="Cart Items">
           {items.map((item) => (
             <CartItemComponent
               key={item.productVariantId}
@@ -97,7 +97,7 @@ export const CartSection = ({
               onRemoveClick={() => handleRemoveClick(item)}
             />
           ))}
-        </div>
+        </section>
         <CartSummary lineItems={lineItems} total={total} />
       </div>
 

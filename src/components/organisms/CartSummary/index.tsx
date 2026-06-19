@@ -8,7 +8,7 @@ import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import { CHECKOUT_MESSAGES } from "@/consts/messages";
 import "./index.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/routes";
 
 export interface SummaryLineItem {
@@ -32,6 +32,8 @@ export const CartSummary = ({
   className,
   ...rest
 }: CartSummaryProps) => {
+  const navigate = useNavigate();
+
   return (
     <aside className={clsx("cart-summary", className)} {...rest}>
       <Heading
@@ -80,6 +82,7 @@ export const CartSummary = ({
               type="text"
               unstyled
               placeholder="Add promo code"
+              aria-label="Enter promo code"
               className="cart-summary__promo-input"
             />
           </div>
@@ -101,12 +104,15 @@ export const CartSummary = ({
           {isLoading ? CHECKOUT_MESSAGES.PLACING_ORDER : CHECKOUT_MESSAGES.PLACE_ORDER}
         </Button>
       ) : (
-        <Link to={PATHS.CHECKOUT} state={{ fromCart: true }} className="cart-summary__link">
-          <Button variant="solid" fullWidth className="cart-summary__checkout">
-            Go to Checkout
-            <span className="cart-summary__checkout-arrow" aria-hidden="true">→</span>
-          </Button>
-        </Link>
+        <Button
+          variant="solid"
+          fullWidth
+          className="cart-summary__checkout"
+          onClick={() => navigate(PATHS.CHECKOUT, { state: { fromCart: true } })}
+        >
+          Go to Checkout
+          <span className="cart-summary__checkout-arrow" aria-hidden="true">→</span>
+        </Button>
       )}
     </aside>
   );

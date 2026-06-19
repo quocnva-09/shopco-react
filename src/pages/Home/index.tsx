@@ -50,6 +50,7 @@ export const HomePage = () => {
         stats={HERO_STATS}
         heroImage={HERO_IMAGE}
         effectSrc={HERO_EFFECTS.src}
+        onCtaClick={() => navigate(API_ENDPOINTS.LINK_TO_CATEGORY)}
       />
 
       <BrandLogoBar className="home__brand-logo" />

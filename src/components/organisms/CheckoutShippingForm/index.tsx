@@ -114,7 +114,10 @@ export const CheckoutShippingForm = ({
           CHECKOUT_MESSAGES.LABELS.PHONE_NUMBER,
           register("phoneNumber", checkoutValidationRules.phoneNumber),
           errors.phoneNumber,
-          { placeholder: CHECKOUT_MESSAGES.PLACEHOLDERS.PHONE_NUMBER },
+          {
+            type: "tel",
+            placeholder: CHECKOUT_MESSAGES.PLACEHOLDERS.PHONE_NUMBER,
+          },
         )}
       </div>
     </section>

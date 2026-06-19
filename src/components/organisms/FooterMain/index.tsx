@@ -36,7 +36,7 @@ export const FooterMain = () => {
   return (
     <div className="footer-main">
       <div className="footer-main__brand">
-        <Heading as="h2" className="footer-main__logo">SHOP.CO</Heading>
+        <Heading as="div" className="footer-main__logo">SHOP.CO</Heading>
         <Text showTooltip={false} className="footer-main__desc">
           We have clothes that suits your style and which you're proud to wear. From women to men.
         </Text>

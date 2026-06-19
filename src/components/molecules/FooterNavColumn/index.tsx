@@ -17,7 +17,7 @@ export const FooterNavColumn = ({ title, links }: FooterNavColumnProps) => {
 
   return (
     <nav className="footer-col" aria-labelledby={headingId}>
-      <Heading as="h3" id={headingId} className="footer-col__title">
+      <Heading as="h2" id={headingId} className="footer-col__title">
         {title}
       </Heading>
       <ul className="footer-col__list">

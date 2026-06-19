@@ -34,6 +34,7 @@ export const NewsletterForm = ({
           name="email"
           className="newsletter-form__input"
           placeholder={placeholder}
+          aria-label="Email address"
           required
         />
       </div>

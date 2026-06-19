@@ -114,7 +114,11 @@ export const ReviewsHeader = ({
           />
         </Dropdown>
 
-        <Button variant="solid" className="reviews-header__write-btn" onClick={onWriteReviewClick}>
+        <Button
+          variant="solid"
+          className="reviews-header__write-btn"
+          onClick={onWriteReviewClick}
+        >
           Write a Review
         </Button>
       </div>

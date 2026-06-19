@@ -10,7 +10,7 @@ import { Breadcrumb } from "@/components/molecules/Breadcrumb";
 import { CategoryLayout } from "@/components/templates/CategoryLayout";
 import { SidebarFilter } from "@/components/organisms/SidebarFilter";
 import { ProductGridHeader } from "@/components/organisms/ProductGridHeader";
-import { ProductGrid } from "@/components/organisms/ProductGrid";
+import { ProductGrid, ProductGridSkeleton } from "@/components/organisms/ProductGrid";
 import { ProductCard } from "@/components/molecules/ProductCard";
 import { PaginationBox } from "@/components/organisms/PaginationBox";
 import { useResponsivePagination } from "@/hooks/useResponsivePagination";
@@ -140,16 +140,19 @@ export const CategoryPage = () => {
             <Suspense
               key={location.search}
               fallback={
-                <div
-                  style={{
-                    padding: 20,
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  Loading products...
-                </div>
+                <>
+                  <ProductGridHeader
+                    title={pageTitle}
+                    showingStart={0}
+                    showingEnd={0}
+                    totalProducts={0}
+                    sortOptions={[]}
+                    sortValue="newest"
+                    onSortChange={() => {}}
+                    className="category-page__header"
+                  />
+                  <ProductGridSkeleton count={9} className="category-page__grid" />
+                </>
               }
             >
               <Await resolve={products}>
@@ -172,9 +175,15 @@ export const CategoryPage = () => {
                       />
 
                       <ProductGrid className="category-page__grid">
-                        {data.map((product) => (
-                          <ProductCard key={product.id} product={product} />
-                        ))}
+                        {data?.length ? (
+                          data.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                          ))
+                        ) : (
+                          <div className="category-page__empty">
+                            No products found
+                          </div>
+                        )}
                       </ProductGrid>
 
                       {total > 0 && (

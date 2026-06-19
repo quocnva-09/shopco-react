@@ -17,7 +17,7 @@ export const FooterNewsletter = () => {
       <div className="container">
         <div className="footer-newsletter__container">
           <div className="footer-newsletter__title-wrapper">
-            <Heading as="h3" className="footer-newsletter__title" lineClamp={0}>
+            <Heading as="h2" className="footer-newsletter__title" lineClamp={0}>
               STAY UPTO DATE ABOUT OUR LATEST OFFERS
             </Heading>
           </div>

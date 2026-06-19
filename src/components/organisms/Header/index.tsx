@@ -57,6 +57,17 @@ export const Header = ({
     };
   }, []);
 
+  // Close mobile menu on Esc key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        closeMobileMenu();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen, closeMobileMenu]);
+
   return (
     <header className={clsx("header", className)} {...rest}>
       <div className={clsx("header__container", "container", noBorder && "header__container--no-border")}>
@@ -118,6 +129,7 @@ export const Header = ({
       <div
         className={clsx("header__overlay", isMobileMenuOpen && "header__overlay--active")}
         onClick={closeMobileMenu}
+        aria-hidden="true"
       />
     </header>
   );

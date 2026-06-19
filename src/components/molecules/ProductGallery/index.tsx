@@ -27,19 +27,25 @@ export const ProductGallery = ({
     <div className={clsx("product-detail__gallery", className)} {...rest}>
       <div className="product-detail__thumbnails">
         {images.map((img, idx) => (
-          <Image
+          <button
             key={`${productName} - Thumbnail ${idx + 1}`}
-            src={img.imgPath}
-            alt={`${productName} - Thumbnail ${idx + 1}`}
-            title={`${productName} - Thumbnail ${idx + 1}`}
-            renderWrapper={false}
+            type="button"
+            aria-label={`View image ${idx + 1}`}
             className={clsx(
-              "product-detail__thumbnail",
+              "product-detail__thumbnail-btn",
               img.imgPath === selectedImage &&
-                "product-detail__thumbnail--active",
+                "product-detail__thumbnail-btn--active",
             )}
             onClick={() => handleImageClick(img.imgPath)}
-          />
+          >
+            <Image
+              src={img.imgPath}
+              alt={`${productName} - Thumbnail ${idx + 1}`}
+              title={`${productName} - Thumbnail ${idx + 1}`}
+              renderWrapper={false}
+              className="product-detail__thumbnail"
+            />
+          </button>
         ))}
       </div>
       <figure className="product-detail__main-image">

@@ -27,7 +27,9 @@ const DropdownContext = createContext<DropdownContextType | null>(null);
 export const useDropdownContext = () => {
   const context = useContext(DropdownContext);
   if (!context) {
-    throw new Error("Dropdown compound components must be used within a Dropdown");
+    throw new Error(
+      "Dropdown compound components must be used within a Dropdown",
+    );
   }
   return context;
 };
