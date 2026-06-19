@@ -76,6 +76,7 @@
     border: 1px solid transparent;
     transition: border-color 0.3s ease;
     display: block;
+    background-color: $color-neutral;
 
     .product-detail__thumbnail-btn--active &,
     .product-detail__thumbnail-btn:hover & {
@@ -107,7 +108,7 @@
     }
 
     @media (max-width: $bp-lg) {
-      max-height: 450px;
+      max-height: 350px;
     }
 
     @media (max-width: $bp-sm) {
