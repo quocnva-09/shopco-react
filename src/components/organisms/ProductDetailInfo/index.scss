@@ -16,9 +16,9 @@
   &__name {
     font-size: 40px;
     font-family: $font-family-title;
-    line-height: 100%;
+    line-height: 1.1;
     letter-spacing: 0;
-    padding-top: 5px;
+    padding-top: 3px;
 
     @media (max-width: $bp-sm) {
       padding-top: 0;
@@ -31,9 +31,9 @@
     .tooltip {
       font-size: 40px;
       font-family: $font-family-title;
-      line-height: 100%;
+      line-height: 1.1;
       letter-spacing: 0;
-      top: 5px;
+      top: 3px;
       padding: 0;
 
       @media (max-width: $bp-lg) {
@@ -117,6 +117,12 @@
   &__rating {
     margin-block: 15px 20px;
 
+    .rating__text {
+      font-size: 16px;
+      line-height: 100%;
+      padding-top: 5px;
+    }
+
     @media (max-width: $bp-sm) {
       margin-block: 12px;
       gap: 13px; // sm: gap star ↔ text
@@ -124,6 +130,11 @@
       .rating {
         --star-size: 18.5px;
         --star-gap: 5.5px;
+      }
+
+      .rating__text {
+        font-size: 14px;
+        padding-top: 2.5px;
       }
     }
   }
